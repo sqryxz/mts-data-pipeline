@@ -1,0 +1,219 @@
+2025-06-28 23:54:39,937 - root - INFO - test_fix
+2025-06-28 23:54:55,028 - root - INFO - test
+2025-06-28 23:55:30,402 - root - INFO - final_test
+2025-06-29 01:24:01,445 - __main__ - INFO - Initializing MTS Crypto Data Pipeline
+2025-06-29 01:24:01,445 - __main__ - INFO - Configuration loaded - API Base URL: https://api.coingecko.com/api/v3
+2025-06-29 01:24:01,445 - __main__ - INFO - Data collector initialized successfully
+2025-06-29 01:24:01,445 - __main__ - INFO - ============================================================
+2025-06-29 01:24:01,445 - __main__ - INFO - STARTING MANUAL DATA COLLECTION
+2025-06-29 01:24:01,445 - __main__ - INFO - ============================================================
+2025-06-29 01:24:01,445 - src.services.collector - INFO - Starting batch collection for top 3 cryptocurrencies (1 days each)
+2025-06-29 01:24:01,445 - src.services.collector - INFO - Fetching top 3 cryptocurrencies by market cap
+2025-06-29 01:24:01,812 - src.services.collector - INFO - Successfully processed 3 cryptocurrencies
+2025-06-29 01:24:01,812 - src.services.collector - INFO - Found 3 cryptocurrencies to collect: ['bitcoin', 'ethereum', 'tether']
+2025-06-29 01:24:01,812 - src.services.collector - INFO - Collecting data for Bitcoin (bitcoin) - attempt 1
+2025-06-29 01:24:01,812 - src.services.collector - INFO - Collecting OHLCV data for bitcoin (1 days)
+2025-06-29 01:24:02,094 - src.services.collector - INFO - Successfully collected and stored 48 OHLCV records for bitcoin
+2025-06-29 01:24:02,095 - src.services.collector - INFO - Successfully collected data for Bitcoin
+2025-06-29 01:24:02,095 - src.services.collector - INFO - Collecting data for Ethereum (ethereum) - attempt 1
+2025-06-29 01:24:02,095 - src.services.collector - INFO - Collecting OHLCV data for ethereum (1 days)
+2025-06-29 01:24:02,398 - src.services.collector - INFO - Successfully collected and stored 48 OHLCV records for ethereum
+2025-06-29 01:24:02,398 - src.services.collector - INFO - Successfully collected data for Ethereum
+2025-06-29 01:24:02,398 - src.services.collector - INFO - Collecting data for Tether (tether) - attempt 1
+2025-06-29 01:24:02,398 - src.services.collector - INFO - Collecting OHLCV data for tether (1 days)
+2025-06-29 01:24:03,054 - src.services.collector - INFO - Successfully collected and stored 48 OHLCV records for tether
+2025-06-29 01:24:03,054 - src.services.collector - INFO - Successfully collected data for Tether
+2025-06-29 01:24:03,055 - src.services.collector - INFO - Batch collection completed in 1.61s: 3/3 successful
+2025-06-29 01:24:03,055 - src.services.collector - INFO - Successfully collected: bitcoin, ethereum, tether
+2025-06-29 01:24:03,055 - __main__ - INFO - ============================================================
+2025-06-29 01:24:03,055 - __main__ - INFO - COLLECTION SUMMARY
+2025-06-29 01:24:03,055 - __main__ - INFO - ============================================================
+2025-06-29 01:24:03,055 - __main__ - INFO - Total cryptocurrencies attempted: 3
+2025-06-29 01:24:03,055 - __main__ - INFO - Successful collections: 3
+2025-06-29 01:24:03,055 - __main__ - INFO - Failed collections: 0
+2025-06-29 01:24:03,055 - __main__ - INFO - Total retries used: 0
+2025-06-29 01:24:03,055 - __main__ - INFO - Collection duration: 1.61 seconds
+2025-06-29 01:24:03,055 - __main__ - INFO - Successfully collected data for: bitcoin, ethereum, tether
+2025-06-29 01:24:03,055 - __main__ - INFO - ✅ Data collection completed successfully
+2025-06-29 01:24:03,055 - __main__ - INFO - ============================================================
+2025-06-29 01:24:34,244 - __main__ - INFO - Initializing MTS Crypto Data Pipeline
+2025-06-29 01:24:34,244 - __main__ - INFO - Configuration loaded - API Base URL: https://api.coingecko.com/api/v3
+2025-06-29 01:24:34,244 - __main__ - INFO - Data collector initialized successfully
+2025-06-29 01:24:34,244 - __main__ - INFO - ============================================================
+2025-06-29 01:24:34,244 - __main__ - INFO - STARTING MANUAL DATA COLLECTION
+2025-06-29 01:24:34,244 - __main__ - INFO - ============================================================
+2025-06-29 01:24:34,245 - src.services.collector - INFO - Starting batch collection for top 3 cryptocurrencies (1 days each)
+2025-06-29 01:24:34,245 - src.services.collector - INFO - Fetching top 3 cryptocurrencies by market cap
+2025-06-29 01:24:34,303 - src.services.collector - INFO - Successfully processed 3 cryptocurrencies
+2025-06-29 01:24:34,304 - src.services.collector - INFO - Found 3 cryptocurrencies to collect: ['bitcoin', 'ethereum', 'tether']
+2025-06-29 01:24:34,304 - src.services.collector - INFO - Collecting data for Bitcoin (bitcoin) - attempt 1
+2025-06-29 01:24:34,304 - src.services.collector - INFO - Collecting OHLCV data for bitcoin (1 days)
+2025-06-29 01:24:34,338 - src.utils.retry - WARNING - get_ohlc_data rate limited, waiting 60 seconds (retry_after: 60)
+2025-06-29 01:25:34,395 - src.utils.retry - INFO - get_ohlc_data succeeded after 1 retries
+2025-06-29 01:25:34,397 - src.services.collector - INFO - Successfully collected and stored 48 OHLCV records for bitcoin
+2025-06-29 01:25:34,397 - src.services.collector - INFO - Successfully collected data for Bitcoin
+2025-06-29 01:25:34,397 - src.services.collector - INFO - Collecting data for Ethereum (ethereum) - attempt 1
+2025-06-29 01:25:34,397 - src.services.collector - INFO - Collecting OHLCV data for ethereum (1 days)
+2025-06-29 01:25:34,461 - src.services.collector - INFO - Successfully collected and stored 48 OHLCV records for ethereum
+2025-06-29 01:25:34,461 - src.services.collector - INFO - Successfully collected data for Ethereum
+2025-06-29 01:25:34,461 - src.services.collector - INFO - Collecting data for Tether (tether) - attempt 1
+2025-06-29 01:25:34,461 - src.services.collector - INFO - Collecting OHLCV data for tether (1 days)
+2025-06-29 01:25:34,511 - src.services.collector - INFO - Successfully collected and stored 48 OHLCV records for tether
+2025-06-29 01:25:34,512 - src.services.collector - INFO - Successfully collected data for Tether
+2025-06-29 01:25:34,512 - src.services.collector - INFO - Batch collection completed in 60.27s: 3/3 successful
+2025-06-29 01:25:34,512 - src.services.collector - INFO - Successfully collected: bitcoin, ethereum, tether
+2025-06-29 01:25:34,512 - __main__ - INFO - ============================================================
+2025-06-29 01:25:34,512 - __main__ - INFO - COLLECTION SUMMARY
+2025-06-29 01:25:34,512 - __main__ - INFO - ============================================================
+2025-06-29 01:25:34,512 - __main__ - INFO - Total cryptocurrencies attempted: 3
+2025-06-29 01:25:34,512 - __main__ - INFO - Successful collections: 3
+2025-06-29 01:25:34,512 - __main__ - INFO - Failed collections: 0
+2025-06-29 01:25:34,512 - __main__ - INFO - Total retries used: 0
+2025-06-29 01:25:34,512 - __main__ - INFO - Collection duration: 60.27 seconds
+2025-06-29 01:25:34,512 - __main__ - INFO - Successfully collected data for: bitcoin, ethereum, tether
+2025-06-29 01:25:34,512 - __main__ - INFO - ✅ Data collection completed successfully
+2025-06-29 01:25:34,513 - __main__ - INFO - ============================================================
+2025-06-29 02:19:13,653 - __main__ - INFO - Initializing MTS Crypto Data Pipeline
+2025-06-29 02:19:13,654 - __main__ - INFO - Configuration loaded - API Base URL: https://api.coingecko.com/api/v3
+2025-06-29 02:19:13,654 - __main__ - INFO - Data collector initialized successfully
+2025-06-29 02:19:13,654 - __main__ - INFO - ============================================================
+2025-06-29 02:19:13,654 - __main__ - INFO - STARTING HEALTH MONITORING SERVER
+2025-06-29 02:19:13,654 - __main__ - INFO - ============================================================
+2025-06-29 02:19:18,209 - __main__ - INFO - Health server listening on http://0.0.0.0:8080
+2025-06-29 02:19:18,210 - __main__ - INFO - Available endpoints:
+2025-06-29 02:19:18,210 - __main__ - INFO -   • GET /health - System health status
+2025-06-29 02:19:18,211 - __main__ - INFO - Press Ctrl+C to stop the server
+2025-06-29 02:19:18,211 - __main__ - INFO - ============================================================
+2025-06-29 02:19:19,423 - src.services.monitor - INFO - Performing comprehensive system health check
+2025-06-29 02:19:19,423 - src.services.monitor - INFO - Checking data freshness for 3 cryptocurrencies
+2025-06-29 02:19:19,423 - health_server - INFO - 127.0.0.1 - "GET /health HTTP/1.1" 200 -
+2025-06-29 02:19:36,122 - __main__ - INFO - Initializing MTS Crypto Data Pipeline
+2025-06-29 02:19:36,122 - __main__ - INFO - Configuration loaded - API Base URL: https://api.coingecko.com/api/v3
+2025-06-29 02:19:36,122 - __main__ - INFO - Data collector initialized successfully
+2025-06-29 02:19:36,122 - __main__ - INFO - ============================================================
+2025-06-29 02:19:36,122 - __main__ - INFO - STARTING MANUAL DATA COLLECTION
+2025-06-29 02:19:36,122 - __main__ - INFO - ============================================================
+2025-06-29 02:19:36,122 - src.services.collector - INFO - Starting batch collection for top 3 cryptocurrencies (1 days each)
+2025-06-29 02:19:36,122 - src.services.collector - INFO - METRICS: {"event_type":"batch_collection_start","timestamp":"2025-06-29T02:19:36.122640","days_requested":1,"max_retries_per_crypto":1,"target_crypto_count":3}
+2025-06-29 02:19:36,122 - src.services.collector - INFO - Fetching top 3 cryptocurrencies by market cap
+2025-06-29 02:19:36,418 - src.services.collector - INFO - Successfully processed 3 cryptocurrencies
+2025-06-29 02:19:36,419 - src.services.collector - INFO - Found 3 cryptocurrencies to collect: ['bitcoin', 'ethereum', 'tether']
+2025-06-29 02:19:36,419 - src.services.collector - INFO - Collecting data for Bitcoin (bitcoin) - attempt 1
+2025-06-29 02:19:36,419 - src.services.collector - INFO - Collecting OHLCV data for bitcoin (1 days)
+2025-06-29 02:19:36,665 - src.services.collector - INFO - METRICS: {"event_type":"crypto_collection_complete","timestamp":"2025-06-29T02:19:36.665352","crypto_id":"bitcoin","success":true,"records_collected":48,"duration_seconds":0.246178,"days_requested":1}
+2025-06-29 02:19:36,665 - src.services.collector - INFO - Successfully collected and stored 48 OHLCV records for bitcoin
+2025-06-29 02:19:36,665 - src.services.collector - INFO - Successfully collected data for Bitcoin
+2025-06-29 02:19:36,666 - src.services.collector - INFO - Collecting data for Ethereum (ethereum) - attempt 1
+2025-06-29 02:19:36,666 - src.services.collector - INFO - Collecting OHLCV data for ethereum (1 days)
+2025-06-29 02:19:36,918 - src.services.collector - INFO - METRICS: {"event_type":"crypto_collection_complete","timestamp":"2025-06-29T02:19:36.918226","crypto_id":"ethereum","success":true,"records_collected":48,"duration_seconds":0.251941,"days_requested":1}
+2025-06-29 02:19:36,918 - src.services.collector - INFO - Successfully collected and stored 48 OHLCV records for ethereum
+2025-06-29 02:19:36,918 - src.services.collector - INFO - Successfully collected data for Ethereum
+2025-06-29 02:19:36,918 - src.services.collector - INFO - Collecting data for Tether (tether) - attempt 1
+2025-06-29 02:19:36,918 - src.services.collector - INFO - Collecting OHLCV data for tether (1 days)
+2025-06-29 02:19:37,256 - src.services.collector - INFO - METRICS: {"event_type":"crypto_collection_complete","timestamp":"2025-06-29T02:19:37.256892","crypto_id":"tether","success":true,"records_collected":48,"duration_seconds":0.338105,"days_requested":1}
+2025-06-29 02:19:37,257 - src.services.collector - INFO - Successfully collected and stored 48 OHLCV records for tether
+2025-06-29 02:19:37,257 - src.services.collector - INFO - Successfully collected data for Tether
+2025-06-29 02:19:37,257 - src.services.collector - INFO - METRICS: {"event_type":"batch_collection_complete","timestamp":"2025-06-29T02:19:37.257247","total_attempted":3,"successful":3,"failed":0,"total_records_collected":144,"retries_used":0,"duration_seconds":1.134626,"successful_cryptos":["bitcoin","ethereum","tether"],"failed_cryptos":[],"error_categories":{}}
+2025-06-29 02:19:37,257 - src.services.collector - INFO - Batch collection completed in 1.13s: 3/3 successful, 144 total records collected
+2025-06-29 02:19:37,257 - src.services.collector - INFO - Successfully collected: bitcoin, ethereum, tether
+2025-06-29 02:19:37,257 - __main__ - INFO - ============================================================
+2025-06-29 02:19:37,257 - __main__ - INFO - COLLECTION SUMMARY
+2025-06-29 02:19:37,257 - __main__ - INFO - ============================================================
+2025-06-29 02:19:37,257 - __main__ - INFO - Total cryptocurrencies attempted: 3
+2025-06-29 02:19:37,257 - __main__ - INFO - Successful collections: 3
+2025-06-29 02:19:37,257 - __main__ - INFO - Failed collections: 0
+2025-06-29 02:19:37,257 - __main__ - INFO - Total retries used: 0
+2025-06-29 02:19:37,257 - __main__ - INFO - Collection duration: 1.13 seconds
+2025-06-29 02:19:37,257 - __main__ - INFO - Successfully collected data for: bitcoin, ethereum, tether
+2025-06-29 02:19:37,257 - __main__ - INFO - ✅ Data collection completed successfully
+2025-06-29 02:19:37,257 - __main__ - INFO - ============================================================
+2025-06-29 02:19:48,348 - __main__ - INFO - Initializing MTS Crypto Data Pipeline
+2025-06-29 02:19:48,348 - __main__ - INFO - Configuration loaded - API Base URL: https://api.coingecko.com/api/v3
+2025-06-29 02:19:48,348 - __main__ - INFO - Data collector initialized successfully
+2025-06-29 02:19:48,348 - __main__ - INFO - ============================================================
+2025-06-29 02:19:48,348 - __main__ - INFO - STARTING HEALTH MONITORING SERVER
+2025-06-29 02:19:48,348 - __main__ - INFO - ============================================================
+2025-06-29 02:19:48,348 - __main__ - ERROR - Port 8080 is already in use. Please choose a different port or stop the existing service.
+2025-06-29 02:19:48,348 - __main__ - INFO - Health monitoring server stopped
+2025-06-29 02:19:50,374 - src.services.monitor - INFO - Performing comprehensive system health check
+2025-06-29 02:19:50,374 - src.services.monitor - INFO - Checking data freshness for 3 cryptocurrencies
+2025-06-29 02:19:50,374 - health_server - INFO - 127.0.0.1 - "GET /health HTTP/1.1" 200 -
+2025-06-29 02:19:59,816 - health_server - INFO - 127.0.0.1 - "GET /invalid HTTP/1.1" 404 -
+2025-06-29 02:23:15,076 - __main__ - INFO - Initializing MTS Crypto Data Pipeline
+2025-06-29 02:23:15,076 - __main__ - INFO - Configuration loaded - API Base URL: https://api.coingecko.com/api/v3
+2025-06-29 02:23:15,076 - __main__ - INFO - Data collector initialized successfully
+2025-06-29 02:23:15,076 - __main__ - INFO - ============================================================
+2025-06-29 02:23:15,076 - __main__ - INFO - STARTING HEALTH MONITORING SERVER
+2025-06-29 02:23:15,076 - __main__ - INFO - ============================================================
+2025-06-29 02:23:15,076 - __main__ - ERROR - Port 8080 is already in use. Please choose a different port or stop the existing service.
+2025-06-29 02:23:15,076 - __main__ - INFO - Health monitoring server stopped
+2025-06-29 02:23:18,219 - src.services.monitor - INFO - Performing comprehensive system health check
+2025-06-29 02:23:18,220 - src.services.monitor - INFO - Checking data freshness for 3 cryptocurrencies
+2025-06-29 02:23:18,221 - health_server - INFO - 127.0.0.1 - "GET /health HTTP/1.1" 200 -
+2025-06-29 02:23:23,322 - src.services.monitor - INFO - Performing comprehensive system health check
+2025-06-29 02:23:23,322 - src.services.monitor - INFO - Checking data freshness for 3 cryptocurrencies
+2025-06-29 02:23:23,323 - health_server - INFO - 127.0.0.1 - "GET /health HTTP/1.1" 200 -
+2025-06-29 12:24:14,479 - __main__ - INFO - Initializing MTS Crypto Data Pipeline
+2025-06-29 12:24:14,479 - __main__ - INFO - Configuration loaded - API Base URL: https://api.coingecko.com/api/v3
+2025-06-29 12:24:14,480 - __main__ - INFO - Data collector initialized successfully
+2025-06-29 12:24:14,480 - __main__ - DEBUG - Verbose logging enabled
+2025-06-29 12:24:14,480 - __main__ - INFO - ============================================================
+2025-06-29 12:24:14,480 - __main__ - INFO - STARTING MANUAL DATA COLLECTION
+2025-06-29 12:24:14,480 - __main__ - INFO - ============================================================
+2025-06-29 12:24:14,480 - src.services.collector - INFO - Starting batch collection for top 3 cryptocurrencies (1 days each)
+2025-06-29 12:24:14,480 - src.services.collector - INFO - METRICS: {"event_type":"batch_collection_start","timestamp":"2025-06-29T12:24:14.480236","days_requested":1,"max_retries_per_crypto":1,"target_crypto_count":3}
+2025-06-29 12:24:14,480 - src.services.collector - INFO - Fetching top 3 cryptocurrencies by market cap
+2025-06-29 12:24:14,480 - src.utils.retry - DEBUG - Attempt 1/4 for get_top_cryptos
+2025-06-29 12:24:14,486 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.coingecko.com:443
+2025-06-29 12:24:14,756 - urllib3.connectionpool - DEBUG - https://api.coingecko.com:443 "GET /api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=3&page=1&sparkline=false HTTP/1.1" 200 None
+2025-06-29 12:24:14,757 - src.services.collector - INFO - Successfully processed 3 cryptocurrencies
+2025-06-29 12:24:14,758 - src.services.collector - INFO - Found 3 cryptocurrencies to collect: ['bitcoin', 'ethereum', 'tether']
+2025-06-29 12:24:14,758 - src.services.collector - INFO - Collecting data for Bitcoin (bitcoin) - attempt 1
+2025-06-29 12:24:14,758 - src.services.collector - INFO - Collecting OHLCV data for bitcoin (1 days)
+2025-06-29 12:24:14,758 - src.utils.retry - DEBUG - Attempt 1/4 for get_ohlc_data
+2025-06-29 12:24:14,758 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.coingecko.com:443
+2025-06-29 12:24:14,999 - urllib3.connectionpool - DEBUG - https://api.coingecko.com:443 "GET /api/v3/coins/bitcoin/ohlc?vs_currency=usd&days=1 HTTP/1.1" 200 None
+2025-06-29 12:24:15,002 - src.services.collector - INFO - METRICS: {"event_type":"crypto_collection_complete","timestamp":"2025-06-29T12:24:15.002681","crypto_id":"bitcoin","success":true,"records_collected":48,"duration_seconds":0.244444,"days_requested":1}
+2025-06-29 12:24:15,002 - src.services.collector - INFO - Successfully collected and stored 48 OHLCV records for bitcoin
+2025-06-29 12:24:15,002 - src.services.collector - INFO - Successfully collected data for Bitcoin
+2025-06-29 12:24:15,002 - src.services.collector - INFO - Collecting data for Ethereum (ethereum) - attempt 1
+2025-06-29 12:24:15,002 - src.services.collector - INFO - Collecting OHLCV data for ethereum (1 days)
+2025-06-29 12:24:15,002 - src.utils.retry - DEBUG - Attempt 1/4 for get_ohlc_data
+2025-06-29 12:24:15,003 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.coingecko.com:443
+2025-06-29 12:24:15,268 - urllib3.connectionpool - DEBUG - https://api.coingecko.com:443 "GET /api/v3/coins/ethereum/ohlc?vs_currency=usd&days=1 HTTP/1.1" 200 None
+2025-06-29 12:24:15,272 - src.services.collector - INFO - METRICS: {"event_type":"crypto_collection_complete","timestamp":"2025-06-29T12:24:15.272026","crypto_id":"ethereum","success":true,"records_collected":48,"duration_seconds":0.2692,"days_requested":1}
+2025-06-29 12:24:15,272 - src.services.collector - INFO - Successfully collected and stored 48 OHLCV records for ethereum
+2025-06-29 12:24:15,272 - src.services.collector - INFO - Successfully collected data for Ethereum
+2025-06-29 12:24:15,272 - src.services.collector - INFO - Collecting data for Tether (tether) - attempt 1
+2025-06-29 12:24:15,272 - src.services.collector - INFO - Collecting OHLCV data for tether (1 days)
+2025-06-29 12:24:15,272 - src.utils.retry - DEBUG - Attempt 1/4 for get_ohlc_data
+2025-06-29 12:24:15,273 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): api.coingecko.com:443
+2025-06-29 12:24:15,616 - urllib3.connectionpool - DEBUG - https://api.coingecko.com:443 "GET /api/v3/coins/tether/ohlc?vs_currency=usd&days=1 HTTP/1.1" 200 None
+2025-06-29 12:24:15,618 - src.services.collector - INFO - METRICS: {"event_type":"crypto_collection_complete","timestamp":"2025-06-29T12:24:15.618266","crypto_id":"tether","success":true,"records_collected":48,"duration_seconds":0.345834,"days_requested":1}
+2025-06-29 12:24:15,618 - src.services.collector - INFO - Successfully collected and stored 48 OHLCV records for tether
+2025-06-29 12:24:15,618 - src.services.collector - INFO - Successfully collected data for Tether
+2025-06-29 12:24:15,618 - src.services.collector - INFO - METRICS: {"event_type":"batch_collection_complete","timestamp":"2025-06-29T12:24:15.618570","total_attempted":3,"successful":3,"failed":0,"total_records_collected":144,"retries_used":0,"duration_seconds":1.13835,"successful_cryptos":["bitcoin","ethereum","tether"],"failed_cryptos":[],"error_categories":{}}
+2025-06-29 12:24:15,618 - src.services.collector - INFO - Batch collection completed in 1.14s: 3/3 successful, 144 total records collected
+2025-06-29 12:24:15,618 - src.services.collector - INFO - Successfully collected: bitcoin, ethereum, tether
+2025-06-29 12:24:15,618 - __main__ - INFO - ============================================================
+2025-06-29 12:24:15,618 - __main__ - INFO - COLLECTION SUMMARY
+2025-06-29 12:24:15,618 - __main__ - INFO - ============================================================
+2025-06-29 12:24:15,618 - __main__ - INFO - Total cryptocurrencies attempted: 3
+2025-06-29 12:24:15,618 - __main__ - INFO - Successful collections: 3
+2025-06-29 12:24:15,618 - __main__ - INFO - Failed collections: 0
+2025-06-29 12:24:15,618 - __main__ - INFO - Total retries used: 0
+2025-06-29 12:24:15,618 - __main__ - INFO - Collection duration: 1.14 seconds
+2025-06-29 12:24:15,618 - __main__ - INFO - Successfully collected data for: bitcoin, ethereum, tether
+2025-06-29 12:24:15,618 - __main__ - INFO - ✅ Data collection completed successfully
+2025-06-29 12:24:15,618 - __main__ - INFO - ============================================================
+2025-06-29 12:24:34,556 - __main__ - INFO - Initializing MTS Crypto Data Pipeline
+2025-06-29 12:24:34,556 - __main__ - INFO - Configuration loaded - API Base URL: https://api.coingecko.com/api/v3
+2025-06-29 12:24:34,557 - __main__ - INFO - Data collector initialized successfully
+2025-06-29 12:24:34,557 - __main__ - INFO - ============================================================
+2025-06-29 12:24:34,557 - __main__ - INFO - STARTING HEALTH MONITORING SERVER
+2025-06-29 12:24:34,557 - __main__ - INFO - ============================================================
+2025-06-29 12:24:34,557 - __main__ - ERROR - Port 8080 is already in use. Please choose a different port or stop the existing service.
+2025-06-29 12:24:34,557 - __main__ - INFO - Health monitoring server stopped
+2025-06-29 12:24:36,986 - src.services.monitor - INFO - Performing comprehensive system health check
+2025-06-29 12:24:36,989 - src.services.monitor - INFO - Checking data freshness for 3 cryptocurrencies
+2025-06-29 12:24:36,994 - health_server - INFO - 127.0.0.1 - "GET /health HTTP/1.1" 200 -
