@@ -4,7 +4,7 @@ A robust cryptocurrency data collection pipeline that automatically gathers OHLC
 
 ## Features
 
-- **Automated Data Collection**: Collects hourly OHLCV data for Bitcoin, Ethereum, and the #3 cryptocurrency by market cap
+- **Automated Data Collection**: Collects 5-minute interval OHLCV data for Bitcoin, Ethereum, and the #3 cryptocurrency by market cap
 - **Reliable Storage**: Stores data in CSV format with automatic deduplication and year-based file organization
 - **Comprehensive Error Handling**: Smart retry logic with exponential backoff for API failures
 - **Health Monitoring**: Built-in health checks and HTTP monitoring endpoint
@@ -174,7 +174,7 @@ Each CSV file contains the following columns:
 - `high`: Highest price
 - `low`: Lowest price  
 - `close`: Closing price
-- `volume`: Trading volume (set to 0 as CoinGecko OHLC doesn't provide volume)
+- `volume`: Trading volume (actual volume data from CoinGecko market_chart endpoint)
 
 ### Logging Configuration
 
@@ -189,9 +189,17 @@ Configure logging levels in `config/logging_config.py` or use the `--verbose` fl
 The pipeline uses the CoinGecko public API with built-in rate limiting and retry logic:
 
 - **Base URL**: https://api.coingecko.com/api/v3/
+- **Primary Endpoint**: `/coins/{id}/market_chart` (provides prices and volume data)
+- **Data Granularity**: 5-minute intervals for 1-day requests
 - **Rate Limits**: Automatically handled with exponential backoff
 - **Timeout**: 30 seconds per request
 - **Retries**: Up to 3 attempts for recoverable errors
+
+**Note**: The market_chart endpoint provides price points rather than traditional OHLCV candles, so Open/High/Low/Close values are identical (representing the price at that timestamp), while Volume data represents actual trading volume.
+
+### Recent Updates
+
+**Volume Data Fix (Latest)**: Switched from CoinGecko's `/ohlc` endpoint (which doesn't provide volume data) to the `/market_chart` endpoint to capture real trading volume information. This ensures complete OHLCV datasets with accurate volume metrics for analysis.
 
 ## Architecture
 
@@ -230,8 +238,8 @@ The MTS Data Pipeline follows a modular, layered architecture designed for relia
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    Command Line Interface                    │
-│                        (main.py)                           │
+│                    Command Line Interface                   │
+│                        (main.py)                            │
 └─────────────────────┬───────────────────────────────────────┘
                       │
       ┌───────────────┼───────────────┐
@@ -245,19 +253,19 @@ The MTS Data Pipeline follows a modular, layered architecture designed for relia
       ▼               ▼               ▼
 ┌─────────────────────────────────────────┐
 │         Core Data Layer                 │
-│  ┌─────────┐ ┌──────────┐ ┌─────────┐  │
-│  │API      │ │Validation│ │Storage  │  │
-│  │Client   │ │Engine    │ │Engine   │  │
-│  └─────────┘ └──────────┘ └─────────┘  │
+│  ┌─────────┐ ┌──────────┐ ┌─────────┐   │
+│  │API      │ │Validation│ │Storage  │   │
+│  │Client   │ │Engine    │ │Engine   │   │
+│  └─────────┘ └──────────┘ └─────────┘   │
 └─────────────────────────────────────────┘
       │               │               │
       ▼               ▼               ▼
 ┌─────────────────────────────────────────┐
 │         External Dependencies           │
-│  ┌─────────┐ ┌──────────┐ ┌─────────┐  │
-│  │CoinGecko│ │File      │ │Logging  │  │
-│  │API      │ │System    │ │System   │  │
-│  └─────────┘ └──────────┘ └─────────┘  │
+│  ┌─────────┐ ┌──────────┐ ┌─────────┐   │
+│  │CoinGecko│ │File      │ │Logging  │   │
+│  │API      │ │System    │ │System   │   │
+│  └─────────┘ └──────────┘ └─────────┘   │
 └─────────────────────────────────────────┘
 ```
 
@@ -284,24 +292,31 @@ crypto_ids = ["bitcoin", "ethereum", "tether"]
 #### Phase 2: OHLCV Data Collection
 For each cryptocurrency:
 ```python
-# 1. API call for OHLCV data
-GET /api/v3/coins/{crypto_id}/ohlc?vs_currency=usd&days={days}
+# 1. API call for market chart data (includes volume)
+GET /api/v3/coins/{crypto_id}/market_chart?vs_currency=usd&days={days}
 
-# 2. Raw API response (array of arrays)
-[
-  [1751049000000, 106842.0, 106943.0, 106809.0, 106811.0],  # [timestamp, open, high, low, close]
-  [1751050800000, 106797.0, 106797.0, 106598.0, 106623.0],
-  ...
-]
+# 2. Raw API response (structured data with prices and volumes)
+{
+  "prices": [
+    [1751049000000, 106842.0],  # [timestamp, price]
+    [1751050800000, 106797.0],
+    ...
+  ],
+  "total_volumes": [
+    [1751049000000, 23427465211.72],  # [timestamp, volume] 
+    [1751050800000, 23441304537.47],
+    ...
+  ]
+}
 
-# 3. Data transformation to structured format
+# 3. Data transformation to structured OHLCV format
 OHLCVRecord(
     timestamp=1751049000000,
-    open=106842.0,
-    high=106943.0, 
-    low=106809.0,
-    close=106811.0,
-    volume=0.0  # Set to 0 as CoinGecko OHLC doesn't provide volume
+    open=106842.0,      # Price point used for all OHLC values
+    high=106842.0,      # (5-minute market chart data)
+    low=106842.0,
+    close=106842.0,
+    volume=23427465211.72  # Actual trading volume from API
 )
 ```
 
@@ -333,7 +348,7 @@ data/raw/
 
 # 2. CSV structure
 timestamp,open,high,low,close,volume
-1751049000000,106842.0,106943.0,106809.0,106811.0,0.0
+1751049000000,106842.0,106842.0,106842.0,106842.0,23427465211.72
 
 # 3. Atomic write operations
 - Write to temporary file first
