@@ -186,6 +186,56 @@ class DataCollector:
         
         return error_info
 
+    def _convert_market_chart_to_ohlcv(self, prices: List[List], volumes: List[List], crypto_id: str) -> List[OHLCVData]:
+        """
+        Convert market chart data (prices and volumes) to OHLCV format.
+        
+        Args:
+            prices: List of [timestamp, price] pairs
+            volumes: List of [timestamp, volume] pairs
+            crypto_id: Cryptocurrency identifier for logging
+            
+        Returns:
+            List of OHLCVData objects
+        """
+        ohlcv_objects = []
+        
+        # Create a dict of volumes by timestamp for quick lookup
+        volume_dict = {int(vol[0]): float(vol[1]) for vol in volumes if len(vol) >= 2}
+        
+        for price_entry in prices:
+            try:
+                if len(price_entry) < 2:
+                    continue
+                    
+                timestamp = int(price_entry[0])
+                price = float(price_entry[1])
+                
+                # Get corresponding volume or default to 0
+                volume = volume_dict.get(timestamp, 0.0)
+                
+                # For market chart data, we treat each price point as a candle
+                # where open = high = low = close = price
+                ohlcv = OHLCVData(
+                    timestamp=timestamp,
+                    open=price,
+                    high=price,
+                    low=price,
+                    close=price,
+                    volume=volume
+                )
+                ohlcv_objects.append(ohlcv)
+                
+            except (ValueError, IndexError, TypeError) as e:
+                logger.warning(f"Skipping invalid price entry for {crypto_id}: {price_entry}, error: {e}")
+                continue
+            except Exception as e:
+                logger.warning(f"Failed to process price entry for {crypto_id}: {price_entry}, error: {e}")
+                continue
+        
+        logger.info(f"Converted {len(ohlcv_objects)} price points to OHLCV format for {crypto_id}")
+        return ohlcv_objects
+
     def collect_crypto_data(self, crypto_id: str, days: int = 1) -> Dict[str, Any]:
         """
         Collect and store OHLCV data for a specific cryptocurrency.
@@ -214,53 +264,28 @@ class DataCollector:
         }
         
         try:
-            # Get OHLC data from API
-            ohlc_data = self.api_client.get_ohlc_data(crypto_id, days)
+            # Get market chart data from API (includes volume)
+            market_data = self.api_client.get_market_chart_data(crypto_id, days)
             
-            if not ohlc_data:
-                logger.warning(f"No OHLC data received for {crypto_id}")
+            if not market_data:
+                logger.warning(f"No market data received for {crypto_id}")
                 collection_result['end_time'] = datetime.now().isoformat()
                 collection_result['duration_seconds'] = (datetime.now() - start_time).total_seconds()
                 return collection_result
             
-            # Validate raw OHLC data structure
-            if not self.validator.validate_ohlcv_data(ohlc_data):
-                logger.error(f"Invalid OHLC data structure for {crypto_id}")
+            # Extract price and volume data
+            prices = market_data.get('prices', [])
+            volumes = market_data.get('total_volumes', [])
+            
+            if not prices:
+                logger.warning(f"No price data received for {crypto_id}")
                 collection_result['end_time'] = datetime.now().isoformat()
                 collection_result['duration_seconds'] = (datetime.now() - start_time).total_seconds()
-                collection_result['error'] = "Invalid OHLC data structure"
+                collection_result['error'] = "No price data received"
                 return collection_result
             
-            # Convert to OHLCVData objects
-            ohlcv_objects = []
-            for ohlc_entry in ohlc_data:
-                try:
-                    # Extract values from API response [timestamp, open, high, low, close]
-                    timestamp = int(ohlc_entry[0])
-                    open_price = float(ohlc_entry[1])
-                    high = float(ohlc_entry[2])
-                    low = float(ohlc_entry[3])
-                    close = float(ohlc_entry[4])
-                    # Note: CoinGecko OHLC endpoint doesn't provide volume, so we'll use 0
-                    volume = 0.0
-                    
-                    # Create OHLCVData object (this will validate the data)
-                    ohlcv = OHLCVData(
-                        timestamp=timestamp,
-                        open=open_price,
-                        high=high,
-                        low=low,
-                        close=close,
-                        volume=volume
-                    )
-                    ohlcv_objects.append(ohlcv)
-                    
-                except (ValueError, IndexError, TypeError) as e:
-                    logger.warning(f"Skipping invalid OHLC entry for {crypto_id}: {ohlc_entry}, error: {e}")
-                    continue
-                except Exception as e:
-                    logger.warning(f"Failed to process OHLC entry for {crypto_id}: {ohlc_entry}, error: {e}")
-                    continue
+            # Convert market chart data to OHLCV format
+            ohlcv_objects = self._convert_market_chart_to_ohlcv(prices, volumes, crypto_id)
             
             if not ohlcv_objects:
                 logger.warning(f"No valid OHLCV data processed for {crypto_id}")
