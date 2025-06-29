@@ -21,6 +21,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from config.logging_config import setup_logging
 from config.settings import Config
 from src.services.collector import DataCollector
+from src.services.macro_collector import MacroDataCollector
 from src.services.monitor import HealthChecker
 from src.utils.exceptions import CryptoDataPipelineError
 
@@ -177,6 +178,79 @@ def run_collection(collector: DataCollector, logger: logging.Logger, days: int =
         return False
 
 
+def run_macro_collection(logger: logging.Logger, days: int = 30, indicators: list = None) -> bool:
+    """
+    Execute the macro data collection process.
+    
+    Args:
+        logger: Logger instance
+        days: Number of days of data to collect (default: 30)
+        indicators: List of indicators to collect (default: ALL)
+        
+    Returns:
+        bool: True if collection was successful, False otherwise
+    """
+    logger.info("=" * 60)
+    logger.info("STARTING MACRO DATA COLLECTION")
+    logger.info("=" * 60)
+    
+    try:
+        # Initialize macro collector
+        macro_collector = MacroDataCollector()
+        
+        # Handle indicators list
+        if not indicators or 'ALL' in indicators:
+            logger.info("Collecting all macro indicators...")
+            results = macro_collector.collect_all_indicators(days=days)
+        else:
+            logger.info(f"Collecting specific indicators: {', '.join(indicators)}")
+            results = {}
+            for indicator in indicators:
+                try:
+                    records = macro_collector.collect_indicator(indicator, days=days)
+                    results[indicator] = records
+                except Exception as e:
+                    logger.error(f"Failed to collect {indicator}: {e}")
+                    results[indicator] = []
+        
+        # Log summary results
+        logger.info("=" * 60)
+        logger.info("MACRO COLLECTION SUMMARY")
+        logger.info("=" * 60)
+        
+        successful_indicators = [k for k, v in results.items() if v]
+        failed_indicators = [k for k, v in results.items() if not v]
+        total_records = sum(len(records) for records in results.values())
+        valid_records = sum(sum(1 for r in records if r.value is not None) for records in results.values())
+        
+        logger.info(f"Total indicators attempted: {len(results)}")
+        logger.info(f"Successful indicators: {len(successful_indicators)}")
+        logger.info(f"Failed indicators: {len(failed_indicators)}")
+        logger.info(f"Total records collected: {total_records}")
+        logger.info(f"Valid data points: {valid_records}")
+        logger.info(f"Missing data points: {total_records - valid_records}")
+        
+        if successful_indicators:
+            logger.info(f"Successfully collected: {', '.join(successful_indicators)}")
+        
+        if failed_indicators:
+            logger.warning(f"Failed to collect: {', '.join(failed_indicators)}")
+        
+        # Determine overall success
+        collection_success = len(successful_indicators) > 0
+        if collection_success:
+            logger.info("✅ Macro data collection completed successfully")
+        else:
+            logger.error("❌ Macro data collection failed - no indicators collected")
+        
+        logger.info("=" * 60)
+        return collection_success
+        
+    except Exception as e:
+        logger.error(f"Unexpected error during macro collection: {e}")
+        return False
+
+
 def run_server(logger: logging.Logger, port: int = 8080) -> None:
     """
     Start the HTTP health monitoring server.
@@ -239,8 +313,11 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  python main.py --collect                    # Collect latest data (1 day)
-  python main.py --collect --days 7          # Collect 7 days of data
+  python main.py --collect                    # Collect latest crypto data (1 day)
+  python main.py --collect --days 7          # Collect 7 days of crypto data
+  python main.py --collect-macro             # Collect all macro indicators
+  python main.py --collect-macro --macro-indicators VIX DXY  # Collect specific indicators
+  python main.py --collect --collect-macro   # Collect both crypto and macro data
   python main.py --server                    # Start health monitoring server
   python main.py --server --port 9090       # Start server on custom port
   python main.py --version                   # Show version info
@@ -251,6 +328,20 @@ Examples:
         '--collect',
         action='store_true',
         help='Trigger data collection for top 3 cryptocurrencies'
+    )
+    
+    parser.add_argument(
+        '--collect-macro',
+        action='store_true',
+        help='Trigger macro economic indicators collection'
+    )
+    
+    parser.add_argument(
+        '--macro-indicators',
+        nargs='+',
+        choices=['VIX', 'DXY', 'TREASURY_10Y', 'FED_FUNDS_RATE', 'ALL'],
+        default=['ALL'],
+        help='Specific macro indicators to collect (default: ALL)'
     )
     
     parser.add_argument(
@@ -307,12 +398,17 @@ Examples:
         return 1
     
     # Check for conflicting arguments
-    if args.collect and args.server:
-        print("Error: Cannot specify both --collect and --server", file=sys.stderr)
+    if (args.collect or args.collect_macro) and args.server:
+        print("Error: Cannot specify collection options with --server", file=sys.stderr)
+        return 1
+    
+    # Validate macro indicators argument
+    if args.macro_indicators and not args.collect_macro:
+        print("Error: --macro-indicators can only be used with --collect-macro", file=sys.stderr)
         return 1
     
     # If no action specified, show help
-    if not args.collect and not args.server:
+    if not args.collect and not args.collect_macro and not args.server:
         parser.print_help()
         return 0
     
@@ -325,13 +421,23 @@ Examples:
             logging.getLogger().setLevel(logging.DEBUG)
             logger.debug("Verbose logging enabled")
         
-        # Execute requested action
+        # Execute requested actions
+        crypto_success = True
+        macro_success = True
+        
         if args.collect:
-            success = run_collection(collector, logger, days=args.days)
-            return 0 if success else 1
-        elif args.server:
+            crypto_success = run_collection(collector, logger, days=args.days)
+        
+        if args.collect_macro:
+            macro_success = run_macro_collection(logger, days=args.days, indicators=args.macro_indicators)
+        
+        if args.server:
             run_server(logger, port=args.port)
             return 0
+        
+        # Return overall success
+        overall_success = crypto_success and macro_success
+        return 0 if overall_success else 1
             
     except KeyboardInterrupt:
         print("\nOperation cancelled by user", file=sys.stderr)

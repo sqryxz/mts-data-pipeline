@@ -9,6 +9,7 @@ import logging
 from datetime import datetime, timedelta
 from typing import Dict, Any, Optional
 from src.data.storage import CSVStorage
+from config.macro_settings import MACRO_INDICATORS
 
 
 logger = logging.getLogger(__name__)
@@ -163,6 +164,127 @@ class HealthChecker:
             'checked_at': datetime.now().isoformat()
         }
     
+    def get_macro_data_freshness_status(self, indicator_key: str) -> Dict[str, Any]:
+        """
+        Get detailed data freshness status for a macro indicator.
+        
+        Args:
+            indicator_key: Macro indicator key (e.g., "VIX")
+            
+        Returns:
+            Dict with freshness status, latest date, age, and details
+        """
+        self.logger.debug(f"Checking macro data freshness for {indicator_key}")
+        
+        try:
+            if indicator_key not in MACRO_INDICATORS:
+                return {
+                    'indicator': indicator_key,
+                    'is_fresh': False,
+                    'status': 'invalid',
+                    'message': f'Unknown indicator: {indicator_key}',
+                    'latest_date': None,
+                    'age_hours': None,
+                    'threshold_hours': self.freshness_threshold_hours,
+                    'checked_at': datetime.now().isoformat()
+                }
+            
+            # Load latest macro data
+            indicator_config = MACRO_INDICATORS[indicator_key]
+            series_id = indicator_config['fred_series_id']
+            macro_data = self.storage.load_macro_indicator_data(indicator_key, series_id)
+            
+            if not macro_data:
+                return {
+                    'indicator': indicator_key,
+                    'is_fresh': False,
+                    'status': 'no_data',
+                    'message': f'No data found for {indicator_key}',
+                    'latest_date': None,
+                    'age_hours': None,
+                    'threshold_hours': self.freshness_threshold_hours,
+                    'checked_at': datetime.now().isoformat()
+                }
+            
+            # Find the most recent data point
+            latest_record = max(macro_data, key=lambda x: x.date)
+            latest_date = latest_record.date
+            current_time = datetime.now()
+            
+            # Calculate age of the latest data
+            age_delta = current_time - latest_date
+            age_hours = age_delta.total_seconds() / 3600
+            
+            # For macro data, use a longer threshold (24 hours) since it's typically daily
+            macro_threshold = 24  # hours
+            is_fresh = age_hours <= macro_threshold
+            
+            status = 'fresh' if is_fresh else 'stale'
+            message = (f"Latest data for {indicator_key} is {age_hours:.2f} hours old "
+                      f"(threshold: {macro_threshold} hours)")
+            
+            return {
+                'indicator': indicator_key,
+                'is_fresh': is_fresh,
+                'status': status,
+                'message': message,
+                'latest_date': latest_date.strftime('%Y-%m-%d'),
+                'age_hours': round(age_hours, 2),
+                'threshold_hours': macro_threshold,
+                'record_count': len(macro_data),
+                'series_id': series_id,
+                'checked_at': current_time.isoformat()
+            }
+            
+        except Exception as e:
+            self.logger.error(f"Error checking macro data freshness for {indicator_key}: {e}")
+            return {
+                'indicator': indicator_key,
+                'is_fresh': False,
+                'status': 'error',
+                'message': f'Error checking data for {indicator_key}: {str(e)}',
+                'latest_date': None,
+                'age_hours': None,
+                'threshold_hours': 24,
+                'error': str(e),
+                'checked_at': datetime.now().isoformat()
+            }
+    
+    def check_all_macro_freshness(self) -> Dict[str, Any]:
+        """
+        Check data freshness for all macro indicators.
+        
+        Returns:
+            Dict with overall macro status and individual indicator results
+        """
+        indicator_keys = list(MACRO_INDICATORS.keys())
+        self.logger.info(f"Checking macro data freshness for {len(indicator_keys)} indicators")
+        
+        results = {}
+        fresh_count = 0
+        total_count = len(indicator_keys)
+        
+        for indicator_key in indicator_keys:
+            status = self.get_macro_data_freshness_status(indicator_key)
+            results[indicator_key] = status
+            
+            if status['is_fresh']:
+                fresh_count += 1
+        
+        # Determine overall macro health
+        overall_fresh = fresh_count == total_count
+        health_status = 'healthy' if overall_fresh else 'degraded' if fresh_count > 0 else 'unhealthy'
+        
+        return {
+            'overall_status': health_status,
+            'is_healthy': overall_fresh,
+            'fresh_count': fresh_count,
+            'total_count': total_count,
+            'freshness_percentage': round((fresh_count / total_count) * 100, 1) if total_count > 0 else 0,
+            'indicators': results,
+            'checked_at': datetime.now().isoformat()
+        }
+    
     def get_system_health_status(self) -> Dict[str, Any]:
         """
         Get comprehensive system health status including data freshness.
@@ -173,18 +295,34 @@ class HealthChecker:
         self.logger.info("Performing comprehensive system health check")
         
         # Check data freshness for top cryptos
-        freshness_status = self.check_all_cryptos_freshness()
+        crypto_freshness_status = self.check_all_cryptos_freshness()
         
-        # Overall system health is based on data freshness for now
-        # Can be extended with other health checks (disk space, API connectivity, etc.)
-        system_healthy = freshness_status['is_healthy']
+        # Check data freshness for macro indicators
+        macro_freshness_status = self.check_all_macro_freshness()
+        
+        # Overall system health is based on both crypto and macro data freshness
+        crypto_healthy = crypto_freshness_status['is_healthy']
+        macro_healthy = macro_freshness_status['is_healthy']
+        system_healthy = crypto_healthy and macro_healthy
+        
+        # Determine overall status
+        if system_healthy:
+            status = 'healthy'
+            message = 'All components healthy'
+        elif crypto_healthy or macro_healthy:
+            status = 'degraded'
+            message = 'Some components unhealthy'
+        else:
+            status = 'unhealthy'
+            message = 'Multiple components unhealthy'
         
         return {
-            'status': 'healthy' if system_healthy else 'unhealthy',
+            'status': status,
             'healthy': system_healthy,
             'components': {
-                'data_freshness': freshness_status
+                'crypto_data': crypto_freshness_status,
+                'macro_data': macro_freshness_status
             },
-            'message': 'All components healthy' if system_healthy else 'Some components unhealthy',
+            'message': message,
             'checked_at': datetime.now().isoformat()
         } 

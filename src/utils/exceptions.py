@@ -127,4 +127,37 @@ class ConfigurationError(CryptoDataPipelineError):
             config_key: The configuration key that caused the error
         """
         super().__init__(message, "CONFIGURATION_ERROR")
-        self.config_key = config_key 
+        self.config_key = config_key
+
+
+class FREDAPIError(APIError):
+    """Exception for FRED API specific errors."""
+    
+    def __init__(self, message: str, series_id: str = None, status_code: int = None):
+        """
+        Initialize FRED API error.
+        
+        Args:
+            message: Human-readable error message
+            series_id: The FRED series ID that caused the error
+            status_code: HTTP status code if applicable
+        """
+        super().__init__(message, "FRED_API_ERROR", status_code)
+        self.series_id = series_id
+
+
+class MacroDataError(CryptoDataPipelineError):
+    """Exception for macro data processing errors."""
+    
+    def __init__(self, message: str, indicator: str = None, date: str = None):
+        """
+        Initialize macro data error.
+        
+        Args:
+            message: Human-readable error message
+            indicator: The macro indicator that caused the error
+            date: The date associated with the error
+        """
+        super().__init__(message, "MACRO_DATA_ERROR")
+        self.indicator = indicator
+        self.date = date 
