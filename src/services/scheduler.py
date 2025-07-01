@@ -15,6 +15,7 @@ from typing import Optional, Callable, Any
 from datetime import datetime, timedelta
 
 from src.services.collector import DataCollector
+from src.services.macro_collector import MacroDataCollector
 from src.utils.exceptions import CryptoDataPipelineError
 
 
@@ -27,25 +28,52 @@ class SimpleScheduler:
     
     The scheduler persists its state to avoid duplicate collections
     across restarts.
+    
+    Supports both crypto and macro data collection.
     """
     
     def __init__(self, 
                  collector: Optional[DataCollector] = None,
+                 macro_collector: Optional[MacroDataCollector] = None,
                  interval_seconds: int = 3600,  # Default: 1 hour
                  days_to_collect: int = 1,
+                 collect_crypto: bool = True,
+                 collect_macro: bool = False,
+                 macro_indicators: Optional[list[str]] = None,
                  state_file: Optional[str] = None):
         """
         Initialize the scheduler.
         
         Args:
-            collector: DataCollector instance (creates default if None)
+            collector: DataCollector instance (creates default if None and collect_crypto=True)
+            macro_collector: MacroDataCollector instance (creates default if None and collect_macro=True)
             interval_seconds: Time between collections in seconds (default: 3600 = 1 hour)
             days_to_collect: Number of days of data to collect each run (default: 1)
+            collect_crypto: Whether to collect crypto data (default: True)
+            collect_macro: Whether to collect macro data (default: False)
+            macro_indicators: List of specific macro indicators to collect (None = all configured)
             state_file: Path to state persistence file (default: data/scheduler_state.json)
         """
-        self.collector = collector if collector is not None else DataCollector()
+        # Collection configuration
+        self.collect_crypto = collect_crypto
+        self.collect_macro = collect_macro
+        self.macro_indicators = macro_indicators
         self.interval_seconds = interval_seconds
         self.days_to_collect = days_to_collect
+        
+        # Initialize collectors only if needed
+        self.collector = None
+        self.macro_collector = None
+        
+        if self.collect_crypto:
+            self.collector = collector if collector is not None else DataCollector()
+            
+        if self.collect_macro:
+            self.macro_collector = macro_collector if macro_collector is not None else MacroDataCollector()
+        
+        # Validation
+        if not self.collect_crypto and not self.collect_macro:
+            raise ValueError("At least one collection type (crypto or macro) must be enabled")
         
         # State persistence
         self.state_file = state_file if state_file else os.path.join('data', 'scheduler_state.json')
@@ -89,25 +117,100 @@ class SimpleScheduler:
             self.logger.info("=" * 60)
             self.logger.info(f"SCHEDULED COLLECTION #{self._collection_count + 1}")
             self.logger.info(f"Interval: {self.interval_seconds}s, Days: {self.days_to_collect}")
+            self.logger.info(f"Crypto: {self.collect_crypto}, Macro: {self.collect_macro}")
+            if self.collect_macro and self.macro_indicators:
+                self.logger.info(f"Macro indicators: {', '.join(self.macro_indicators)}")
             self.logger.info("=" * 60)
             
-            # Run the collection
-            results = self.collector.collect_all_data(days=self.days_to_collect)
+            overall_success = True
+            crypto_results = None
+            macro_results = None
             
-            # Log results
+            # Run crypto collection if enabled
+            if self.collect_crypto and self.collector:
+                try:
+                    self.logger.info("Running crypto data collection...")
+                    crypto_results = self.collector.collect_all_data(days=self.days_to_collect)
+                    
+                    if crypto_results['successful'] == 0:
+                        overall_success = False
+                        self.logger.warning("❌ Crypto collection failed - no data collected")
+                    else:
+                        self.logger.info(f"✅ Crypto collection successful: {crypto_results['successful']} assets")
+                        
+                except Exception as e:
+                    self.logger.error(f"❌ Crypto collection failed: {e}")
+                    overall_success = False
+            
+            # Run macro collection if enabled
+            if self.collect_macro and self.macro_collector:
+                try:
+                    self.logger.info("Running macro data collection...")
+                    if self.macro_indicators:
+                        # Collect specific indicators
+                        macro_results = {}
+                        successful_indicators = []
+                        failed_indicators = []
+                        
+                        for indicator in self.macro_indicators:
+                            try:
+                                self.macro_collector.collect_indicator(indicator, days=self.days_to_collect)
+                                successful_indicators.append(indicator)
+                            except Exception as e:
+                                self.logger.error(f"Failed to collect {indicator}: {e}")
+                                failed_indicators.append(indicator)
+                        
+                        macro_results = {
+                            'successful_indicators': successful_indicators,
+                            'failed_indicators': failed_indicators,
+                            'success_count': len(successful_indicators),
+                            'total_count': len(self.macro_indicators)
+                        }
+                    else:
+                        # Collect all configured indicators
+                        raw_results = self.macro_collector.collect_all_indicators(days=self.days_to_collect)
+                        
+                        # Process results into consistent format
+                        successful_indicators = [k for k, v in raw_results.items() if v]
+                        failed_indicators = [k for k, v in raw_results.items() if not v]
+                        
+                        macro_results = {
+                            'successful_indicators': successful_indicators,
+                            'failed_indicators': failed_indicators,
+                            'success_count': len(successful_indicators),
+                            'total_count': len(raw_results)
+                        }
+                    
+                    if macro_results.get('success_count', 0) == 0:
+                        overall_success = False
+                        self.logger.warning("❌ Macro collection failed - no indicators collected")
+                    else:
+                        self.logger.info(f"✅ Macro collection successful: {macro_results.get('success_count', 0)} indicators")
+                        
+                except Exception as e:
+                    self.logger.error(f"❌ Macro collection failed: {e}")
+                    overall_success = False
+            
+            # Log comprehensive results
             self.logger.info("=" * 60)
             self.logger.info("SCHEDULED COLLECTION SUMMARY")
             self.logger.info("=" * 60)
-            self.logger.info(f"Total attempted: {results['total_attempted']}")
-            self.logger.info(f"Successful: {results['successful']}")
-            self.logger.info(f"Failed: {results['failed']}")
-            self.logger.info(f"Duration: {results['duration_seconds']:.2f}s")
             
-            if results['successful_cryptos']:
-                self.logger.info(f"✅ Successfully collected: {', '.join(results['successful_cryptos'])}")
+            if crypto_results:
+                self.logger.info(f"📈 CRYPTO: {crypto_results['successful']}/{crypto_results['total_attempted']} successful")
+                if crypto_results['successful_cryptos']:
+                    self.logger.info(f"  ✅ Success: {', '.join(crypto_results['successful_cryptos'])}")
+                if crypto_results['failed_cryptos']:
+                    self.logger.info(f"  ❌ Failed: {', '.join(crypto_results['failed_cryptos'])}")
             
-            if results['failed_cryptos']:
-                self.logger.warning(f"❌ Failed to collect: {', '.join(results['failed_cryptos'])}")
+            if macro_results:
+                success_count = macro_results.get('success_count', 0)
+                total_count = macro_results.get('total_count', 0)
+                self.logger.info(f"📊 MACRO: {success_count}/{total_count} successful")
+                if macro_results.get('successful_indicators'):
+                    self.logger.info(f"  ✅ Success: {', '.join(macro_results['successful_indicators'])}")
+                if macro_results.get('failed_indicators'):
+                    self.logger.info(f"  ❌ Failed: {', '.join(macro_results['failed_indicators'])}")
             
             # Update state
             self._last_collection_time = collection_start_time
@@ -116,14 +219,13 @@ class SimpleScheduler:
             # Save state for persistence
             self._save_state()
             
-            success = results['successful'] > 0
-            if success:
+            if overall_success:
                 self.logger.info("✅ Scheduled collection completed successfully")
             else:
-                self.logger.error("❌ Scheduled collection failed - no data collected")
+                self.logger.error("❌ Scheduled collection had failures")
             
             self.logger.info("=" * 60)
-            return success
+            return overall_success
             
         except CryptoDataPipelineError as e:
             self.logger.error(f"Pipeline error during scheduled collection: {e}")
@@ -256,6 +358,9 @@ class SimpleScheduler:
             'running': self.is_running(),
             'interval_seconds': self.interval_seconds,
             'days_to_collect': self.days_to_collect,
+            'collect_crypto': self.collect_crypto,
+            'collect_macro': self.collect_macro,
+            'macro_indicators': self.macro_indicators,
             'collection_count': self._collection_count,
             'last_collection_time': self._last_collection_time.isoformat() if self._last_collection_time else None,
             'next_collection_time': (
@@ -298,7 +403,10 @@ class SimpleScheduler:
                 'last_collection_time': self._last_collection_time.isoformat() if self._last_collection_time else None,
                 'collection_count': self._collection_count,
                 'interval_seconds': self.interval_seconds,
-                'days_to_collect': self.days_to_collect
+                'days_to_collect': self.days_to_collect,
+                'collect_crypto': self.collect_crypto,
+                'collect_macro': self.collect_macro,
+                'macro_indicators': self.macro_indicators
             }
             
             with open(self.state_file, 'w') as f:

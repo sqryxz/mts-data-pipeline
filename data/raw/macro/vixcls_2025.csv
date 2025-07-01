@@ -1,0 +1,24 @@
+date,value,series_id,indicator_name,units,is_interpolated,is_forward_filled,source
+2025-01-26,18.45,VIXCLS,CBOE Volatility Index,Index,False,False,FRED
+2025-01-27,,VIXCLS,CBOE Volatility Index,Index,False,False,FRED
+2025-01-28,19.2,VIXCLS,CBOE Volatility Index,Index,False,False,FRED
+2025-05-30,18.57,VIXCLS,CBOE Volatility Index,Index,False,False,FRED
+2025-06-02,18.36,VIXCLS,CBOE Volatility Index,Index,False,False,FRED
+2025-06-03,17.69,VIXCLS,CBOE Volatility Index,Index,False,False,FRED
+2025-06-04,17.61,VIXCLS,CBOE Volatility Index,Index,False,False,FRED
+2025-06-05,18.48,VIXCLS,CBOE Volatility Index,Index,False,False,FRED
+2025-06-06,16.77,VIXCLS,CBOE Volatility Index,Index,False,False,FRED
+2025-06-09,17.16,VIXCLS,CBOE Volatility Index,Index,False,False,FRED
+2025-06-10,16.95,VIXCLS,CBOE Volatility Index,Index,False,False,FRED
+2025-06-11,17.26,VIXCLS,CBOE Volatility Index,Index,False,False,FRED
+2025-06-12,18.02,VIXCLS,CBOE Volatility Index,Index,False,False,FRED
+2025-06-13,20.82,VIXCLS,CBOE Volatility Index,Index,False,False,FRED
+2025-06-16,19.11,VIXCLS,CBOE Volatility Index,Index,False,False,FRED
+2025-06-17,21.6,VIXCLS,CBOE Volatility Index,Index,False,False,FRED
+2025-06-18,20.14,VIXCLS,CBOE Volatility Index,Index,False,False,FRED
+2025-06-19,22.17,VIXCLS,CBOE Volatility Index,Index,False,False,FRED
+2025-06-20,20.62,VIXCLS,CBOE Volatility Index,Index,False,False,FRED
+2025-06-23,19.83,VIXCLS,CBOE Volatility Index,Index,False,False,FRED
+2025-06-24,17.48,VIXCLS,CBOE Volatility Index,Index,False,False,FRED
+2025-06-25,16.76,VIXCLS,CBOE Volatility Index,Index,False,False,FRED
+2025-06-26,16.59,VIXCLS,CBOE Volatility Index,Index,False,False,FRED

@@ -4,18 +4,23 @@ from typing import List, Dict, Optional
 from datetime import datetime, timedelta
 from ..api.fred_client import FREDClient
 from ..data.macro_models import MacroIndicatorRecord
-from ..data.storage import CSVStorage
+from ..data.sqlite_helper import CryptoDatabase
 from ..utils.exceptions import FREDAPIError, MacroDataError
 from config.macro_settings import MACRO_INDICATORS
 
 class MacroDataCollector:
     """Service for collecting macro economic indicators"""
     
-    def __init__(self):
+    def __init__(self, database: Optional[CryptoDatabase] = None, fred_client: Optional[FREDClient] = None):
         """Initialize the macro data collector"""
-        self.fred_client = FREDClient()
-        self.storage = CSVStorage()
+        self.fred_client = fred_client  # Initialize later if needed
+        self.database = database or CryptoDatabase()
         self.logger = logging.getLogger(__name__)
+    
+    def _ensure_fred_client(self):
+        """Lazy initialization of FRED client"""
+        if self.fred_client is None:
+            self.fred_client = FREDClient()
     
     def _log_structured_metrics(self, event_type: str, data: Dict) -> None:
         """
@@ -31,6 +36,34 @@ class MacroDataCollector:
             **data
         }
         self.logger.info(f"METRICS: {json.dumps(metrics)}")
+
+    def _convert_records_to_database_format(self, records: List[MacroIndicatorRecord]) -> List[Dict]:
+        """
+        Convert MacroIndicatorRecord objects to database-compatible dictionaries.
+        
+        Args:
+            records: List of MacroIndicatorRecord objects
+            
+        Returns:
+            List of dictionaries ready for database insertion
+        """
+        db_records = []
+        
+        for record in records:
+            # Skip records with None values (missing data)
+            if record.value is None:
+                continue
+                
+            db_record = {
+                'indicator': record.series_id,  # Use series_id as indicator (e.g., 'VIXCLS', 'DFF')
+                'date': record.date.strftime('%Y-%m-%d'),
+                'value': record.value,
+                'is_interpolated': record.is_interpolated,
+                'is_forward_filled': record.is_forward_filled
+            }
+            db_records.append(db_record)
+            
+        return db_records
     
     def collect_indicator(self, indicator_key: str, days: int = 30) -> List[MacroIndicatorRecord]:
         """
@@ -86,6 +119,9 @@ class MacroDataCollector:
                 'end_date': end_date_str
             })
             
+            # Ensure FRED client is initialized
+            self._ensure_fred_client()
+            
             # Fetch data from FRED API
             api_data = self.fred_client.get_series_data(series_id, start_date_str, end_date_str)
             
@@ -119,8 +155,28 @@ class MacroDataCollector:
             
             self.logger.info(f"Converted {len(records)} data points to MacroIndicatorRecord objects")
             
-            # Save to CSV
-            self.storage.save_macro_indicator_data(indicator_key, records)
+            # Check for incremental collection - filter out existing data
+            latest_date = self.database.get_latest_macro_date(series_id)
+            if latest_date:
+                # Convert latest_date string to datetime for comparison
+                latest_datetime = datetime.strptime(latest_date, '%Y-%m-%d')
+                
+                # Filter out data that already exists in database
+                new_records = [record for record in records if record.date > latest_datetime]
+                if not new_records:
+                    self.logger.info(f"No new data to store for {indicator_key} - latest date {latest_date} is up to date")
+                    return records  # Return original records for consistency
+                
+                self.logger.info(f"Filtered {len(records) - len(new_records)} existing records for {indicator_key}")
+                records_to_store = new_records
+            else:
+                records_to_store = records
+            
+            # Convert to database format (this also filters out None values)
+            db_records = self._convert_records_to_database_format(records_to_store)
+            
+            # Store in database
+            inserted_count = self.database.insert_macro_data(db_records)
             
             # Count non-None values for logging
             valid_values = sum(1 for r in records if r.value is not None)
@@ -136,6 +192,7 @@ class MacroDataCollector:
                 'success': True,
                 'duration_seconds': round(collection_duration, 3),
                 'records_collected': len(records),
+                'records_inserted': inserted_count,
                 'valid_values': valid_values,
                 'missing_values': missing_values,
                 'missing_percentage': round((missing_values / len(records)) * 100, 1) if len(records) > 0 else 0,
@@ -144,7 +201,7 @@ class MacroDataCollector:
                 'days_requested': days
             })
             
-            self.logger.info(f"Successfully collected {indicator_key}: {valid_values} valid values, {missing_values} missing values")
+            self.logger.info(f"Successfully collected {indicator_key}: {inserted_count} new records inserted, {valid_values} valid values total, {missing_values} missing values")
             
             return records
             

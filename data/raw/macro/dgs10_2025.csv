@@ -1,0 +1,21 @@
+date,value,series_id,indicator_name,units,is_interpolated,is_forward_filled,source
+2025-05-30,4.41,DGS10,10-Year Treasury Constant Maturity Rate,Percent,False,False,FRED
+2025-06-02,4.46,DGS10,10-Year Treasury Constant Maturity Rate,Percent,False,False,FRED
+2025-06-03,4.46,DGS10,10-Year Treasury Constant Maturity Rate,Percent,False,False,FRED
+2025-06-04,4.37,DGS10,10-Year Treasury Constant Maturity Rate,Percent,False,False,FRED
+2025-06-05,4.4,DGS10,10-Year Treasury Constant Maturity Rate,Percent,False,False,FRED
+2025-06-06,4.51,DGS10,10-Year Treasury Constant Maturity Rate,Percent,False,False,FRED
+2025-06-09,4.49,DGS10,10-Year Treasury Constant Maturity Rate,Percent,False,False,FRED
+2025-06-10,4.47,DGS10,10-Year Treasury Constant Maturity Rate,Percent,False,False,FRED
+2025-06-11,4.41,DGS10,10-Year Treasury Constant Maturity Rate,Percent,False,False,FRED
+2025-06-12,4.36,DGS10,10-Year Treasury Constant Maturity Rate,Percent,False,False,FRED
+2025-06-13,4.41,DGS10,10-Year Treasury Constant Maturity Rate,Percent,False,False,FRED
+2025-06-16,4.46,DGS10,10-Year Treasury Constant Maturity Rate,Percent,False,False,FRED
+2025-06-17,4.39,DGS10,10-Year Treasury Constant Maturity Rate,Percent,False,False,FRED
+2025-06-18,4.38,DGS10,10-Year Treasury Constant Maturity Rate,Percent,False,False,FRED
+2025-06-19,,DGS10,10-Year Treasury Constant Maturity Rate,Percent,False,False,FRED
+2025-06-20,4.38,DGS10,10-Year Treasury Constant Maturity Rate,Percent,False,False,FRED
+2025-06-23,4.34,DGS10,10-Year Treasury Constant Maturity Rate,Percent,False,False,FRED
+2025-06-24,4.3,DGS10,10-Year Treasury Constant Maturity Rate,Percent,False,False,FRED
+2025-06-25,4.29,DGS10,10-Year Treasury Constant Maturity Rate,Percent,False,False,FRED
+2025-06-26,4.26,DGS10,10-Year Treasury Constant Maturity Rate,Percent,False,False,FRED

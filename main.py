@@ -22,6 +22,7 @@ from config.logging_config import setup_logging
 from config.settings import Config
 from src.services.collector import DataCollector
 from src.services.macro_collector import MacroDataCollector
+from src.services.scheduler import SimpleScheduler
 from src.services.monitor import HealthChecker
 from src.utils.exceptions import CryptoDataPipelineError
 
@@ -251,6 +252,83 @@ def run_macro_collection(logger: logging.Logger, days: int = 30, indicators: lis
         return False
 
 
+def run_scheduler(logger: logging.Logger, 
+                 interval_minutes: int = 60,
+                 days: int = 1,
+                 collect_crypto: bool = True,
+                 collect_macro: bool = False,
+                 macro_indicators: list = None) -> None:
+    """
+    Start the automated scheduler for data collection.
+    
+    Args:
+        logger: Logger instance
+        interval_minutes: Minutes between collections (default: 60)
+        days: Number of days of data to collect each run (default: 1)
+        collect_crypto: Whether to collect crypto data (default: True)
+        collect_macro: Whether to collect macro data (default: False)
+        macro_indicators: List of macro indicators to collect (default: None = all)
+    """
+    logger.info("=" * 60)
+    logger.info("STARTING AUTOMATED DATA COLLECTION SCHEDULER")
+    logger.info("=" * 60)
+    
+    try:
+        # Initialize collectors
+        collector = None
+        macro_collector = None
+        
+        if collect_crypto:
+            collector = DataCollector()
+            logger.info("✅ Crypto collector initialized")
+        
+        if collect_macro:
+            macro_collector = MacroDataCollector()
+            logger.info("✅ Macro collector initialized")
+        
+        # Create scheduler with configuration
+        scheduler = SimpleScheduler(
+            collector=collector,
+            macro_collector=macro_collector,
+            interval_seconds=interval_minutes * 60,
+            days_to_collect=days,
+            collect_crypto=collect_crypto,
+            collect_macro=collect_macro,
+            macro_indicators=macro_indicators
+        )
+        
+        # Log configuration
+        logger.info(f"📅 Collection interval: {interval_minutes} minutes")
+        logger.info(f"📊 Days per collection: {days}")
+        logger.info(f"🪙 Crypto collection: {'✅ Enabled' if collect_crypto else '❌ Disabled'}")
+        logger.info(f"📈 Macro collection: {'✅ Enabled' if collect_macro else '❌ Disabled'}")
+        if collect_macro and macro_indicators:
+            logger.info(f"📋 Macro indicators: {', '.join(macro_indicators)}")
+        
+        logger.info("Press Ctrl+C to stop the scheduler")
+        logger.info("=" * 60)
+        
+        # Start scheduler
+        if scheduler.start():
+            try:
+                # Keep the main thread alive
+                while scheduler.is_running():
+                    import time
+                    time.sleep(1)
+            except KeyboardInterrupt:
+                logger.info("Received shutdown signal, stopping scheduler...")
+                scheduler.stop()
+                logger.info("✅ Scheduler stopped gracefully")
+        else:
+            logger.error("❌ Failed to start scheduler")
+            
+    except Exception as e:
+        logger.error(f"Scheduler error: {e}")
+        raise
+    finally:
+        logger.info("Automated scheduler stopped")
+
+
 def run_server(logger: logging.Logger, port: int = 8080) -> None:
     """
     Start the HTTP health monitoring server.
@@ -318,6 +396,9 @@ Examples:
   python main.py --collect-macro             # Collect all macro indicators
   python main.py --collect-macro --macro-indicators VIX DXY  # Collect specific indicators
   python main.py --collect --collect-macro   # Collect both crypto and macro data
+  python main.py --schedule --collect        # Schedule crypto data collection (every 60 min)
+  python main.py --schedule --collect-macro  # Schedule macro data collection
+  python main.py --schedule --collect --collect-macro --interval 30  # Schedule both every 30 min
   python main.py --server                    # Start health monitoring server
   python main.py --server --port 9090       # Start server on custom port
   python main.py --version                   # Show version info
@@ -340,7 +421,7 @@ Examples:
         '--macro-indicators',
         nargs='+',
         choices=['VIX', 'DXY', 'TREASURY_10Y', 'FED_FUNDS_RATE', 'ALL'],
-        default=['ALL'],
+        default=None,
         help='Specific macro indicators to collect (default: ALL)'
     )
     
@@ -348,6 +429,19 @@ Examples:
         '--server',
         action='store_true',
         help='Start HTTP health monitoring server'
+    )
+    
+    parser.add_argument(
+        '--schedule',
+        action='store_true',
+        help='Start automated data collection scheduler'
+    )
+    
+    parser.add_argument(
+        '--interval',
+        type=int,
+        default=60,
+        help='Minutes between scheduled collections (default: 60)'
     )
     
     parser.add_argument(
@@ -397,18 +491,31 @@ Examples:
         print("Error: --port must be between 1 and 65535", file=sys.stderr)
         return 1
     
-    # Check for conflicting arguments
-    if (args.collect or args.collect_macro) and args.server:
-        print("Error: Cannot specify collection options with --server", file=sys.stderr)
+    if args.interval < 1:
+        print("Error: --interval must be a positive integer (minutes)", file=sys.stderr)
         return 1
     
-    # Validate macro indicators argument
-    if args.macro_indicators and not args.collect_macro:
+    # Check for conflicting arguments
+    if args.server and (args.collect or args.collect_macro or args.schedule):
+        print("Error: Cannot specify other options with --server", file=sys.stderr)
+        return 1
+    
+    if args.schedule and not (args.collect or args.collect_macro):
+        print("Error: --schedule requires at least one of --collect or --collect-macro", file=sys.stderr)
+        return 1
+    
+    # Validate macro indicators argument - only check if explicitly provided
+    if args.macro_indicators is not None and not args.collect_macro:
         print("Error: --macro-indicators can only be used with --collect-macro", file=sys.stderr)
         return 1
     
+    # Validate interval argument
+    if args.interval != 60 and not args.schedule:  # 60 is the default
+        print("Error: --interval can only be used with --schedule", file=sys.stderr)
+        return 1
+    
     # If no action specified, show help
-    if not args.collect and not args.collect_macro and not args.server:
+    if not args.collect and not args.collect_macro and not args.server and not args.schedule:
         parser.print_help()
         return 0
     
@@ -422,6 +529,27 @@ Examples:
             logger.debug("Verbose logging enabled")
         
         # Execute requested actions
+        if args.server:
+            run_server(logger, port=args.port)
+            return 0
+        
+        if args.schedule:
+            # Handle macro indicators processing
+            macro_indicators = None
+            if args.collect_macro and args.macro_indicators:
+                macro_indicators = args.macro_indicators if 'ALL' not in args.macro_indicators else None
+            
+            run_scheduler(
+                logger=logger,
+                interval_minutes=args.interval,
+                days=args.days,
+                collect_crypto=args.collect,
+                collect_macro=args.collect_macro,
+                macro_indicators=macro_indicators
+            )
+            return 0
+        
+        # Manual collection mode
         crypto_success = True
         macro_success = True
         
@@ -429,11 +557,8 @@ Examples:
             crypto_success = run_collection(collector, logger, days=args.days)
         
         if args.collect_macro:
-            macro_success = run_macro_collection(logger, days=args.days, indicators=args.macro_indicators)
-        
-        if args.server:
-            run_server(logger, port=args.port)
-            return 0
+            indicators = args.macro_indicators if args.macro_indicators is not None else ['ALL']
+            macro_success = run_macro_collection(logger, days=args.days, indicators=indicators)
         
         # Return overall success
         overall_success = crypto_success and macro_success

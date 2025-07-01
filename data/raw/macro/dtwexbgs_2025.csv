@@ -1,0 +1,17 @@
+date,value,series_id,indicator_name,units,is_interpolated,is_forward_filled,source
+2025-05-30,122.1112,DTWEXBGS,US Dollar Index,Index (Jan 1997=100),False,False,FRED
+2025-06-02,121.549,DTWEXBGS,US Dollar Index,Index (Jan 1997=100),False,False,FRED
+2025-06-03,121.808,DTWEXBGS,US Dollar Index,Index (Jan 1997=100),False,False,FRED
+2025-06-04,121.4093,DTWEXBGS,US Dollar Index,Index (Jan 1997=100),False,False,FRED
+2025-06-05,121.3178,DTWEXBGS,US Dollar Index,Index (Jan 1997=100),False,False,FRED
+2025-06-06,121.5217,DTWEXBGS,US Dollar Index,Index (Jan 1997=100),False,False,FRED
+2025-06-09,121.2757,DTWEXBGS,US Dollar Index,Index (Jan 1997=100),False,False,FRED
+2025-06-10,121.4134,DTWEXBGS,US Dollar Index,Index (Jan 1997=100),False,False,FRED
+2025-06-11,120.9763,DTWEXBGS,US Dollar Index,Index (Jan 1997=100),False,False,FRED
+2025-06-12,120.565,DTWEXBGS,US Dollar Index,Index (Jan 1997=100),False,False,FRED
+2025-06-13,120.7131,DTWEXBGS,US Dollar Index,Index (Jan 1997=100),False,False,FRED
+2025-06-16,120.5449,DTWEXBGS,US Dollar Index,Index (Jan 1997=100),False,False,FRED
+2025-06-17,120.8862,DTWEXBGS,US Dollar Index,Index (Jan 1997=100),False,False,FRED
+2025-06-18,121.1093,DTWEXBGS,US Dollar Index,Index (Jan 1997=100),False,False,FRED
+2025-06-19,,DTWEXBGS,US Dollar Index,Index (Jan 1997=100),False,False,FRED
+2025-06-20,121.411,DTWEXBGS,US Dollar Index,Index (Jan 1997=100),False,False,FRED

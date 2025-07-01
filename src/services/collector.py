@@ -7,7 +7,7 @@ from datetime import datetime
 from src.api.coingecko_client import CoinGeckoClient
 from src.data.models import Cryptocurrency, OHLCVData
 from src.data.validator import DataValidator
-from src.data.storage import CSVStorage
+from src.data.sqlite_helper import CryptoDatabase
 from src.utils.exceptions import (
     APIError, APIRateLimitError, APIConnectionError, APITimeoutError,
     DataValidationError, StorageError
@@ -28,18 +28,18 @@ class DataCollector:
     def __init__(self, 
                  api_client: Optional[CoinGeckoClient] = None,
                  validator: Optional[DataValidator] = None,
-                 storage: Optional[CSVStorage] = None):
+                 database: Optional[CryptoDatabase] = None):
         """
         Initialize the data collector with dependencies.
         
         Args:
             api_client: CoinGecko API client instance
             validator: Data validator instance  
-            storage: CSV storage instance
+            database: SQLite database instance
         """
         self.api_client = api_client or CoinGeckoClient()
         self.validator = validator or DataValidator()
-        self.storage = storage or CSVStorage()
+        self.database = database or CryptoDatabase()
 
     def _log_structured_metrics(self, event_type: str, data: Dict[str, Any]):
         """
@@ -236,6 +236,37 @@ class DataCollector:
         logger.info(f"Converted {len(ohlcv_objects)} price points to OHLCV format for {crypto_id}")
         return ohlcv_objects
 
+    def _convert_ohlcv_to_database_format(self, ohlcv_objects: List[OHLCVData], crypto_id: str) -> List[Dict[str, Any]]:
+        """
+        Convert OHLCVData objects to database-compatible dictionaries.
+        
+        Args:
+            ohlcv_objects: List of OHLCVData objects
+            crypto_id: Cryptocurrency identifier
+            
+        Returns:
+            List of dictionaries ready for database insertion
+        """
+        db_records = []
+        
+        for ohlcv in ohlcv_objects:
+            # Convert timestamp to date string for database
+            date_str = ohlcv.to_datetime().strftime('%Y-%m-%d')
+            
+            db_record = {
+                'cryptocurrency': crypto_id,
+                'timestamp': ohlcv.timestamp,
+                'date_str': date_str,
+                'open': ohlcv.open,
+                'high': ohlcv.high,
+                'low': ohlcv.low,
+                'close': ohlcv.close,
+                'volume': ohlcv.volume
+            }
+            db_records.append(db_record)
+            
+        return db_records
+
     def collect_crypto_data(self, crypto_id: str, days: int = 1) -> Dict[str, Any]:
         """
         Collect and store OHLCV data for a specific cryptocurrency.
@@ -294,14 +325,36 @@ class DataCollector:
                 collection_result['error'] = "No valid OHLCV data processed"
                 return collection_result
             
-            # Store the data
-            self.storage.save_ohlcv_data(crypto_id, ohlcv_objects)
+            # Check for incremental collection - filter out existing data
+            latest_timestamp = self.database.get_latest_crypto_timestamp(crypto_id)
+            if latest_timestamp:
+                # Filter out data that already exists in database
+                new_ohlcv_objects = [obj for obj in ohlcv_objects if obj.timestamp > latest_timestamp]
+                if not new_ohlcv_objects:
+                    logger.info(f"No new data to store for {crypto_id} - latest timestamp {latest_timestamp} is up to date")
+                    end_time = datetime.now()
+                    collection_result.update({
+                        'success': True,
+                        'records_collected': 0,
+                        'end_time': end_time.isoformat(),
+                        'duration_seconds': (end_time - start_time).total_seconds()
+                    })
+                    return collection_result
+                
+                logger.info(f"Filtered {len(ohlcv_objects) - len(new_ohlcv_objects)} existing records for {crypto_id}")
+                ohlcv_objects = new_ohlcv_objects
+            
+            # Convert OHLCV objects to database format
+            db_records = self._convert_ohlcv_to_database_format(ohlcv_objects, crypto_id)
+            
+            # Store the data in database
+            inserted_count = self.database.insert_crypto_data(db_records)
             
             # Update successful result
             end_time = datetime.now()
             collection_result.update({
                 'success': True,
-                'records_collected': len(ohlcv_objects),
+                'records_collected': inserted_count,
                 'end_time': end_time.isoformat(),
                 'duration_seconds': (end_time - start_time).total_seconds()
             })
@@ -310,12 +363,12 @@ class DataCollector:
             self._log_structured_metrics('crypto_collection_complete', {
                 'crypto_id': crypto_id,
                 'success': True,
-                'records_collected': len(ohlcv_objects),
+                'records_collected': inserted_count,
                 'duration_seconds': collection_result['duration_seconds'],
                 'days_requested': days
             })
             
-            logger.info(f"Successfully collected and stored {len(ohlcv_objects)} OHLCV records for {crypto_id}")
+            logger.info(f"Successfully collected and stored {inserted_count} new OHLCV records for {crypto_id}")
             return collection_result
             
         except Exception as e:

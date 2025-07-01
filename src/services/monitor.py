@@ -8,7 +8,7 @@ and detect when data becomes stale or outdated.
 import logging
 from datetime import datetime, timedelta
 from typing import Dict, Any, Optional
-from src.data.storage import CSVStorage
+from src.data.sqlite_helper import CryptoDatabase
 from config.macro_settings import MACRO_INDICATORS
 
 
@@ -24,16 +24,16 @@ class HealthChecker:
     """
     
     def __init__(self, 
-                 storage: Optional[CSVStorage] = None,
+                 database: Optional[CryptoDatabase] = None,
                  freshness_threshold_hours: int = 2):
         """
         Initialize the health checker.
         
         Args:
-            storage: CSV storage instance for data access
+            database: SQLite database instance for data access
             freshness_threshold_hours: Hours after which data is considered stale (default: 2)
         """
-        self.storage = storage or CSVStorage()
+        self.database = database or CryptoDatabase()
         self.freshness_threshold_hours = freshness_threshold_hours
         self.logger = logging.getLogger(__name__)
     
@@ -287,42 +287,135 @@ class HealthChecker:
     
     def get_system_health_status(self) -> Dict[str, Any]:
         """
-        Get comprehensive system health status including data freshness.
+        Get comprehensive system health status using database health information.
         
         Returns:
             Dict with system health information
         """
-        self.logger.info("Performing comprehensive system health check")
+        self.logger.info("Performing comprehensive system health check using database")
         
-        # Check data freshness for top cryptos
-        crypto_freshness_status = self.check_all_cryptos_freshness()
-        
-        # Check data freshness for macro indicators
-        macro_freshness_status = self.check_all_macro_freshness()
-        
-        # Overall system health is based on both crypto and macro data freshness
-        crypto_healthy = crypto_freshness_status['is_healthy']
-        macro_healthy = macro_freshness_status['is_healthy']
-        system_healthy = crypto_healthy and macro_healthy
-        
-        # Determine overall status
-        if system_healthy:
-            status = 'healthy'
-            message = 'All components healthy'
-        elif crypto_healthy or macro_healthy:
-            status = 'degraded'
-            message = 'Some components unhealthy'
-        else:
-            status = 'unhealthy'
-            message = 'Multiple components unhealthy'
-        
-        return {
-            'status': status,
-            'healthy': system_healthy,
-            'components': {
-                'crypto_data': crypto_freshness_status,
-                'macro_data': macro_freshness_status
-            },
-            'message': message,
-            'checked_at': datetime.now().isoformat()
-        } 
+        try:
+            # Get database health status (this provides comprehensive data)
+            db_health = self.database.get_health_status()
+            
+            # Determine data freshness based on database contents
+            current_time = datetime.now()
+            crypto_data = db_health.get('crypto_data', [])
+            macro_data = db_health.get('macro_data', [])
+            
+            # Check crypto data freshness
+            crypto_healthy = True
+            crypto_status = []
+            for crypto in crypto_data:
+                latest_date_str = crypto.get('latest_date')
+                if latest_date_str:
+                    try:
+                        latest_date = datetime.strptime(latest_date_str, '%Y-%m-%d')
+                        age_hours = (current_time - latest_date).total_seconds() / 3600
+                        is_fresh = age_hours <= (self.freshness_threshold_hours * 24)  # Convert to days for daily data
+                        crypto_status.append({
+                            'symbol': crypto['symbol'],
+                            'is_fresh': is_fresh,
+                            'age_hours': round(age_hours, 2),
+                            'records': crypto['total_records'],
+                            'latest_date': latest_date_str
+                        })
+                        if not is_fresh:
+                            crypto_healthy = False
+                    except ValueError:
+                        crypto_healthy = False
+                        crypto_status.append({
+                            'symbol': crypto['symbol'],
+                            'is_fresh': False,
+                            'error': 'Invalid date format'
+                        })
+                else:
+                    crypto_healthy = False
+                    crypto_status.append({
+                        'symbol': crypto['symbol'],
+                        'is_fresh': False,
+                        'error': 'No data available'
+                    })
+            
+            # Check macro data freshness
+            macro_healthy = True
+            macro_status = []
+            for macro in macro_data:
+                latest_date_str = macro.get('latest_date')
+                if latest_date_str:
+                    try:
+                        latest_date = datetime.strptime(latest_date_str, '%Y-%m-%d')
+                        age_hours = (current_time - latest_date).total_seconds() / 3600
+                        is_fresh = age_hours <= 72  # 3 days for macro data (less frequent updates)
+                        macro_status.append({
+                            'indicator': macro['indicator'],
+                            'is_fresh': is_fresh,
+                            'age_hours': round(age_hours, 2),
+                            'records': macro['total_records'],
+                            'latest_date': latest_date_str
+                        })
+                        if not is_fresh:
+                            macro_healthy = False
+                    except ValueError:
+                        macro_healthy = False
+                        macro_status.append({
+                            'indicator': macro['indicator'],
+                            'is_fresh': False,
+                            'error': 'Invalid date format'
+                        })
+                else:
+                    macro_healthy = False
+                    macro_status.append({
+                        'indicator': macro['indicator'],
+                        'is_fresh': False,
+                        'error': 'No data available'
+                    })
+            
+            # Overall system health
+            system_healthy = crypto_healthy and macro_healthy
+            
+            # Determine status
+            if system_healthy:
+                status = 'healthy'
+                message = 'All data components are healthy and fresh'
+            elif crypto_healthy or macro_healthy:
+                status = 'degraded' 
+                message = 'Some data components have stale data'
+            else:
+                status = 'unhealthy'
+                message = 'Multiple data components are stale or missing'
+            
+            return {
+                'status': status,
+                'healthy': system_healthy,
+                'database': {
+                    'path': db_health.get('database_path', 'Unknown'),
+                    'size_mb': db_health.get('database_size_mb', 0),
+                    'total_crypto_records': sum(c['total_records'] for c in crypto_data),
+                    'total_macro_records': sum(m['total_records'] for m in macro_data)
+                },
+                'components': {
+                    'crypto_data': {
+                        'healthy': crypto_healthy,
+                        'symbols': crypto_status,
+                        'total_symbols': len(crypto_data)
+                    },
+                    'macro_data': {
+                        'healthy': macro_healthy, 
+                        'indicators': macro_status,
+                        'total_indicators': len(macro_data)
+                    }
+                },
+                'message': message,
+                'checked_at': current_time.isoformat()
+            }
+            
+        except Exception as e:
+            self.logger.error(f"Error performing health check: {e}")
+            return {
+                'status': 'error',
+                'healthy': False,
+                'message': f'Health check failed: {str(e)}',
+                'error': str(e),
+                'checked_at': datetime.now().isoformat()
+            } 
