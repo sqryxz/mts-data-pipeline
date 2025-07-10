@@ -1,23 +1,36 @@
 # MTS Data Pipeline
 
-A robust cryptocurrency data collection pipeline that automatically gathers OHLCV (Open, High, Low, Close, Volume) data for the top 3 cryptocurrencies by market cap using the CoinGecko API.
+A comprehensive cryptocurrency data collection and trading signal pipeline that automatically gathers historical OHLCV data, real-time market data, and generates trading signals using advanced cross-exchange analysis and multi-strategy algorithms.
 
 ## Features
 
-- **Automated Data Collection**: Collects 5-minute interval OHLCV data for Bitcoin, Ethereum, and the #3 cryptocurrency by market cap
-- **Reliable Storage**: Stores data in CSV format with automatic deduplication and year-based file organization
-- **Comprehensive Error Handling**: Smart retry logic with exponential backoff for API failures
-- **Health Monitoring**: Built-in health checks and HTTP monitoring endpoint
-- **Scheduled Operations**: Persistent scheduler with graceful shutdown and restart handling
-- **Structured Logging**: Detailed metrics and logging for monitoring and debugging
-- **Production Ready**: Comprehensive test coverage and robust error recovery
+### Core Data Collection
+- **Historical Data Collection**: Collects 5-minute interval OHLCV data for Bitcoin, Ethereum, and the #3 cryptocurrency by market cap
+- **Real-Time Data Streams**: Live WebSocket connections to Binance and Bybit for order book and funding rate data
+- **Cross-Exchange Integration**: Seamless data collection from multiple exchanges (Binance, Bybit)
+- **Macro Economic Data**: Integration with FRED API for VIX, Treasury rates, and economic indicators
+
+### Advanced Analytics & Signals
+- **Cross-Exchange Arbitrage Detection**: Real-time identification of arbitrage opportunities between exchanges
+- **Multi-Strategy Signal Generation**: VIX correlation, mean reversion, and custom trading strategies
+- **Real-Time Signal Aggregation**: Live signal processing with strength classification and confidence scoring
+- **Volume Spike Detection**: Automated detection of unusual trading activity
+- **Funding Rate Analysis**: Cross-exchange funding rate divergence tracking
+
+### Production Features
+- **Dual Storage System**: SQLite database + CSV backup with Redis caching for real-time data
+- **WebSocket Infrastructure**: Robust WebSocket connections with automatic reconnection and error handling
+- **Comprehensive Monitoring**: Built-in health checks, HTTP monitoring endpoints, and performance metrics
+- **Production Deployment**: Docker-based deployment with orchestration and monitoring
+- **High Test Coverage**: 96+ comprehensive tests covering all components and edge cases
 
 ## Quick Start
 
 ### Prerequisites
 
 - Python 3.8 or higher
-- Internet connection for CoinGecko API access
+- Redis server (for real-time data caching)
+- Internet connection for API access (CoinGecko, FRED, Binance, Bybit)
 
 ### Installation
 
@@ -27,18 +40,45 @@ A robust cryptocurrency data collection pipeline that automatically gathers OHLC
    cd MTS-data-pipeline
    ```
 
-2. **Install dependencies**:
+2. **Install Redis** (for real-time features):
+   ```bash
+   # macOS
+   brew install redis
+   brew services start redis
+   
+   # Ubuntu/Debian
+   sudo apt-get install redis-server
+   sudo systemctl start redis-server
+   
+   # Docker
+   docker run -d -p 6379:6379 redis:alpine
+   ```
+
+3. **Install dependencies**:
    ```bash
    pip install -r requirements.txt
    ```
 
-3. **Verify installation**:
+4. **Verify installation**:
    ```bash
    python3 main.py --version
    ```
 
+5. **Test real-time features**:
+   ```bash
+   # Test Binance connection
+   python3 -c "from src.api.binance_client import BinanceClient; print('Binance OK:', BinanceClient().get_ticker('BTCUSDT') is not None)"
+   
+   # Test Bybit connection  
+   python3 -c "from src.api.bybit_client import BybitClient; print('Bybit OK:', BybitClient().get_ticker('BTCUSDT') is not None)"
+   
+   # Test Redis connection
+   python3 -c "from src.data.redis_helper import RedisHelper; r = RedisHelper(); print('Redis OK:', r.connect())"
+   ```
+
 ### Basic Usage
 
+#### Historical Data Collection
 **Run a one-time data collection**:
 ```bash
 python3 main.py --collect
@@ -49,9 +89,36 @@ python3 main.py --collect
 python3 main.py --collect --days 7
 ```
 
+#### Real-Time Features
+**Start real-time order book collection**:
+```bash
+python3 production_main.py --mode orderbook-collector
+```
+
+**Start cross-exchange arbitrage detection**:
+```bash
+python3 production_main.py --mode arbitrage-monitor
+```
+
+**Start real-time signal generation**:
+```bash
+python3 production_main.py --mode realtime-signals
+```
+
+**Start complete real-time pipeline**:
+```bash
+python3 production_main.py --mode full-realtime
+```
+
+#### Monitoring & Health Checks
 **Start health monitoring server**:
 ```bash
 python3 main.py --server --port 8080
+```
+
+**Check system health**:
+```bash
+curl http://localhost:8080/health
 ```
 
 ## Detailed Usage
@@ -159,15 +226,46 @@ curl http://localhost:8080/health
 
 ### Data Storage
 
+#### Historical Data Storage
 Data is stored in CSV files under the `data/raw/` directory:
 
 ```
 data/raw/
 ├── bitcoin_2025.csv
 ├── ethereum_2025.csv
-└── tether_2025.csv
+├── tether_2025.csv
+└── macro/
+    ├── vixcls_2025.csv
+    ├── dgs10_2025.csv
+    ├── dtwexbgs_2025.csv
+    └── dff_2025.csv
 ```
 
+#### Real-Time Data Storage
+Real-time data uses a multi-tier storage approach:
+
+```
+data/realtime/
+├── binance/
+│   ├── orderbooks/
+│   ├── funding/
+│   └── spreads/
+├── bybit/
+│   ├── orderbooks/
+│   ├── funding/
+│   └── spreads/
+└── signals/
+    ├── arbitrage/
+    ├── volume_spikes/
+    └── spread_anomalies/
+```
+
+**Storage Layers**:
+- **Redis**: Real-time caching (1-hour TTL)
+- **SQLite**: Analysis and historical queries
+- **CSV**: Backup and data portability
+
+#### Data Schema
 Each CSV file contains the following columns:
 - `timestamp`: Unix timestamp in milliseconds
 - `open`: Opening price
@@ -207,28 +305,140 @@ The pipeline uses the CoinGecko public API with built-in rate limiting and retry
 
 ```
 src/
-├── api/                 # External API integration
-│   └── coingecko_client.py
-├── data/                # Data models, validation, and storage
-│   ├── models.py
-│   ├── validator.py
-│   └── storage.py
-├── services/            # Core business logic
-│   ├── collector.py     # Data collection orchestration
-│   ├── monitor.py       # Health monitoring
-│   └── scheduler.py     # Automated scheduling
-└── utils/               # Utilities and exceptions
-    ├── exceptions.py
-    └── retry.py
+├── api/                          # External API integration
+│   ├── coingecko_client.py      # Historical data collection
+│   ├── binance_client.py        # Binance REST API client
+│   ├── bybit_client.py          # Bybit REST API client
+│   ├── fred_client.py           # Macro economic data
+│   └── websockets/              # Real-time WebSocket clients
+│       ├── base_websocket.py    # Abstract WebSocket base
+│       ├── binance_websocket.py # Binance WebSocket streams
+│       └── bybit_websocket.py   # Bybit WebSocket streams
+├── data/                        # Data models, validation, and storage
+│   ├── models.py               # Historical data models
+│   ├── realtime_models.py      # Real-time data structures
+│   ├── signal_models.py        # Trading signal models
+│   ├── validator.py            # Data validation
+│   ├── storage.py              # CSV storage
+│   ├── realtime_storage.py     # Real-time data persistence
+│   └── redis_helper.py         # Redis caching layer
+├── realtime/                   # Real-time processing
+│   └── orderbook_processor.py  # Order book data processing
+├── services/                   # Core business logic
+│   ├── collector.py            # Historical data collection
+│   ├── orderbook_collector.py  # Real-time order book collection
+│   ├── funding_collector.py    # Funding rate collection
+│   ├── cross_exchange_analyzer.py # Arbitrage detection
+│   ├── realtime_signal_aggregator.py # Real-time signal generation
+│   ├── monitor.py              # Health monitoring
+│   └── scheduler.py            # Automated scheduling
+├── signals/                    # Trading signal framework
+│   ├── signal_aggregator.py    # Signal aggregation
+│   ├── backtest_interface.py   # Backtesting
+│   └── strategies/             # Strategy implementations
+│       ├── base_strategy.py    # Strategy base class
+│       ├── mean_reversion_strategy.py
+│       └── vix_correlation_strategy.py
+└── utils/                      # Utilities and exceptions
+    ├── exceptions.py           # Custom exceptions
+    ├── retry.py               # Retry logic
+    └── websocket_utils.py     # WebSocket utilities
+```
+
+### Real-Time Architecture
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    Real-Time Data Pipeline                   │
+├─────────────────────────────────────────────────────────────┤
+│  WebSocket Layer                                            │
+│  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐           │
+│  │ Binance WS  │ │ Bybit WS    │ │ Base WS     │           │
+│  │ Client      │ │ Client      │ │ Handler     │           │
+│  └─────────────┘ └─────────────┘ └─────────────┘           │
+├─────────────────────────────────────────────────────────────┤
+│  Processing Layer                                           │
+│  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐           │
+│  │ Order Book  │ │ Cross-Exch  │ │ Signal      │           │
+│  │ Processor   │ │ Analyzer    │ │ Aggregator  │           │
+│  └─────────────┘ └─────────────┘ └─────────────┘           │
+├─────────────────────────────────────────────────────────────┤
+│  Storage Layer                                              │
+│  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐           │
+│  │ Redis       │ │ SQLite      │ │ CSV         │           │
+│  │ (Real-time) │ │ (Analysis)  │ │ (Backup)    │           │
+│  └─────────────┘ └─────────────┘ └─────────────┘           │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ### High-Level Data Flow
 
+#### Historical Data Flow
 1. **Discovery**: Get top 3 cryptocurrencies by market cap
 2. **Collection**: Fetch OHLCV data for each cryptocurrency
 3. **Validation**: Validate data structure and values
 4. **Storage**: Save to CSV files with deduplication
 5. **Monitoring**: Track collection status and data freshness
+
+#### Real-Time Data Flow
+1. **WebSocket Connections**: Connect to Binance and Bybit WebSocket streams
+2. **Order Book Processing**: Real-time order book updates and processing
+3. **Cross-Exchange Analysis**: Identify arbitrage opportunities and spread anomalies
+4. **Signal Generation**: Real-time trading signal generation and aggregation
+5. **Data Persistence**: Store in Redis for real-time access, SQLite for analysis
+
+## Real-Time Features
+
+### Cross-Exchange Arbitrage Detection
+The system continuously monitors price discrepancies between Binance and Bybit:
+
+```python
+# Example arbitrage opportunity detection
+{
+    "symbol": "BTCUSDT",
+    "buy_exchange": "binance",
+    "sell_exchange": "bybit", 
+    "buy_price": 43010.0,
+    "sell_price": 43080.0,
+    "profit_absolute": 70.0,
+    "profit_percentage": 0.163,
+    "max_volume": 2.4,
+    "confidence": 0.88
+}
+```
+
+### Real-Time Signal Generation
+Multi-strategy signal generation with live market data:
+
+**Signal Types**:
+- **ARBITRAGE**: Cross-exchange price discrepancies
+- **SPREAD_ANOMALY**: Unusually wide bid-ask spreads  
+- **VOLUME_SPIKE**: Significant volume increases
+- **FUNDING_RATE_DIVERGENCE**: Rate differences between exchanges
+- **MOMENTUM_BREAKOUT**: Price momentum signals
+
+**Signal Example**:
+```python
+{
+    "signal_id": "ARB_20250115_143022_001",
+    "signal_type": "ARBITRAGE",
+    "symbol": "BTCUSDT", 
+    "action": "BUY",
+    "strength": "MODERATE",
+    "confidence": 0.66,
+    "exchange": "binance",
+    "target_exchange": "bybit",
+    "entry_price": 43010.0,
+    "target_price": 43080.0,
+    "timestamp": 1705324222000
+}
+```
+
+### WebSocket Infrastructure
+- **Binance WebSocket**: Real-time order book and ticker updates
+- **Bybit WebSocket**: Real-time market data streams
+- **Auto-Reconnection**: Automatic reconnection with exponential backoff
+- **Error Handling**: Comprehensive error recovery and connection management
 
 ## How the Data Pipeline Works
 

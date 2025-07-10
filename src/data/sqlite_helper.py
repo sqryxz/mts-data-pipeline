@@ -501,4 +501,289 @@ class CryptoDatabase:
             
         except Exception as e:
             self.logger.error(f"Failed to get combined analysis data for {cryptocurrency}: {e}")
-            raise 
+            raise
+
+    def get_strategy_market_data(self, assets: List[str], days: int = 60) -> Dict[str, pd.DataFrame]:
+        """
+        Get comprehensive market data for strategy analysis across multiple assets.
+        
+        This method is designed specifically for trading strategies that need:
+        - VIX data (current level, historical)  
+        - Crypto OHLCV data for all assets
+        - Rolling highs for drawdown calculation
+        - Aligned timestamps across all assets
+        
+        Args:
+            assets: List of cryptocurrency names (e.g., ['bitcoin', 'ethereum', 'binancecoin'])
+            days: Number of recent days to retrieve (default: 60)
+            
+        Returns:
+            Dict[str, pd.DataFrame]: Dictionary with keys:
+                - 'vix_data': VIX historical data with statistics
+                - 'crypto_data': Combined crypto OHLCV data for all assets
+                - 'market_summary': Overall market statistics
+                - '{asset_name}': Individual asset data with rolling highs/lows
+                
+        Raises:
+            sqlite3.Error: If database query fails
+        """
+        import time
+        import numpy as np
+        
+        # Calculate the cutoff timestamp for the date range
+        current_timestamp = int(time.time())
+        cutoff_timestamp = (current_timestamp - (days * 24 * 60 * 60)) * 1000
+        
+        try:
+            result = {
+                'vix_data': pd.DataFrame(),
+                'crypto_data': pd.DataFrame(),
+                'market_summary': {},
+                'timestamp_range': {
+                    'start_timestamp': cutoff_timestamp,
+                    'end_timestamp': current_timestamp * 1000,
+                    'days_requested': days
+                }
+            }
+            
+            # 1. Get VIX data with historical statistics
+            vix_query = """
+                SELECT 
+                    date,
+                    value as vix_value,
+                    is_interpolated,
+                    is_forward_filled
+                FROM macro_indicators 
+                WHERE indicator = 'VIXCLS'
+                AND date >= DATE('now', '-{} days')
+                ORDER BY date ASC
+            """.format(days)
+            
+            vix_df = self.query_to_dataframe(vix_query)
+            
+            if not vix_df.empty:
+                # Add VIX analysis columns
+                vix_df['vix_percentile'] = vix_df['vix_value'].rolling(window=min(30, len(vix_df))).rank(pct=True) * 100
+                vix_df['vix_ma_10'] = vix_df['vix_value'].rolling(window=10, min_periods=1).mean()
+                vix_df['vix_ma_20'] = vix_df['vix_value'].rolling(window=20, min_periods=1).mean()
+                vix_df['vix_spike'] = vix_df['vix_value'] > 25  # Common spike threshold
+                vix_df['vix_extreme'] = vix_df['vix_value'] > 35  # Extreme fear threshold
+                
+                # Add VIX regime classification
+                vix_df['vix_regime'] = pd.cut(vix_df['vix_value'], 
+                                             bins=[0, 15, 25, 35, float('inf')],
+                                             labels=['Low', 'Normal', 'High', 'Extreme'])
+                
+                result['vix_data'] = vix_df
+                
+                # VIX summary statistics
+                result['vix_summary'] = {
+                    'current_vix': float(vix_df['vix_value'].iloc[-1]) if not vix_df.empty else None,
+                    'average_vix': float(vix_df['vix_value'].mean()),
+                    'max_vix': float(vix_df['vix_value'].max()),
+                    'min_vix': float(vix_df['vix_value'].min()),
+                    'vix_above_25_days': int((vix_df['vix_value'] > 25).sum()),
+                    'vix_above_35_days': int((vix_df['vix_value'] > 35).sum()),
+                    'data_points': len(vix_df)
+                }
+            
+            # 2. Get crypto data for all assets
+            all_crypto_data = []
+            asset_summaries = {}
+            
+            for asset in assets:
+                # Get crypto OHLCV data
+                crypto_query = """
+                    SELECT 
+                        cryptocurrency,
+                        date_str,
+                        timestamp,
+                        open,
+                        high,
+                        low,
+                        close,
+                        volume
+                    FROM crypto_ohlcv 
+                    WHERE cryptocurrency = ?
+                    AND timestamp >= ?
+                    ORDER BY timestamp ASC
+                """
+                
+                asset_df = self.query_to_dataframe(crypto_query, (asset, cutoff_timestamp))
+                
+                if not asset_df.empty:
+                    # Add technical analysis columns
+                    asset_df = self._add_technical_indicators(asset_df)
+                    
+                    # Add asset-specific data to results
+                    result[asset] = asset_df
+                    all_crypto_data.append(asset_df)
+                    
+                    # Calculate asset summary
+                    asset_summaries[asset] = self._calculate_asset_summary(asset_df)
+                else:
+                    self.logger.warning(f"No data found for {asset} in the last {days} days")
+                    result[asset] = pd.DataFrame()
+                    asset_summaries[asset] = {'error': 'No data available'}
+            
+            # 3. Combine all crypto data
+            if all_crypto_data:
+                result['crypto_data'] = pd.concat(all_crypto_data, ignore_index=True)
+                result['crypto_data'] = result['crypto_data'].sort_values(['timestamp', 'cryptocurrency'])
+            
+            # 4. Create market summary
+            result['market_summary'] = {
+                'assets_analyzed': len(assets),
+                'assets_with_data': len([a for a in assets if not result[a].empty]),
+                'total_data_points': sum(len(result[a]) for a in assets if not result[a].empty),
+                'date_range': {
+                    'start_date': result['crypto_data']['date_str'].min() if not result['crypto_data'].empty else None,
+                    'end_date': result['crypto_data']['date_str'].max() if not result['crypto_data'].empty else None
+                },
+                'vix_summary': result.get('vix_summary', {}),
+                'asset_summaries': asset_summaries
+            }
+            
+            self.logger.info(f"Retrieved strategy market data for {len(assets)} assets over {days} days")
+            self.logger.debug(f"Data summary: {result['market_summary']['total_data_points']} total data points, VIX data: {len(result['vix_data'])}")
+            
+            return result
+            
+        except Exception as e:
+            self.logger.error(f"Failed to get strategy market data: {e}")
+            raise
+    
+    def _add_technical_indicators(self, df: pd.DataFrame) -> pd.DataFrame:
+        """
+        Add technical analysis indicators to crypto data for strategy analysis.
+        
+        Args:
+            df: DataFrame with OHLCV data
+            
+        Returns:
+            DataFrame with added technical indicators
+        """
+        if df.empty:
+            return df
+        
+        # Ensure data is sorted by timestamp
+        df = df.sort_values('timestamp').copy()
+        
+        # Calculate daily returns
+        df['daily_return'] = df['close'].pct_change()
+        
+        # Calculate rolling highs and lows for drawdown analysis
+        df['rolling_high_7d'] = df['high'].rolling(window=7, min_periods=1).max()
+        df['rolling_high_14d'] = df['high'].rolling(window=14, min_periods=1).max()
+        df['rolling_high_30d'] = df['high'].rolling(window=30, min_periods=1).max()
+        df['rolling_low_7d'] = df['low'].rolling(window=7, min_periods=1).min()
+        df['rolling_low_14d'] = df['low'].rolling(window=14, min_periods=1).min()
+        df['rolling_low_30d'] = df['low'].rolling(window=30, min_periods=1).min()
+        
+        # Calculate drawdowns from rolling highs
+        df['drawdown_from_7d_high'] = (df['rolling_high_7d'] - df['close']) / df['rolling_high_7d']
+        df['drawdown_from_14d_high'] = (df['rolling_high_14d'] - df['close']) / df['rolling_high_14d']
+        df['drawdown_from_30d_high'] = (df['rolling_high_30d'] - df['close']) / df['rolling_high_30d']
+        
+        # Calculate recovery from lows
+        df['recovery_from_7d_low'] = (df['close'] - df['rolling_low_7d']) / df['rolling_low_7d']
+        df['recovery_from_14d_low'] = (df['close'] - df['rolling_low_14d']) / df['rolling_low_14d']
+        df['recovery_from_30d_low'] = (df['close'] - df['rolling_low_30d']) / df['rolling_low_30d']
+        
+        # Calculate moving averages
+        df['ma_7'] = df['close'].rolling(window=7, min_periods=1).mean()
+        df['ma_14'] = df['close'].rolling(window=14, min_periods=1).mean()
+        df['ma_30'] = df['close'].rolling(window=30, min_periods=1).mean()
+        
+        # Calculate volatility (rolling standard deviation of returns)
+        df['volatility_7d'] = df['daily_return'].rolling(window=7, min_periods=1).std()
+        df['volatility_14d'] = df['daily_return'].rolling(window=14, min_periods=1).std()
+        df['volatility_30d'] = df['daily_return'].rolling(window=30, min_periods=1).std()
+        
+        # Calculate RSI (Relative Strength Index)
+        df['rsi_14'] = self._calculate_rsi(df['close'], period=14)
+        
+        # Add price position indicators
+        df['price_vs_ma_7'] = df['close'] / df['ma_7'] - 1
+        df['price_vs_ma_14'] = df['close'] / df['ma_14'] - 1
+        df['price_vs_ma_30'] = df['close'] / df['ma_30'] - 1
+        
+        # Add datetime column for easier analysis
+        df['datetime'] = pd.to_datetime(df['timestamp'], unit='ms')
+        
+        return df
+    
+    def _calculate_rsi(self, price_series: pd.Series, period: int = 14) -> pd.Series:
+        """
+        Calculate RSI (Relative Strength Index) for price series.
+        
+        Args:
+            price_series: Series of closing prices
+            period: Period for RSI calculation (default: 14)
+            
+        Returns:
+            Series with RSI values
+        """
+        if len(price_series) < period + 1:
+            return pd.Series([50.0] * len(price_series), index=price_series.index)
+        
+        # Calculate price changes
+        delta = price_series.diff()
+        
+        # Separate gains and losses
+        gains = delta.where(delta > 0, 0)
+        losses = -delta.where(delta < 0, 0)
+        
+        # Calculate average gains and losses
+        avg_gains = gains.rolling(window=period, min_periods=1).mean()
+        avg_losses = losses.rolling(window=period, min_periods=1).mean()
+        
+        # Calculate RSI
+        rs = avg_gains / avg_losses
+        rsi = 100 - (100 / (1 + rs))
+        
+        # Handle division by zero
+        rsi = rsi.fillna(50.0)
+        
+        return rsi
+    
+    def _calculate_asset_summary(self, df: pd.DataFrame) -> Dict:
+        """
+        Calculate summary statistics for an asset.
+        
+        Args:
+            df: DataFrame with asset OHLCV and technical data
+            
+        Returns:
+            Dict with asset summary statistics
+        """
+        if df.empty:
+            return {'error': 'No data available'}
+        
+        current_price = float(df['close'].iloc[-1])
+        
+        # Calculate various metrics
+        summary = {
+            'current_price': current_price,
+            'price_change_7d': float(df['close'].iloc[-1] / df['close'].iloc[max(0, len(df)-8)] - 1) if len(df) >= 8 else 0,
+            'price_change_14d': float(df['close'].iloc[-1] / df['close'].iloc[max(0, len(df)-15)] - 1) if len(df) >= 15 else 0,
+            'price_change_30d': float(df['close'].iloc[-1] / df['close'].iloc[max(0, len(df)-31)] - 1) if len(df) >= 31 else 0,
+            'max_drawdown_7d': float(df['drawdown_from_7d_high'].max()) if 'drawdown_from_7d_high' in df.columns else 0,
+            'max_drawdown_14d': float(df['drawdown_from_14d_high'].max()) if 'drawdown_from_14d_high' in df.columns else 0,
+            'max_drawdown_30d': float(df['drawdown_from_30d_high'].max()) if 'drawdown_from_30d_high' in df.columns else 0,
+            'current_drawdown_7d': float(df['drawdown_from_7d_high'].iloc[-1]) if 'drawdown_from_7d_high' in df.columns else 0,
+            'current_drawdown_14d': float(df['drawdown_from_14d_high'].iloc[-1]) if 'drawdown_from_14d_high' in df.columns else 0,
+            'current_drawdown_30d': float(df['drawdown_from_30d_high'].iloc[-1]) if 'drawdown_from_30d_high' in df.columns else 0,
+            'volatility_7d': float(df['volatility_7d'].iloc[-1]) if 'volatility_7d' in df.columns else 0,
+            'volatility_14d': float(df['volatility_14d'].iloc[-1]) if 'volatility_14d' in df.columns else 0,
+            'volatility_30d': float(df['volatility_30d'].iloc[-1]) if 'volatility_30d' in df.columns else 0,
+            'rsi_14': float(df['rsi_14'].iloc[-1]) if 'rsi_14' in df.columns else 50,
+            'volume_24h': float(df['volume'].iloc[-1]) if not df.empty else 0,
+            'data_points': len(df),
+            'date_range': {
+                'start': df['date_str'].iloc[0],
+                'end': df['date_str'].iloc[-1]
+            }
+        }
+        
+        return summary 

@@ -1,0 +1,24 @@
+{
+  "name": "Mean_Reversion_Strategy",
+  "description": "Strategy that detects VIX spikes combined with crypto drawdowns to generate mean reversion signals",
+  "assets": ["bitcoin", "ethereum", "binancecoin"],
+  "vix_spike_threshold": 25,
+  "drawdown_threshold": 0.10,
+  "lookback_days": 14,
+  "position_size": 0.025,
+  "risk_management": {
+    "max_position_size": 0.05,
+    "max_risk_per_trade": 0.03,
+    "min_vix_adjustment": 0.5,
+    "confidence_multiplier": 0.5
+  },
+  "parameters": {
+    "rsi_period": 14,
+    "rolling_high_window": 14,
+    "min_data_points": 5,
+    "stop_loss_base": 0.03,
+    "take_profit_ratio": 0.6
+  },
+  "enabled": true,
+  "version": "1.0.0"
+} 

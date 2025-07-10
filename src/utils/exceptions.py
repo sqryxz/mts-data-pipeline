@@ -22,142 +22,163 @@ class CryptoDataPipelineError(Exception):
         return self.message
 
 
-class APIError(CryptoDataPipelineError):
-    """Base exception for API-related errors."""
+# Real-Time Data Collection Exceptions
+class RealTimeDataError(CryptoDataPipelineError):
+    """Base exception for real-time data collection errors."""
+    pass
+
+
+class WebSocketConnectionError(RealTimeDataError):
+    """WebSocket connection failed or lost."""
     
-    def __init__(self, message: str, error_code: str = "API_ERROR", status_code: int = None):
-        """
-        Initialize API error.
-        
-        Args:
-            message: Human-readable error message
-            error_code: Machine-readable error code
-            status_code: HTTP status code if applicable
-        """
-        super().__init__(message, error_code)
+    def __init__(self, message: str, exchange: str = None, retry_after: int = None):
+        super().__init__(message)
+        self.exchange = exchange
+        self.retry_after = retry_after
+
+
+class OrderBookError(RealTimeDataError):
+    """Order book data processing error."""
+    
+    def __init__(self, message: str, symbol: str = None, exchange: str = None):
+        super().__init__(message)
+        self.symbol = symbol
+        self.exchange = exchange
+
+
+class FundingRateError(RealTimeDataError):
+    """Funding rate collection error."""
+    
+    def __init__(self, message: str, symbol: str = None, exchange: str = None):
+        super().__init__(message)
+        self.symbol = symbol
+        self.exchange = exchange
+
+
+class StreamError(RealTimeDataError):
+    """Stream processing error."""
+    
+    def __init__(self, message: str, stream_name: str = None, error_type: str = None):
+        super().__init__(message)
+        self.stream_name = stream_name
+        self.error_type = error_type
+
+
+class ArbitrageError(RealTimeDataError):
+    """Arbitrage detection and calculation error."""
+    
+    def __init__(self, message: str, symbol: str = None, exchanges: list = None):
+        super().__init__(message)
+        self.symbol = symbol
+        self.exchanges = exchanges or []
+
+
+class RealTimeStorageError(RealTimeDataError):
+    """Real-time data storage error."""
+    
+    def __init__(self, message: str, storage_type: str = None):
+        super().__init__(message)
+        self.storage_type = storage_type  # 'redis', 'sqlite', 'csv'
+
+
+# API and Connection Exceptions
+class APIError(CryptoDataPipelineError):
+    """Base exception for API errors."""
+    
+    def __init__(self, message: str, status_code: int = None, response_text: str = None):
+        super().__init__(message)
         self.status_code = status_code
+        self.response_text = response_text
 
 
 class APIRateLimitError(APIError):
-    """Exception for API rate limiting errors."""
+    """API rate limit exceeded."""
     
-    def __init__(self, message: str = "API rate limit exceeded", retry_after: int = None):
-        """
-        Initialize rate limit error.
-        
-        Args:
-            message: Human-readable error message
-            retry_after: Seconds to wait before retrying, if provided by API
-        """
-        super().__init__(message, "API_RATE_LIMIT", status_code=429)
+    def __init__(self, message: str, retry_after: int = None, status_code: int = 429):
+        super().__init__(message, status_code)
         self.retry_after = retry_after
 
 
 class APIConnectionError(APIError):
-    """Exception for API connection errors."""
-    
-    def __init__(self, message: str = "Failed to connect to API"):
-        """
-        Initialize connection error.
-        
-        Args:
-            message: Human-readable error message
-        """
-        super().__init__(message, "API_CONNECTION_ERROR")
+    """API connection error."""
+    pass
 
 
 class APITimeoutError(APIError):
-    """Exception for API timeout errors."""
-    
-    def __init__(self, message: str = "API request timed out", timeout: float = None):
-        """
-        Initialize timeout error.
-        
-        Args:
-            message: Human-readable error message
-            timeout: The timeout value that was exceeded
-        """
-        super().__init__(message, "API_TIMEOUT")
-        self.timeout = timeout
+    """API request timeout."""
+    pass
 
 
+# Data Processing Exceptions
 class DataValidationError(CryptoDataPipelineError):
-    """Exception for data validation failures."""
+    """Data validation failed."""
     
-    def __init__(self, message: str, field: str = None, value = None):
-        """
-        Initialize validation error.
-        
-        Args:
-            message: Human-readable error message
-            field: The field that failed validation
-            value: The invalid value
-        """
-        super().__init__(message, "DATA_VALIDATION_ERROR")
-        self.field = field
-        self.value = value
+    def __init__(self, message: str, field_name: str = None, field_value: str = None):
+        super().__init__(message)
+        self.field_name = field_name
+        self.field_value = field_value
 
 
+class DataStorageError(CryptoDataPipelineError):
+    """Data storage operation failed."""
+    pass
+
+
+class DataProcessingError(CryptoDataPipelineError):
+    """Data processing operation failed."""
+    pass
+
+
+# Storage Exceptions
 class StorageError(CryptoDataPipelineError):
-    """Exception for storage operation failures."""
-    
-    def __init__(self, message: str, operation: str = None, file_path: str = None):
-        """
-        Initialize storage error.
-        
-        Args:
-            message: Human-readable error message
-            operation: The storage operation that failed (e.g., 'read', 'write')
-            file_path: The file path involved in the operation
-        """
-        super().__init__(message, "STORAGE_ERROR")
-        self.operation = operation
-        self.file_path = file_path
+    """Storage operation failed."""
+    pass
 
 
-class ConfigurationError(CryptoDataPipelineError):
-    """Exception for configuration-related errors."""
-    
-    def __init__(self, message: str, config_key: str = None):
-        """
-        Initialize configuration error.
-        
-        Args:
-            message: Human-readable error message
-            config_key: The configuration key that caused the error
-        """
-        super().__init__(message, "CONFIGURATION_ERROR")
-        self.config_key = config_key
+class DatabaseError(StorageError):
+    """Database operation failed."""
+    pass
 
 
+# FRED API Exceptions  
 class FREDAPIError(APIError):
-    """Exception for FRED API specific errors."""
-    
-    def __init__(self, message: str, series_id: str = None, status_code: int = None):
-        """
-        Initialize FRED API error.
-        
-        Args:
-            message: Human-readable error message
-            series_id: The FRED series ID that caused the error
-            status_code: HTTP status code if applicable
-        """
-        super().__init__(message, "FRED_API_ERROR", status_code)
-        self.series_id = series_id
+    """FRED API specific error."""
+    pass
 
 
 class MacroDataError(CryptoDataPipelineError):
-    """Exception for macro data processing errors."""
+    """Macro data collection error."""
     
-    def __init__(self, message: str, indicator: str = None, date: str = None):
-        """
-        Initialize macro data error.
-        
-        Args:
-            message: Human-readable error message
-            indicator: The macro indicator that caused the error
-            date: The date associated with the error
-        """
-        super().__init__(message, "MACRO_DATA_ERROR")
+    def __init__(self, message: str, indicator: str = None):
+        super().__init__(message)
         self.indicator = indicator
-        self.date = date 
+
+
+# Strategy and Signal Exceptions
+class StrategyError(CryptoDataPipelineError):
+    """Strategy execution error."""
+    
+    def __init__(self, message: str, strategy_name: str = None):
+        super().__init__(message)
+        self.strategy_name = strategy_name
+
+
+class SignalGenerationError(CryptoDataPipelineError):
+    """Signal generation error."""
+    pass
+
+
+class BacktestError(CryptoDataPipelineError):
+    """Backtesting error."""
+    pass
+
+
+# Configuration Exceptions
+class ConfigurationError(CryptoDataPipelineError):
+    """Configuration error."""
+    pass
+
+
+class ValidationError(CryptoDataPipelineError):
+    """General validation error."""
+    pass 
