@@ -13,7 +13,7 @@ from src.signals.strategies.strategy_registry import StrategyRegistry
 from src.signals.signal_aggregator import SignalAggregator
 from src.data.signal_models import TradingSignal
 from src.data.sqlite_helper import CryptoDatabase
-from src.utils.exceptions import ConfigurationError, DataError
+from src.utils.exceptions import ConfigurationError, DataProcessingError
 
 
 class MultiStrategyGenerator:
@@ -119,7 +119,7 @@ class MultiStrategyGenerator:
             
         except Exception as e:
             self.logger.error(f"Failed to generate aggregated signals: {e}")
-            raise DataError(f"Signal generation failed: {e}")
+            raise DataProcessingError(f"Signal generation failed: {e}")
     
     def _get_all_assets(self) -> List[str]:
         """Get all unique assets from all strategy configurations."""
@@ -156,7 +156,7 @@ class MultiStrategyGenerator:
             
         except Exception as e:
             self.logger.error(f"Failed to retrieve market data: {e}")
-            raise DataError(f"Market data retrieval failed: {e}")
+            raise DataProcessingError(f"Market data retrieval failed: {e}")
     
     def _generate_individual_signals(self, market_data: Dict[str, Any]) -> Dict[str, List[TradingSignal]]:
         """
@@ -301,7 +301,7 @@ class MultiStrategyGenerator:
             
         except Exception as e:
             self.logger.error(f"Failed to export signals to JSON: {e}")
-            raise DataError(f"JSON export failed: {e}")
+            raise DataProcessingError(f"JSON export failed: {e}")
     
     def get_strategy_status(self) -> Dict[str, Any]:
         """
@@ -361,7 +361,7 @@ class MultiStrategyGenerator:
             
         except Exception as e:
             self.logger.error(f"Conflict analysis failed: {e}")
-            raise DataError(f"Conflict analysis failed: {e}")
+            raise DataProcessingError(f"Conflict analysis failed: {e}")
 
 
 def create_default_multi_strategy_generator() -> MultiStrategyGenerator:
@@ -373,10 +373,10 @@ def create_default_multi_strategy_generator() -> MultiStrategyGenerator:
     """
     # Default strategy configurations
     strategy_configs = {
-        "VIX_Correlation_Strategy": {
+        "vixcorrelation": {
             "config_path": "config/strategies/vix_correlation.json"
         },
-        "Mean_Reversion_Strategy": {
+        "meanreversion": {
             "config_path": "config/strategies/mean_reversion.json"
         }
     }
@@ -384,8 +384,8 @@ def create_default_multi_strategy_generator() -> MultiStrategyGenerator:
     # Default aggregator configuration
     aggregator_config = {
         "strategy_weights": {
-            "VIX_Correlation_Strategy": 0.6,
-            "Mean_Reversion_Strategy": 0.4
+            "vixcorrelation": 0.6,
+            "meanreversion": 0.4
         },
         "aggregation_config": {
             "conflict_resolution": "weighted_average",

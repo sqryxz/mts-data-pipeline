@@ -9,7 +9,7 @@ import numpy as np
 
 from src.signals.backtest_interface import BacktestInterface, BacktestResult, BacktestStatus
 from src.data.signal_models import TradingSignal, SignalType, SignalStrength
-from src.utils.exceptions import DataError, ConfigurationError
+from src.utils.exceptions import DataProcessingError, ConfigurationError
 
 
 class TestBacktestInterface:

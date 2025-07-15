@@ -14,6 +14,11 @@ import json
 import signal
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from typing import Optional
+from datetime import datetime
+from backtesting_engine.src.core.backtest_engine import BacktestEngine
+from backtesting_engine.config.backtest_settings import BacktestConfig
+from backtesting_engine.src.database.backtest_models import BacktestResult
+
 
 # Setup path for imports
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -575,3 +580,198 @@ Examples:
 if __name__ == "__main__":
     exit_code = main()
     sys.exit(exit_code) 
+
+
+def run_backtest():
+    parser = argparse.ArgumentParser(description="Run a backtest from the command line.")
+    parser.add_argument('--symbols', nargs='+', required=True, help='Symbol(s) to backtest (e.g. bitcoin ethereum)')
+    parser.add_argument('--start', required=True, help='Start date (YYYY-MM-DD)')
+    parser.add_argument('--end', required=True, help='End date (YYYY-MM-DD)')
+    parser.add_argument('--strategy', required=True, help='Strategy name to use')
+    parser.add_argument('--capital', type=float, default=100000.0, help='Initial capital (default: 100000.0)')
+    args = parser.parse_args()
+
+    # Parse dates
+    try:
+        start_date = datetime.strptime(args.start, '%Y-%m-%d')
+        end_date = datetime.strptime(args.end, '%Y-%m-%d')
+    except ValueError:
+        print("Error: Dates must be in YYYY-MM-DD format.")
+        return
+
+    # Build config
+    config = BacktestConfig(
+        start_date=start_date,
+        end_date=end_date,
+        initial_capital=args.capital,
+        strategies=[args.strategy],
+        symbols=args.symbols
+    )
+
+    # Run backtest
+    engine = BacktestEngine(config)
+    try:
+        result = engine.run_backtest()
+    except Exception as e:
+        print(f"Backtest failed: {e}")
+        return
+
+    # Print summary
+    print("\nBacktest Results Summary:")
+    print(f"  Strategy: {args.strategy}")
+    print(f"  Symbols: {', '.join(args.symbols)}")
+    print(f"  Period: {args.start} to {args.end}")
+    print(f"  Initial Capital: {args.capital:,.2f}")
+    print(f"  Total Return: {result.total_return:.2%}")
+    print(f"  Sharpe Ratio: {result.sharpe_ratio:.3f}")
+    print(f"  Max Drawdown: {result.max_drawdown:.2%}")
+    print(f"  Trade Count: {result.trade_count}")
+
+if __name__ == "__main__":
+    run_backtest() 
+
+
+def validate_capital(value):
+    """Validate that capital is a positive number."""
+    try:
+        fvalue = float(value)
+        if fvalue <= 0:
+            raise argparse.ArgumentTypeError(f"Capital must be positive, got {fvalue}")
+        return fvalue
+    except ValueError:
+        raise argparse.ArgumentTypeError(f"Capital must be a number, got '{value}'")
+
+def format_percentage(value):
+    """Format percentage values handling both decimal and percentage formats."""
+    if abs(value) <= 1.0:
+        return f"{value:.2%}"  # Decimal format (0.15 -> 15.00%)
+    else:
+        return f"{value:.2f}%"  # Already percentage (15.0 -> 15.00%)
+
+def validate_resources(engine, strategy, symbols, start_date, end_date):
+    """Validate that strategy and symbols are available."""
+    # Check strategy availability
+    available_strategies = getattr(engine, 'get_available_strategies', lambda: [])()
+    if available_strategies and strategy not in available_strategies:
+        print(f"Error: Strategy '{strategy}' not available.")
+        if available_strategies:
+            print(f"Available strategies: {', '.join(available_strategies)}")
+        return False
+    # Check symbol data availability
+    available_symbols = getattr(engine, 'get_available_symbols', lambda s, e: symbols)(start_date, end_date)
+    if available_symbols:
+        missing_symbols = [s for s in symbols if s not in available_symbols]
+        if missing_symbols:
+            print(f"Error: No data available for symbols: {', '.join(missing_symbols)}")
+            print(f"Available symbols for period: {', '.join(available_symbols[:10])}{'...' if len(available_symbols) > 10 else ''}")
+            return False
+    return True
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Run a backtest from the command line.",
+        epilog="""
+Examples:
+  %(prog)s --symbols bitcoin --start 2023-01-01 --end 2023-12-31 --strategy BuyHoldStrategy
+  %(prog)s --symbols bitcoin ethereum --start 2023-01-01 --end 2023-06-30 --strategy MovingAverageCrossover --capital 50000
+  %(prog)s --symbols bitcoin --start 2022-01-01 --end 2022-12-31 --strategy RSIStrategy --capital 25000
+        """,
+        formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    parser.add_argument('--symbols', nargs='+', required=True, 
+                       help='Symbol(s) to backtest (e.g. bitcoin ethereum)')
+    parser.add_argument('--start', required=True, 
+                       help='Start date in YYYY-MM-DD format')
+    parser.add_argument('--end', required=True, 
+                       help='End date in YYYY-MM-DD format')
+    parser.add_argument('--strategy', required=True, 
+                       help='Strategy name to use')
+    parser.add_argument('--capital', type=validate_capital, default=100000.0, 
+                       help='Initial capital (must be positive, default: 100000.0)')
+    parser.add_argument('--verbose', '-v', action='store_true', 
+                       help='Show detailed trade history')
+    args = parser.parse_args()
+
+    # Parse and validate dates
+    try:
+        start_date = datetime.strptime(args.start, '%Y-%m-%d')
+        end_date = datetime.strptime(args.end, '%Y-%m-%d')
+        if start_date >= end_date:
+            print("Error: Start date must be before end date.")
+            sys.exit(1)
+        if start_date > datetime.now():
+            print("Warning: Start date is in the future.")
+    except ValueError as e:
+        print(f"Error: Invalid date format. Use YYYY-MM-DD. Details: {e}")
+        sys.exit(1)
+
+    # Create temporary engine for validation
+    try:
+        temp_config = BacktestConfig(
+            start_date=start_date,
+            end_date=end_date,
+            initial_capital=args.capital,
+            strategies=[],
+            symbols=[]
+        )
+        temp_engine = BacktestEngine(temp_config)
+        # Validate resources
+        if not validate_resources(temp_engine, args.strategy, args.symbols, start_date, end_date):
+            sys.exit(1)
+    except Exception as e:
+        print(f"Error: Could not initialize backtesting engine: {e}")
+        sys.exit(1)
+
+    # Build final config
+    config = BacktestConfig(
+        start_date=start_date,
+        end_date=end_date,
+        initial_capital=args.capital,
+        strategies=[args.strategy],
+        symbols=args.symbols
+    )
+
+    # Run backtest
+    print(f"Running backtest for {args.strategy} on {', '.join(args.symbols)}...")
+    print(f"Period: {args.start} to {args.end}")
+    print(f"Initial Capital: ${args.capital:,.2f}")
+    print("-" * 50)
+    engine = BacktestEngine(config)
+    try:
+        result = engine.run_backtest()
+    except Exception as e:
+        print(f"Backtest failed: {e}")
+        sys.exit(1)
+    finally:
+        # Cleanup if available
+        if hasattr(engine, 'cleanup'):
+            engine.cleanup()
+
+    # Print comprehensive summary
+    print("\n" + "=" * 50)
+    print("BACKTEST RESULTS SUMMARY")
+    print("=" * 50)
+    print(f"Strategy: {args.strategy}")
+    print(f"Symbols: {', '.join(args.symbols)}")
+    print(f"Period: {args.start} to {args.end}")
+    print(f"Initial Capital: ${args.capital:,.2f}")
+    print("-" * 30)
+    print(f"Final Portfolio Value: ${result.portfolio_values[-1]:,.2f}" if result.portfolio_values else "N/A")
+    print(f"Total Return: {format_percentage(result.total_return)}")
+    print(f"Sharpe Ratio: {result.sharpe_ratio:.3f}")
+    print(f"Max Drawdown: {format_percentage(result.max_drawdown)}")
+    print(f"Total Trades: {result.trade_count}")
+    # Show trade details if verbose
+    if args.verbose and result.trade_history:
+        print("\n" + "-" * 30)
+        print("TRADE HISTORY")
+        print("-" * 30)
+        for i, trade in enumerate(result.trade_history[:10]):  # Show first 10 trades
+            print(f"{i+1:2d}. {trade.get('action', 'N/A').upper()} {trade.get('quantity', 0):.4f} "
+                  f"{trade.get('symbol', 'N/A')} @ ${trade.get('price', 0):.2f}")
+        if len(result.trade_history) > 10:
+            print(f"    ... and {len(result.trade_history) - 10} more trades")
+    print("=" * 50)
+
+if __name__ == "__main__":
+    main() 

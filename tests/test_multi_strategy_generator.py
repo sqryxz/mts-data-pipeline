@@ -13,7 +13,7 @@ from typing import List, Dict, Any
 
 from src.services.multi_strategy_generator import MultiStrategyGenerator, create_default_multi_strategy_generator
 from src.data.signal_models import TradingSignal, SignalType, SignalStrength
-from src.utils.exceptions import ConfigurationError, DataError
+from src.utils.exceptions import ConfigurationError, DataProcessingError
 
 
 class TestMultiStrategyGenerator:

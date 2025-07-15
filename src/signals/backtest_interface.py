@@ -15,7 +15,7 @@ from src.data.sqlite_helper import CryptoDatabase
 from src.signals.strategies.base_strategy import SignalStrategy
 # MultiStrategyGenerator import removed to avoid circular dependency - import when needed
 from src.data.signal_models import TradingSignal, SignalType
-from src.utils.exceptions import DataError, ConfigurationError
+from src.utils.exceptions import DataProcessingError, ConfigurationError
 
 
 class BacktestStatus(Enum):
@@ -365,7 +365,7 @@ class BacktestInterface:
             return filtered_data
             
         except Exception as e:
-            raise DataError(f"Failed to get historical data: {e}")
+            raise DataProcessingError(f"Failed to get historical data: {e}")
     
     def _filter_data_by_date_range(self, market_data: Dict[str, Any], 
                                   start_date: str, end_date: str) -> Dict[str, Any]:

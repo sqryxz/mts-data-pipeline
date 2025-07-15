@@ -145,4 +145,57 @@ class CoinGeckoClient:
         except requests.exceptions.RequestException as e:
             raise APIError(f"API request failed: {e}")
         except ValueError as e:
+            raise APIError(f"Invalid JSON response: {e}")
+
+    @retry_with_backoff(max_retries=3, base_delay=1.0)
+    def get_market_chart_range_data(self, coin_id, from_timestamp, to_timestamp):
+        """
+        Fetch market chart data within a specific date range using Unix timestamps.
+        
+        This method provides more precise control over data collection periods and
+        ensures hourly granularity for ranges between 1-90 days.
+        
+        Args:
+            coin_id: Cryptocurrency ID (e.g., 'bitcoin')
+            from_timestamp: Start timestamp in Unix format (seconds)
+            to_timestamp: End timestamp in Unix format (seconds)
+            
+        Returns:
+            Dict containing prices and total_volumes arrays
+            
+        Note:
+            - 1 day from anytime (except from current time) = hourly data
+            - 2-90 days from anytime = hourly data
+            - >90 days from anytime = daily data
+        """
+        try:
+            url = f"{self.base_url}/coins/{coin_id}/market_chart/range"
+            params = {
+                'vs_currency': 'usd',
+                'from': int(from_timestamp),
+                'to': int(to_timestamp)
+            }
+            response = requests.get(url, params=params, timeout=self.timeout)
+            
+            # Handle specific HTTP status codes
+            if response.status_code == 429:
+                retry_after = response.headers.get('Retry-After')
+                retry_after_int = int(retry_after) if retry_after and retry_after.isdigit() else None
+                raise APIRateLimitError("API rate limit exceeded", retry_after=retry_after_int)
+            
+            response.raise_for_status()
+            return response.json()
+            
+        except requests.exceptions.ConnectionError as e:
+            raise APIConnectionError(f"Failed to connect to API: {e}")
+        except requests.exceptions.Timeout as e:
+            raise APITimeoutError(f"API request timed out: {e}", timeout=self.timeout)
+        except requests.exceptions.HTTPError as e:
+            if response.status_code == 429:
+                # Already handled above, but just in case
+                raise APIRateLimitError(f"API rate limit exceeded: {e}")
+            raise APIError(f"HTTP error: {e}", status_code=response.status_code)
+        except requests.exceptions.RequestException as e:
+            raise APIError(f"API request failed: {e}")
+        except ValueError as e:
             raise APIError(f"Invalid JSON response: {e}") 

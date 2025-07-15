@@ -47,3 +47,8 @@ pytest-cov>=4.1.0
 # Optional: For enhanced features
 matplotlib>=3.7.0  # For signal visualization
 plotly>=5.17.0     # Interactive charts 
+
+pandas
+sqlite3
+pytest
+dataclasses 

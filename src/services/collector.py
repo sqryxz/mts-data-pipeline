@@ -58,133 +58,118 @@ class DataCollector:
 
     def get_top_cryptocurrencies(self, limit: int = 3) -> List[Cryptocurrency]:
         """
-        Get top cryptocurrencies by market cap with error recovery.
+        Fetch the top cryptocurrencies by market capitalization.
         
         Args:
-            limit: Number of top cryptocurrencies to fetch (default: 3)
+            limit: Number of cryptocurrencies to fetch (default: 3)
             
         Returns:
-            List[Cryptocurrency]: List of cryptocurrency objects
+            List of Cryptocurrency objects
             
         Raises:
-            Exception: If API request fails or data is invalid
+            APIError: If the API request fails
+            DataValidationError: If the response data is invalid
         """
-        logger.info(f"Fetching top {limit} cryptocurrencies by market cap")
-        
         try:
-            # Get market data from API
+            logger.info(f"Fetching top {limit} cryptocurrencies by market cap")
+            
+            # Fetch market data from CoinGecko
             market_data = self.api_client.get_top_cryptos(limit)
             
             if not market_data:
-                logger.warning("No market data received from API")
-                return []
+                raise APIError("No market data received from CoinGecko API")
+            
+            # Validate the response structure
+            if not isinstance(market_data, list):
+                raise DataValidationError("Expected list of cryptocurrencies, got: " + str(type(market_data)))
             
             # Convert to Cryptocurrency objects
             cryptocurrencies = []
             for crypto_data in market_data:
                 try:
-                    # Validate the cryptocurrency data
-                    if not self.validator.validate_cryptocurrency_data(crypto_data):
-                        logger.warning(f"Invalid cryptocurrency data: {crypto_data}")
-                        continue
-                    
-                    # Create Cryptocurrency object
                     crypto = Cryptocurrency(
                         id=crypto_data['id'],
-                        symbol=crypto_data['symbol'],
                         name=crypto_data['name'],
-                        market_cap_rank=crypto_data.get('market_cap_rank')
+                        symbol=crypto_data['symbol'],
+                        market_cap_rank=crypto_data['market_cap_rank']
                     )
                     cryptocurrencies.append(crypto)
-                    
+                except KeyError as e:
+                    logger.warning(f"Missing field in cryptocurrency data: {e}")
+                    continue
                 except Exception as e:
-                    logger.error(f"Error processing cryptocurrency data {crypto_data}: {e}")
+                    logger.warning(f"Error processing cryptocurrency {crypto_data.get('id', 'unknown')}: {e}")
                     continue
             
-            logger.info(f"Successfully processed {len(cryptocurrencies)} cryptocurrencies")
+            if not cryptocurrencies:
+                raise DataValidationError("No valid cryptocurrencies found in API response")
+            
+            logger.info(f"Successfully fetched {len(cryptocurrencies)} cryptocurrencies")
             return cryptocurrencies
             
-        except Exception as e:
-            logger.error(f"Failed to get top cryptocurrencies: {e}")
+        except (APIError, DataValidationError):
             raise
+        except Exception as e:
+            logger.error(f"Unexpected error fetching cryptocurrencies: {e}")
+            raise APIError(f"Failed to fetch cryptocurrencies: {e}")
 
-    def _categorize_collection_error(self, error: Exception, crypto_id: str) -> Dict[str, Any]:
+    def _validate_ohlcv_data(self, ohlcv_data: List[OHLCVData]) -> List[OHLCVData]:
         """
-        Categorize collection errors for better reporting and handling.
+        Validate OHLCV data for consistency and completeness.
         
         Args:
-            error: Exception that occurred
-            crypto_id: ID of the cryptocurrency being processed
+            ohlcv_data: List of OHLCV data objects
             
         Returns:
-            Dict with error category, message, and metadata
+            List of validated OHLCV data objects
         """
-        error_info = {
-            'crypto_id': crypto_id,
-            'error_message': str(error),
-            'error_type': type(error).__name__,
-            'timestamp': datetime.now().isoformat(),
-            'category': 'unknown',
-            'recoverable': False,
-            'retry_recommended': False
-        }
-        
-        # Categorize API errors
-        if isinstance(error, APIRateLimitError):
-            error_info.update({
-                'category': 'rate_limit',
-                'recoverable': True,
-                'retry_recommended': True,
-                'retry_after': getattr(error, 'retry_after', None)
-            })
-        elif isinstance(error, (APIConnectionError, APITimeoutError)):
-            error_info.update({
-                'category': 'network',
-                'recoverable': True,
-                'retry_recommended': True
-            })
-        elif isinstance(error, APIError):
-            # Check status code for categorization
-            status_code = getattr(error, 'status_code', None)
-            if status_code:
-                if status_code in (404, 400):
-                    error_info.update({
-                        'category': 'client_error',
-                        'recoverable': False,
-                        'retry_recommended': False
-                    })
-                elif status_code >= 500:
-                    error_info.update({
-                        'category': 'server_error',
-                        'recoverable': True,
-                        'retry_recommended': True
-                    })
+        try:
+            validated_data = []
+            
+            for data in ohlcv_data:
+                # Validate the data using the validator
+                if self.validator.validate_ohlcv_data(data):
+                    validated_data.append(data)
                 else:
-                    error_info.update({
-                        'category': 'api_error',
-                        'recoverable': False,
-                        'retry_recommended': False
-                    })
-        elif isinstance(error, DataValidationError):
-            error_info.update({
-                'category': 'validation',
-                'recoverable': False,
-                'retry_recommended': False
-            })
-        elif isinstance(error, StorageError):
-            error_info.update({
-                'category': 'storage',
-                'recoverable': True,
-                'retry_recommended': True
-            })
-        else:
-            error_info.update({
-                'category': 'unexpected',
-                'recoverable': False,
-                'retry_recommended': False
-            })
+                    logger.warning(f"Invalid OHLCV data: {data}")
+            
+            logger.info(f"Validated {len(validated_data)} out of {len(ohlcv_data)} OHLCV records")
+            return validated_data
+            
+        except Exception as e:
+            logger.error(f"Error validating OHLCV data: {e}")
+            raise DataValidationError(f"OHLCV data validation failed: {e}")
+
+    def _convert_ohlcv_to_database_format(self, ohlcv_data: List[OHLCVData], crypto_id: str) -> List[Dict[str, Any]]:
+        """
+        Convert OHLCV data objects to database format.
         
-        return error_info
+        Args:
+            ohlcv_data: List of OHLCV data objects
+            crypto_id: Cryptocurrency identifier
+            
+        Returns:
+            List of dictionaries ready for database insertion
+        """
+        db_records = []
+        
+        for data in ohlcv_data:
+            # Convert timestamp to date string for database
+            date_str = data.to_datetime().strftime('%Y-%m-%d')
+            
+            record = {
+                'cryptocurrency': crypto_id,  # Fixed: was 'crypto_id' 
+                'timestamp': data.timestamp,
+                'date_str': date_str,        # Added: required field
+                'open': data.open,
+                'high': data.high,
+                'low': data.low,
+                'close': data.close,
+                'volume': data.volume
+            }
+            db_records.append(record)
+        
+        return db_records
 
     def _convert_market_chart_to_ohlcv(self, prices: List[List], volumes: List[List], crypto_id: str) -> List[OHLCVData]:
         """
@@ -236,36 +221,28 @@ class DataCollector:
         logger.info(f"Converted {len(ohlcv_objects)} price points to OHLCV format for {crypto_id}")
         return ohlcv_objects
 
-    def _convert_ohlcv_to_database_format(self, ohlcv_objects: List[OHLCVData], crypto_id: str) -> List[Dict[str, Any]]:
+    def _categorize_error(self, error: Exception) -> str:
         """
-        Convert OHLCVData objects to database-compatible dictionaries.
+        Categorize errors for better metrics and recovery strategies.
         
         Args:
-            ohlcv_objects: List of OHLCVData objects
-            crypto_id: Cryptocurrency identifier
+            error: Exception that occurred
             
         Returns:
-            List of dictionaries ready for database insertion
+            String category of the error
         """
-        db_records = []
-        
-        for ohlcv in ohlcv_objects:
-            # Convert timestamp to date string for database
-            date_str = ohlcv.to_datetime().strftime('%Y-%m-%d')
-            
-            db_record = {
-                'cryptocurrency': crypto_id,
-                'timestamp': ohlcv.timestamp,
-                'date_str': date_str,
-                'open': ohlcv.open,
-                'high': ohlcv.high,
-                'low': ohlcv.low,
-                'close': ohlcv.close,
-                'volume': ohlcv.volume
-            }
-            db_records.append(db_record)
-            
-        return db_records
+        if isinstance(error, APIRateLimitError):
+            return "rate_limit"
+        elif isinstance(error, APITimeoutError):
+            return "timeout"
+        elif isinstance(error, APIConnectionError):
+            return "connection"
+        elif isinstance(error, DataValidationError):
+            return "validation"
+        elif isinstance(error, StorageError):
+            return "storage"
+        else:
+            return "unknown"
 
     def collect_crypto_data(self, crypto_id: str, days: int = 1) -> Dict[str, Any]:
         """
@@ -391,6 +368,138 @@ class DataCollector:
             logger.error(f"Failed to collect data for {crypto_id}: {e}")
             raise
 
+    def collect_crypto_data_range(self, crypto_id: str, start_timestamp: int, end_timestamp: int) -> Dict[str, Any]:
+        """
+        Collect and store OHLCV data for a specific cryptocurrency within a date range.
+        
+        This method uses the CoinGecko range endpoint for more precise data collection
+        and ensures hourly granularity for ranges of 1-90 days.
+        
+        Args:
+            crypto_id: Cryptocurrency identifier (e.g., "bitcoin")
+            start_timestamp: Start timestamp in Unix format (seconds)
+            end_timestamp: End timestamp in Unix format (seconds)
+            
+        Returns:
+            Dict with collection results including success status and record count
+            
+        Raises:
+            Exception: If data collection fails
+        """
+        start_time = datetime.now()
+        start_date = datetime.fromtimestamp(start_timestamp).strftime('%Y-%m-%d')
+        end_date = datetime.fromtimestamp(end_timestamp).strftime('%Y-%m-%d')
+        
+        logger.info(f"Collecting OHLCV data for {crypto_id} from {start_date} to {end_date}")
+        
+        collection_result = {
+            'crypto_id': crypto_id,
+            'success': False,
+            'records_collected': 0,
+            'start_time': start_time.isoformat(),
+            'end_time': None,
+            'duration_seconds': None,
+            'error': None,
+            'date_range': {'start': start_date, 'end': end_date}
+        }
+        
+        try:
+            # Get market chart data from API using range endpoint
+            market_data = self.api_client.get_market_chart_range_data(crypto_id, start_timestamp, end_timestamp)
+            
+            if not market_data:
+                logger.warning(f"No market data received for {crypto_id} in range {start_date} to {end_date}")
+                collection_result['end_time'] = datetime.now().isoformat()
+                collection_result['duration_seconds'] = (datetime.now() - start_time).total_seconds()
+                return collection_result
+            
+            # Extract price and volume data
+            prices = market_data.get('prices', [])
+            volumes = market_data.get('total_volumes', [])
+            
+            if not prices:
+                logger.warning(f"No price data received for {crypto_id} in range {start_date} to {end_date}")
+                collection_result['end_time'] = datetime.now().isoformat()
+                collection_result['duration_seconds'] = (datetime.now() - start_time).total_seconds()
+                collection_result['error'] = "No price data received"
+                return collection_result
+            
+            # Convert market chart data to OHLCV format
+            ohlcv_objects = self._convert_market_chart_to_ohlcv(prices, volumes, crypto_id)
+            
+            if not ohlcv_objects:
+                logger.warning(f"No valid OHLCV data processed for {crypto_id} in range {start_date} to {end_date}")
+                collection_result['end_time'] = datetime.now().isoformat()
+                collection_result['duration_seconds'] = (datetime.now() - start_time).total_seconds()
+                collection_result['error'] = "No valid OHLCV data processed"
+                return collection_result
+            
+            # Check for incremental collection - filter out existing data
+            latest_timestamp = self.database.get_latest_crypto_timestamp(crypto_id)
+            if latest_timestamp:
+                # Filter out data that already exists in database
+                new_ohlcv_objects = [obj for obj in ohlcv_objects if obj.timestamp > latest_timestamp]
+                if not new_ohlcv_objects:
+                    logger.info(f"No new data to store for {crypto_id} in range {start_date} to {end_date}")
+                    end_time = datetime.now()
+                    collection_result.update({
+                        'success': True,
+                        'records_collected': 0,
+                        'end_time': end_time.isoformat(),
+                        'duration_seconds': (end_time - start_time).total_seconds()
+                    })
+                    return collection_result
+                
+                logger.info(f"Filtered {len(ohlcv_objects) - len(new_ohlcv_objects)} existing records for {crypto_id}")
+                ohlcv_objects = new_ohlcv_objects
+            
+            # Convert OHLCV objects to database format
+            db_records = self._convert_ohlcv_to_database_format(ohlcv_objects, crypto_id)
+            
+            # Store the data in database
+            inserted_count = self.database.insert_crypto_data(db_records)
+            
+            # Update successful result
+            end_time = datetime.now()
+            collection_result.update({
+                'success': True,
+                'records_collected': inserted_count,
+                'end_time': end_time.isoformat(),
+                'duration_seconds': (end_time - start_time).total_seconds()
+            })
+            
+            # Log structured metrics for individual crypto collection
+            self._log_structured_metrics('crypto_collection_range_complete', {
+                'crypto_id': crypto_id,
+                'success': True,
+                'records_collected': inserted_count,
+                'duration_seconds': collection_result['duration_seconds'],
+                'date_range': collection_result['date_range']
+            })
+            
+            logger.info(f"Successfully collected and stored {inserted_count} new OHLCV records for {crypto_id} in range {start_date} to {end_date}")
+            return collection_result
+            
+        except Exception as e:
+            end_time = datetime.now()
+            collection_result.update({
+                'end_time': end_time.isoformat(),
+                'duration_seconds': (end_time - start_time).total_seconds(),
+                'error': str(e)
+            })
+            
+            # Log structured metrics for failed collection
+            self._log_structured_metrics('crypto_collection_range_failed', {
+                'crypto_id': crypto_id,
+                'success': False,
+                'error': str(e),
+                'duration_seconds': collection_result['duration_seconds'],
+                'date_range': collection_result['date_range']
+            })
+            
+            logger.error(f"Failed to collect data for {crypto_id} in range {start_date} to {end_date}: {e}")
+            raise
+
     def collect_all_data(self, days: int = 1, max_retries_per_crypto: int = 1) -> Dict[str, Any]:
         """
         Collect OHLCV data for all top 3 cryptocurrencies with enhanced error recovery.
@@ -491,15 +600,19 @@ class DataCollector:
                     
                     except Exception as e:
                         # Handle individual crypto failure
-                        error_details = self._categorize_collection_error(e, crypto.id)
+                        error_details = self._categorize_error(e)
                         
-                        if attempt < max_retries_per_crypto and error_details.get('retry_recommended', False):
+                        if attempt < max_retries_per_crypto and error_details == 'rate_limit':
                             logger.warning(f"Attempt {attempt + 1} failed for {crypto.name}: {e}, retrying...")
                             results['retries_used'] += 1
                             continue
                         else:
                             crypto_result['error'] = str(e)
-                            crypto_result['error_details'] = error_details
+                            crypto_result['error_details'] = {
+                                'category': error_details,
+                                'recoverable': error_details != 'validation' and error_details != 'storage',
+                                'retry_recommended': error_details != 'validation' and error_details != 'storage'
+                            }
                             logger.error(f"Failed to collect data for {crypto.name} ({crypto.id}) after {attempt + 1} attempts: {e}")
                             break  # Max retries reached or non-recoverable error
                 
@@ -573,6 +686,10 @@ class DataCollector:
             logger.error(f"Failed to get top cryptocurrencies for batch collection: {e}")
             results['details'].append({
                 'error': f"Failed to get top cryptocurrencies: {e}",
-                'error_details': self._categorize_collection_error(e, 'batch_initialization')
+                'error_details': {
+                    'category': 'initialization',
+                    'recoverable': False,
+                    'retry_recommended': False
+                }
             })
             return results 

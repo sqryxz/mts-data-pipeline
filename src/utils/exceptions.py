@@ -182,3 +182,39 @@ class ConfigurationError(CryptoDataPipelineError):
 class ValidationError(CryptoDataPipelineError):
     """General validation error."""
     pass 
+
+"""
+Custom exceptions for the backtesting engine.
+"""
+
+class BacktestingError(Exception):
+    """Base exception for all backtesting-related errors."""
+    pass
+
+class DataError(BacktestingError):
+    """Raised when there are issues with market data."""
+    pass
+
+class StrategyError(BacktestingError):
+    """Raised when there are issues with strategy execution."""
+    pass
+
+class ConfigurationError(BacktestingError):
+    """Raised when there are issues with backtest configuration."""
+    pass
+
+class ExecutionError(BacktestingError):
+    """Raised when there are issues with order execution."""
+    pass
+
+class PortfolioError(BacktestingError):
+    """Raised when there are issues with portfolio management."""
+    pass
+
+class ValidationError(BacktestingError):
+    """Raised when input validation fails."""
+    pass
+
+class DatabaseError(BacktestingError):
+    """Raised when there are database-related issues."""
+    pass 
