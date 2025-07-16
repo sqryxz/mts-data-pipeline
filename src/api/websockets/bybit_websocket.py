@@ -7,6 +7,8 @@ from typing import List, Dict, Any, Callable, Optional
 from src.api.websockets.base_websocket import BaseWebSocket
 from src.utils.websocket_utils import exponential_backoff, parse_websocket_message
 from config.exchanges.bybit_config import BYBIT_CONFIG
+from src.services.collector import RollingVolatilityCalculator
+import sqlite3
 
 logger = logging.getLogger(__name__)
 
@@ -17,6 +19,9 @@ class BybitWebSocket(BaseWebSocket):
         self.reconnect_attempts = 0
         self.max_reconnect_attempts = 5
         self.req_id = 1  # Request ID for Bybit API
+        # --- Add rolling volatility calculators for BTCUSDT and ETHUSDT ---
+        self.btc_vol_calc = RollingVolatilityCalculator(window_size=15)
+        self.eth_vol_calc = RollingVolatilityCalculator(window_size=15)
         
     async def connect(self) -> None:
         """Connect to Bybit WebSocket"""
@@ -105,11 +110,48 @@ class BybitWebSocket(BaseWebSocket):
                         logger.error(f"Unsubscription failed: {message.get('ret_msg', 'Unknown error')}")
                 elif op == 'pong':
                     logger.debug("Received pong from Bybit WebSocket")
+                elif op == 'ping':
+                    logger.debug("Received ping from Bybit WebSocket")
+                    # Optionally, respond with pong if Bybit expects it:
+                    # await self.websocket.send(json.dumps({"op": "pong", "req_id": str(self.req_id)}))
+                    # self.req_id += 1
                 else:
-                    logger.warning(f"Unknown operation: {op}")
+                    logger.debug(f"Ignoring unknown operation: {op}")
             
-            # Handle data messages
+            # --- Real-time kline handler for rolling volatility ---
             elif 'topic' in message and 'data' in message:
+                topic = message['topic']
+                data = message['data']
+                # Example topic: kline.1.BTCUSDT
+                if topic.startswith('kline.1.') and isinstance(data, list) and len(data) > 0:
+                    kline = data[-1]  # Use the latest kline
+                    symbol = topic.split('.')[-1]
+                    close_price = float(kline['close']) if isinstance(kline, dict) and 'close' in kline else None
+                    if close_price is not None:
+                        if symbol == 'BTCUSDT':
+                            vol = self.btc_vol_calc.update(close_price)
+                            if vol is not None:
+                                ts = int(kline['start']) if 'start' in kline else int(time.time())
+                                conn = sqlite3.connect('data/crypto_data.db')
+                                c = conn.cursor()
+                                c.execute('''
+                                    INSERT INTO crypto_volatility (symbol, timestamp, window_minutes, volatility)
+                                    VALUES (?, ?, ?, ?)
+                                ''', ('BTCUSDT_BYBIT', ts, 15, vol))
+                                conn.commit()
+                                conn.close()
+                        elif symbol == 'ETHUSDT':
+                            vol = self.eth_vol_calc.update(close_price)
+                            if vol is not None:
+                                ts = int(kline['start']) if 'start' in kline else int(time.time())
+                                conn = sqlite3.connect('data/crypto_data.db')
+                                c = conn.cursor()
+                                c.execute('''
+                                    INSERT INTO crypto_volatility (symbol, timestamp, window_minutes, volatility)
+                                    VALUES (?, ?, ?, ?)
+                                ''', ('ETHUSDT_BYBIT', ts, 15, vol))
+                                conn.commit()
+                                conn.close()
                 # This is actual market data
                 if self.message_handler:
                     await self.message_handler(message)
