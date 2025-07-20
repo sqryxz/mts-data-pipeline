@@ -1,0 +1,74 @@
+{
+  "cryptocurrencies": [
+    {
+      "coingecko_id": "bitcoin",
+      "symbols": {
+        "binance": "BTCUSDT",
+        "bybit": "BTCUSDT"
+      }
+    },
+    {
+      "coingecko_id": "ethereum",
+      "symbols": {
+        "binance": "ETHUSDT",
+        "bybit": "ETHUSDT"
+      }
+    },
+    {
+      "coingecko_id": "tether",
+      "symbols": {
+        "binance": "USDTUSDT",
+        "bybit": "USDTUSDT"
+      }
+    },
+    {
+      "coingecko_id": "solana",
+      "symbols": {
+        "binance": "SOLUSDT",
+        "bybit": "SOLUSDT"
+      }
+    },
+    {
+      "coingecko_id": "ripple",
+      "symbols": {
+        "binance": "XRPUSDT",
+        "bybit": "XRPUSDT"
+      }
+    },
+    {
+      "coingecko_id": "bittensor",
+      "symbols": {
+        "binance": "TAOUSDT",
+        "bybit": "TAOUSDT"
+      }
+    },
+    {
+      "coingecko_id": "fetch-ai",
+      "symbols": {
+        "binance": "FETUSDT",
+        "bybit": "FETUSDT"
+      }
+    },
+    {
+      "coingecko_id": "singularitynet",
+      "symbols": {
+        "binance": "AGIXUSDT",
+        "bybit": "AGIXUSDT"
+      }
+    },
+    {
+      "coingecko_id": "render-token",
+      "symbols": {
+        "binance": "RNDRUSDT",
+        "bybit": "RNDRUSDT"
+      }
+    },
+    {
+      "coingecko_id": "ocean-protocol",
+      "symbols": {
+        "binance": "OCEANUSDT",
+        "bybit": "OCEANUSDT"
+      }
+    }
+  ]
+} 

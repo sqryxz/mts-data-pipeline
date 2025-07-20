@@ -1,0 +1,27 @@
+{
+    "database": {
+        "path": "data/crypto_data.db",
+        "type": "sqlite"
+    },
+    "analytics": {
+        "default_timeframes": ["1h", "4h", "1d"],
+        "default_metrics": ["roc", "z_score"],
+        "lookback_periods": {
+            "1h": 24,
+            "4h": 168,
+            "1d": 30,
+            "1w": 52,
+            "1m": 12
+        },
+        "interpolation": true,
+        "value_column": "value"
+    },
+    "logging": {
+        "level": "INFO",
+        "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    },
+    "indicators": {
+        "supported": ["VIX", "DGS10", "DTWEXBGS", "DFF"],
+        "default": "VIX"
+    }
+} 

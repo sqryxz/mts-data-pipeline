@@ -1,0 +1,49 @@
+{
+  "macro_indicators": [
+    {
+      "name": "VIXCLS",
+      "fred_series_id": "VIXCLS",
+      "description": "CBOE Volatility Index"
+    },
+    {
+      "name": "DFF",
+      "fred_series_id": "DFF",
+      "description": "Federal Funds Effective Rate"
+    },
+    {
+      "name": "DGS10",
+      "fred_series_id": "DGS10",
+      "description": "10-Year Treasury Constant Maturity Rate"
+    },
+    {
+      "name": "DTWEXBGS",
+      "fred_series_id": "DTWEXBGS",
+      "description": "US Dollar Index"
+    },
+    {
+      "name": "DEXUSEU",
+      "fred_series_id": "DEXUSEU",
+      "description": "USD/EUR Exchange Rate - Daily updates reveal dollar strength dynamics. EUR weakness often precedes crypto rallies as global liquidity seeks alternatives."
+    },
+    {
+      "name": "DEXCHUS",
+      "fred_series_id": "DEXCHUS",
+      "description": "China/US Exchange Rate: Yuan weakness >0.5% daily correlates with crypto selloffs in Asian hours."
+    },
+    {
+      "name": "BAMLH0A0HYM2",
+      "fred_series_id": "BAMLH0A0HYM2",
+      "description": "High Yield Credit Spreads - Critical for risk appetite measurement. Widening spreads telegraph stress before it hits crypto markets, giving MTS early warning signals."
+    },
+    {
+      "name": "RRPONTSYD",
+      "fred_series_id": "RRPONTSYD",
+      "description": "Overnight Reverse Repo: Tracks excess liquidity in the system. Spikes above $2T historically precede crypto volatility expansions by 24-48 hours."
+    },
+    {
+      "name": "SOFR",
+      "fred_series_id": "SOFR",
+      "description": "Secured Overnight Financing Rate: Dollar funding stress indicator. Deviations >10bps from trailing average signal risk-off moves in BTC/ETH."
+    }
+  ]
+} 
