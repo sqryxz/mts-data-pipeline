@@ -1,8 +1,8 @@
 import os
 import requests
 from typing import Dict, Optional
-from ..utils.exceptions import FREDAPIError, APIConnectionError, APITimeoutError
-from ..utils.retry import retry_with_backoff
+from src.utils.exceptions import FREDAPIError, APIConnectionError, APITimeoutError
+from src.utils.retry import retry_with_backoff
 
 class FREDClient:
     """St Louis Federal Reserve Economic Data API client"""

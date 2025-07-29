@@ -78,3 +78,25 @@ pytest
 ## 📣 Contributing
 
 Pull requests and issues are welcome! 
+
+## 🔑 Environment Variables & API Keys
+
+This project uses a `.env` file for sensitive configuration, including API keys. You must create a `.env` file in the project root with the following variables:
+
+```
+COINGECKO_API_KEY=your_actual_coingecko_api_key
+FRED_API_KEY=your_actual_fred_api_key
+```
+
+- **Never hardcode API keys in scripts.**
+- All scripts and services will load these automatically.
+
+## 🛠️ Data Fetching Scripts
+
+- `scripts/fetch_and_import_2024_data.py` — Fetches and imports all crypto, macro, and order book data for a given year.
+- `scripts/fetch_macro_only.py` — Fetches and imports macroeconomic data for all configured indicators for a given year (default: 2024). Does not touch crypto or order book data.
+
+  Example usage:
+  ```bash
+  python3 scripts/fetch_macro_only.py --year 2024
+  ``` 

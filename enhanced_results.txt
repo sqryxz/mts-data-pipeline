@@ -1,0 +1,361 @@
+2025-07-21 03:20:18,809 - __main__ - INFO - Found 9 indicators in database: ['BAMLH0A0HYM2', 'DEXCHUS', 'DEXUSEU', 'DFF', 'DGS10', 'DTWEXBGS', 'RRPONTSYD', 'SOFR', 'VIXCLS']
+2025-07-21 03:20:18,812 - __main__ - INFO - Loaded 125 records for BAMLH0A0HYM2 from 2025-01-22 00:00:00 to 2025-07-15 00:00:00
+2025-07-21 03:20:18,814 - __main__ - INFO - Loaded 119 records for DEXCHUS from 2025-01-22 00:00:00 to 2025-07-11 00:00:00
+2025-07-21 03:20:18,816 - __main__ - INFO - Loaded 119 records for DEXUSEU from 2025-01-22 00:00:00 to 2025-07-11 00:00:00
+2025-07-21 03:20:18,817 - __main__ - INFO - Loaded 174 records for DFF from 2025-01-22 00:00:00 to 2025-07-14 00:00:00
+2025-07-21 03:20:18,819 - __main__ - INFO - Loaded 119 records for DGS10 from 2025-01-22 00:00:00 to 2025-07-14 00:00:00
+2025-07-21 03:20:18,821 - __main__ - INFO - Loaded 119 records for DTWEXBGS from 2025-01-22 00:00:00 to 2025-07-11 00:00:00
+2025-07-21 03:20:18,823 - __main__ - INFO - Loaded 120 records for RRPONTSYD from 2025-01-22 00:00:00 to 2025-07-15 00:00:00
+2025-07-21 03:20:18,825 - __main__ - INFO - Loaded 120 records for SOFR from 2025-01-22 00:00:00 to 2025-07-15 00:00:00
+2025-07-21 03:20:18,827 - __main__ - INFO - Loaded 127 records for VIXCLS from 2025-01-22 00:00:00 to 2025-07-15 00:00:00
+🚀 Starting Enhanced Macro Analytics Runner
+📅 Analysis period: Past 6 months
+📊 Data source: SQLite Database (with CSV fallback)
+⏱️  Enhanced timeframes: 1d, 7d, 30d, 90d ROC + 30d, 90d Z-Scores
+🎯 Focus: High-conviction regime detection signals
+
+================================================================================
+ENHANCED MACRO ANALYTICS RUNNER
+================================================================================
+Started at: 2025-07-21 03:20:18
+Data source: SQLite Database
+
+📊 Available indicators:
+   - BAMLH0A0HYM2
+   - DEXCHUS
+   - DEXUSEU
+   - DFF
+   - DGS10
+   - DTWEXBGS
+   - RRPONTSYD
+   - SOFR
+   - VIXCLS
+
+⏱️  Enhanced Timeframes:
+   - Rate of Change: 1d, 7d, 30d, 90d
+   - Z-Scores: 30d, 90d
+
+📈 Regime Detection:
+   - VIX: Extreme Fear/Greed classification
+   - DXY: Momentum acceleration/deceleration
+   - Treasury: Yield curve compression/expansion
+   - Credit: Spread widening/compression
+
+================================================================================
+ANALYSIS RESULTS
+================================================================================
+📊 Analyzing BAMLH0A0HYM2 with enhanced calculations...
+   📈 Loaded 125 data points
+   📅 Date range: 2025-01-22 00:00:00 to 2025-07-15 00:00:00
+   ✅ 1d ROC: 0.0000, 7d ROC: 0.0536, 30d ROC: -0.0752
+   ✅ 30d Z-Score: -0.7000, 90d Z-Score: -1.0078
+   ✅ CREDIT_regime: greed
+   ✅ Analysis completed for BAMLH0A0HYM2
+
+📊 Analyzing DEXCHUS with enhanced calculations...
+   📈 Loaded 119 data points
+   📅 Date range: 2025-01-22 00:00:00 to 2025-07-11 00:00:00
+   ✅ 1d ROC: -0.0009, 7d ROC: 0.0005, 30d ROC: -0.0036
+   ✅ 30d Z-Score: -1.1180, 90d Z-Score: -1.2750
+   ✅ Analysis completed for DEXCHUS
+
+📊 Analyzing DEXUSEU with enhanced calculations...
+   📈 Loaded 119 data points
+   📅 Date range: 2025-01-22 00:00:00 to 2025-07-11 00:00:00
+   ✅ 1d ROC: 0.0007, 7d ROC: -0.0068, 30d ROC: 0.0363
+   ✅ 30d Z-Score: 0.8561, 90d Z-Score: 1.4190
+   ✅ Analysis completed for DEXUSEU
+
+📊 Analyzing DFF with enhanced calculations...
+   📈 Loaded 174 data points
+   📅 Date range: 2025-01-22 00:00:00 to 2025-07-14 00:00:00
+   ✅ 1d ROC: 0.0000, 7d ROC: 0.0000, 30d ROC: 0.0000
+   ✅ 30d Z-Score: 0.0000, 90d Z-Score: 0.0000
+   ✅ FED_regime: compressed
+   ✅ Analysis completed for DFF
+
+📊 Analyzing DGS10 with enhanced calculations...
+   📈 Loaded 119 data points
+   📅 Date range: 2025-01-22 00:00:00 to 2025-07-14 00:00:00
+   ✅ 1d ROC: 0.0000, 7d ROC: 0.0302, 30d ROC: 0.0000
+   ✅ 30d Z-Score: 0.7153, 90d Z-Score: 0.8003
+   ✅ TREASURY_regime: neutral
+   ✅ Analysis completed for DGS10
+
+📊 Analyzing DTWEXBGS with enhanced calculations...
+   📈 Loaded 119 data points
+   📅 Date range: 2025-01-22 00:00:00 to 2025-07-11 00:00:00
+   ✅ 1d ROC: 0.0007, 7d ROC: 0.0047, 30d ROC: -0.0163
+   ✅ 30d Z-Score: -0.6386, 90d Z-Score: -1.2742
+   ✅ DXY_momentum: neutral
+   ✅ Analysis completed for DTWEXBGS
+
+📊 Analyzing RRPONTSYD with enhanced calculations...
+   📈 Loaded 120 data points
+   📅 Date range: 2025-01-22 00:00:00 to 2025-07-15 00:00:00
+   ✅ 1d ROC: -0.0898, 7d ROC: -0.0763, 30d ROC: -0.3719
+   ✅ 30d Z-Score: -0.0476, 90d Z-Score: 0.3701
+   ✅ Analysis completed for RRPONTSYD
+
+📊 Analyzing SOFR with enhanced calculations...
+   📈 Loaded 120 data points
+   📅 Date range: 2025-01-22 00:00:00 to 2025-07-15 00:00:00
+   ✅ 1d ROC: 0.0092, 7d ROC: 0.0046, 30d ROC: 0.0046
+   ✅ 30d Z-Score: 0.8708, 90d Z-Score: 1.0215
+   ✅ SOFR_regime: expanding
+   ✅ Analysis completed for SOFR
+
+📊 Analyzing VIXCLS with enhanced calculations...
+   📈 Loaded 127 data points
+   📅 Date range: 2025-01-22 00:00:00 to 2025-07-15 00:00:00
+   ✅ 1d ROC: 0.0105, 7d ROC: -0.0057, 30d ROC: -0.0595
+   ✅ 30d Z-Score: -0.2045, 90d Z-Score: -0.6664
+   ✅ VIX_regime: neutral
+   ✅ VIX_momentum: neutral
+   ✅ Analysis completed for VIXCLS
+
+================================================================================
+SUMMARY
+================================================================================
+✅ Successful analyses: 9
+   Indicators: BAMLH0A0HYM2, DEXCHUS, DEXUSEU, DFF, DGS10, DTWEXBGS, RRPONTSYD, SOFR, VIXCLS
+🎯 High-conviction signals: 0
+
+================================================================================
+DETAILED REPORT
+================================================================================
+
+📊 BAMLH0A0HYM2 Enhanced Analysis Report
+--------------------------------------------------
+Indicator: BAMLH0A0HYM2 (High Yield Credit Spreads)
+Data Source: database
+
+📈 Rate of Change Metrics:
+   1d ROC: 0.0
+   7d ROC: 0.0536
+   30d ROC: -0.0752
+   90d ROC: -0.0839
+
+📊 Z-Score Metrics:
+   30d Z-Score: -0.7
+   90d Z-Score: -1.0078
+
+🎯 Regime Status:
+   CREDIT_regime: greed
+
+📋 Data Summary:
+   Total data points: 125
+   Current value: 2.95
+   Current date: 2025-07-15T00:00:00
+   Value range: 2.59 to 4.61
+   Mean: 3.21064
+   Std Dev: 0.4722214898581713
+
+📊 DEXCHUS Enhanced Analysis Report
+--------------------------------------------------
+Indicator: DEXCHUS (China/US Exchange Rate)
+Data Source: database
+
+📈 Rate of Change Metrics:
+   1d ROC: -0.0009
+   7d ROC: 0.0005
+   30d ROC: -0.0036
+   90d ROC: -0.0134
+
+📊 Z-Score Metrics:
+   30d Z-Score: -1.118
+   90d Z-Score: -1.275
+
+📋 Data Summary:
+   Total data points: 119
+   Current value: 7.1681
+   Current date: 2025-07-11T00:00:00
+   Value range: 7.1636 to 7.3499
+   Mean: 7.239552941176471
+   Std Dev: 0.04670585711379031
+
+📊 DEXUSEU Enhanced Analysis Report
+--------------------------------------------------
+Indicator: DEXUSEU (USD/EUR Exchange Rate)
+Data Source: database
+
+📈 Rate of Change Metrics:
+   1d ROC: 0.0007
+   7d ROC: -0.0068
+   30d ROC: 0.0363
+   90d ROC: 0.1103
+
+📊 Z-Score Metrics:
+   30d Z-Score: 0.8561
+   90d Z-Score: 1.419
+
+📋 Data Summary:
+   Total data points: 119
+   Current value: 1.1696
+   Current date: 2025-07-11T00:00:00
+   Value range: 1.0277 to 1.179
+   Mean: 1.1065605042016806
+   Std Dev: 0.0448304531379863
+
+📊 DFF Enhanced Analysis Report
+--------------------------------------------------
+Indicator: DFF (Federal Funds Effective Rate)
+Data Source: database
+
+📈 Rate of Change Metrics:
+   1d ROC: 0.0
+   7d ROC: 0.0
+   30d ROC: 0.0
+   90d ROC: 0.0
+
+📊 Z-Score Metrics:
+   30d Z-Score: 0.0
+   90d Z-Score: 0.0
+
+🎯 Regime Status:
+   FED_regime: compressed
+
+📋 Data Summary:
+   Total data points: 174
+   Current value: 4.33
+   Current date: 2025-07-14T00:00:00
+   Value range: 4.33 to 4.33
+   Mean: 4.329999999999998
+   Std Dev: 1.781483421024812e-15
+
+📊 DGS10 Enhanced Analysis Report
+--------------------------------------------------
+Indicator: DGS10 (10-Year Treasury Constant Maturity Rate)
+Data Source: database
+
+📈 Rate of Change Metrics:
+   1d ROC: 0.0
+   7d ROC: 0.0302
+   30d ROC: 0.0
+   90d ROC: 0.0498
+
+📊 Z-Score Metrics:
+   30d Z-Score: 0.7153
+   90d Z-Score: 0.8003
+
+🎯 Regime Status:
+   TREASURY_regime: neutral
+
+📋 Data Summary:
+   Total data points: 119
+   Current value: 4.43
+   Current date: 2025-07-14T00:00:00
+   Value range: 4.01 to 4.65
+   Mean: 4.376302521008403
+   Std Dev: 0.12232816066587343
+
+📊 DTWEXBGS Enhanced Analysis Report
+--------------------------------------------------
+Indicator: DTWEXBGS (Trade Weighted U.S. Dollar Index)
+Data Source: database
+
+📈 Rate of Change Metrics:
+   1d ROC: 0.0007
+   7d ROC: 0.0047
+   30d ROC: -0.0163
+   90d ROC: -0.0612
+
+📊 Z-Score Metrics:
+   30d Z-Score: -0.6386
+   90d Z-Score: -1.2742
+
+🎯 Regime Status:
+   DXY_momentum: neutral
+
+📋 Data Summary:
+   Total data points: 119
+   Current value: 120.3354
+   Current date: 2025-07-11T00:00:00
+   Value range: 119.6678 to 129.2815
+   Mean: 124.4584605042017
+   Std Dev: 2.9133425038284297
+
+📊 RRPONTSYD Enhanced Analysis Report
+--------------------------------------------------
+Indicator: RRPONTSYD (Overnight Reverse Repo)
+Data Source: database
+
+📈 Rate of Change Metrics:
+   1d ROC: -0.0898
+   7d ROC: -0.0763
+   30d ROC: -0.3719
+   90d ROC: 0.4214
+
+📊 Z-Score Metrics:
+   30d Z-Score: -0.0476
+   90d Z-Score: 0.3701
+
+📋 Data Summary:
+   Total data points: 120
+   Current value: 198.277
+   Current date: 2025-07-15T00:00:00
+   Value range: 54.772 to 460.731
+   Mean: 157.943875
+   Std Dev: 65.10218488202078
+
+📊 SOFR Enhanced Analysis Report
+--------------------------------------------------
+Indicator: SOFR (Secured Overnight Financing Rate)
+Data Source: database
+
+📈 Rate of Change Metrics:
+   1d ROC: 0.0092
+   7d ROC: 0.0046
+   30d ROC: 0.0046
+   90d ROC: 0.0069
+
+📊 Z-Score Metrics:
+   30d Z-Score: 0.8708
+   90d Z-Score: 1.0215
+
+🎯 Regime Status:
+   SOFR_regime: expanding
+
+📋 Data Summary:
+   Total data points: 120
+   Current value: 4.37
+   Current date: 2025-07-15T00:00:00
+   Value range: 4.26 to 4.45
+   Mean: 4.331
+   Std Dev: 0.03824731549870062
+
+📊 VIXCLS Enhanced Analysis Report
+--------------------------------------------------
+Indicator: VIXCLS (CBOE Volatility Index)
+Data Source: database
+
+📈 Rate of Change Metrics:
+   1d ROC: 0.0105
+   7d ROC: -0.0057
+   30d ROC: -0.0595
+   90d ROC: -0.2827
+
+📊 Z-Score Metrics:
+   30d Z-Score: -0.2045
+   90d Z-Score: -0.6664
+
+🎯 Regime Status:
+   VIX_regime: neutral
+   VIX_momentum: neutral
+
+📋 Data Summary:
+   Total data points: 127
+   Current value: 17.38
+   Current date: 2025-07-15T00:00:00
+   Value range: 14.77 to 52.33
+   Mean: 21.04803149606299
+   Std Dev: 6.475975631513179
+
+💾 Saving results to: enhanced_macro_analytics_results_20250721_032018.json
+✅ Results saved to enhanced_macro_analytics_results_20250721_032018.json
+
+================================================================================
+ANALYSIS COMPLETE
+================================================================================
+Completed at: 2025-07-21 03:20:18
+✅ Enhanced macro analytics completed successfully!

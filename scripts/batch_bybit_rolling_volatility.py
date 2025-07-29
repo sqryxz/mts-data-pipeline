@@ -10,7 +10,7 @@ from services.collector import RollingVolatilityCalculator
 
 BYBIT_BASE_URL = "https://api.bybit.com"
 KLINE_ENDPOINT = "/v5/market/kline"
-SYMBOLS = ["BTCUSDT", "ETHUSDT"]
+SYMBOLS = ["BTCUSDT", "ETHUSDT", "XRPUSDT", "TAOUSDT", "FETUSDT", "AGIXUSDT", "RNDRUSDT", "OCEANUSDT"]
 INTERVAL = "1"  # 1-minute
 WINDOW_MINUTES = 15
 DB_PATH = "data/crypto_data.db"

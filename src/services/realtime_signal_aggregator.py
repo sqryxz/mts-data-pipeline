@@ -5,6 +5,7 @@ from typing import Dict, Any, List, Optional, Set, Callable
 from dataclasses import dataclass
 from enum import Enum
 from datetime import datetime, timedelta
+from collections import defaultdict
 
 from src.data.realtime_models import OrderBookSnapshot, BidAskSpread
 from src.services.cross_exchange_analyzer import CrossExchangeAnalyzer, ArbitrageOpportunity, ArbitrageDirection
@@ -88,9 +89,26 @@ class RealTimeSignalAggregator:
             min_signal_confidence: Minimum confidence for signal generation
             max_active_signals: Maximum number of active signals to maintain
         """
-        self.min_arbitrage_profit = min_arbitrage_profit
-        self.min_signal_confidence = min_signal_confidence
-        self.max_active_signals = max_active_signals
+        # Track different types of signals
+        self.orderbook_signals: Dict[str, RealTimeSignal] = {}
+        self.funding_signals: Dict[str, RealTimeSignal] = {}
+        self.spread_signals: Dict[str, RealTimeSignal] = {}
+        self.arbitrage_signals: Dict[str, RealTimeSignal] = {}
+        
+        # Configuration for signal generation
+        self.min_arbitrage_profit = 0.001  # 0.1% minimum arbitrage profit
+        self.spread_threshold = 0.0005  # 0.05% spread threshold
+        self.volume_threshold = 1.0  # Minimum volume threshold
+        
+        # Symbol monitoring
+        self.monitored_symbols: Set[str] = {'BTCUSDT', 'ETHUSDT', 'XRPUSDT', 'TAOUSDT', 'FETUSDT', 'AGIXUSDT', 'RNDRUSDT', 'OCEANUSDT'}
+        
+        # Performance tracking
+        self.signals_generated = 0
+        self.signals_by_type = defaultdict(int)
+        self.last_signal_time = {}
+        
+        logger.info("RealTimeSignalAggregator initialized")
         
         # Components
         self.cross_exchange_analyzer = CrossExchangeAnalyzer(
@@ -113,7 +131,6 @@ class RealTimeSignalAggregator:
         self.last_cleanup_time = time.time()
         
         # Symbol tracking
-        self.monitored_symbols: Set[str] = {'BTCUSDT', 'ETHUSDT'}
         self.last_orderbook_data: Dict[str, Dict[str, OrderBookSnapshot]] = {}
         
     def add_signal_callback(self, callback: Callable[[RealTimeSignal], None]) -> None:

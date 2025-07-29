@@ -1,0 +1,12 @@
+{
+  "timestamp": 1753759798403,
+  "asset": "ethereum",
+  "current_price": 3150.0,
+  "volatility_value": 0.028,
+  "volatility_threshold": 0.025,
+  "volatility_percentile": 91.3,
+  "position_direction": "BUY",
+  "signal_type": "LONG",
+  "alert_type": "volatility_spike",
+  "threshold_exceeded": true
+}

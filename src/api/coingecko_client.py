@@ -2,22 +2,33 @@ import requests
 from config.settings import Config
 from src.utils.retry import retry_with_backoff
 from src.utils.exceptions import APIError, APIRateLimitError, APIConnectionError, APITimeoutError
+import os
 
 
 class CoinGeckoClient:
     """CoinGecko API client for cryptocurrency data."""
     
-    def __init__(self):
+    def __init__(self, api_key=None):
         self.config = Config()
-        self.base_url = self.config.COINGECKO_BASE_URL
+        self.api_key = api_key or getattr(self.config, 'COINGECKO_API_KEY', None) or os.getenv('COINGECKO_API_KEY')
+        
+        # Use Pro API endpoint if we have a Pro API key
+        if self.api_key and self.api_key.startswith('CG-'):
+            self.base_url = 'https://pro-api.coingecko.com/api/v3'
+        else:
+            self.base_url = self.config.COINGECKO_BASE_URL
+            
         self.timeout = self.config.REQUEST_TIMEOUT
+        self.headers = {}
+        if self.api_key:
+            self.headers['x-cg-pro-api-key'] = self.api_key
     
     @retry_with_backoff(max_retries=3, base_delay=1.0)
     def ping(self):
         """Test connection to CoinGecko API."""
         try:
             url = f"{self.base_url}/ping"
-            response = requests.get(url, timeout=self.timeout)
+            response = requests.get(url, timeout=self.timeout, headers=self.headers)
             
             # Handle specific HTTP status codes
             if response.status_code == 429:
@@ -54,7 +65,7 @@ class CoinGeckoClient:
                 'page': 1,
                 'sparkline': 'false'
             }
-            response = requests.get(url, params=params, timeout=self.timeout)
+            response = requests.get(url, params=params, timeout=self.timeout, headers=self.headers)
             
             # Handle specific HTTP status codes
             if response.status_code == 429:
@@ -88,7 +99,7 @@ class CoinGeckoClient:
                 'vs_currency': 'usd',
                 'days': days
             }
-            response = requests.get(url, params=params, timeout=self.timeout)
+            response = requests.get(url, params=params, timeout=self.timeout, headers=self.headers)
             
             # Handle specific HTTP status codes
             if response.status_code == 429:
@@ -122,7 +133,7 @@ class CoinGeckoClient:
                 'vs_currency': 'usd',
                 'days': days
             }
-            response = requests.get(url, params=params, timeout=self.timeout)
+            response = requests.get(url, params=params, timeout=self.timeout, headers=self.headers)
             
             # Handle specific HTTP status codes
             if response.status_code == 429:
@@ -175,8 +186,9 @@ class CoinGeckoClient:
                 'from': int(from_timestamp),
                 'to': int(to_timestamp)
             }
-            response = requests.get(url, params=params, timeout=self.timeout)
-            
+            response = requests.get(url, params=params, timeout=self.timeout, headers=self.headers)
+            if response.status_code != 200:
+                print(f"CoinGecko API error {response.status_code}: {response.text}")
             # Handle specific HTTP status codes
             if response.status_code == 429:
                 retry_after = response.headers.get('Retry-After')

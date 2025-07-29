@@ -12,9 +12,54 @@ from src.utils.exceptions import (
     APIError, APIRateLimitError, APIConnectionError, APITimeoutError,
     DataValidationError, StorageError
 )
+import collections
+import numpy as np
+import time
+import sqlite3
 
 
 logger = logging.getLogger(__name__)
+
+
+class RollingVolatilityCalculator:
+    def __init__(self, window_size=15):
+        self.window_size = window_size
+        self.prices = collections.deque(maxlen=window_size)
+        self.last_vol = None
+
+    def update(self, price):
+        self.prices.append(price)
+        if len(self.prices) == self.window_size:
+            log_returns = np.log(np.array(self.prices)[1:] / np.array(self.prices)[:-1])
+            self.last_vol = np.std(log_returns) * np.sqrt(self.window_size)
+        else:
+            self.last_vol = None
+        return self.last_vol
+
+    def get_volatility(self):
+        return self.last_vol
+
+# --- Example integration in your real-time collector ---
+# In your real-time price handler for BTCUSDT and ETHUSDT:
+#
+# btc_vol_calc = RollingVolatilityCalculator(window_size=15)
+# eth_vol_calc = RollingVolatilityCalculator(window_size=15)
+#
+# # On each new 1-minute price:
+# btc_vol = btc_vol_calc.update(new_btc_price)
+# if btc_vol is not None:
+#     # Store in DB
+#     conn = sqlite3.connect('data/crypto_data.db')
+#     c = conn.cursor()
+#     ts = int(time.time())
+#     c.execute('''
+#         INSERT INTO crypto_volatility (symbol, timestamp, window_minutes, volatility)
+#         VALUES (?, ?, ?, ?)
+#     ''', ('BTCUSDT', ts, 15, btc_vol))
+#     conn.commit()
+#     conn.close()
+#
+# # Repeat for ETHUSDT
 
 
 class DataCollector:

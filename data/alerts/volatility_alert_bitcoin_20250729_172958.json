@@ -1,0 +1,12 @@
+{
+  "timestamp": 1753781398403,
+  "asset": "bitcoin",
+  "current_price": 45000.0,
+  "volatility_value": 0.035,
+  "volatility_threshold": 0.025,
+  "volatility_percentile": 92.5,
+  "position_direction": "BUY",
+  "signal_type": "LONG",
+  "alert_type": "volatility_spike",
+  "threshold_exceeded": true
+}

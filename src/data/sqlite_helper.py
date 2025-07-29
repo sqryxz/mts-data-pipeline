@@ -786,4 +786,151 @@ class CryptoDatabase:
             }
         }
         
-        return summary 
+        return summary
+    
+    def get_strategy_market_data_hours(self, assets: List[str], hours: int = 24) -> Dict[str, pd.DataFrame]:
+        """
+        Get comprehensive market data for strategy analysis across multiple assets using hour-based time window.
+        
+        This method is designed specifically for trading strategies that need:
+        - VIX data (current level, historical)  
+        - Crypto OHLCV data for all assets
+        - Rolling highs for drawdown calculation
+        - Aligned timestamps across all assets
+        
+        Args:
+            assets: List of cryptocurrency names (e.g., ['bitcoin', 'ethereum', 'binancecoin'])
+            hours: Number of recent hours to retrieve (default: 24)
+            
+        Returns:
+            Dict[str, pd.DataFrame]: Dictionary with keys:
+                - 'vix_data': VIX historical data with statistics
+                - 'crypto_data': Combined crypto OHLCV data for all assets
+                - 'market_summary': Overall market statistics
+                - '{asset_name}': Individual asset data with rolling highs/lows
+                
+        Raises:
+            sqlite3.Error: If database query fails
+        """
+        import time
+        import numpy as np
+        
+        # Calculate the cutoff timestamp for the hour range
+        current_timestamp = int(time.time())
+        cutoff_timestamp = (current_timestamp - (hours * 60 * 60)) * 1000
+        
+        try:
+            result = {
+                'vix_data': pd.DataFrame(),
+                'crypto_data': pd.DataFrame(),
+                'market_summary': {},
+                'timestamp_range': {
+                    'start_timestamp': cutoff_timestamp,
+                    'end_timestamp': current_timestamp * 1000,
+                    'hours_requested': hours
+                }
+            }
+            
+            # 1. Get VIX data with historical statistics (convert hours to days for VIX)
+            vix_days = max(1, hours // 24)  # At least 1 day for VIX data
+            vix_query = """
+                SELECT 
+                    date,
+                    value as vix_value,
+                    is_interpolated,
+                    is_forward_filled
+                FROM macro_indicators 
+                WHERE indicator = 'VIXCLS'
+                AND date >= DATE('now', '-{} days')
+                ORDER BY date ASC
+            """.format(vix_days)
+            
+            vix_df = self.query_to_dataframe(vix_query)
+            
+            if not vix_df.empty:
+                # Add VIX analysis columns
+                vix_df['vix_percentile'] = vix_df['vix_value'].rolling(window=min(30, len(vix_df))).rank(pct=True) * 100
+                vix_df['vix_ma_10'] = vix_df['vix_value'].rolling(window=10, min_periods=1).mean()
+                vix_df['vix_ma_20'] = vix_df['vix_value'].rolling(window=20, min_periods=1).mean()
+                vix_df['vix_spike'] = vix_df['vix_value'] > 25  # Common spike threshold
+                vix_df['vix_extreme'] = vix_df['vix_value'] > 35  # Extreme fear threshold
+                
+                # Add VIX regime classification
+                vix_df['vix_regime'] = pd.cut(vix_df['vix_value'], 
+                                             bins=[0, 15, 25, 35, float('inf')],
+                                             labels=['Low', 'Normal', 'High', 'Extreme'])
+                
+                result['vix_data'] = vix_df
+                
+                # VIX summary statistics
+                result['vix_summary'] = {
+                    'current_vix': float(vix_df['vix_value'].iloc[-1]) if not vix_df.empty else None,
+                    'average_vix': float(vix_df['vix_value'].mean()),
+                    'max_vix': float(vix_df['vix_value'].max()),
+                    'min_vix': float(vix_df['vix_value'].min()),
+                    'vix_above_25_days': int((vix_df['vix_value'] > 25).sum()),
+                    'vix_above_35_days': int((vix_df['vix_value'] > 35).sum()),
+                    'data_points': len(vix_df)
+                }
+            
+            # 2. Get crypto data for all assets with hour-based filtering
+            all_crypto_data = []
+            asset_summaries = {}
+            
+            for asset in assets:
+                # Get crypto OHLCV data with hour-based timestamp filtering
+                crypto_query = """
+                    SELECT 
+                        cryptocurrency,
+                        date_str,
+                        timestamp,
+                        open,
+                        high,
+                        low,
+                        close,
+                        volume
+                    FROM crypto_ohlcv 
+                    WHERE cryptocurrency = ?
+                    AND timestamp >= ?
+                    ORDER BY timestamp ASC
+                """
+                
+                crypto_df = self.query_to_dataframe(crypto_query, (asset, cutoff_timestamp))
+                
+                if not crypto_df.empty:
+                    # Add technical indicators
+                    crypto_df = self._add_technical_indicators(crypto_df)
+                    
+                    # Calculate rolling highs and lows for drawdown analysis
+                    crypto_df['rolling_high'] = crypto_df['high'].rolling(window=20, min_periods=1).max()
+                    crypto_df['rolling_low'] = crypto_df['low'].rolling(window=20, min_periods=1).min()
+                    crypto_df['drawdown'] = (crypto_df['close'] - crypto_df['rolling_high']) / crypto_df['rolling_high']
+                    crypto_df['drawup'] = (crypto_df['close'] - crypto_df['rolling_low']) / crypto_df['rolling_low']
+                    
+                    # Add asset to result
+                    result[asset] = crypto_df
+                    all_crypto_data.append(crypto_df)
+                    
+                    # Calculate asset summary
+                    asset_summaries[asset] = self._calculate_asset_summary(crypto_df)
+            
+            # 3. Combine all crypto data
+            if all_crypto_data:
+                result['crypto_data'] = pd.concat(all_crypto_data, ignore_index=True)
+                result['crypto_data'] = result['crypto_data'].sort_values('timestamp')
+            
+            # 4. Market summary
+            result['market_summary'] = {
+                'total_assets': len(assets),
+                'data_points_per_asset': {asset: len(result.get(asset, pd.DataFrame())) for asset in assets},
+                'timestamp_range': result['timestamp_range'],
+                'asset_summaries': asset_summaries
+            }
+            
+            self.logger.debug(f"Retrieved market data for {len(assets)} assets over {hours} hours")
+            
+        except Exception as e:
+            self.logger.error(f"Failed to get strategy market data: {e}")
+            raise
+        
+        return result 
