@@ -4,12 +4,18 @@ Handles weighted combination, conflict resolution, and position size optimizatio
 """
 
 import logging
+import asyncio
+import threading
+import os
+from concurrent.futures import ThreadPoolExecutor
 from typing import Dict, List, Any, Optional
 from collections import defaultdict
 from datetime import datetime
 import numpy as np
 
 from src.data.signal_models import TradingSignal, SignalType, SignalStrength
+from src.utils.discord_webhook import DiscordAlertManager
+from src.utils.config_utils import get_discord_config_from_env, validate_discord_config
 
 
 class SignalAggregator:
@@ -49,9 +55,62 @@ class SignalAggregator:
             'min_position_size': 0.005,  # Minimum position size threshold
             'require_majority_agreement': False,  # Require >50% weight agreement for signal
             'signal_timeout_hours': 24,  # How long signals are valid
+            'discord_alerts': os.getenv('DISCORD_ALERTS_ENABLED', 'false').lower() == 'true',  # Enable Discord alerts
+            'discord_webhook_url': os.getenv('DISCORD_WEBHOOK_URL', ''),  # Discord webhook URL
+            'discord_config': {  # Discord alert configuration
+                'min_confidence': float(os.getenv('DISCORD_MIN_CONFIDENCE', '0.6')),
+                'min_strength': os.getenv('DISCORD_MIN_STRENGTH', 'WEAK'),
+                'rate_limit': int(os.getenv('DISCORD_RATE_LIMIT_SECONDS', '60')),
+                'enabled_assets': ['bitcoin', 'ethereum'],
+                'enabled_signal_types': ['LONG', 'SHORT']
+            },
         }
         
         self.config = {**default_config, **(aggregation_config or {})}
+        
+        # Initialize Discord alert manager if configured
+        self.discord_manager = None
+        self._discord_executor = None
+        
+        discord_enabled = self.config.get('discord_alerts', False)
+        
+        if discord_enabled:
+            # Get Discord configuration from environment variables
+            discord_config = get_discord_config_from_env()
+            
+            # Validate the configuration
+            if validate_discord_config(discord_config):
+                try:
+                    self.discord_manager = DiscordAlertManager(
+                        discord_config['webhook_url'],
+                        discord_config
+                    )
+                    # Initialize thread pool executor for Discord alerts
+                    self._discord_executor = ThreadPoolExecutor(
+                        max_workers=2, 
+                        thread_name_prefix="discord-alerts"
+                    )
+                    self.logger.info("Discord alert manager initialized with thread pool")
+                except Exception as e:
+                    self.logger.error(f"Failed to initialize Discord alert manager: {e}")
+                    # Still initialize executor for consistency
+                    self._discord_executor = ThreadPoolExecutor(
+                        max_workers=2, 
+                        thread_name_prefix="discord-alerts"
+                    )
+            else:
+                # Initialize thread pool executor even without Discord for consistency
+                self._discord_executor = ThreadPoolExecutor(
+                    max_workers=2, 
+                    thread_name_prefix="discord-alerts"
+                )
+                self.logger.warning("Discord alerts enabled but configuration is invalid. Check DISCORD_WEBHOOK_URL in .env file.")
+        else:
+            # Initialize thread pool executor even without Discord for consistency
+            self._discord_executor = ThreadPoolExecutor(
+                max_workers=2, 
+                thread_name_prefix="discord-alerts"
+            )
         
         self.logger.info(f"Signal Aggregator initialized with {len(self.strategy_weights)} strategies")
         self.logger.debug(f"Strategy weights: {self.strategy_weights}")
@@ -95,8 +154,25 @@ class SignalAggregator:
                 self.logger.error(f"Failed to aggregate signals for {asset}: {e}")
                 continue
         
-        # Sort by confidence and timestamp
-        aggregated_signals.sort(key=lambda s: (-s.confidence, -s.timestamp))
+        # Sort by confidence and timestamp (handle different timestamp types)
+        def sort_key(signal):
+            # Ensure timestamp is numeric for sorting
+            timestamp = signal.timestamp
+            if isinstance(timestamp, str):
+                try:
+                    timestamp = int(timestamp)
+                except (ValueError, TypeError):
+                    timestamp = 0
+            elif not isinstance(timestamp, (int, float)):
+                timestamp = 0
+            
+            return (-signal.confidence, -timestamp)
+        
+        aggregated_signals.sort(key=sort_key)
+        
+        # Send Discord alerts if configured
+        if self.discord_manager and aggregated_signals:
+            self._schedule_discord_alerts(aggregated_signals)
         
         self.logger.info(f"Aggregated {len(aggregated_signals)} signals from {len(strategy_signals)} strategies")
         
@@ -238,7 +314,17 @@ class SignalAggregator:
                         'weight': strategy_weight
                     })
             
-            latest_timestamp = max(latest_timestamp, signal.timestamp)
+            # Handle timestamp comparison safely
+            current_timestamp = signal.timestamp
+            if isinstance(current_timestamp, str):
+                try:
+                    current_timestamp = int(current_timestamp)
+                except (ValueError, TypeError):
+                    current_timestamp = 0
+            elif not isinstance(current_timestamp, (int, float)):
+                current_timestamp = 0
+            
+            latest_timestamp = max(latest_timestamp, current_timestamp)
         
         if total_weight == 0:
             return None
@@ -724,4 +810,141 @@ class SignalAggregator:
                 'suggested_action': 'Run resolve_signal_conflicts() to get conflict-free signals'
             })
         
-        return recommendations 
+        return recommendations
+    
+    def _schedule_discord_alerts(self, signals: List[TradingSignal]) -> None:
+        """
+        Schedule Discord alerts without blocking the main thread.
+        
+        Args:
+            signals: List of aggregated TradingSignal objects
+        """
+        if not self.discord_manager or not signals:
+            return
+        
+        try:
+            # Primary: Use thread pool executor for reliable async execution
+            if self._discord_executor:
+                future = self._discord_executor.submit(self._send_discord_alerts_sync, signals)
+                # Add callback for error handling
+                future.add_done_callback(self._handle_discord_task_completion)
+                self.logger.debug("Scheduled Discord alerts via thread pool executor")
+            else:
+                # Fallback to direct async execution
+                self._schedule_discord_alerts_fallback(signals)
+                
+        except Exception as e:
+            self.logger.error(f"Failed to schedule Discord alerts: {e}")
+    
+    def _send_discord_alerts_sync(self, signals: List[TradingSignal]) -> None:
+        """
+        Send Discord alerts in a synchronous context (runs in thread pool).
+        
+        Args:
+            signals: List of aggregated TradingSignal objects
+        """
+        try:
+            # Create new event loop for this thread
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            
+            try:
+                loop.run_until_complete(self._send_discord_alerts(signals))
+            finally:
+                loop.close()
+                
+        except Exception as e:
+            self.logger.error(f"Failed to send Discord alerts in thread: {e}")
+    
+    def _schedule_discord_alerts_fallback(self, signals: List[TradingSignal]) -> None:
+        """
+        Fallback method for scheduling Discord alerts when thread pool is not available.
+        
+        Args:
+            signals: List of aggregated TradingSignal objects
+        """
+        try:
+            # Try to get running loop
+            try:
+                loop = asyncio.get_running_loop()
+                loop.create_task(self._send_discord_alerts(signals))
+                self.logger.debug("Scheduled Discord alerts in async context")
+            except RuntimeError:
+                # No running loop, create new one in thread
+                import threading
+                def run_in_thread():
+                    try:
+                        asyncio.run(self._send_discord_alerts(signals))
+                    except Exception as e:
+                        self.logger.error(f"Failed to send Discord alerts in fallback thread: {e}")
+                
+                thread = threading.Thread(target=run_in_thread, daemon=True)
+                thread.start()
+                self.logger.debug("Scheduled Discord alerts in new thread")
+                
+        except Exception as e:
+            self.logger.error(f"Failed to schedule Discord alerts (fallback): {e}")
+    
+    async def _send_discord_alerts(self, signals: List[TradingSignal]) -> None:
+        """
+        Send Discord alerts for aggregated signals.
+        
+        Args:
+            signals: List of aggregated TradingSignal objects
+        """
+        if not self.discord_manager:
+            return
+        
+        try:
+            results = await self.discord_manager.process_signals(signals)
+            self.logger.info(f"Discord alerts sent: {results['sent']}/{results['total']} successful")
+        except Exception as e:
+            self.logger.error(f"Failed to send Discord alerts: {e}")
+    
+    def _handle_discord_task_completion(self, future):
+        """
+        Handle completion of Discord alert task.
+        
+        Args:
+            future: Future object from thread pool executor
+        """
+        try:
+            future.result()  # This will raise exception if task failed
+            self.logger.debug("Discord alert task completed successfully")
+        except Exception as e:
+            self.logger.error(f"Discord alert task failed: {e}")
+    
+    async def send_test_discord_alert(self) -> bool:
+        """
+        Send a test Discord alert to verify configuration.
+        
+        Returns:
+            bool: True if successful
+        """
+        if not self.discord_manager:
+            self.logger.warning("Discord manager not configured")
+            return False
+        
+        try:
+            return await self.discord_manager.send_test_alert()
+        except Exception as e:
+            self.logger.error(f"Failed to send test Discord alert: {e}")
+            return False
+    
+    def cleanup(self):
+        """
+        Clean up resources, especially the thread pool executor.
+        Call this when shutting down the aggregator.
+        """
+        if hasattr(self, '_discord_executor') and self._discord_executor:
+            try:
+                self._discord_executor.shutdown(wait=True)
+                self.logger.info("Discord alert thread pool executor shut down")
+            except Exception as e:
+                self.logger.error(f"Error shutting down Discord executor: {e}")
+    
+    def __del__(self):
+        """
+        Destructor to ensure thread pool is cleaned up.
+        """
+        self.cleanup() 

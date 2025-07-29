@@ -78,6 +78,13 @@ class Config:
         self.ALERT_EMAIL_FROM = os.getenv('ALERT_EMAIL_FROM', '')
         self.ALERT_EMAIL_TO = self._parse_list(os.getenv('ALERT_EMAIL_TO', ''))
         
+        # Discord Webhook Configuration
+        self.DISCORD_WEBHOOK_URL = os.getenv('DISCORD_WEBHOOK_URL', '')
+        self.DISCORD_ALERTS_ENABLED = os.getenv('DISCORD_ALERTS_ENABLED', 'false').lower() == 'true'
+        self.DISCORD_MIN_CONFIDENCE = float(os.getenv('DISCORD_MIN_CONFIDENCE', '0.6'))
+        self.DISCORD_MIN_STRENGTH = os.getenv('DISCORD_MIN_STRENGTH', 'WEAK')
+        self.DISCORD_RATE_LIMIT_SECONDS = int(os.getenv('DISCORD_RATE_LIMIT_SECONDS', '60'))
+        
         # Risk Management
         self.MAX_POSITION_SIZE = float(os.getenv('MAX_POSITION_SIZE', '0.10'))  # 10%
         self.MAX_DAILY_TRADES = int(os.getenv('MAX_DAILY_TRADES', '50'))
@@ -94,7 +101,7 @@ class Config:
         """Setup comprehensive real-time configuration"""
         # Real-Time Collection Settings
         self.REALTIME_ENABLED = os.getenv('REALTIME_ENABLED', 'true').lower() == 'true'
-        self.REALTIME_SYMBOLS = self._parse_list(os.getenv('REALTIME_SYMBOLS', 'BTCUSDT,ETHUSDT'))
+        self.REALTIME_SYMBOLS = self._parse_list(os.getenv('REALTIME_SYMBOLS', 'BTCUSDT,ETHUSDT,XRPUSDT,TAOUSDT,FETUSDT,AGIXUSDT,RNDRUSDT,OCEANUSDT'))
         self.REALTIME_EXCHANGES = self._parse_list(os.getenv('REALTIME_EXCHANGES', 'binance'))
         
         # Order Book Configuration

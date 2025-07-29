@@ -1,0 +1,17 @@
+{
+    "webhook_url": "${DISCORD_WEBHOOK_URL}",
+    "username": "MTS Signal Bot",
+    "avatar_url": null,
+    "embed_color": 16711680,
+    "include_risk_metrics": true,
+    "include_volatility_metrics": true,
+    "max_retries": 3,
+    "retry_delay": 1.0,
+    "min_confidence": "${DISCORD_MIN_CONFIDENCE}",
+    "min_strength": "${DISCORD_MIN_STRENGTH}",
+    "enabled_assets": ["bitcoin", "ethereum"],
+    "enabled_signal_types": ["LONG", "SHORT"],
+    "rate_limit": "${DISCORD_RATE_LIMIT_SECONDS}",
+    "batch_alerts": true,
+    "description": "Discord alert configuration for MTS Pipeline signal notifications (uses environment variables)"
+} 
