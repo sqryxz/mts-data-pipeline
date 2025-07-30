@@ -90,10 +90,11 @@ python3 main.py --symbols bitcoin ethereum --start 2023-01-01 --end 2023-06-30 -
 The MTS pipeline consists of four main components:
 
 1. **Data Sources & Collection**
-   - CoinGecko API for historical crypto data
+   - CoinGecko API for historical crypto data (with automatic Pro/Free API fallback)
    - FRED API for macro-economic indicators
    - Binance & Bybit WebSockets for real-time data
    - Order book and funding rate streams
+   - Resilient API clients with automatic error recovery
 
 2. **Signal Generation Engine**
    - VIX Correlation Strategy
@@ -392,6 +393,142 @@ Structured logging with configurable levels:
 - Portfolio risk exposure limits (default: 25%)
 - Stop-loss and take-profit automation
 
+## 🔧 API Resilience & Error Handling
+
+### CoinGecko API Fallback System
+
+The system now includes an intelligent fallback mechanism for CoinGecko API requests:
+
+#### **Automatic Pro/Free API Switching**
+```python
+# Automatic configuration based on API key
+from src.api.coingecko_client import CoinGeckoClient
+
+client = CoinGeckoClient()  # Automatically detects Pro vs Free API
+# Pro API key (CG-xxx): Uses pro-api.coingecko.com with fallback to api.coingecko.com
+# Free usage: Uses api.coingecko.com only
+```
+
+#### **Resilience Features**
+- **Connection Failures**: Automatically tries fallback URL
+- **DNS Resolution Errors**: Seamless failover to backup endpoint
+- **Timeout Handling**: Retries with exponential backoff
+- **Rate Limit Respect**: Proper handling without fallback for 429 errors
+- **Error Transparency**: Clear error messages for debugging
+
+#### **Fallback Logic**
+1. **Primary Attempt**: Uses Pro API with authentication headers
+2. **Fallback Attempt**: Uses Free API without authentication if Pro fails
+3. **Error Handling**: Returns detailed error information if both fail
+
+#### **Testing API Connectivity**
+```bash
+# Test CoinGecko connectivity with fallback
+python3 -c "
+from src.api.coingecko_client import CoinGeckoClient
+client = CoinGeckoClient()
+try:
+    result = client.ping()
+    print('✓ CoinGecko API connectivity successful')
+    print(f'Base URL: {client.base_url}')
+    if hasattr(client, 'fallback_url'):
+        print(f'Fallback URL: {client.fallback_url}')
+except Exception as e:
+    print(f'✗ API connectivity failed: {e}')
+"
+
+# Test market data retrieval
+python3 -c "
+from src.api.coingecko_client import CoinGeckoClient
+client = CoinGeckoClient()
+data = client.get_market_chart_data('bitcoin', 1)
+print(f'✓ Retrieved {len(data[\"prices\"])} price points')
+"
+```
+
+### Error Recovery Strategies
+
+#### **Automatic Recovery**
+- **Exponential Backoff**: Increasing delays between retries
+- **Circuit Breaker Pattern**: Temporary failure isolation
+- **Graceful Degradation**: Continue with available data sources
+
+#### **Manual Recovery**
+```bash
+# Force API client reset
+python3 -c "
+from src.api.coingecko_client import CoinGeckoClient
+client = CoinGeckoClient()
+print('API Status:', 'OK' if client.ping() else 'Failed')
+"
+
+# Check data pipeline health
+python3 main.py --health
+```
+
+### Common Issues & Troubleshooting
+
+#### **DNS Resolution Errors (CoinGecko API)**
+
+**Problem**: Error messages like:
+```
+NameResolutionError: Failed to resolve 'pro-api.coingecko.com'
+[APICONNECTIONERROR] Failed to connect to API: HTTPSConnectionPool(host='pro-api.coingecko.com', port=443)
+```
+
+**Solution**: The enhanced CoinGecko client automatically handles this with fallback:
+```bash
+# Test connectivity
+python3 -c "
+from src.api.coingecko_client import CoinGeckoClient
+client = CoinGeckoClient()
+try:
+    result = client.get_market_chart_data('bitcoin', 1)
+    print(f'✓ Success: {len(result[\"prices\"])} price points retrieved')
+except Exception as e:
+    print(f'✗ Still failing: {e}')
+"
+```
+
+**Manual Workaround** (if needed):
+```python
+# Force free API usage
+import os
+os.environ['COINGECKO_API_KEY'] = ''  # Remove Pro API key temporarily
+from src.api.coingecko_client import CoinGeckoClient
+client = CoinGeckoClient()  # Will use free API only
+```
+
+#### **API Rate Limiting**
+
+**Problem**: `429 Too Many Requests` errors
+
+**Solution**:
+- Pro API: 500 calls/minute limit
+- Free API: 10-50 calls/minute limit
+- System automatically respects rate limits and retries
+
+```bash
+# Check current rate limit usage
+grep "rate limit" logs/*.log | tail -10
+```
+
+#### **Data Collection Failures**
+
+**Problem**: Incomplete or failed data collection
+
+**Diagnosis**:
+```bash
+# Check recent collection status
+python3 -c "
+from src.services.collector import DataCollector
+collector = DataCollector()
+status = collector.get_collection_status()
+print(f'Success rate: {status[\"success_rate\"]:.1%}')
+print(f'Failed assets: {status[\"failed_assets\"]}')
+"
+```
+
 ## 🚀 Production Deployment
 
 ### Environment Setup
@@ -500,6 +637,47 @@ print(f"Total Return: {result.total_return:.2%}")
 print(f"Sharpe Ratio: {result.sharpe_ratio:.3f}")
 print(f"Max Drawdown: {result.max_drawdown:.2%}")
 ```
+
+## 📋 Recent Updates & Changelog
+
+### Version 2.1.0 - Enhanced API Resilience (Latest)
+
+#### 🔧 **CoinGecko Client Improvements**
+- **Added automatic fallback mechanism** for Pro API to Free API switching
+- **Enhanced error handling** for DNS resolution and connectivity issues
+- **Centralized request logic** with `_make_request_with_fallback()` method
+- **Improved reliability** for all CoinGecko API endpoints
+- **Backwards compatible** - no code changes required
+
+#### ✨ **Key Features**
+- **Seamless Failover**: Automatically switches to Free API when Pro API is unreachable
+- **Smart Error Detection**: Distinguishes between network issues and API errors
+- **Proper Header Management**: Uses API key only for Pro endpoint requests
+- **Comprehensive Testing**: Verified fallback mechanism with connection simulation
+
+#### 🐛 **Bug Fixes**
+- **Fixed DNS resolution errors** for `pro-api.coingecko.com`
+- **Improved timeout handling** with automatic retries
+- **Enhanced connection error recovery** with fallback URLs
+
+#### 🚀 **Performance Improvements**
+- **Reduced code duplication** in API client methods
+- **Faster error recovery** through intelligent fallback logic
+- **Better resource utilization** with centralized request handling
+
+### Previous Updates
+
+#### Version 2.0.0 - Multi-Tier Scheduling System
+- **Optimized data collection** with tier-based scheduling
+- **Enhanced macro analytics** with correlation analysis
+- **Improved signal generation** with confidence scoring
+- **Real-time monitoring** and health checks
+
+#### Version 1.5.0 - Backtesting Engine
+- **Event-driven backtesting** framework
+- **Portfolio management** with position tracking
+- **Performance analytics** with comprehensive metrics
+- **Strategy optimization** tools
 
 ## 📞 Support
 
