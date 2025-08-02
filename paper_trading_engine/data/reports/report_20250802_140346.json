@@ -1,0 +1,266 @@
+{
+  "portfolio_summary": {
+    "current_value": 9975.386931442634,
+    "initial_capital": 10000.0,
+    "cash": 10129.988845859838,
+    "total_pnl": -21.894859502495322,
+    "realized_pnl": -21.894859502495322,
+    "unrealized_pnl": 0.0,
+    "position_count": 3,
+    "trade_count": 10,
+    "win_count": 0,
+    "loss_count": 7,
+    "win_rate": 0.0,
+    "positions": {
+      "BTC": {
+        "quantity": -0.0031906808195481095,
+        "average_price": 49468.192721103194,
+        "current_price": 49468.192721103194,
+        "unrealized_pnl": 0.0
+      },
+      "ETH": {
+        "quantity": -0.05321823042857167,
+        "average_price": 2972.3063123741276,
+        "current_price": 2972.3063123741276,
+        "unrealized_pnl": 0.0
+      },
+      "ADA": {
+        "quantity": 319.5013755089453,
+        "average_price": 0.5052127905703931,
+        "current_price": 0.5052127905703931,
+        "unrealized_pnl": 0.0
+      }
+    }
+  },
+  "performance_metrics": {
+    "summary": {
+      "total_return_percent": -0.24613068557366202,
+      "total_pnl": -21.894859502495322,
+      "realized_pnl": -21.894859502495322,
+      "unrealized_pnl": 0.0,
+      "total_trades": 5,
+      "win_rate_percent": 0.0
+    },
+    "risk_metrics": {
+      "sharpe_ratio": NaN,
+      "max_drawdown": 12.542691928256318,
+      "max_drawdown_percent": 0.12542691928256317,
+      "volatility": 1.404122646897913
+    },
+    "profitability": {
+      "profit_factor": 0.0,
+      "average_win": 0.0,
+      "average_loss": 3.1356729820639693,
+      "largest_win": 0.0,
+      "largest_loss": -3.215760636323061,
+      "avg_trade_pnl": -2.5085383856511756
+    },
+    "trading_activity": {
+      "trading_days": 1,
+      "avg_trades_per_day": 5.0,
+      "best_day_pnl": -12.542691928255877,
+      "worst_day_pnl": -12.542691928255877,
+      "consecutive_wins": 0,
+      "consecutive_losses": 4
+    }
+  },
+  "trade_history": [
+    {
+      "timestamp": "2025-08-02T14:03:46.385647",
+      "asset": "BTC",
+      "side": "BUY",
+      "quantity": 0.0032021549258741885,
+      "entry_price": 50486.41266168058,
+      "exit_price": null,
+      "price": 50486.41266168058,
+      "pnl": 0.0,
+      "fees": 0.16166531499431747,
+      "execution_id": "18eef183-777e-4401-9105-4c02ff174b08",
+      "order_id": "e2427606-8fce-437d-b5d6-96a76e0a36f8",
+      "signal_id": "",
+      "trade_id": "1f73d397-26f2-4bac-b35b-e39c36dab71f",
+      "metadata": {}
+    },
+    {
+      "timestamp": "2025-08-02T14:03:46.385736",
+      "asset": "ETH",
+      "side": "SELL",
+      "quantity": 0.05337284265068755,
+      "entry_price": 2972.88243648648,
+      "exit_price": 2972.88243648648,
+      "price": 2972.88243648648,
+      "pnl": 0.0,
+      "fees": 0.15867118650158551,
+      "execution_id": "9bdb3fc0-97d7-422b-8618-ef7dba61f9d1",
+      "order_id": "2037451e-c808-42ed-be12-02e24c2c2de6",
+      "signal_id": "",
+      "trade_id": "e7b4eb56-24de-44c4-91a6-24d0e92afc3a",
+      "metadata": {}
+    },
+    {
+      "timestamp": "2025-08-02T14:03:46.385802",
+      "asset": "ADA",
+      "side": "BUY",
+      "quantity": 319.9734139215033,
+      "entry_price": 0.5049230296273907,
+      "exit_price": null,
+      "price": 0.5049230296273907,
+      "pnl": 0.0,
+      "fees": 0.16156194555746456,
+      "execution_id": "1fa6fc05-b3a2-48b9-a088-15f133814489",
+      "order_id": "734b8599-6f31-411d-a827-84e8fe4e458e",
+      "signal_id": "",
+      "trade_id": "4c2eaf93-605f-473b-a70d-8b9b4174cb0b",
+      "metadata": {}
+    },
+    {
+      "timestamp": "2025-08-02T14:03:46.385859",
+      "asset": "BTC",
+      "side": "SELL",
+      "quantity": 0.006404194123894437,
+      "entry_price": 49541.937224553076,
+      "exit_price": 49541.937224553076,
+      "price": 49541.937224553076,
+      "pnl": -3.024356673365017,
+      "fees": 0.31727618325982987,
+      "execution_id": "ddfbd3a7-1b5c-4568-aef2-33b1c0dbdee1",
+      "order_id": "1f97ca87-c2c7-40e9-8463-877045abfe8b",
+      "signal_id": "",
+      "trade_id": "2be6f878-280f-4727-8e9a-2195ff6fdd6e",
+      "metadata": {}
+    },
+    {
+      "timestamp": "2025-08-02T14:03:46.385911",
+      "asset": "ETH",
+      "side": "BUY",
+      "quantity": 0.10673820969476468,
+      "entry_price": 3032.5656306257383,
+      "exit_price": null,
+      "price": 3032.5656306257383,
+      "pnl": -3.1854617296850747,
+      "fees": 0.3236906261948664,
+      "execution_id": "5eeeed73-5e46-427f-ab9c-54cc898fe878",
+      "order_id": "2fea514f-901d-4d5b-a15f-ff57d056eae0",
+      "signal_id": "",
+      "trade_id": "a4a21f18-c0c7-485a-b58a-ce3bcded4897",
+      "metadata": {}
+    },
+    {
+      "timestamp": "2025-08-02T14:03:46.385960",
+      "asset": "ADA",
+      "side": "SELL",
+      "quantity": 639.9320181836283,
+      "entry_price": 0.4951440632188802,
+      "exit_price": 0.4951440632188802,
+      "price": 0.4951440632188802,
+      "pnl": -3.12900926635479,
+      "fees": 0.3168585396673001,
+      "execution_id": "8e82d60e-67f1-4d86-bb56-3cafe9c86bad",
+      "order_id": "1e78aac9-ec7c-4970-84fc-7b0208b322f6",
+      "signal_id": "",
+      "trade_id": "49cdbdfd-0c86-44c3-bcda-7de2f2e67088",
+      "metadata": {}
+    },
+    {
+      "timestamp": "2025-08-02T14:03:46.386006",
+      "asset": "BTC",
+      "side": "BUY",
+      "quantity": 0.006396330792577695,
+      "entry_price": 50461.70419564116,
+      "exit_price": null,
+      "price": 50461.70419564116,
+      "pnl": -2.945129894468412,
+      "fees": 0.32276975239252664,
+      "execution_id": "39bbda58-03ee-41ed-a981-6a464567e5c0",
+      "order_id": "afd3ffbb-de5e-4f77-93be-71929fb08bed",
+      "signal_id": "",
+      "trade_id": "0beaedbd-942a-46ad-8a86-1b3c538a834b",
+      "metadata": {}
+    },
+    {
+      "timestamp": "2025-08-02T14:03:46.386052",
+      "asset": "ETH",
+      "side": "SELL",
+      "quantity": 0.1065835974726488,
+      "entry_price": 2972.3063123741276,
+      "exit_price": 2972.3063123741276,
+      "price": 2972.3063123741276,
+      "pnl": -3.215760636323061,
+      "fees": 0.3167990995634971,
+      "execution_id": "67c9cbc7-6ea8-4bd1-a2ba-86b23ba2c6d5",
+      "order_id": "7b2295ea-23f1-42d2-924d-5ee09be0fd7d",
+      "signal_id": "",
+      "trade_id": "1f89a1af-4b3c-4957-bca3-7f1e545d3dc2",
+      "metadata": {}
+    },
+    {
+      "timestamp": "2025-08-02T14:03:46.386095",
+      "asset": "ADA",
+      "side": "BUY",
+      "quantity": 639.4599797710703,
+      "entry_price": 0.5052127905703931,
+      "exit_price": null,
+      "price": 0.5052127905703931,
+      "pnl": -3.2215759500859593,
+      "fees": 0.3230633608382296,
+      "execution_id": "6830a28d-a870-453b-9d20-303f5893466d",
+      "order_id": "1bebef08-ffb4-4eea-9ec4-816dc09d0ff5",
+      "signal_id": "",
+      "trade_id": "e1cd3f66-220d-4178-9775-2ac22c685dc1",
+      "metadata": {}
+    },
+    {
+      "timestamp": "2025-08-02T14:03:46.386139",
+      "asset": "BTC",
+      "side": "SELL",
+      "quantity": 0.006384972414105556,
+      "entry_price": 49468.192721103194,
+      "exit_price": 49468.192721103194,
+      "price": 49468.192721103194,
+      "pnl": -3.1735653522130085,
+      "fees": 0.3158530458999012,
+      "execution_id": "d1044c29-de5b-4d6b-af58-372fca3c7bc7",
+      "order_id": "d82a2a6f-065c-44bd-b67c-c49016fb3a8b",
+      "signal_id": "",
+      "trade_id": "86b649d8-c975-478c-b103-4a26c834d19b",
+      "metadata": {}
+    }
+  ],
+  "risk_analysis": {
+    "risk_metrics": {
+      "sharpe_ratio": NaN,
+      "max_drawdown": 12.542691928256318,
+      "max_drawdown_percent": 0.12542691928256317,
+      "volatility": 1.404122646897913
+    },
+    "position_risk": {
+      "largest_position_value": 161.4161815119533,
+      "cash_ratio": 1.0154983376063234,
+      "position_concentration": {
+        "BTC": 33.05946412957367,
+        "ETH": 33.1314465069457,
+        "ADA": 33.80908936348063
+      }
+    },
+    "trade_risk": {
+      "largest_win": 0.0,
+      "largest_loss": -3.215760636323061,
+      "average_win": 0.0,
+      "average_loss": 3.1356729820639693,
+      "consecutive_wins": 0,
+      "consecutive_losses": 4
+    }
+  },
+  "trading_activity": {
+    "total_trades": 10,
+    "trading_days": 1,
+    "avg_trades_per_day": 10.0,
+    "most_traded_asset": "BTC",
+    "trading_frequency": "High",
+    "asset_distribution": {
+      "BTC": 4,
+      "ETH": 3,
+      "ADA": 3
+    }
+  }
+}

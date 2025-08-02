@@ -1,0 +1,12 @@
+{
+  "timestamp": 1753761343140,
+  "asset": "ethereum",
+  "current_price": 3028.144527870486,
+  "volatility_value": 0.058,
+  "volatility_threshold": 0.03,
+  "volatility_percentile": 97.8,
+  "position_direction": "SELL",
+  "signal_type": "SHORT",
+  "alert_type": "volatility_spike",
+  "threshold_exceeded": true
+}

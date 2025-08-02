@@ -1,0 +1,58 @@
+[
+  {
+    "id": "4662af67-0bea-4c19-bc5b-455e212c9fcd",
+    "asset": "BTCUSDT",
+    "side": "BUY",
+    "quantity": 0.01,
+    "entry_price": 48000.0,
+    "exit_price": null,
+    "pnl": 0.0,
+    "fees": 4.8,
+    "timestamp": "2025-07-30T23:52:07.704489",
+    "signal_id": "signal_001",
+    "order_id": "order_001",
+    "execution_id": "exec_001"
+  },
+  {
+    "id": "87f4ab65-3efa-4416-b8ce-9e973fab046f",
+    "asset": "BTCUSDT",
+    "side": "BUY",
+    "quantity": 0.015,
+    "entry_price": 49000.0,
+    "exit_price": null,
+    "pnl": 0.0,
+    "fees": 7.35,
+    "timestamp": "2025-07-31T00:52:07.704507",
+    "signal_id": "signal_002",
+    "order_id": "order_002",
+    "execution_id": "exec_002"
+  },
+  {
+    "id": "77488ec6-617e-41f1-ba0b-25f6f8dfc500",
+    "asset": "ETHUSDT",
+    "side": "BUY",
+    "quantity": 0.3,
+    "entry_price": 3150.0,
+    "exit_price": null,
+    "pnl": 0.0,
+    "fees": 9.45,
+    "timestamp": "2025-07-31T01:07:07.704514",
+    "signal_id": "signal_003",
+    "order_id": "order_003",
+    "execution_id": "exec_003"
+  },
+  {
+    "id": "1fd2a5c4-27e8-4299-8d5e-ca398cd54d1c",
+    "asset": "ETHUSDT",
+    "side": "BUY",
+    "quantity": 0.2,
+    "entry_price": 3250.0,
+    "exit_price": null,
+    "pnl": 0.0,
+    "fees": 6.5,
+    "timestamp": "2025-07-31T01:22:07.704520",
+    "signal_id": "signal_004",
+    "order_id": "order_004",
+    "execution_id": "exec_004"
+  }
+]

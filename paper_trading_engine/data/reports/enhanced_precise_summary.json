@@ -1,0 +1,25 @@
+{
+  "portfolio_summary": {
+    "total_value": 9974.403618431948,
+    "initial_capital": 10000.0,
+    "total_pnl": -22.880681822087514,
+    "realized_pnl": -22.880681822087514,
+    "unrealized_pnl": 0.0,
+    "cash": 10129.27410851642,
+    "position_count": 3,
+    "trade_count": 10,
+    "win_rate": 0.0
+  },
+  "key_metrics": {
+    "total_return_percent": -0.2559638156805158,
+    "sharpe_ratio": NaN,
+    "max_drawdown_percent": 0.13136844303795442,
+    "profit_factor": 0.0,
+    "win_rate_percent": 0.0
+  },
+  "report_metadata": {
+    "generated_at": "2025-08-02T14:04:26.162431",
+    "report_type": "summary_report",
+    "version": "1.0"
+  }
+}

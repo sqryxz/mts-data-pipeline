@@ -1,0 +1,91 @@
+{
+  "collection_strategy": {
+    "description": "Multi-tier collection strategy optimized for minimal API usage",
+    "total_daily_api_calls_estimate": 393,
+    "api_cost_reduction_percent": 86,
+    "tiers": {
+      "high_frequency": {
+        "description": "Critical assets requiring frequent updates",
+        "interval_minutes": 15,
+        "daily_collections_per_asset": 96,
+        "assets": ["bitcoin", "ethereum"],
+        "rationale": "BTC and ETH are primary trading pairs and require frequent updates for accurate volatility and trend analysis"
+      },
+      "hourly": {
+        "description": "Standard crypto assets updated hourly",
+        "interval_minutes": 60,
+        "daily_collections_per_asset": 24,
+        "assets": [
+          "tether", "solana", "ripple", "bittensor", "fetch-ai",
+          "singularitynet", "render-token", "ocean-protocol"
+        ],
+        "rationale": "Hourly updates provide good balance between data freshness and API efficiency for portfolio diversification signals"
+      },
+      "macro": {
+        "description": "Macro economic indicators updated daily",
+        "interval_hours": 24,
+        "daily_collections_per_indicator": 1,
+        "indicators": [
+          "VIXCLS", "DFF", "DGS10", "DTWEXBGS", "DEXUSEU",
+          "DEXCHUS", "BAMLH0A0HYM2", "RRPONTSYD", "SOFR"
+        ],
+        "rationale": "Macro indicators change slowly and daily updates provide sufficient granularity for correlation analysis"
+      }
+    }
+  },
+  "api_optimization": {
+    "rate_limit_compliance": {
+      "coingecko": {
+        "limit_per_minute": 50,
+        "our_usage_peak": 10,
+        "utilization_percent": 20,
+        "notes": "Well below rate limits with hourly collections for other assets"
+      },
+      "fred": {
+        "limit_per_hour": 1000,
+        "our_usage_per_hour": 1,
+        "utilization_percent": 0.1,
+        "notes": "Extremely low utilization, only collecting macro data once daily"
+      }
+    },
+    "batching_strategies": {
+      "crypto_assets": "Individual API calls per asset to maintain granular error handling",
+      "macro_indicators": "Individual calls with built-in retry logic",
+      "time_distribution": "Spread collections throughout the day to avoid API spikes"
+    }
+  },
+  "performance_monitoring": {
+    "health_checks": {
+      "data_freshness": "Monitor last successful collection time per asset",
+      "api_response_times": "Track API latency and failure rates",
+      "storage_health": "Monitor database performance and disk usage"
+    },
+    "alerts": {
+      "consecutive_failures": 3,
+      "stale_data_threshold_hours": 25,
+      "api_error_rate_threshold": 10
+    }
+  },
+  "failover_strategies": {
+    "api_failures": {
+      "retry_attempts": 3,
+      "backoff_strategy": "exponential",
+      "fallback_intervals": "Temporarily increase intervals on repeated failures"
+    },
+    "network_issues": {
+      "timeout_seconds": 30,
+      "connection_retry_delay": 60,
+      "offline_mode": "Continue with cached data and resume when connectivity restored"
+    }
+  },
+  "cost_analysis": {
+    "current_approach_daily_calls": 2880,
+    "optimized_approach_daily_calls": 393,
+    "reduction_factor": 7.3,
+    "estimated_monthly_savings": {
+      "api_costs": "Minimal impact as CoinGecko free tier and FRED is free",
+      "server_resources": "Reduced CPU and network usage",
+      "data_storage": "Slower growth rate of time-series data"
+    }
+  }
+} 

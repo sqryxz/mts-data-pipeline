@@ -54,4 +54,4 @@ aiohttp>=3.8.0     # For async Discord webhooks
 pandas
 sqlite3
 pytest
-dataclasses 
+dataclasses watchdog>=2.1.0

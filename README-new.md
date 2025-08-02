@@ -2,6 +2,8 @@
 
 A comprehensive cryptocurrency trading infrastructure system that combines multi-source data collection, real-time market analysis, signal generation, and event-driven backtesting capabilities. The MTS (Multi-Timeframe Signal) pipeline is designed for quantitative cryptocurrency trading strategy development and deployment.
 
+**New in v2.2.0**: The system now features an **optimized multi-tier scheduling system** that reduces API usage by 86% while maintaining high-frequency data collection for critical assets (BTC/ETH every 15 minutes) and efficient collection for portfolio assets (hourly) and macro indicators (daily).
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -31,7 +33,39 @@ cp .env.example .env  # Edit with your API keys
 
 ### Basic Usage
 
-#### 1. Data Collection
+#### Option 1: Optimized Multi-Tier Pipeline (Recommended)
+
+**Start the optimized background service:**
+```bash
+# Start the optimized pipeline with automatic signal generation
+./scripts/start_optimized_pipeline.sh start
+
+# Check status and monitor collections
+./scripts/start_optimized_pipeline.sh status
+
+# View live logs
+./scripts/start_optimized_pipeline.sh logs
+
+# Stop the pipeline
+./scripts/start_optimized_pipeline.sh stop
+```
+
+**Alternative: Direct Python commands:**
+```bash
+# Start enhanced pipeline with signal generation
+python3 main_enhanced.py --background
+
+# Start optimized pipeline (data collection only)
+python3 main_optimized.py --background
+
+# Check detailed status
+python3 main_optimized.py --status
+
+# Test configuration
+python3 main_optimized.py --test
+```
+
+#### Option 2: Traditional Data Collection
 
 ```bash
 # Collect latest crypto data (1 day)
@@ -82,6 +116,47 @@ python3 main.py --symbols bitcoin --start 2023-01-01 --end 2023-12-31 --strategy
 # Multiple assets
 python3 main.py --symbols bitcoin ethereum --start 2023-01-01 --end 2023-06-30 --strategy BuyHoldStrategy
 ```
+
+## 🎯 Multi-Tier Optimized Pipeline (New)
+
+The MTS pipeline now features an **optimized multi-tier scheduling system** that reduces API usage by 86% while maintaining high-frequency data collection for critical assets. This intelligent system adapts collection frequency based on asset importance and data requirements.
+
+### Collection Tiers
+
+#### **High-Frequency Tier** (15 minutes)
+- **Assets**: Bitcoin (BTC), Ethereum (ETH)
+- **Frequency**: Every 15 minutes (96 collections/day per asset)
+- **Rationale**: Critical trading pairs requiring real-time volatility analysis
+- **API Usage**: 192 calls/day for both assets
+
+#### **Hourly Tier** (60 minutes) 
+- **Assets**: Tether, Solana, Ripple, Bittensor, Fetch.ai, SingularityNET, Render Token, Ocean Protocol
+- **Frequency**: Every 60 minutes (24 collections/day per asset)
+- **Rationale**: Portfolio diversification assets with sufficient hourly granularity
+- **API Usage**: 192 calls/day for all 8 assets
+
+#### **Macro Tier** (Daily)
+- **Indicators**: VIX, DFF, DGS10, Dollar Index, etc.
+- **Frequency**: Once daily (1 collection/day per indicator)
+- **Rationale**: Economic indicators change slowly, daily updates sufficient
+- **API Usage**: 9 calls/day for all indicators
+
+### Optimization Benefits
+
+| Metric | Before Optimization | After Optimization | Improvement |
+|--------|-------------------|-------------------|------------|
+| **Daily API Calls** | 2,880 | 393 | **86% reduction** |
+| **BTC/ETH Frequency** | 24/day | 96/day | **4x increase** |
+| **API Cost** | High usage | Minimal | **Significant savings** |
+| **Rate Limit Usage** | 50%+ | 20% | **Safe margins** |
+
+### Enhanced Features
+
+- **Automatic Signal Generation**: Runs multi-strategy analysis every hour
+- **JSON Alert System**: Generates structured alerts for high-confidence signals
+- **Background Operation**: Runs as a service with full monitoring
+- **Health Monitoring**: Continuous system health checks and failure recovery
+- **Configurable Tiers**: Easy to customize intervals and add new assets
 
 ## 📊 System Overview
 
@@ -164,6 +239,50 @@ MAX_DAILY_TRADES=50
 MAX_PORTFOLIO_RISK=0.25
 ```
 
+### Multi-Tier Pipeline Configuration
+
+The optimized pipeline uses `config/optimized_collection.json` for tier configuration:
+
+```json
+{
+  "collection_strategy": {
+    "description": "Multi-tier collection strategy optimized for minimal API usage",
+    "total_daily_api_calls_estimate": 393,
+    "api_cost_reduction_percent": 86,
+    "tiers": {
+      "high_frequency": {
+        "description": "Critical assets requiring frequent updates",
+        "interval_minutes": 15,
+        "daily_collections_per_asset": 96,
+        "assets": ["bitcoin", "ethereum"],
+        "rationale": "BTC and ETH are primary trading pairs"
+      },
+      "hourly": {
+        "description": "Standard crypto assets updated hourly", 
+        "interval_minutes": 60,
+        "daily_collections_per_asset": 24,
+        "assets": ["tether", "solana", "ripple", "bittensor", "fetch-ai"]
+      },
+      "macro": {
+        "description": "Macro economic indicators updated daily",
+        "interval_hours": 24,
+        "daily_collections_per_indicator": 1,
+        "indicators": ["VIXCLS", "DFF", "DGS10", "DTWEXBGS"]
+      }
+    }
+  },
+  "api_optimization": {
+    "rate_limit_compliance": {
+      "coingecko": {
+        "limit_per_minute": 50,
+        "our_usage_peak": 10,
+        "utilization_percent": 20
+      }
+    }
+  }
+}
+```
+
 ### Strategy Configuration
 
 Strategies are configured via JSON files in `config/strategies/`:
@@ -198,11 +317,14 @@ Strategies are configured via JSON files in `config/strategies/`:
 
 ```
 MTS-data-pipeline/
-├── main.py                     # CLI entry point
+├── main.py                     # Original CLI entry point
+├── main_optimized.py           # Optimized multi-tier pipeline (data only)
+├── main_enhanced.py            # Enhanced pipeline with signal generation
 ├── requirements.txt            # Dependencies
 ├── config/                     # Configuration files
 │   ├── settings.py            # Main configuration
 │   ├── logging_config.py      # Logging setup
+│   ├── optimized_collection.json  # Multi-tier collection strategy
 │   ├── exchanges/             # Exchange configs
 │   └── strategies/            # Strategy parameters
 ├── src/                       # Core application code
@@ -221,7 +343,10 @@ MTS-data-pipeline/
 │   ├── services/              # Business logic services
 │   │   ├── collector.py       # Data collection orchestrator
 │   │   ├── macro_collector.py # Economic data collection
-│   │   ├── scheduler.py       # Automated scheduling
+│   │   ├── scheduler.py       # Original automated scheduling
+│   │   ├── multi_tier_scheduler.py      # NEW: Optimized multi-tier scheduling
+│   │   ├── enhanced_multi_tier_scheduler.py  # NEW: Enhanced with signal generation
+│   │   ├── multi_strategy_generator.py # NEW: Multi-strategy signal generator
 │   │   ├── monitor.py         # Health monitoring
 │   │   └── cross_exchange_analyzer.py  # Arbitrage analysis
 │   ├── signals/               # Signal generation
@@ -235,6 +360,8 @@ MTS-data-pipeline/
 │   └── utils/                 # Utilities
 │       ├── exceptions.py      # Custom exceptions
 │       ├── retry.py          # Retry logic
+│       ├── json_alert_system.py  # NEW: JSON alert generation
+│       ├── discord_webhook.py    # NEW: Discord integration
 │       └── websocket_utils.py # WebSocket helpers
 ├── backtesting-engine/        # Event-driven backtesting
 │   ├── src/
@@ -260,13 +387,21 @@ MTS-data-pipeline/
 │   └── tests/               # Backtest tests
 ├── data/                    # Data storage
 │   ├── crypto_data.db      # Main SQLite database
+│   ├── alerts/             # NEW: JSON alert files
+│   │   ├── volatility_alert_bitcoin_*.json
+│   │   └── signal_alert_ethereum_*.json
 │   ├── backup/             # Data backups
 │   ├── raw/                # Raw data files
-│   └── realtime/           # Real-time data streams
+│   ├── realtime/           # Real-time data streams
+│   ├── multi_tier_scheduler_state.json     # NEW: Scheduler state
+│   └── enhanced_multi_tier_scheduler_state.json  # NEW: Enhanced scheduler state
 ├── scripts/                # Utility scripts
+│   ├── start_optimized_pipeline.sh  # NEW: Pipeline management script
 │   ├── fetch_and_import_data.py
 │   ├── migrate_csv_to_sqlite.py
 │   └── calc_rolling_volatility.py
+├── generate_real_volatility_alerts.py  # NEW: Alert generation utility
+├── fetch_missing_crypto_data.py        # NEW: Data backfill utility
 ├── tests/                  # Test suites
 ├── examples/               # Usage examples
 └── logs/                   # Application logs
@@ -296,6 +431,79 @@ Identifies mean reversion opportunities during market stress:
 - Weighted signal combination with confidence scoring
 - Conflict resolution algorithms
 - Risk management and position size optimization
+
+## 🚨 JSON Alert System (New)
+
+The enhanced pipeline includes a sophisticated alert system that generates structured JSON alerts for high-confidence trading signals and market events.
+
+### Alert Types
+
+#### **Volatility Alerts**
+Generated when assets exceed volatility thresholds:
+```json
+{
+  "timestamp": 1753775743140,
+  "asset": "bitcoin", 
+  "current_price": 115975.35,
+  "volatility_value": 0.042,
+  "volatility_threshold": 0.025,
+  "volatility_percentile": 94.2,
+  "position_direction": "BUY",
+  "signal_type": "LONG",
+  "alert_type": "volatility_spike",
+  "threshold_exceeded": true
+}
+```
+
+#### **Signal Alerts**  
+Generated for multi-strategy signal confirmations:
+```json
+{
+  "timestamp": 1753775743140,
+  "asset": "ethereum",
+  "signal_type": "LONG",
+  "confidence": 0.87,
+  "strategies": ["vix_correlation", "mean_reversion"],
+  "price": 3133.07,
+  "position_size": 0.025,
+  "risk_metrics": {
+    "stop_loss": 2975.42,
+    "take_profit": 3290.72
+  }
+}
+```
+
+### Alert Generation
+
+Alerts are automatically generated and stored in `data/alerts/` with timestamped filenames:
+- `volatility_alert_bitcoin_20250729_155543.json`
+- `signal_alert_ethereum_20250729_160012.json`
+
+### Usage Examples
+
+```bash
+# Generate sample volatility alerts
+python3 generate_real_volatility_alerts.py
+
+# View recent alerts
+ls -la data/alerts/
+
+# Parse alert data programmatically
+python3 -c "
+import json
+with open('data/alerts/volatility_alert_bitcoin_20250729_155543.json') as f:
+    alert = json.load(f)
+    print(f'Alert: {alert[\"signal_type\"]} {alert[\"asset\"]} at {alert[\"current_price\"]}')
+"
+```
+
+### Integration with External Systems
+
+The JSON format enables easy integration with:
+- **Trading Bots**: Parse alerts for automated execution
+- **Discord/Slack**: Send formatted notifications
+- **Monitoring Systems**: Aggregate and analyze alert patterns
+- **Risk Management**: Track signal performance and accuracy
 
 ## 🧪 Testing
 
@@ -374,8 +582,73 @@ curl http://localhost:8080/metrics
 
 Structured logging with configurable levels:
 - Application logs: `logs/mts_pipeline.log`
+- Optimized pipeline: `logs/optimized_pipeline.log`
 - Real-time streams: `logs/streams/`
 - Performance metrics: `logs/metrics/`
+
+## 🛠️ Utility Scripts (New)
+
+### Pipeline Management Script
+
+The `scripts/start_optimized_pipeline.sh` script provides complete pipeline management:
+
+```bash
+# Start the optimized pipeline
+./scripts/start_optimized_pipeline.sh start
+
+# Check pipeline status
+./scripts/start_optimized_pipeline.sh status
+# Output: Process ID, runtime, collection statistics
+
+# View live logs
+./scripts/start_optimized_pipeline.sh logs
+
+# Stop the pipeline
+./scripts/start_optimized_pipeline.sh stop
+
+# Restart the pipeline
+./scripts/start_optimized_pipeline.sh restart
+
+# Test configuration without starting
+./scripts/start_optimized_pipeline.sh test
+```
+
+**Features:**
+- **Background Process Management**: Handles PID files and process monitoring
+- **Configuration Validation**: Tests setup before starting
+- **Live Log Streaming**: Real-time monitoring capabilities
+- **Status Reporting**: Collection statistics and health metrics
+- **Safe Restart**: Graceful shutdown and restart procedures
+
+### Volatility Alert Generator
+
+The `generate_real_volatility_alerts.py` utility creates realistic test alerts:
+
+```bash
+# Generate 5 sample volatility alerts
+python3 generate_real_volatility_alerts.py
+
+# Output: Creates timestamped JSON files in data/alerts/
+# - volatility_alert_bitcoin_20250729_155543.json
+# - volatility_alert_ethereum_20250729_112958.json
+```
+
+**Use Cases:**
+- **Testing Alert Systems**: Validate alert processing workflows
+- **Development**: Generate sample data for testing integrations
+- **Monitoring Setup**: Verify alert aggregation and notification systems
+
+### Data Backfill Utilities
+
+New utilities for maintaining data continuity:
+
+```bash
+# Backfill missing cryptocurrency data
+python3 fetch_missing_crypto_data.py
+
+# Fetch specific date ranges
+python3 fetch_missing_data_july15_29.py
+```
 
 ## 🔒 Security & Risk Management
 
@@ -640,32 +913,53 @@ print(f"Max Drawdown: {result.max_drawdown:.2%}")
 
 ## 📋 Recent Updates & Changelog
 
-### Version 2.1.0 - Enhanced API Resilience (Latest)
+### Version 2.2.0 - Optimized Multi-Tier Pipeline with Signal Generation (Latest)
 
-#### 🔧 **CoinGecko Client Improvements**
+#### 🚀 **Multi-Tier Scheduling System**
+- **86% API usage reduction**: From 2,880 to 393 daily API calls
+- **Intelligent collection tiers**: BTC/ETH (15min), Other cryptos (60min), Macro (daily)
+- **Optimized rate limit compliance**: 20% utilization vs previous 50%+
+- **Background service operation**: Complete pipeline automation with monitoring
+
+#### 🔧 **Enhanced Pipeline Components**
+- **Enhanced Multi-Tier Scheduler** (`enhanced_multi_tier_scheduler.py`): Signal generation + data collection
+- **Multi-Tier Scheduler** (`multi_tier_scheduler.py`): Optimized data collection only  
+- **Multi-Strategy Generator** (`multi_strategy_generator.py`): Automated signal generation
+- **Configuration-driven tiers** (`config/optimized_collection.json`): Easy customization
+
+#### ✨ **JSON Alert System**
+- **Structured volatility alerts**: Real-time JSON notifications for market spikes
+- **Signal confirmation alerts**: Multi-strategy signal aggregation with confidence scoring
+- **Automated alert generation**: Timestamped alerts stored in `data/alerts/`
+- **Integration-ready format**: Easy parsing for trading bots and notification systems
+
+#### 🛠️ **New Utility Scripts**
+- **Pipeline Management** (`scripts/start_optimized_pipeline.sh`): Complete service lifecycle management
+- **Alert Generation** (`generate_real_volatility_alerts.py`): Test alert creation utility
+- **Data Backfill** (`fetch_missing_crypto_data.py`): Historical data recovery tools
+- **Enhanced Main Scripts** (`main_enhanced.py`, `main_optimized.py`): Specialized pipeline entry points
+
+#### 🔄 **Operational Improvements**
+- **State persistence**: Scheduler state maintained across restarts
+- **Failure recovery**: Automatic retry and backoff mechanisms
+- **Health monitoring**: Continuous system health checks and reporting
+- **Configuration validation**: Pre-flight checks before pipeline startup
+
+#### 📊 **Data Quality Enhancements**
+- **Higher frequency for critical assets**: BTC/ETH now collected every 15 minutes (4x increase)
+- **Appropriate granularity**: Hourly collection for portfolio assets, daily for macro indicators
+- **Improved signal generation**: Multi-strategy analysis with hourly signal updates
+- **Alert correlation**: Volatility alerts linked to price movements and strategy signals
+
+### Previous Updates
+
+#### Version 2.1.0 - Enhanced API Resilience
 - **Added automatic fallback mechanism** for Pro API to Free API switching
 - **Enhanced error handling** for DNS resolution and connectivity issues
 - **Centralized request logic** with `_make_request_with_fallback()` method
 - **Improved reliability** for all CoinGecko API endpoints
-- **Backwards compatible** - no code changes required
-
-#### ✨ **Key Features**
 - **Seamless Failover**: Automatically switches to Free API when Pro API is unreachable
-- **Smart Error Detection**: Distinguishes between network issues and API errors
-- **Proper Header Management**: Uses API key only for Pro endpoint requests
-- **Comprehensive Testing**: Verified fallback mechanism with connection simulation
-
-#### 🐛 **Bug Fixes**
 - **Fixed DNS resolution errors** for `pro-api.coingecko.com`
-- **Improved timeout handling** with automatic retries
-- **Enhanced connection error recovery** with fallback URLs
-
-#### 🚀 **Performance Improvements**
-- **Reduced code duplication** in API client methods
-- **Faster error recovery** through intelligent fallback logic
-- **Better resource utilization** with centralized request handling
-
-### Previous Updates
 
 #### Version 2.0.0 - Multi-Tier Scheduling System
 - **Optimized data collection** with tier-based scheduling

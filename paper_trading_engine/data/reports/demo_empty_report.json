@@ -1,0 +1,84 @@
+{
+  "report_metadata": {
+    "generated_at": "2025-08-02T13:59:49.521277",
+    "report_type": "empty_demo_report",
+    "period_start": "2025-08-02T13:59:49.521279",
+    "period_end": "2025-08-02T13:59:49.521280",
+    "version": "1.0"
+  },
+  "portfolio_summary": {
+    "current_value": 10000.0,
+    "initial_capital": 10000.0,
+    "cash": 10000.0,
+    "total_pnl": 0.0,
+    "realized_pnl": 0.0,
+    "unrealized_pnl": 0,
+    "position_count": 0,
+    "trade_count": 0,
+    "win_count": 0,
+    "loss_count": 0,
+    "win_rate": 0.0,
+    "positions": {}
+  },
+  "performance_metrics": {
+    "summary": {
+      "total_return_percent": 0.0,
+      "total_pnl": 0.0,
+      "realized_pnl": 0.0,
+      "unrealized_pnl": 0,
+      "total_trades": 0,
+      "win_rate_percent": 0.0
+    },
+    "risk_metrics": {
+      "sharpe_ratio": 0.0,
+      "max_drawdown": 0.0,
+      "max_drawdown_percent": 0.0,
+      "volatility": 0.0
+    },
+    "profitability": {
+      "profit_factor": 0.0,
+      "average_win": 0.0,
+      "average_loss": 0.0,
+      "largest_win": 0.0,
+      "largest_loss": 0.0,
+      "avg_trade_pnl": 0.0
+    },
+    "trading_activity": {
+      "trading_days": 0,
+      "avg_trades_per_day": 0.0,
+      "best_day_pnl": 0.0,
+      "worst_day_pnl": 0.0,
+      "consecutive_wins": 0,
+      "consecutive_losses": 0
+    }
+  },
+  "trade_history": [],
+  "risk_analysis": {
+    "risk_metrics": {
+      "sharpe_ratio": 0.0,
+      "max_drawdown": 0.0,
+      "max_drawdown_percent": 0.0,
+      "volatility": 0.0
+    },
+    "position_risk": {
+      "largest_position_value": 0.0,
+      "cash_ratio": 1.0,
+      "position_concentration": {}
+    },
+    "trade_risk": {
+      "largest_win": 0.0,
+      "largest_loss": 0.0,
+      "average_win": 0.0,
+      "average_loss": 0.0,
+      "consecutive_wins": 0,
+      "consecutive_losses": 0
+    }
+  },
+  "trading_activity": {
+    "total_trades": 0,
+    "trading_days": 0,
+    "avg_trades_per_day": 0.0,
+    "most_traded_asset": null,
+    "trading_frequency": "No trades"
+  }
+}

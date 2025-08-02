@@ -1,0 +1,26 @@
+{
+  "timestamp": "2025-07-31T01:52:07.703859",
+  "initial_capital": 10000.0,
+  "cash": 7587.5,
+  "positions": {
+    "BTCUSDT": {
+      "asset": "BTCUSDT",
+      "quantity": 0.025,
+      "average_price": 48500.0,
+      "current_price": 50000.0,
+      "unrealized_pnl": 37.5,
+      "last_update": "2025-07-31T01:52:07.703850"
+    },
+    "ETHUSDT": {
+      "asset": "ETHUSDT",
+      "quantity": 0.5,
+      "average_price": 3200.0,
+      "current_price": 3300.0,
+      "unrealized_pnl": 50.0,
+      "last_update": "2025-07-31T01:22:07.703855"
+    }
+  },
+  "total_value": 9675.0,
+  "total_pnl": -325.0,
+  "trade_count": 4
+}
