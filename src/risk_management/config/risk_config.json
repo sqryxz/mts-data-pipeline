@@ -1,0 +1,38 @@
+{
+  "risk_limits": {
+    "max_drawdown_limit": 0.20,
+    "daily_loss_limit": 0.05,
+    "per_trade_stop_loss": 0.02,
+    "max_position_size": 0.10,
+    "max_single_asset_exposure": 0.15,
+    "max_sector_exposure": 0.30,
+    "max_correlation_risk": 0.80,
+    "volatility_threshold": 0.05,
+    "drawdown_warning_level": 0.15
+  },
+  "position_sizing": {
+    "base_position_percent": 0.02,
+    "min_position_size": 0.001,
+    "position_sizing_weights": {
+      "fixed_percent": 0.3,
+      "kelly": 0.3,
+      "volatility": 0.25,
+      "risk_parity": 0.15
+    }
+  },
+  "risk_assessment": {
+    "default_risk_reward_ratio": 2.0,
+    "confidence_threshold": 0.5,
+    "processing_timeout_ms": 5000
+  },
+  "market_conditions": {
+    "volatility_warning_threshold": 0.04,
+    "low_liquidity_threshold": 1000000,
+    "correlation_lookback_days": 30
+  },
+  "reporting": {
+    "enable_json_output": true,
+    "enable_logging": true,
+    "log_level": "INFO"
+  }
+} 
