@@ -1,0 +1,269 @@
+{
+  "generated_at": "2025-08-11T00:35:36.006596",
+  "data_range": {
+    "start_date": "2020-01-01",
+    "end_date": "2025-08-11"
+  },
+  "database_stats": {
+    "database_path": "data/crypto_data.db",
+    "database_size_mb": 23.18,
+    "crypto_data": [
+      {
+        "symbol": "bitcoin",
+        "total_records": 5700,
+        "latest_date": "2025-08-10"
+      },
+      {
+        "symbol": "bittensor",
+        "total_records": 4022,
+        "latest_date": "2025-08-11"
+      },
+      {
+        "symbol": "ethereum",
+        "total_records": 6875,
+        "latest_date": "2025-08-11"
+      },
+      {
+        "symbol": "fetch-ai",
+        "total_records": 5197,
+        "latest_date": "2025-08-11"
+      },
+      {
+        "symbol": "ocean-protocol",
+        "total_records": 5331,
+        "latest_date": "2025-08-11"
+      },
+      {
+        "symbol": "render-token",
+        "total_records": 5055,
+        "latest_date": "2025-08-11"
+      },
+      {
+        "symbol": "ripple",
+        "total_records": 5085,
+        "latest_date": "2025-08-11"
+      },
+      {
+        "symbol": "singularitynet",
+        "total_records": 5289,
+        "latest_date": "2025-08-11"
+      },
+      {
+        "symbol": "solana",
+        "total_records": 9560,
+        "latest_date": "2025-08-11"
+      },
+      {
+        "symbol": "sui",
+        "total_records": 834,
+        "latest_date": "2025-08-10"
+      },
+      {
+        "symbol": "tether",
+        "total_records": 5874,
+        "latest_date": "2025-08-11"
+      }
+    ],
+    "macro_data": [
+      {
+        "indicator": "BAMLH0A0HYM2",
+        "total_records": 1464,
+        "latest_date": "2025-08-07"
+      },
+      {
+        "indicator": "DEXCHUS",
+        "total_records": 1396,
+        "latest_date": "2025-08-01"
+      },
+      {
+        "indicator": "DEXUSEU",
+        "total_records": 1396,
+        "latest_date": "2025-08-01"
+      },
+      {
+        "indicator": "DFF",
+        "total_records": 2046,
+        "latest_date": "2025-08-07"
+      },
+      {
+        "indicator": "DGS10",
+        "total_records": 1401,
+        "latest_date": "2025-08-07"
+      },
+      {
+        "indicator": "DTWEXBGS",
+        "total_records": 1396,
+        "latest_date": "2025-08-01"
+      },
+      {
+        "indicator": "RRPONTSYD",
+        "total_records": 1400,
+        "latest_date": "2025-08-08"
+      },
+      {
+        "indicator": "SOFR",
+        "total_records": 1399,
+        "latest_date": "2025-08-07"
+      },
+      {
+        "indicator": "VIXCLS",
+        "total_records": 1436,
+        "latest_date": "2025-08-07"
+      }
+    ]
+  },
+  "crypto_metrics": {
+    "bitcoin": {
+      "total_return": 9.221374343525685,
+      "volatility": 0.2852115982488052,
+      "sharpe_ratio": 0.5174276977957323,
+      "max_drawdown": -0.7671822068881937,
+      "avg_annual_return": 0.1475763806665206,
+      "var_95": -0.022850621078880307,
+      "skewness": 0.41951286777623653,
+      "kurtosis": 16.86871977688506,
+      "data_points": 5476
+    },
+    "ethereum": {
+      "total_return": 10.150418886244399,
+      "volatility": 0.3445008295413496,
+      "sharpe_ratio": 0.4373937946969731,
+      "max_drawdown": -0.7933018460301268,
+      "avg_annual_return": 0.150682525109346,
+      "var_95": -0.026532560385418777,
+      "skewness": 0.4490944067063958,
+      "kurtosis": 24.1333093798188,
+      "data_points": 6651
+    },
+    "solana": {
+      "total_return": 54.55646728064086,
+      "volatility": 0.4452252386407473,
+      "sharpe_ratio": 0.4603171836128096,
+      "max_drawdown": -0.9629771193722053,
+      "avg_annual_return": 0.20494482792444985,
+      "var_95": -0.02816950114928446,
+      "skewness": 1.716006016325071,
+      "kurtosis": 44.285709242972366,
+      "data_points": 9437
+    },
+    "ripple": {
+      "total_return": 10.25226165323385,
+      "volatility": 0.5584835420667119,
+      "sharpe_ratio": 0.4872721330471055,
+      "max_drawdown": -0.831672803560622,
+      "avg_annual_return": 0.2721334668145496,
+      "var_95": -0.039052765877203396,
+      "skewness": 4.1405314651219545,
+      "kurtosis": 77.28624309555802,
+      "data_points": 4861
+    },
+    "tether": {
+      "total_return": -0.0022674427475075642,
+      "volatility": 0.017905602974866878,
+      "sharpe_ratio": 0.003297911810989407,
+      "max_drawdown": -0.022878529331445758,
+      "avg_annual_return": 5.905109953370054e-05,
+      "var_95": -0.0010895322352293623,
+      "skewness": -0.2712699344565628,
+      "kurtosis": 58.43224623526268,
+      "data_points": 5650
+    }
+  },
+  "macro_stats": {
+    "VIXCLS": {
+      "count": 1436,
+      "mean": 21.242374651810586,
+      "std": 8.03534074620497,
+      "min": 11.86,
+      "max": 82.69,
+      "current": 16.57,
+      "first_date": "2020-01-02",
+      "last_date": "2025-08-07"
+    },
+    "DGS10": {
+      "count": 1401,
+      "mean": 2.8712491077801574,
+      "std": 1.4192678983147275,
+      "min": 0.52,
+      "max": 4.98,
+      "current": 4.23,
+      "first_date": "2020-01-02",
+      "last_date": "2025-08-07"
+    },
+    "DTWEXBGS": {
+      "count": 1396,
+      "mean": 119.64141411174785,
+      "std": 4.614580751067565,
+      "min": 110.5179,
+      "max": 130.2142,
+      "current": 121.6148,
+      "first_date": "2020-01-02",
+      "last_date": "2025-08-01"
+    },
+    "DFF": {
+      "count": 2046,
+      "mean": 2.6624389051808404,
+      "std": 2.2689572510887115,
+      "min": 0.04,
+      "max": 5.33,
+      "current": 4.33,
+      "first_date": "2020-01-01",
+      "last_date": "2025-08-07"
+    },
+    "DEXUSEU": {
+      "count": 1396,
+      "mean": 1.1079018624641832,
+      "std": 0.05723415662609858,
+      "min": 0.9616,
+      "max": 1.2295,
+      "current": 1.1555,
+      "first_date": "2020-01-02",
+      "last_date": "2025-08-01"
+    },
+    "DEXCHUS": {
+      "count": 1396,
+      "mean": 6.911313252148997,
+      "std": 0.32430918152606186,
+      "min": 6.3084,
+      "max": 7.3499,
+      "current": 7.2116,
+      "first_date": "2020-01-02",
+      "last_date": "2025-08-01"
+    },
+    "BAMLH0A0HYM2": {
+      "count": 1464,
+      "mean": 4.019542349726776,
+      "std": 1.1656900752724686,
+      "min": 2.59,
+      "max": 10.87,
+      "current": 2.95,
+      "first_date": "2020-01-02",
+      "last_date": "2025-08-07"
+    },
+    "RRPONTSYD": {
+      "count": 1400,
+      "mean": 883.1280049999999,
+      "std": 848.7339825311285,
+      "min": 0.0,
+      "max": 2553.716,
+      "current": 80.303,
+      "first_date": "2020-01-02",
+      "last_date": "2025-08-08"
+    },
+    "SOFR": {
+      "count": 1399,
+      "mean": 2.6379628305932803,
+      "std": 2.2805401648598,
+      "min": 0.01,
+      "max": 5.4,
+      "current": 4.35,
+      "first_date": "2020-01-02",
+      "last_date": "2025-08-07"
+    }
+  },
+  "summary": {
+    "total_crypto_assets": 5,
+    "total_macro_indicators": 9,
+    "data_completeness": "Historical data from 2020-2025 loaded successfully"
+  }
+}

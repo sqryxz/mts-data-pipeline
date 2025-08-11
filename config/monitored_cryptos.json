@@ -69,6 +69,13 @@
         "binance": "OCEANUSDT",
         "bybit": "OCEANUSDT"
       }
+    },
+    {
+      "coingecko_id": "sui",
+      "symbols": {
+        "binance": "SUIUSDT",
+        "bybit": "SUIUSDT"
+      }
     }
   ]
 } 
