@@ -1,0 +1,21 @@
+{
+  "breakdown_thresholds": {
+    "z_score_threshold": 3.0,
+    "significance_level": 0.003,
+    "min_duration_minutes": 15,
+    "confirmation_windows": 2
+  },
+  "divergence_thresholds": {
+    "price_divergence_threshold": 0.05,
+    "momentum_divergence_threshold": 0.03,
+    "correlation_stability_threshold": 0.7,
+    "min_correlation_for_divergence": 0.5
+  },
+  "mosaic_settings": {
+    "generation_time": "16:00",
+    "timezone": "America/New_York",
+    "include_significance_test": true,
+    "heatmap_color_scheme": "RdYlBu_r",
+    "export_formats": ["json", "html", "png"]
+  }
+}
