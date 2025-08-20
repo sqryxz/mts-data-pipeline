@@ -76,6 +76,13 @@
         "binance": "SUIUSDT",
         "bybit": "SUIUSDT"
       }
+    },
+    {
+      "coingecko_id": "ethena",
+      "symbols": {
+        "binance": "ENAUSDT",
+        "bybit": "ENAUSDT"
+      }
     }
   ]
 } 

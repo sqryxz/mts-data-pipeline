@@ -1,137 +1,149 @@
 {
   "tasks": {
     "crypto_bitcoin": {
-      "last_collection": "2025-08-03T00:56:39.117246",
+      "last_collection": "2025-08-21T02:40:15.890473",
       "last_signal_generation": null,
       "consecutive_failures": 0,
       "enabled": true
     },
     "crypto_ethereum": {
-      "last_collection": "2025-08-03T00:56:39.117246",
-      "last_signal_generation": null,
-      "consecutive_failures": 0,
-      "enabled": true
-    },
-    "crypto_tether": {
-      "last_collection": "2025-08-03T00:24:34.749179",
-      "last_signal_generation": null,
-      "consecutive_failures": 0,
-      "enabled": true
-    },
-    "crypto_solana": {
-      "last_collection": "2025-08-03T00:24:34.749179",
+      "last_collection": "2025-08-21T02:40:15.890473",
       "last_signal_generation": null,
       "consecutive_failures": 0,
       "enabled": true
     },
     "crypto_ripple": {
-      "last_collection": "2025-08-03T00:24:34.749179",
+      "last_collection": "2025-08-21T02:40:15.890473",
+      "last_signal_generation": null,
+      "consecutive_failures": 0,
+      "enabled": true
+    },
+    "crypto_sui": {
+      "last_collection": "2025-08-21T02:40:15.890473",
+      "last_signal_generation": null,
+      "consecutive_failures": 0,
+      "enabled": true
+    },
+    "crypto_ethena": {
+      "last_collection": "2025-08-21T02:40:15.890473",
+      "last_signal_generation": null,
+      "consecutive_failures": 0,
+      "enabled": true
+    },
+    "crypto_tether": {
+      "last_collection": "2025-08-21T02:40:15.890473",
+      "last_signal_generation": null,
+      "consecutive_failures": 0,
+      "enabled": true
+    },
+    "crypto_solana": {
+      "last_collection": "2025-08-21T02:40:15.890473",
       "last_signal_generation": null,
       "consecutive_failures": 0,
       "enabled": true
     },
     "crypto_bittensor": {
-      "last_collection": "2025-08-03T00:24:34.749179",
+      "last_collection": "2025-08-21T02:40:15.890473",
       "last_signal_generation": null,
       "consecutive_failures": 0,
       "enabled": true
     },
     "crypto_fetch-ai": {
-      "last_collection": "2025-08-03T00:24:34.749179",
+      "last_collection": "2025-08-21T02:40:15.890473",
       "last_signal_generation": null,
       "consecutive_failures": 0,
       "enabled": true
     },
     "crypto_singularitynet": {
-      "last_collection": "2025-08-03T00:24:34.749179",
+      "last_collection": "2025-08-21T02:40:15.890473",
       "last_signal_generation": null,
       "consecutive_failures": 0,
       "enabled": true
     },
     "crypto_render-token": {
-      "last_collection": "2025-08-03T00:24:34.749179",
+      "last_collection": "2025-08-21T02:40:15.890473",
       "last_signal_generation": null,
       "consecutive_failures": 0,
       "enabled": true
     },
     "crypto_ocean-protocol": {
-      "last_collection": "2025-08-03T00:24:34.749179",
+      "last_collection": "2025-08-21T02:40:15.890473",
       "last_signal_generation": null,
       "consecutive_failures": 0,
       "enabled": true
     },
     "macro_VIXCLS": {
-      "last_collection": "2025-08-01T10:55:26.421010",
+      "last_collection": null,
       "last_signal_generation": null,
-      "consecutive_failures": 3,
-      "enabled": false
+      "consecutive_failures": 0,
+      "enabled": true
     },
     "macro_DFF": {
-      "last_collection": "2025-08-01T10:55:26.421010",
+      "last_collection": null,
       "last_signal_generation": null,
-      "consecutive_failures": 3,
-      "enabled": false
+      "consecutive_failures": 0,
+      "enabled": true
     },
     "macro_DGS10": {
-      "last_collection": "2025-08-01T10:55:26.421010",
+      "last_collection": null,
       "last_signal_generation": null,
-      "consecutive_failures": 3,
-      "enabled": false
+      "consecutive_failures": 0,
+      "enabled": true
     },
     "macro_DTWEXBGS": {
-      "last_collection": "2025-08-01T10:55:26.421010",
+      "last_collection": null,
       "last_signal_generation": null,
-      "consecutive_failures": 3,
-      "enabled": false
+      "consecutive_failures": 0,
+      "enabled": true
     },
     "macro_DEXUSEU": {
-      "last_collection": "2025-08-01T10:55:26.421010",
+      "last_collection": null,
       "last_signal_generation": null,
-      "consecutive_failures": 3,
-      "enabled": false
+      "consecutive_failures": 0,
+      "enabled": true
     },
     "macro_DEXCHUS": {
-      "last_collection": "2025-08-01T10:55:26.421010",
+      "last_collection": null,
       "last_signal_generation": null,
-      "consecutive_failures": 3,
-      "enabled": false
+      "consecutive_failures": 0,
+      "enabled": true
     },
     "macro_BAMLH0A0HYM2": {
-      "last_collection": "2025-08-01T10:55:26.421010",
+      "last_collection": null,
       "last_signal_generation": null,
-      "consecutive_failures": 3,
-      "enabled": false
+      "consecutive_failures": 0,
+      "enabled": true
     },
     "macro_RRPONTSYD": {
-      "last_collection": "2025-08-02T10:56:11.007394",
+      "last_collection": null,
       "last_signal_generation": null,
       "consecutive_failures": 0,
       "enabled": true
     },
     "macro_SOFR": {
-      "last_collection": "2025-08-01T10:55:26.421010",
+      "last_collection": null,
       "last_signal_generation": null,
-      "consecutive_failures": 3,
-      "enabled": false
+      "consecutive_failures": 0,
+      "enabled": true
     }
   },
   "collection_stats": {
     "high_frequency": {
-      "success": 628,
-      "failure": 4
+      "success": 5,
+      "failure": 0
     },
     "hourly": {
-      "success": 655,
-      "failure": 1
+      "success": 7,
+      "failure": 0
     },
     "macro": {
-      "success": 3,
-      "failure": 25
+      "success": 0,
+      "failure": 0
     }
   },
-  "total_api_calls": 1292,
+  "total_api_calls": 0,
   "signals_generated": 0,
   "alerts_generated": 0,
   "discord_alerts_sent": 0,
-  "last_save": "2025-08-03T01:03:39.888078"
+  "last_save": "2025-08-21T02:46:14.454055"
 }

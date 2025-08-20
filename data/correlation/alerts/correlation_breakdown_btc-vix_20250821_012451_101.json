@@ -1,0 +1,49 @@
+{
+  "timestamp": 1755710691101,
+  "alert_type": "correlation_breakdown",
+  "alert_id": "corr_breakdown_btc-vix_20250821_012451_101_96dbfc83",
+  "pair": "BTC_VIX",
+  "pair_type": "crypto_macro",
+  "breakdown_details": {
+    "current_correlation": -0.0017186185447145964,
+    "historical_average_correlation": -3.191934427187846e-15,
+    "z_score": -260126061671.7363,
+    "significance_level": 0.9107444311035866,
+    "threshold_exceeded": true,
+    "breakdown_direction": "negative",
+    "severity": "extreme",
+    "duration_minutes": 0
+  },
+  "market_context": {
+    "asset1_price": 0.0,
+    "asset1_24h_change": 0.0,
+    "asset2_price": 0.0,
+    "asset2_24h_change": 0.0,
+    "market_volatility": "normal"
+  },
+  "statistical_analysis": {
+    "correlation_windows": {
+      "7d": -0.0017186185447145964
+    },
+    "confidence_interval": {
+      "lower": -0.031758273868279445,
+      "upper": 0.02832413880537794
+    },
+    "p_value": 0.9107444311035866,
+    "sample_size": 100
+  },
+  "recommended_actions": [
+    "Strong negative correlation breakdown detected",
+    "Consider hedging strategies immediately",
+    "High severity correlation change - monitor closely",
+    "Watch for correlation normalization",
+    "Consider position adjustments",
+    "Monitor related asset pairs"
+  ],
+  "alert_metadata": {
+    "severity": "extreme",
+    "category": "correlation_analysis",
+    "expires_at": 1755714291101,
+    "related_pairs": []
+  }
+}

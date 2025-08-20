@@ -1,0 +1,74 @@
+{
+  "timestamp": 1754761260000,
+  "alert_type": "divergence_signal",
+  "alert_id": "corr_divergence_btc-vix_20250810_140100_000_e5f6g7h8",
+  "pair": "BTC_VIX",
+  "pair_type": "crypto_macro",
+  "divergence_details": {
+    "current_correlation": -0.15,
+    "historical_average_correlation": -0.68,
+    "z_score": 2.67,
+    "significance_level": 0.004,
+    "threshold_exceeded": true,
+    "divergence_type": "correlation_breakdown",
+    "severity": "extreme",
+    "duration_minutes": 120
+  },
+  "market_context": {
+    "asset1_price": 45250.75,
+    "asset1_24h_change": 0.023,
+    "asset2_price": 18.45,
+    "asset2_24h_change": -0.085,
+    "market_volatility": "high",
+    "market_regime": "risk_on"
+  },
+  "statistical_analysis": {
+    "correlation_windows": {
+      "7d": -0.12,
+      "14d": -0.25,
+      "30d": -0.68,
+      "60d": -0.72
+    },
+    "confidence_interval": {
+      "lower": -0.25,
+      "upper": -0.05
+    },
+    "p_value": 0.004,
+    "sample_size": 1440,
+    "rolling_volatility": {
+      "btc_volatility": 0.042,
+      "vix_volatility": 0.38
+    }
+  },
+  "divergence_analysis": {
+    "price_divergence": 0.067,
+    "momentum_divergence": 0.041,
+    "correlation_stability": 0.45,
+    "breakdown_strength": "strong",
+    "regime_change_probability": 0.78
+  },
+  "recommended_actions": [
+    "Extreme correlation breakdown detected - BTC/VIX relationship significantly weakened",
+    "Consider hedging strategies as traditional risk-off correlations may be unreliable",
+    "Monitor for potential regime change in crypto vs traditional risk assets",
+    "Evaluate portfolio risk exposure as diversification benefits may be reduced",
+    "Watch for similar breakdowns in other crypto-macro correlations (ETH_VIX, BTC_DXY)",
+    "Consider reducing position sizes until correlation patterns stabilize",
+    "Prepare for potential increased volatility as traditional hedges become less effective"
+  ],
+  "alert_metadata": {
+    "severity": "extreme",
+    "category": "correlation_analysis",
+    "expires_at": 1754768460000,
+    "related_pairs": [
+      "ETH_VIX",
+      "BTC_DXY",
+      "ETH_DXY",
+      "BTC_TREASURY"
+    ],
+    "risk_level": "critical",
+    "market_regime": "regime_change",
+    "volatility_regime": "high",
+    "macro_environment": "uncertain"
+  }
+}

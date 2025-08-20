@@ -127,7 +127,9 @@ class CoinGeckoClient:
             'SHIB': 'shiba-inu',
             'DAI': 'dai',
             'WBTC': 'wrapped-bitcoin',
-            'LEO': 'leo-token'
+            'LEO': 'leo-token',
+            'SUI': 'sui',
+            'ENA': 'ethena'
         }
     
     def _make_request(self, endpoint: str, params: Optional[Dict] = None) -> Dict:

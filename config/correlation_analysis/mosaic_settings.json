@@ -1,0 +1,19 @@
+{
+  "mosaic_generation": {
+    "daily_enabled": true,
+    "historical_enabled": false,
+    "max_pairs_per_mosaic": 50,
+    "correlation_windows": [7, 14, 30, 60]
+  },
+  "visualization": {
+    "heatmap_size": [12, 8],
+    "color_scheme": "RdYlBu_r",
+    "annotate_values": true,
+    "include_significance": true
+  },
+  "export": {
+    "formats": ["json", "html", "png"],
+    "compression": false,
+    "include_metadata": true
+  }
+}

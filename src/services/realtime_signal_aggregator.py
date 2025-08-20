@@ -101,7 +101,7 @@ class RealTimeSignalAggregator:
         self.volume_threshold = 1.0  # Minimum volume threshold
         
         # Symbol monitoring
-        self.monitored_symbols: Set[str] = {'BTCUSDT', 'ETHUSDT', 'XRPUSDT', 'TAOUSDT', 'FETUSDT', 'AGIXUSDT', 'RNDRUSDT', 'OCEANUSDT'}
+        self.monitored_symbols: Set[str] = {'BTCUSDT', 'ETHUSDT', 'XRPUSDT', 'SUIUSDT', 'TAOUSDT', 'FETUSDT', 'AGIXUSDT', 'RNDRUSDT', 'OCEANUSDT'}
         
         # Performance tracking
         self.signals_generated = 0

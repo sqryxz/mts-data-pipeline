@@ -378,14 +378,22 @@ def create_default_multi_strategy_generator() -> MultiStrategyGenerator:
         },
         "meanreversion": {
             "config_path": "config/strategies/mean_reversion.json"
+        },
+        "volatility": {
+            "config_path": "config/strategies/volatility_strategy.json"
+        },
+        "ripple": {
+            "config_path": "config/strategies/ripple_signals.json"
         }
     }
     
     # Default aggregator configuration
     aggregator_config = {
         "strategy_weights": {
-            "vixcorrelation": 0.6,
-            "meanreversion": 0.4
+            "vixcorrelation": 0.30,
+            "meanreversion": 0.25,
+            "volatility": 0.25,
+            "ripple": 0.20
         },
         "aggregation_config": {
             "conflict_resolution": "weighted_average",

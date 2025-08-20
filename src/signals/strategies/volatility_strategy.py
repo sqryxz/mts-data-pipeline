@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 import logging
 
 from src.signals.strategies.base_strategy import SignalStrategy
-from src.data.signal_models import TradingSignal, SignalType, SignalStrength
+from src.data.signal_models import TradingSignal, SignalType, SignalStrength, SignalDirection
 from src.data.sqlite_helper import CryptoDatabase
 
 
@@ -252,8 +252,9 @@ class VolatilityStrategy(SignalStrategy):
                 
                 # Create trading signal
                 signal = TradingSignal(
-                    asset=asset,
+                    symbol=asset,
                     signal_type=SignalType(signal_type),
+                    direction=SignalDirection.BUY if SignalType(signal_type) == SignalType.LONG else SignalDirection.SELL,
                     timestamp=analysis_results['timestamp'],
                     price=current_price,
                     strategy_name=analysis_results['strategy_name'],
@@ -340,7 +341,7 @@ class VolatilityStrategy(SignalStrategy):
         return {
             'assets': self.assets,
             'volatility_window': self.volatility_window,
-            'historical_days': self.historical_days,
+            'historical_hours': self.historical_hours,
             'volatility_threshold_percentile': self.volatility_threshold_percentile,
             'extreme_volatility_percentile': self.extreme_volatility_percentile,
             'base_position_size': self.base_position_size,

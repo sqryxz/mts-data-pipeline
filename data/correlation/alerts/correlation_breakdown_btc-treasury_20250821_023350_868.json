@@ -1,0 +1,49 @@
+{
+  "timestamp": 1755714830868,
+  "alert_type": "correlation_breakdown",
+  "alert_id": "corr_breakdown_btc-treasury_20250821_023350_868_ca4ab584",
+  "pair": "BTC_TREASURY",
+  "pair_type": "crypto_crypto",
+  "breakdown_details": {
+    "current_correlation": 0.2954879064499231,
+    "historical_average_correlation": 0.023722038168349117,
+    "z_score": 3.3782581885530027,
+    "significance_level": 0.0,
+    "threshold_exceeded": true,
+    "breakdown_direction": "positive",
+    "severity": "extreme",
+    "duration_minutes": 0
+  },
+  "market_context": {
+    "asset1_price": 0.0,
+    "asset1_24h_change": 0.0,
+    "asset2_price": 0.0,
+    "asset2_24h_change": 0.0,
+    "market_volatility": "normal"
+  },
+  "statistical_analysis": {
+    "correlation_windows": {
+      "14d": 0.2954879064499231
+    },
+    "confidence_interval": {
+      "lower": 0.2678796122844505,
+      "upper": 0.3226113233035293
+    },
+    "p_value": 0.0,
+    "sample_size": 100
+  },
+  "recommended_actions": [
+    "Strong positive correlation breakout detected",
+    "Consider momentum-based trading strategies",
+    "High severity correlation change - monitor closely",
+    "Watch for correlation normalization",
+    "Consider position adjustments",
+    "Monitor related asset pairs"
+  ],
+  "alert_metadata": {
+    "severity": "extreme",
+    "category": "correlation_analysis",
+    "expires_at": 1755718430868,
+    "related_pairs": []
+  }
+}

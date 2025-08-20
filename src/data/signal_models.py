@@ -10,6 +10,9 @@ class SignalType(Enum):
     SHORT = "SHORT"
     HOLD = "HOLD"
     CLOSE = "CLOSE"
+    TOP = "TOP"
+    BOTTOM = "BOTTOM"
+    DIVERGENCE = "DIVERGENCE"
 
 
 class SignalStrength(Enum):
@@ -19,14 +22,22 @@ class SignalStrength(Enum):
     STRONG = "STRONG"
 
 
+class SignalDirection(Enum):
+    """Enumeration for signal directions"""
+    BUY = "BUY"
+    SELL = "SELL"
+    HOLD = "HOLD"
+
+
 @dataclass
 class TradingSignal:
     """Data model for trading signals with risk management parameters"""
     
     # Core signal information
-    asset: str                          # Asset identifier (e.g., "bitcoin", "ethereum")
-    signal_type: SignalType            # LONG, SHORT, HOLD, CLOSE
-    timestamp: int                     # Unix timestamp in milliseconds
+    symbol: str                        # Asset identifier (e.g., "bitcoin", "ethereum")
+    signal_type: SignalType            # LONG, SHORT, HOLD, CLOSE, TOP, BOTTOM, DIVERGENCE
+    direction: SignalDirection         # BUY, SELL, HOLD
+    timestamp: datetime                # Timestamp
     price: float                       # Entry price for the signal
     
     # Signal metadata
@@ -43,6 +54,7 @@ class TradingSignal:
     # Analysis context
     analysis_data: Optional[Dict[str, Any]] = None  # Supporting analysis data
     correlation_value: Optional[float] = None       # For correlation-based signals
+    metadata: Optional[Dict[str, Any]] = None      # Additional metadata
     
     # Metadata
     signal_id: Optional[str] = None    # Unique identifier for the signal
@@ -68,15 +80,16 @@ class TradingSignal:
         
         # Generate signal_id if not provided
         if self.signal_id is None:
-            self.signal_id = f"{self.strategy_name}_{self.asset}_{self.timestamp}"
+            self.signal_id = f"{self.strategy_name}_{self.symbol}_{int(self.timestamp.timestamp() * 1000)}"
     
     def to_dict(self) -> Dict[str, Any]:
         """Convert signal to dictionary format for JSON serialization"""
         return {
             'signal_id': self.signal_id,
-            'asset': self.asset,
+            'symbol': self.symbol,
             'signal_type': self.signal_type.value,
-            'timestamp': self.timestamp,
+            'direction': self.direction.value,
+            'timestamp': self.timestamp.isoformat(),
             'price': self.price,
             'strategy_name': self.strategy_name,
             'signal_strength': self.signal_strength.value,
@@ -87,6 +100,7 @@ class TradingSignal:
             'max_risk': self.max_risk,
             'analysis_data': self.analysis_data,
             'correlation_value': self.correlation_value,
+            'metadata': self.metadata,
             'created_at': self.created_at.isoformat() if self.created_at else None
         }
     
@@ -96,17 +110,21 @@ class TradingSignal:
         # Convert enum values
         signal_type = SignalType(data['signal_type'])
         signal_strength = SignalStrength(data['signal_strength'])
+        direction = SignalDirection(data['direction'])
         
         # Convert datetime
         created_at = None
         if data.get('created_at'):
             created_at = datetime.fromisoformat(data['created_at'].replace('Z', '+00:00'))
         
+        timestamp = datetime.fromisoformat(data['timestamp'].replace('Z', '+00:00'))
+        
         return cls(
             signal_id=data.get('signal_id'),
-            asset=data['asset'],
+            symbol=data['symbol'],
             signal_type=signal_type,
-            timestamp=data['timestamp'],
+            direction=direction,
+            timestamp=timestamp,
             price=data['price'],
             strategy_name=data['strategy_name'],
             signal_strength=signal_strength,
@@ -117,12 +135,13 @@ class TradingSignal:
             max_risk=data.get('max_risk'),
             analysis_data=data.get('analysis_data'),
             correlation_value=data.get('correlation_value'),
+            metadata=data.get('metadata'),
             created_at=created_at
         )
     
     def to_datetime(self) -> datetime:
         """Convert timestamp to datetime object"""
-        return datetime.fromtimestamp(self.timestamp / 1000)
+        return self.timestamp
     
     def calculate_risk_reward_ratio(self) -> Optional[float]:
         """Calculate risk/reward ratio if stop loss and take profit are set"""

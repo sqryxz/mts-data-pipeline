@@ -1,0 +1,49 @@
+{
+  "timestamp": 1755690175256,
+  "alert_type": "correlation_breakdown",
+  "alert_id": "corr_breakdown_eth-sui_20250820_194255_255_7140231d",
+  "pair": "ETH_SUI",
+  "pair_type": "crypto_crypto",
+  "breakdown_details": {
+    "current_correlation": 0.11830680462759657,
+    "historical_average_correlation": 0.04504958917878946,
+    "z_score": 3.436219786032416,
+    "significance_level": 0.0,
+    "threshold_exceeded": true,
+    "breakdown_direction": "positive",
+    "severity": "extreme",
+    "duration_minutes": 0
+  },
+  "market_context": {
+    "asset1_price": 0.0,
+    "asset1_24h_change": 0.0,
+    "asset2_price": 0.0,
+    "asset2_24h_change": 0.0,
+    "market_volatility": "normal"
+  },
+  "statistical_analysis": {
+    "correlation_windows": {
+      "7d": 0.11830680462759657
+    },
+    "confidence_interval": {
+      "lower": 0.09995713904377038,
+      "upper": 0.13657602329694274
+    },
+    "p_value": 0.0,
+    "sample_size": 100
+  },
+  "recommended_actions": [
+    "Strong positive correlation breakout detected",
+    "Consider momentum-based trading strategies",
+    "High severity correlation change - monitor closely",
+    "Watch for correlation normalization",
+    "Consider position adjustments",
+    "Monitor related asset pairs"
+  ],
+  "alert_metadata": {
+    "severity": "extreme",
+    "category": "correlation_analysis",
+    "expires_at": 1755693775256,
+    "related_pairs": []
+  }
+}

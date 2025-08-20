@@ -1,0 +1,27 @@
+{
+  "discord_webhook_url": "https://discord.com/api/webhooks/1399672969462284429/9WzK1RPHcRlR5ERks42o7b5ii0CplUvUsXC1K3sjlq07xDhnM6tyuq4OqH94jzFTKwXc",
+  "enabled_alerts": {
+    "mosaic_alerts": true,
+    "correlation_breakdowns": true,
+    "daily_summaries": true
+  },
+  "alert_settings": {
+    "min_correlation_change": 0.1,
+    "min_significance": 0.05,
+    "send_breakdown_alerts": true,
+    "send_mosaic_alerts": true,
+    "send_daily_summaries": true
+  },
+  "embed_settings": {
+    "include_correlation_matrix": true,
+    "include_market_insights": true,
+    "include_recommendations": true,
+    "max_findings_displayed": 3,
+    "max_recommendations_displayed": 3
+  },
+  "rate_limiting": {
+    "max_alerts_per_hour": 10,
+    "max_alerts_per_day": 50,
+    "cooldown_minutes": 5
+  }
+}

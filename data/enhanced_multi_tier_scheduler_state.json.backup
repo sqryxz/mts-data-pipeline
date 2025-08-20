@@ -1,0 +1,149 @@
+{
+  "tasks": {
+    "crypto_bitcoin": {
+      "last_collection": "2025-08-06T23:16:59.540746",
+      "last_signal_generation": null,
+      "consecutive_failures": 3,
+      "enabled": false
+    },
+    "crypto_ethereum": {
+      "last_collection": "2025-08-20T11:33:54.340833",
+      "last_signal_generation": null,
+      "consecutive_failures": 0,
+      "enabled": true
+    },
+    "crypto_ripple": {
+      "last_collection": "2025-08-20T11:33:54.340833",
+      "last_signal_generation": null,
+      "consecutive_failures": 0,
+      "enabled": true
+    },
+    "crypto_sui": {
+      "last_collection": "2025-08-20T11:33:54.340833",
+      "last_signal_generation": null,
+      "consecutive_failures": 0,
+      "enabled": true
+    },
+    "crypto_ethena": {
+      "last_collection": "2025-08-20T11:33:54.340833",
+      "last_signal_generation": null,
+      "consecutive_failures": 0,
+      "enabled": true
+    },
+    "crypto_tether": {
+      "last_collection": "2025-08-20T11:03:48.651516",
+      "last_signal_generation": null,
+      "consecutive_failures": 0,
+      "enabled": true
+    },
+    "crypto_solana": {
+      "last_collection": "2025-08-20T11:03:48.651516",
+      "last_signal_generation": null,
+      "consecutive_failures": 0,
+      "enabled": true
+    },
+    "crypto_bittensor": {
+      "last_collection": "2025-08-20T11:03:48.651516",
+      "last_signal_generation": null,
+      "consecutive_failures": 0,
+      "enabled": true
+    },
+    "crypto_fetch-ai": {
+      "last_collection": "2025-08-20T11:03:48.651516",
+      "last_signal_generation": null,
+      "consecutive_failures": 0,
+      "enabled": true
+    },
+    "crypto_singularitynet": {
+      "last_collection": "2025-08-20T11:03:48.651516",
+      "last_signal_generation": null,
+      "consecutive_failures": 0,
+      "enabled": true
+    },
+    "crypto_render-token": {
+      "last_collection": "2025-08-20T11:03:48.651516",
+      "last_signal_generation": null,
+      "consecutive_failures": 0,
+      "enabled": true
+    },
+    "crypto_ocean-protocol": {
+      "last_collection": "2025-08-20T11:03:48.651516",
+      "last_signal_generation": null,
+      "consecutive_failures": 0,
+      "enabled": true
+    },
+    "macro_VIXCLS": {
+      "last_collection": "2025-08-01T10:55:26.421010",
+      "last_signal_generation": null,
+      "consecutive_failures": 3,
+      "enabled": false
+    },
+    "macro_DFF": {
+      "last_collection": "2025-08-01T10:55:26.421010",
+      "last_signal_generation": null,
+      "consecutive_failures": 3,
+      "enabled": false
+    },
+    "macro_DGS10": {
+      "last_collection": "2025-08-01T10:55:26.421010",
+      "last_signal_generation": null,
+      "consecutive_failures": 3,
+      "enabled": false
+    },
+    "macro_DTWEXBGS": {
+      "last_collection": "2025-08-01T10:55:26.421010",
+      "last_signal_generation": null,
+      "consecutive_failures": 3,
+      "enabled": false
+    },
+    "macro_DEXUSEU": {
+      "last_collection": "2025-08-01T10:55:26.421010",
+      "last_signal_generation": null,
+      "consecutive_failures": 3,
+      "enabled": false
+    },
+    "macro_DEXCHUS": {
+      "last_collection": "2025-08-01T10:55:26.421010",
+      "last_signal_generation": null,
+      "consecutive_failures": 3,
+      "enabled": false
+    },
+    "macro_BAMLH0A0HYM2": {
+      "last_collection": "2025-08-01T10:55:26.421010",
+      "last_signal_generation": null,
+      "consecutive_failures": 3,
+      "enabled": false
+    },
+    "macro_RRPONTSYD": {
+      "last_collection": "2025-08-19T23:00:01.949236",
+      "last_signal_generation": null,
+      "consecutive_failures": 0,
+      "enabled": true
+    },
+    "macro_SOFR": {
+      "last_collection": "2025-08-01T10:55:26.421010",
+      "last_signal_generation": null,
+      "consecutive_failures": 3,
+      "enabled": false
+    }
+  },
+  "collection_stats": {
+    "high_frequency": {
+      "success": 3873,
+      "failure": 26
+    },
+    "hourly": {
+      "success": 3474,
+      "failure": 22
+    },
+    "macro": {
+      "success": 14,
+      "failure": 31
+    }
+  },
+  "total_api_calls": 176,
+  "signals_generated": 0,
+  "alerts_generated": 0,
+  "discord_alerts_sent": 0,
+  "last_save": "2025-08-20T11:43:56.563727"
+}

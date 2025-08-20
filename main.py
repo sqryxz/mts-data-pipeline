@@ -15,9 +15,10 @@ import signal
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from typing import Optional
 from datetime import datetime
-from backtesting_engine.src.core.backtest_engine import BacktestEngine
-from backtesting_engine.config.backtest_settings import BacktestConfig
-from backtesting_engine.src.database.backtest_models import BacktestResult
+# Backtesting imports (commented out to avoid import issues)
+# from backtesting_engine.src.core.backtest_engine import BacktestEngine
+# from backtesting_engine.config.backtest_settings import BacktestConfig
+# from backtesting_engine.src.database.backtest_models import BacktestResult
 
 
 # Setup path for imports
@@ -30,6 +31,7 @@ from src.services.macro_collector import MacroDataCollector
 from src.services.scheduler import SimpleScheduler
 from src.services.monitor import HealthChecker
 from src.utils.exceptions import CryptoDataPipelineError
+from eth_backtest_simple import ETHBacktest, ETHStrategy
 
 
 class HealthRequestHandler(BaseHTTPRequestHandler):
@@ -386,6 +388,149 @@ def run_server(logger: logging.Logger, port: int = 8080) -> None:
         logger.info("Health monitoring server stopped")
 
 
+def run_eth_strategy_analysis(logger: logging.Logger, start_date: str, end_date: str) -> bool:
+    """
+    Run ETH tops and bottoms strategy analysis.
+    
+    Args:
+        logger: Logger instance
+        start_date: Start date in YYYY-MM-DD format
+        end_date: End date in YYYY-MM-DD format
+        
+    Returns:
+        bool: True if successful, False otherwise
+    """
+    try:
+        logger.info("Starting ETH tops and bottoms strategy analysis...")
+        
+        # Parse dates
+        start_dt = datetime.strptime(start_date, '%Y-%m-%d')
+        end_dt = datetime.strptime(end_date, '%Y-%m-%d')
+        
+        # Initialize strategy
+        strategy = ETHStrategy()
+        
+        # Get ETH data
+        from eth_backtest_simple import ETHBacktest
+        backtest = ETHBacktest()
+        
+        # Get market data
+        market_data = backtest._get_eth_data(start_dt, end_dt)
+        
+        if market_data.empty:
+            logger.error("No ETH data available for analysis")
+            return False
+        
+        logger.info(f"Analyzing {len(market_data)} ETH data points from {start_date} to {end_date}")
+        
+        # Process data and generate signals
+        signals = []
+        for timestamp, row in market_data.iterrows():
+            strategy.update_data(
+                timestamp=timestamp,
+                open_price=row['open'],
+                high=row['high'],
+                low=row['low'],
+                close=row['close'],
+                volume=row['volume']
+            )
+            
+            # Generate signals
+            current_signals = strategy.generate_signals(row['close'])
+            for signal in current_signals:
+                signal['timestamp'] = timestamp
+                signal['price'] = row['close']  # Add price to signal
+                signals.append(signal)
+        
+        # Display results
+        logger.info(f"Analysis completed successfully!")
+        logger.info(f"Total signals generated: {len(signals)}")
+        
+        if signals:
+            buy_signals = len([s for s in signals if s['action'] == 'BUY'])
+            sell_signals = len([s for s in signals if s['action'] == 'SELL'])
+            
+            logger.info(f"Buy signals: {buy_signals}")
+            logger.info(f"Sell signals: {sell_signals}")
+            
+            # Show recent signals
+            recent_signals = signals[-5:] if len(signals) > 5 else signals
+            logger.info("Recent signals:")
+            for signal in recent_signals:
+                logger.info(f"  • {signal['action']} ETH at ${signal['price']:.2f} "
+                          f"(Confidence: {signal['confidence']:.1%})")
+                logger.info(f"    Reason: {signal['reason']}")
+        
+        return True
+        
+    except Exception as e:
+        logger.error(f"ETH strategy analysis failed: {e}")
+        return False
+
+
+def run_eth_strategy_backtest(logger: logging.Logger, start_date: str, end_date: str, 
+                             initial_capital: float) -> bool:
+    """
+    Run ETH tops and bottoms strategy backtest.
+    
+    Args:
+        logger: Logger instance
+        start_date: Start date in YYYY-MM-DD format
+        end_date: End date in YYYY-MM-DD format
+        initial_capital: Initial capital for backtest
+        
+    Returns:
+        bool: True if successful, False otherwise
+    """
+    try:
+        logger.info("Starting ETH tops and bottoms strategy backtest...")
+        
+        # Parse dates
+        start_dt = datetime.strptime(start_date, '%Y-%m-%d')
+        end_dt = datetime.strptime(end_date, '%Y-%m-%d')
+        
+        # Initialize backtest
+        backtest = ETHBacktest(initial_capital)
+        
+        # Run backtest
+        results = backtest.run_backtest(start_dt, end_dt)
+        
+        if not results:
+            logger.error("Backtest failed to produce results")
+            return False
+        
+        # Display results
+        performance = results['performance']
+        
+        logger.info("Backtest Results:")
+        logger.info(f"  • Total Return: {performance['total_return']:.2%}")
+        logger.info(f"  • Annualized Return: {performance['annualized_return']:.2%}")
+        logger.info(f"  • Volatility: {performance['volatility']:.2%}")
+        logger.info(f"  • Sharpe Ratio: {performance['sharpe_ratio']:.3f}")
+        logger.info(f"  • Maximum Drawdown: {performance['max_drawdown']:.2%}")
+        logger.info(f"  • Win Rate: {performance['win_rate']:.1%}")
+        logger.info(f"  • Total Trades: {performance['total_trades']}")
+        logger.info(f"  • Final Equity: ${performance['final_equity']:,.2f}")
+        
+        # Display signal statistics
+        signals = results['signals']
+        if signals:
+            buy_signals = len([s for s in signals if s['action'] == 'BUY'])
+            sell_signals = len([s for s in signals if s['action'] == 'SELL'])
+            
+            logger.info(f"Signal Statistics:")
+            logger.info(f"  • Total Signals: {len(signals)}")
+            logger.info(f"  • Buy Signals: {buy_signals}")
+            logger.info(f"  • Sell Signals: {sell_signals}")
+        
+        logger.info("ETH strategy backtest completed successfully!")
+        return True
+        
+    except Exception as e:
+        logger.error(f"ETH strategy backtest failed: {e}")
+        return False
+
+
 def main():
     """
     Main entry point for the application.
@@ -406,6 +551,10 @@ Examples:
   python main.py --schedule --collect --collect-macro --interval 30  # Schedule both every 30 min
   python main.py --server                    # Start health monitoring server
   python main.py --server --port 9090       # Start server on custom port
+  python main.py --eth-strategy              # Run ETH tops and bottoms strategy analysis
+  python main.py --eth-backtest              # Run ETH tops and bottoms strategy backtest
+  python main.py --eth-backtest --eth-capital 50000  # Run backtest with custom capital
+  python main.py --eth-backtest --eth-start-date 2024-06-01 --eth-end-date 2024-12-31  # Custom date range
   python main.py --version                   # Show version info
         """
     )
@@ -475,6 +624,39 @@ Examples:
         help='Enable verbose logging output'
     )
     
+    parser.add_argument(
+        '--eth-strategy',
+        action='store_true',
+        help='Run ETH tops and bottoms strategy analysis'
+    )
+    
+    parser.add_argument(
+        '--eth-backtest',
+        action='store_true',
+        help='Run ETH tops and bottoms strategy backtest'
+    )
+    
+    parser.add_argument(
+        '--eth-start-date',
+        type=str,
+        default='2024-01-01',
+        help='Start date for ETH strategy (YYYY-MM-DD, default: 2024-01-01)'
+    )
+    
+    parser.add_argument(
+        '--eth-end-date',
+        type=str,
+        default='2025-08-02',
+        help='End date for ETH strategy (YYYY-MM-DD, default: 2025-08-02)'
+    )
+    
+    parser.add_argument(
+        '--eth-capital',
+        type=float,
+        default=100000.0,
+        help='Initial capital for ETH strategy (default: 100000.0)'
+    )
+    
     args = parser.parse_args()
     
     # Handle version request
@@ -520,7 +702,7 @@ Examples:
         return 1
     
     # If no action specified, show help
-    if not args.collect and not args.collect_macro and not args.server and not args.schedule:
+    if not args.collect and not args.collect_macro and not args.server and not args.schedule and not args.eth_strategy and not args.eth_backtest:
         parser.print_help()
         return 0
     
@@ -557,6 +739,8 @@ Examples:
         # Manual collection mode
         crypto_success = True
         macro_success = True
+        eth_strategy_success = True
+        eth_backtest_success = True
         
         if args.collect:
             crypto_success = run_collection(collector, logger, days=args.days)
@@ -565,8 +749,18 @@ Examples:
             indicators = args.macro_indicators if args.macro_indicators is not None else ['ALL']
             macro_success = run_macro_collection(logger, days=args.days, indicators=indicators)
         
+        if args.eth_strategy:
+            eth_strategy_success = run_eth_strategy_analysis(
+                logger, args.eth_start_date, args.eth_end_date
+            )
+        
+        if args.eth_backtest:
+            eth_backtest_success = run_eth_strategy_backtest(
+                logger, args.eth_start_date, args.eth_end_date, args.eth_capital
+            )
+        
         # Return overall success
-        overall_success = crypto_success and macro_success
+        overall_success = crypto_success and macro_success and eth_strategy_success and eth_backtest_success
         return 0 if overall_success else 1
             
     except KeyboardInterrupt:

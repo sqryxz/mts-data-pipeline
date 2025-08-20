@@ -1,0 +1,49 @@
+{
+  "timestamp": 1755690478802,
+  "alert_type": "correlation_breakdown",
+  "alert_id": "corr_breakdown_btc-sol_20250820_194758_802_e6727015",
+  "pair": "BTC_SOL",
+  "pair_type": "crypto_crypto",
+  "breakdown_details": {
+    "current_correlation": -0.2241041318799014,
+    "historical_average_correlation": 0.040649937748362314,
+    "z_score": -2.6522064778240018,
+    "significance_level": 0.0,
+    "threshold_exceeded": true,
+    "breakdown_direction": "negative",
+    "severity": "high",
+    "duration_minutes": 0
+  },
+  "market_context": {
+    "asset1_price": 0.0,
+    "asset1_24h_change": 0.0,
+    "asset2_price": 0.0,
+    "asset2_24h_change": 0.0,
+    "market_volatility": "normal"
+  },
+  "statistical_analysis": {
+    "correlation_windows": {
+      "60d": -0.2241041318799014
+    },
+    "confidence_interval": {
+      "lower": -0.24240575102139877,
+      "upper": -0.20564307018397
+    },
+    "p_value": 0.0,
+    "sample_size": 100
+  },
+  "recommended_actions": [
+    "Strong negative correlation breakdown detected",
+    "Consider hedging strategies immediately",
+    "High severity correlation change - monitor closely",
+    "Watch for correlation normalization",
+    "Consider position adjustments",
+    "Monitor related asset pairs"
+  ],
+  "alert_metadata": {
+    "severity": "high",
+    "category": "correlation_analysis",
+    "expires_at": 1755694078802,
+    "related_pairs": []
+  }
+}

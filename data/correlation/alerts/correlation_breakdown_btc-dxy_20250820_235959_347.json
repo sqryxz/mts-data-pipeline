@@ -1,0 +1,46 @@
+{
+  "timestamp": 1755705599347,
+  "alert_type": "correlation_breakdown",
+  "alert_id": "corr_breakdown_btc-dxy_20250820_235959_347_267b1034",
+  "pair": "BTC_DXY",
+  "pair_type": "crypto_macro",
+  "breakdown_details": {
+    "current_correlation": -9.698658123492263e-15,
+    "historical_average_correlation": 5.389928983031867e-15,
+    "z_score": -2.22237377320673,
+    "significance_level": 0.9999999999994973,
+    "threshold_exceeded": true,
+    "breakdown_direction": "negative",
+    "severity": "moderate",
+    "duration_minutes": 0
+  },
+  "market_context": {
+    "asset1_price": 0.0,
+    "asset1_24h_change": 0.0,
+    "asset2_price": 0.0,
+    "asset2_24h_change": 0.0,
+    "market_volatility": "normal"
+  },
+  "statistical_analysis": {
+    "correlation_windows": {
+      "7d": -9.698658123492263e-15
+    },
+    "confidence_interval": {
+      "lower": -0.030165570686287602,
+      "upper": 0.03016557068626821
+    },
+    "p_value": 0.9999999999994973,
+    "sample_size": 100
+  },
+  "recommended_actions": [
+    "Monitor for potential trend divergence",
+    "Consider hedging strategies",
+    "Monitor related asset pairs"
+  ],
+  "alert_metadata": {
+    "severity": "moderate",
+    "category": "correlation_analysis",
+    "expires_at": 1755709199347,
+    "related_pairs": []
+  }
+}

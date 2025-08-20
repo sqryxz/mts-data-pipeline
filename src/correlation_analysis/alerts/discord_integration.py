@@ -1,0 +1,310 @@
+"""
+Discord integration for correlation analysis alerts.
+Sends mosaic alerts and correlation notifications to Discord webhooks.
+"""
+
+import logging
+import json
+import requests
+from datetime import datetime
+from typing import Dict, List, Optional, Any
+from pathlib import Path
+
+from src.utils.discord_webhook import DiscordWebhook
+
+
+class CorrelationDiscordIntegration:
+    """
+    Discord integration for correlation analysis alerts.
+    """
+    
+    def __init__(self, webhook_url: Optional[str] = None, config: Optional[Dict] = None):
+        """
+        Initialize Discord integration.
+        
+        Args:
+            webhook_url: Discord webhook URL
+            config: Configuration dictionary
+        """
+        self.logger = logging.getLogger(__name__)
+        self.webhook_url = webhook_url
+        self.config = config or {}
+        
+        # Load webhook URL from config if not provided
+        if not self.webhook_url:
+            self.webhook_url = self.config.get('discord_webhook_url')
+        
+        # Initialize Discord webhook
+        if self.webhook_url:
+            self.discord = DiscordWebhook(self.webhook_url)
+            self.logger.info("Discord integration initialized with webhook")
+        else:
+            self.discord = None
+            self.logger.warning("No Discord webhook URL provided - Discord alerts disabled")
+    
+    def send_mosaic_alert(self, mosaic_data: Dict[str, Any], alert_filepath: str = "") -> bool:
+        """
+        Send mosaic alert to Discord.
+        
+        Args:
+            mosaic_data: Mosaic data dictionary
+            alert_filepath: Path to alert file (optional)
+            
+        Returns:
+            bool: True if sent successfully, False otherwise
+        """
+        if not self.discord:
+            self.logger.warning("Discord integration not available")
+            return False
+        
+        try:
+            # Create Discord embed
+            embed = self._create_mosaic_embed(mosaic_data, alert_filepath)
+            
+            # Send to Discord
+            success = self.discord.send_embed(embed)
+            
+            if success:
+                self.logger.info("✅ Mosaic alert sent to Discord successfully")
+            else:
+                self.logger.error("❌ Failed to send mosaic alert to Discord")
+            
+            return success
+            
+        except Exception as e:
+            self.logger.error(f"Error sending mosaic alert to Discord: {e}")
+            return False
+    
+    def send_correlation_breakdown_alert(self, pair: str, correlation_data: Dict[str, Any]) -> bool:
+        """
+        Send correlation breakdown alert to Discord.
+        
+        Args:
+            pair: Correlation pair (e.g., "BTC_ETH")
+            correlation_data: Correlation breakdown data
+            
+        Returns:
+            bool: True if sent successfully, False otherwise
+        """
+        if not self.discord:
+            self.logger.warning("Discord integration not available")
+            return False
+        
+        try:
+            # Create Discord embed
+            embed = self._create_breakdown_embed(pair, correlation_data)
+            
+            # Send to Discord
+            success = self.discord.send_embed(embed)
+            
+            if success:
+                self.logger.info(f"✅ Correlation breakdown alert sent to Discord for {pair}")
+            else:
+                self.logger.error(f"❌ Failed to send correlation breakdown alert to Discord for {pair}")
+            
+            return success
+            
+        except Exception as e:
+            self.logger.error(f"Error sending correlation breakdown alert to Discord: {e}")
+            return False
+    
+    def send_daily_summary(self, summary_data: Dict[str, Any]) -> bool:
+        """
+        Send daily correlation summary to Discord.
+        
+        Args:
+            summary_data: Daily summary data
+            
+        Returns:
+            bool: True if sent successfully, False otherwise
+        """
+        if not self.discord:
+            self.logger.warning("Discord integration not available")
+            return False
+        
+        try:
+            # Create Discord embed
+            embed = self._create_daily_summary_embed(summary_data)
+            
+            # Send to Discord
+            success = self.discord.send_embed(embed)
+            
+            if success:
+                self.logger.info("✅ Daily correlation summary sent to Discord")
+            else:
+                self.logger.error("❌ Failed to send daily correlation summary to Discord")
+            
+            return success
+            
+        except Exception as e:
+            self.logger.error(f"Error sending daily summary to Discord: {e}")
+            return False
+    
+    def _create_mosaic_embed(self, mosaic_data: Dict[str, Any], alert_filepath: str = "") -> Dict[str, Any]:
+        """Create Discord embed for mosaic alert."""
+        try:
+            # Extract key data
+            correlation_matrix = mosaic_data.get('correlation_matrix', {})
+            summary = correlation_matrix.get('summary', {})
+            key_findings = mosaic_data.get('key_findings', [])
+            recommendations = mosaic_data.get('recommendations', [])
+            market_insights = mosaic_data.get('market_insights', [])
+            
+            # Create embed
+            embed = {
+                "title": "🎨 Daily Correlation Mosaic Alert",
+                "description": "Comprehensive correlation analysis for today's market conditions",
+                "color": 0x00ff00,  # Green
+                "timestamp": datetime.now().isoformat(),
+                "fields": []
+            }
+            
+            # Add summary fields
+            embed["fields"].extend([
+                {
+                    "name": "📊 Summary",
+                    "value": f"**Total Pairs:** {summary.get('total_pairs', 0)}\n"
+                            f"**Significant Correlations:** {summary.get('significant_correlations', 0)}\n"
+                            f"**Average Strength:** {summary.get('average_correlation_strength', 0.0):.3f}\n"
+                            f"**Strong Correlations:** {summary.get('strong_correlations', 0)}",
+                    "inline": True
+                },
+                {
+                    "name": "📈 Market Insights",
+                    "value": "\n".join(market_insights[:3]) if market_insights else "No significant insights",
+                    "inline": False
+                }
+            ])
+            
+            # Add key findings
+            if key_findings:
+                embed["fields"].append({
+                    "name": "🔍 Key Findings",
+                    "value": "\n".join(f"• {finding}" for finding in key_findings[:3]),
+                    "inline": False
+                })
+            
+            # Add recommendations
+            if recommendations:
+                embed["fields"].append({
+                    "name": "💡 Recommendations",
+                    "value": "\n".join(f"• {rec}" for rec in recommendations[:3]),
+                    "inline": False
+                })
+            
+            # Add footer with file path
+            if alert_filepath:
+                embed["footer"] = {
+                    "text": f"Detailed report: {Path(alert_filepath).name}"
+                }
+            
+            return embed
+            
+        except Exception as e:
+            self.logger.error(f"Error creating mosaic embed: {e}")
+            return {
+                "title": "🎨 Correlation Mosaic Alert",
+                "description": "Daily correlation analysis completed",
+                "color": 0xff0000,  # Red for error
+                "timestamp": datetime.now().isoformat()
+            }
+    
+    def _create_breakdown_embed(self, pair: str, correlation_data: Dict[str, Any]) -> Dict[str, Any]:
+        """Create Discord embed for correlation breakdown alert."""
+        try:
+            # Extract correlation data
+            current_correlation = correlation_data.get('current_correlation', 0.0)
+            previous_correlation = correlation_data.get('previous_correlation', 0.0)
+            change = current_correlation - previous_correlation
+            significance = correlation_data.get('significance', 0.0)
+            
+            # Determine color based on change
+            if abs(change) > 0.3:
+                color = 0xff0000  # Red for significant change
+            elif abs(change) > 0.1:
+                color = 0xffa500  # Orange for moderate change
+            else:
+                color = 0x00ff00  # Green for minor change
+            
+            # Create embed
+            embed = {
+                "title": f"⚠️ Correlation Breakdown Alert: {pair}",
+                "description": f"Significant change detected in correlation between {pair}",
+                "color": color,
+                "timestamp": datetime.now().isoformat(),
+                "fields": [
+                    {
+                        "name": "📊 Correlation Change",
+                        "value": f"**Previous:** {previous_correlation:.3f}\n"
+                                f"**Current:** {current_correlation:.3f}\n"
+                                f"**Change:** {change:+.3f}\n"
+                                f"**Significance:** {significance:.3f}",
+                        "inline": True
+                    },
+                    {
+                        "name": "🎯 Impact",
+                        "value": self._get_breakdown_impact(change, pair),
+                        "inline": True
+                    }
+                ]
+            }
+            
+            return embed
+            
+        except Exception as e:
+            self.logger.error(f"Error creating breakdown embed: {e}")
+            return {
+                "title": f"⚠️ Correlation Breakdown: {pair}",
+                "description": "Correlation breakdown detected",
+                "color": 0xff0000,
+                "timestamp": datetime.now().isoformat()
+            }
+    
+    def _create_daily_summary_embed(self, summary_data: Dict[str, Any]) -> Dict[str, Any]:
+        """Create Discord embed for daily correlation summary."""
+        try:
+            # Extract summary data
+            total_pairs = summary_data.get('total_pairs', 0)
+            alerts_generated = summary_data.get('alerts_generated', 0)
+            breakouts_detected = summary_data.get('breakouts_detected', 0)
+            average_correlation = summary_data.get('average_correlation', 0.0)
+            
+            # Create embed
+            embed = {
+                "title": "📈 Daily Correlation Summary",
+                "description": "End-of-day correlation analysis summary",
+                "color": 0x0099ff,  # Blue
+                "timestamp": datetime.now().isoformat(),
+                "fields": [
+                    {
+                        "name": "📊 Daily Statistics",
+                        "value": f"**Pairs Monitored:** {total_pairs}\n"
+                                f"**Alerts Generated:** {alerts_generated}\n"
+                                f"**Breakouts Detected:** {breakouts_detected}\n"
+                                f"**Avg Correlation:** {average_correlation:.3f}",
+                        "inline": True
+                    }
+                ]
+            }
+            
+            return embed
+            
+        except Exception as e:
+            self.logger.error(f"Error creating daily summary embed: {e}")
+            return {
+                "title": "📈 Daily Correlation Summary",
+                "description": "Daily correlation analysis completed",
+                "color": 0xff0000,
+                "timestamp": datetime.now().isoformat()
+            }
+    
+    def _get_breakdown_impact(self, change: float, pair: str) -> str:
+        """Get impact description for correlation breakdown."""
+        if abs(change) > 0.5:
+            return "🚨 **High Impact** - Major correlation shift"
+        elif abs(change) > 0.3:
+            return "⚠️ **Medium Impact** - Significant change"
+        elif abs(change) > 0.1:
+            return "📊 **Low Impact** - Moderate change"
+        else:
+            return "📈 **Minimal Impact** - Minor fluctuation"

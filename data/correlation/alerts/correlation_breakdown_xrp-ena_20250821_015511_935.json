@@ -1,0 +1,49 @@
+{
+  "timestamp": 1755712511935,
+  "alert_type": "correlation_breakdown",
+  "alert_id": "corr_breakdown_xrp-ena_20250821_015511_935_681ea62e",
+  "pair": "XRP_ENA",
+  "pair_type": "crypto_crypto",
+  "breakdown_details": {
+    "current_correlation": -0.031099493616206546,
+    "historical_average_correlation": 0.6312646793695815,
+    "z_score": -2.70262417722195,
+    "significance_level": 0.009016836851037935,
+    "threshold_exceeded": true,
+    "breakdown_direction": "negative",
+    "severity": "high",
+    "duration_minutes": 0
+  },
+  "market_context": {
+    "asset1_price": 0.0,
+    "asset1_24h_change": 0.0,
+    "asset2_price": 0.0,
+    "asset2_24h_change": 0.0,
+    "market_volatility": "normal"
+  },
+  "statistical_analysis": {
+    "correlation_windows": {
+      "7d": -0.031099493616206546
+    },
+    "confidence_interval": {
+      "lower": -0.054403556095819414,
+      "upper": -0.0077615703220689294
+    },
+    "p_value": 0.009016836851037935,
+    "sample_size": 100
+  },
+  "recommended_actions": [
+    "Strong negative correlation breakdown detected",
+    "Consider hedging strategies immediately",
+    "High severity correlation change - monitor closely",
+    "Watch for correlation normalization",
+    "Consider position adjustments",
+    "Monitor related asset pairs"
+  ],
+  "alert_metadata": {
+    "severity": "high",
+    "category": "correlation_analysis",
+    "expires_at": 1755716111935,
+    "related_pairs": []
+  }
+}

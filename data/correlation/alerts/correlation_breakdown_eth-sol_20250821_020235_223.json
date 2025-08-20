@@ -1,0 +1,49 @@
+{
+  "timestamp": 1755712955223,
+  "alert_type": "correlation_breakdown",
+  "alert_id": "corr_breakdown_eth-sol_20250821_020235_222_cc005ad9",
+  "pair": "ETH_SOL",
+  "pair_type": "crypto_crypto",
+  "breakdown_details": {
+    "current_correlation": 0.4004623860376695,
+    "historical_average_correlation": 0.23647537030819457,
+    "z_score": 3.0413843378363414,
+    "significance_level": 0.0,
+    "threshold_exceeded": true,
+    "breakdown_direction": "positive",
+    "severity": "extreme",
+    "duration_minutes": 0
+  },
+  "market_context": {
+    "asset1_price": 0.0,
+    "asset1_24h_change": 0.0,
+    "asset2_price": 0.0,
+    "asset2_24h_change": 0.0,
+    "market_volatility": "normal"
+  },
+  "statistical_analysis": {
+    "correlation_windows": {
+      "14d": 0.4004623860376695
+    },
+    "confidence_interval": {
+      "lower": 0.3866750389668759,
+      "upper": 0.4140707587778413
+    },
+    "p_value": 0.0,
+    "sample_size": 100
+  },
+  "recommended_actions": [
+    "Strong positive correlation breakout detected",
+    "Consider momentum-based trading strategies",
+    "High severity correlation change - monitor closely",
+    "Watch for correlation normalization",
+    "Consider position adjustments",
+    "Monitor related asset pairs"
+  ],
+  "alert_metadata": {
+    "severity": "extreme",
+    "category": "correlation_analysis",
+    "expires_at": 1755716555223,
+    "related_pairs": []
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "timestamp": 1755712509172,
+  "alert_type": "correlation_breakdown",
+  "alert_id": "corr_breakdown_sol-xrp_20250821_015509_171_7207ef3b",
+  "pair": "SOL_XRP",
+  "pair_type": "crypto_crypto",
+  "breakdown_details": {
+    "current_correlation": 0.008938905750240936,
+    "historical_average_correlation": 0.3587070004786533,
+    "z_score": -3.5025227793320326,
+    "significance_level": 0.32639155314359636,
+    "threshold_exceeded": true,
+    "breakdown_direction": "negative",
+    "severity": "extreme",
+    "duration_minutes": 0
+  },
+  "market_context": {
+    "asset1_price": 0.0,
+    "asset1_24h_change": 0.0,
+    "asset2_price": 0.0,
+    "asset2_24h_change": 0.0,
+    "market_volatility": "normal"
+  },
+  "statistical_analysis": {
+    "correlation_windows": {
+      "7d": 0.008938905750240936
+    },
+    "confidence_interval": {
+      "lower": -0.00891318057501416,
+      "upper": 0.026785295833690017
+    },
+    "p_value": 0.32639155314359636,
+    "sample_size": 100
+  },
+  "recommended_actions": [
+    "Strong negative correlation breakdown detected",
+    "Consider hedging strategies immediately",
+    "High severity correlation change - monitor closely",
+    "Watch for correlation normalization",
+    "Consider position adjustments",
+    "Monitor related asset pairs"
+  ],
+  "alert_metadata": {
+    "severity": "extreme",
+    "category": "correlation_analysis",
+    "expires_at": 1755716109171,
+    "related_pairs": []
+  }
+}

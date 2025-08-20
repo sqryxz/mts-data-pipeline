@@ -1,0 +1,49 @@
+{
+  "timestamp": 1755711483095,
+  "alert_type": "correlation_breakdown",
+  "alert_id": "corr_breakdown_btc-dxy_20250821_013803_095_dab01487",
+  "pair": "BTC_DXY",
+  "pair_type": "crypto_macro",
+  "breakdown_details": {
+    "current_correlation": -0.08663465382157923,
+    "historical_average_correlation": -0.8052003734545761,
+    "z_score": 9.950305306977796,
+    "significance_level": 1.4945335635729862e-08,
+    "threshold_exceeded": true,
+    "breakdown_direction": "positive",
+    "severity": "extreme",
+    "duration_minutes": 0
+  },
+  "market_context": {
+    "asset1_price": 0.0,
+    "asset1_24h_change": 0.0,
+    "asset2_price": 0.0,
+    "asset2_24h_change": 0.0,
+    "market_volatility": "normal"
+  },
+  "statistical_analysis": {
+    "correlation_windows": {
+      "30d": -0.08663465382157923
+    },
+    "confidence_interval": {
+      "lower": -0.11636959068222398,
+      "upper": -0.05674455404077003
+    },
+    "p_value": 1.4945335635729862e-08,
+    "sample_size": 100
+  },
+  "recommended_actions": [
+    "Strong positive correlation breakout detected",
+    "Consider momentum-based trading strategies",
+    "High severity correlation change - monitor closely",
+    "Watch for correlation normalization",
+    "Consider position adjustments",
+    "Monitor related asset pairs"
+  ],
+  "alert_metadata": {
+    "severity": "extreme",
+    "category": "correlation_analysis",
+    "expires_at": 1755715083095,
+    "related_pairs": []
+  }
+}

@@ -1,52 +1,52 @@
 {
   "tasks": {
     "crypto_bitcoin": {
-      "last_collection": "2025-08-03T00:56:39.030243",
-      "consecutive_failures": 0,
-      "enabled": true
+      "last_collection": "2025-08-06T23:16:59.141652",
+      "consecutive_failures": 3,
+      "enabled": false
     },
     "crypto_ethereum": {
-      "last_collection": "2025-08-03T00:56:39.030243",
+      "last_collection": "2025-08-06T23:47:42.027713",
       "consecutive_failures": 0,
       "enabled": true
     },
     "crypto_tether": {
-      "last_collection": "2025-08-03T00:24:34.722290",
+      "last_collection": "2025-08-06T23:16:59.141652",
       "consecutive_failures": 0,
       "enabled": true
     },
     "crypto_solana": {
-      "last_collection": "2025-08-03T00:24:34.722290",
+      "last_collection": "2025-08-06T23:16:59.141652",
       "consecutive_failures": 0,
       "enabled": true
     },
     "crypto_ripple": {
-      "last_collection": "2025-08-03T00:24:34.722290",
+      "last_collection": "2025-08-06T23:16:59.141652",
       "consecutive_failures": 0,
       "enabled": true
     },
     "crypto_bittensor": {
-      "last_collection": "2025-08-03T00:24:34.722290",
+      "last_collection": "2025-08-06T23:16:59.141652",
       "consecutive_failures": 0,
       "enabled": true
     },
     "crypto_fetch-ai": {
-      "last_collection": "2025-08-03T00:24:34.722290",
+      "last_collection": "2025-08-06T23:16:59.141652",
       "consecutive_failures": 0,
       "enabled": true
     },
     "crypto_singularitynet": {
-      "last_collection": "2025-08-03T00:24:34.722290",
+      "last_collection": "2025-08-06T23:16:59.141652",
       "consecutive_failures": 0,
       "enabled": true
     },
     "crypto_render-token": {
-      "last_collection": "2025-08-03T00:24:34.722290",
+      "last_collection": "2025-08-06T23:16:59.141652",
       "consecutive_failures": 0,
       "enabled": true
     },
     "crypto_ocean-protocol": {
-      "last_collection": "2025-08-03T00:24:34.722290",
+      "last_collection": "2025-08-06T23:16:59.141652",
       "consecutive_failures": 0,
       "enabled": true
     },
@@ -98,18 +98,18 @@
   },
   "collection_stats": {
     "high_frequency": {
-      "success": 708,
-      "failure": 4
+      "success": 1356,
+      "failure": 14
     },
     "hourly": {
-      "success": 736,
-      "failure": 0
+      "success": 1419,
+      "failure": 5
     },
     "macro": {
       "success": 0,
       "failure": 27
     }
   },
-  "total_api_calls": 1434,
-  "last_save": "2025-08-03T01:03:40.277289"
+  "total_api_calls": 2765,
+  "last_save": "2025-08-06T23:51:08.986656"
 }

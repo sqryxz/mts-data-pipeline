@@ -285,6 +285,56 @@ class DiscordWebhook:
         
         payload = self._create_webhook_payload(test_embed)
         return await self._send_webhook(payload)
+    
+    def send_embed(self, embed: Dict[str, Any]) -> bool:
+        """
+        Send a custom embed to Discord (synchronous wrapper).
+        
+        Args:
+            embed: Discord embed dictionary
+            
+        Returns:
+            bool: True if successful, False otherwise
+        """
+        try:
+            # Create event loop if none exists
+            try:
+                loop = asyncio.get_event_loop()
+            except RuntimeError:
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+            
+            # Run async send_embed_async
+            return loop.run_until_complete(self.send_embed_async(embed))
+            
+        except Exception as e:
+            self.logger.error(f"Error in send_embed: {e}")
+            return False
+    
+    async def send_embed_async(self, embed: Dict[str, Any]) -> bool:
+        """
+        Send a custom embed to Discord (async version).
+        
+        Args:
+            embed: Discord embed dictionary
+            
+        Returns:
+            bool: True if successful, False otherwise
+        """
+        try:
+            payload = self._create_webhook_payload(embed)
+            success = await self._send_webhook(payload)
+            
+            if success:
+                self.logger.info("Custom embed sent to Discord successfully")
+            else:
+                self.logger.error("Failed to send custom embed to Discord")
+            
+            return success
+            
+        except Exception as e:
+            self.logger.error(f"Error sending custom embed to Discord: {e}")
+            return False
 
 
 class DiscordAlertManager:

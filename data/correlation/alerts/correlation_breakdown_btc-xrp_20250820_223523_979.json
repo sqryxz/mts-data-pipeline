@@ -1,0 +1,46 @@
+{
+  "timestamp": 1755700523979,
+  "alert_type": "correlation_breakdown",
+  "alert_id": "corr_breakdown_btc-xrp_20250820_223523_979_34f2f232",
+  "pair": "BTC_XRP",
+  "pair_type": "crypto_crypto",
+  "breakdown_details": {
+    "current_correlation": 4.0092904705705156e-16,
+    "historical_average_correlation": 0.4526049446059123,
+    "z_score": -2.417359106234694,
+    "significance_level": 0.9999999999999671,
+    "threshold_exceeded": true,
+    "breakdown_direction": "negative",
+    "severity": "moderate",
+    "duration_minutes": 0
+  },
+  "market_context": {
+    "asset1_price": 0.0,
+    "asset1_24h_change": 0.0,
+    "asset2_price": 0.0,
+    "asset2_24h_change": 0.0,
+    "market_volatility": "normal"
+  },
+  "statistical_analysis": {
+    "correlation_windows": {
+      "7d": 4.0092904705705156e-16
+    },
+    "confidence_interval": {
+      "lower": -0.019164229412659474,
+      "upper": 0.01916422941266037
+    },
+    "p_value": 0.9999999999999671,
+    "sample_size": 100
+  },
+  "recommended_actions": [
+    "Monitor for potential trend divergence",
+    "Consider hedging strategies",
+    "Monitor related asset pairs"
+  ],
+  "alert_metadata": {
+    "severity": "moderate",
+    "category": "correlation_analysis",
+    "expires_at": 1755704123979,
+    "related_pairs": []
+  }
+}

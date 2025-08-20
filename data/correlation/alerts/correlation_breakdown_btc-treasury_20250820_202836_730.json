@@ -1,0 +1,46 @@
+{
+  "timestamp": 1755692916730,
+  "alert_type": "correlation_breakdown",
+  "alert_id": "corr_breakdown_btc-treasury_20250820_202836_730_e247e1e9",
+  "pair": "BTC_TREASURY",
+  "pair_type": "crypto_crypto",
+  "breakdown_details": {
+    "current_correlation": -9.3506989742752e-15,
+    "historical_average_correlation": 8.658682519372766e-15,
+    "z_score": -2.0078855398453856,
+    "significance_level": 0.9999999999995208,
+    "threshold_exceeded": true,
+    "breakdown_direction": "negative",
+    "severity": "moderate",
+    "duration_minutes": 0
+  },
+  "market_context": {
+    "asset1_price": 0.0,
+    "asset1_24h_change": 0.0,
+    "asset2_price": 0.0,
+    "asset2_24h_change": 0.0,
+    "market_volatility": "normal"
+  },
+  "statistical_analysis": {
+    "correlation_windows": {
+      "14d": -9.3506989742752e-15
+    },
+    "confidence_interval": {
+      "lower": -0.03049973999534555,
+      "upper": 0.030499739995326965
+    },
+    "p_value": 0.9999999999995208,
+    "sample_size": 100
+  },
+  "recommended_actions": [
+    "Monitor for potential trend divergence",
+    "Consider hedging strategies",
+    "Monitor related asset pairs"
+  ],
+  "alert_metadata": {
+    "severity": "moderate",
+    "category": "correlation_analysis",
+    "expires_at": 1755696516730,
+    "related_pairs": []
+  }
+}

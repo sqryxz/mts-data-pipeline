@@ -1,0 +1,46 @@
+{
+  "timestamp": 1755703557712,
+  "alert_type": "correlation_breakdown",
+  "alert_id": "corr_breakdown_eth-usdt_20250820_232557_712_598bafff",
+  "pair": "ETH_USDT",
+  "pair_type": "crypto_crypto",
+  "breakdown_details": {
+    "current_correlation": -0.17534090486726936,
+    "historical_average_correlation": 0.013358388291981237,
+    "z_score": -2.315938455587595,
+    "significance_level": 0.0,
+    "threshold_exceeded": true,
+    "breakdown_direction": "negative",
+    "severity": "moderate",
+    "duration_minutes": 0
+  },
+  "market_context": {
+    "asset1_price": 0.0,
+    "asset1_24h_change": 0.0,
+    "asset2_price": 0.0,
+    "asset2_24h_change": 0.0,
+    "market_volatility": "normal"
+  },
+  "statistical_analysis": {
+    "correlation_windows": {
+      "14d": -0.17534090486726936
+    },
+    "confidence_interval": {
+      "lower": -0.19097172543182797,
+      "upper": -0.1596211843493772
+    },
+    "p_value": 0.0,
+    "sample_size": 100
+  },
+  "recommended_actions": [
+    "Monitor for potential trend divergence",
+    "Consider hedging strategies",
+    "Monitor related asset pairs"
+  ],
+  "alert_metadata": {
+    "severity": "moderate",
+    "category": "correlation_analysis",
+    "expires_at": 1755707157712,
+    "related_pairs": []
+  }
+}

@@ -1,0 +1,356 @@
+{
+  "metadata": {
+    "analysis_time": "2025-08-07T18:49:43.961991",
+    "data_source": "database",
+    "total_indicators": 9,
+    "high_conviction_signals": 1
+  },
+  "results": {
+    "BAMLH0A0HYM2": {
+      "indicator": "BAMLH0A0HYM2",
+      "alias": "High Yield Credit Spreads",
+      "data_source": "database",
+      "analysis_time": "2025-08-07T18:49:43.878419",
+      "metrics": {
+        "rate_of_change": {
+          "1d": 0.0071,
+          "7d": -0.0533,
+          "30d": -0.1069,
+          "90d": -0.1153
+        },
+        "z_scores": {
+          "30d": -1.1279,
+          "90d": -1.1362
+        }
+      },
+      "regime_status": {
+        "CREDIT_regime": "greed"
+      },
+      "data_summary": {
+        "total_data_points": 120,
+        "date_range_start": "2025-02-10T00:00:00",
+        "date_range_end": "2025-07-25T00:00:00",
+        "current_value": 2.84,
+        "current_date": "2025-07-25T00:00:00",
+        "min_value": 2.62,
+        "max_value": 4.61,
+        "mean_value": 3.2486666666666664,
+        "std_value": 0.4527821249354533
+      },
+      "signal_strength": {
+        "strength": "medium",
+        "confidence": 0.6,
+        "description": "Credit spreads compressing - risk-on signal",
+        "timeframe": "1-2 weeks"
+      }
+    },
+    "DEXCHUS": {
+      "indicator": "DEXCHUS",
+      "alias": "China/US Exchange Rate",
+      "data_source": "database",
+      "analysis_time": "2025-08-07T18:49:43.891259",
+      "metrics": {
+        "rate_of_change": {
+          "1d": 0.0019,
+          "7d": -0.0016,
+          "30d": -0.0035,
+          "90d": -0.0082
+        },
+        "z_scores": {
+          "30d": -0.6957,
+          "90d": -1.0545
+        }
+      },
+      "regime_status": {},
+      "data_summary": {
+        "total_data_points": 116,
+        "date_range_start": "2025-02-10T00:00:00",
+        "date_range_end": "2025-07-25T00:00:00",
+        "current_value": 7.1679,
+        "current_date": "2025-07-25T00:00:00",
+        "min_value": 7.1541,
+        "max_value": 7.3499,
+        "mean_value": 7.2315172413793105,
+        "std_value": 0.049977565881646036
+      },
+      "signal_strength": {
+        "strength": "low",
+        "confidence": 0.0,
+        "description": "",
+        "timeframe": "none"
+      }
+    },
+    "DEXUSEU": {
+      "indicator": "DEXUSEU",
+      "alias": "USD/EUR Exchange Rate",
+      "data_source": "database",
+      "analysis_time": "2025-08-07T18:49:43.912813",
+      "metrics": {
+        "rate_of_change": {
+          "1d": -0.003,
+          "7d": 0.0087,
+          "30d": 0.0209,
+          "90d": 0.0735
+        },
+        "z_scores": {
+          "30d": 0.7545,
+          "90d": 1.2802
+        }
+      },
+      "regime_status": {},
+      "data_summary": {
+        "total_data_points": 116,
+        "date_range_start": "2025-02-10T00:00:00",
+        "date_range_end": "2025-07-25T00:00:00",
+        "current_value": 1.173,
+        "current_date": "2025-07-25T00:00:00",
+        "min_value": 1.0312,
+        "max_value": 1.179,
+        "mean_value": 1.119296551724138,
+        "std_value": 0.04172281605201577
+      },
+      "signal_strength": {
+        "strength": "low",
+        "confidence": 0.0,
+        "description": "",
+        "timeframe": "none"
+      }
+    },
+    "DFF": {
+      "indicator": "DFF",
+      "alias": "Federal Funds Effective Rate",
+      "data_source": "database",
+      "analysis_time": "2025-08-07T18:49:43.919085",
+      "metrics": {
+        "rate_of_change": {
+          "1d": 0.0,
+          "7d": 0.0,
+          "30d": 0.0,
+          "90d": 0.0
+        },
+        "z_scores": {
+          "30d": 0.0,
+          "90d": 0.0
+        }
+      },
+      "regime_status": {
+        "FED_regime": "compressed"
+      },
+      "data_summary": {
+        "total_data_points": 171,
+        "date_range_start": "2025-02-08T00:00:00",
+        "date_range_end": "2025-07-28T00:00:00",
+        "current_value": 4.33,
+        "current_date": "2025-07-28T00:00:00",
+        "min_value": 4.33,
+        "max_value": 4.33,
+        "mean_value": 4.329999999999999,
+        "std_value": 8.907868788251305e-16
+      },
+      "signal_strength": {
+        "strength": "low",
+        "confidence": 0.0,
+        "description": "",
+        "timeframe": "none"
+      }
+    },
+    "DGS10": {
+      "indicator": "DGS10",
+      "alias": "10-Year Treasury Constant Maturity Rate",
+      "data_source": "database",
+      "analysis_time": "2025-08-07T18:49:43.923688",
+      "metrics": {
+        "rate_of_change": {
+          "1d": -0.0068,
+          "7d": -0.0135,
+          "30d": -0.0023,
+          "90d": 0.0209
+        },
+        "z_scores": {
+          "30d": 0.3893,
+          "90d": 0.3762
+        }
+      },
+      "regime_status": {
+        "TREASURY_regime": "neutral"
+      },
+      "data_summary": {
+        "total_data_points": 115,
+        "date_range_start": "2025-02-10T00:00:00",
+        "date_range_end": "2025-07-25T00:00:00",
+        "current_value": 4.4,
+        "current_date": "2025-07-25T00:00:00",
+        "min_value": 4.01,
+        "max_value": 4.62,
+        "mean_value": 4.361478260869565,
+        "std_value": 0.10987427806090486
+      },
+      "signal_strength": {
+        "strength": "low",
+        "confidence": 0.0,
+        "description": "",
+        "timeframe": "none"
+      }
+    },
+    "DTWEXBGS": {
+      "indicator": "DTWEXBGS",
+      "alias": "Trade Weighted U.S. Dollar Index",
+      "data_source": "database",
+      "analysis_time": "2025-08-07T18:49:43.931409",
+      "metrics": {
+        "rate_of_change": {
+          "1d": 0.0035,
+          "7d": -0.0034,
+          "30d": -0.0047,
+          "90d": -0.0424
+        },
+        "z_scores": {
+          "30d": -0.0862,
+          "90d": -1.0174
+        }
+      },
+      "regime_status": {
+        "DXY_momentum": "neutral"
+      },
+      "data_summary": {
+        "total_data_points": 116,
+        "date_range_start": "2025-02-10T00:00:00",
+        "date_range_end": "2025-07-25T00:00:00",
+        "current_value": 120.4082,
+        "current_date": "2025-07-25T00:00:00",
+        "min_value": 119.6678,
+        "max_value": 128.8215,
+        "mean_value": 123.67200603448276,
+        "std_value": 2.7662449796347706
+      },
+      "signal_strength": {
+        "strength": "low",
+        "confidence": 0.0,
+        "description": "",
+        "timeframe": "none"
+      }
+    },
+    "RRPONTSYD": {
+      "indicator": "RRPONTSYD",
+      "alias": "Overnight Reverse Repo",
+      "data_source": "database",
+      "analysis_time": "2025-08-07T18:49:43.939636",
+      "metrics": {
+        "rate_of_change": {
+          "1d": -0.3291,
+          "7d": -0.3618,
+          "30d": -0.39,
+          "90d": -0.6073
+        },
+        "z_scores": {
+          "30d": -1.7713,
+          "90d": -1.4776
+        }
+      },
+      "regime_status": {},
+      "data_summary": {
+        "total_data_points": 121,
+        "date_range_start": "2025-02-10T00:00:00",
+        "date_range_end": "2025-08-05T00:00:00",
+        "current_value": 84.356,
+        "current_date": "2025-08-05T00:00:00",
+        "min_value": 54.772,
+        "max_value": 460.731,
+        "mean_value": 163.91566942148762,
+        "std_value": 63.579548515932444
+      },
+      "signal_strength": {
+        "strength": "low",
+        "confidence": 0.0,
+        "description": "",
+        "timeframe": "none"
+      }
+    },
+    "SOFR": {
+      "indicator": "SOFR",
+      "alias": "Secured Overnight Financing Rate",
+      "data_source": "database",
+      "analysis_time": "2025-08-07T18:49:43.943762",
+      "metrics": {
+        "rate_of_change": {
+          "1d": 0.014,
+          "7d": 0.0046,
+          "30d": 0.0187,
+          "90d": 0.0093
+        },
+        "z_scores": {
+          "30d": 0.6067,
+          "90d": 0.7913
+        }
+      },
+      "regime_status": {
+        "SOFR_regime": "expanding"
+      },
+      "data_summary": {
+        "total_data_points": 115,
+        "date_range_start": "2025-02-10T00:00:00",
+        "date_range_end": "2025-07-25T00:00:00",
+        "current_value": 4.36,
+        "current_date": "2025-07-25T00:00:00",
+        "min_value": 4.26,
+        "max_value": 4.45,
+        "mean_value": 4.327913043478261,
+        "std_value": 0.039369942497226695
+      },
+      "signal_strength": {
+        "strength": "low",
+        "confidence": 0.0,
+        "description": "",
+        "timeframe": "none"
+      }
+    },
+    "VIXCLS": {
+      "indicator": "VIXCLS",
+      "alias": "CBOE Volatility Index",
+      "data_source": "database",
+      "analysis_time": "2025-08-07T18:49:43.951706",
+      "metrics": {
+        "rate_of_change": {
+          "1d": 0.0067,
+          "7d": -0.0902,
+          "30d": -0.2537,
+          "90d": -0.1236
+        },
+        "z_scores": {
+          "30d": -1.249,
+          "90d": -0.9128
+        }
+      },
+      "regime_status": {
+        "VIX_regime": "greed",
+        "VIX_momentum": "bearish"
+      },
+      "data_summary": {
+        "total_data_points": 122,
+        "date_range_start": "2025-02-10T00:00:00",
+        "date_range_end": "2025-07-28T00:00:00",
+        "current_value": 15.03,
+        "current_date": "2025-07-28T00:00:00",
+        "min_value": 14.77,
+        "max_value": 52.33,
+        "mean_value": 21.18090163934426,
+        "std_value": 6.567349869185804
+      },
+      "signal_strength": {
+        "strength": "low",
+        "confidence": 0.0,
+        "description": "",
+        "timeframe": "none"
+      }
+    }
+  },
+  "high_conviction_signals": [
+    {
+      "indicator": "BAMLH0A0HYM2",
+      "strength": "medium",
+      "confidence": 0.6,
+      "description": "Credit spreads compressing - risk-on signal",
+      "timeframe": "1-2 weeks"
+    }
+  ]
+}

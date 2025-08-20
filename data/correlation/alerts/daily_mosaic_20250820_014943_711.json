@@ -1,0 +1,31 @@
+{
+  "timestamp": 1755625783711,
+  "alert_type": "daily_correlation_mosaic",
+  "alert_id": "corr_mosaic_daily_20250820_014943_711_9ebbcffe",
+  "date": "2025-08-20",
+  "mosaic_summary": {
+    "total_pairs_analyzed": 22,
+    "significant_correlations": 70,
+    "breakdown_events": 0,
+    "divergence_signals": 0,
+    "average_correlation_strength": 0.0
+  },
+  "key_findings": [
+    "Analyzed 22 asset pairs with correlation data",
+    "Found 70 statistically significant correlations",
+    "Identified 13 strong correlations (|r| >= 0.7)",
+    "Found 18 negative correlations",
+    "Strongest correlations: ETH_ENA (14d: 0.867), ETH_ENA (30d: 0.927), ETH_ENA (60d: 0.972), SOL_ENA (14d: 0.745), SOL_ENA (30d: 0.795)"
+  ],
+  "file_locations": {
+    "json_report": "data/correlation/mosaics/daily_mosaic_20250820.json",
+    "html_report": "",
+    "heatmap_image": ""
+  },
+  "alert_metadata": {
+    "severity": "info",
+    "category": "correlation_analysis",
+    "report_type": "daily_summary",
+    "expires_at": 1755712183711
+  }
+}

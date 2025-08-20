@@ -3,20 +3,43 @@ from ..events.order_event import OrderEvent
 from ..events.fill_event import FillEvent
 
 class ExecutionHandler:
-    FIXED_COMMISSION_RATE = 0.001  # 0.1%
+    def __init__(self, commission_rate: float = 0.001, slippage: float = 0.0005):
+        self.commission_rate = commission_rate
+        self.slippage = slippage
 
-    def execute_market_order(self, order_event: OrderEvent, market_price: float) -> FillEvent:
-        if order_event.order_type != "MARKET":
-            raise ValueError(f"Unsupported order type: {order_event.order_type}")
-        if not isinstance(market_price, (int, float)) or market_price <= 0:
-            raise ValueError("market_price must be a positive number")
-        commission = abs(order_event.quantity) * market_price * self.FIXED_COMMISSION_RATE
-        fill_event = FillEvent(
-            timestamp=datetime.now(),
-            symbol=order_event.symbol,
-            quantity=order_event.quantity,
-            fill_price=market_price,
-            commission=commission,
-            direction=order_event.direction
-        )
-        return fill_event 
+    def execute_order(self, order: dict, market_price: float):
+        """Execute an order and return a fill event."""
+        try:
+            symbol = order['symbol']
+            side = order['side']
+            quantity = order['quantity']
+            
+            # Apply slippage
+            if side == 'BUY':
+                fill_price = market_price * (1 + self.slippage)
+            else:  # SELL
+                fill_price = market_price * (1 - self.slippage)
+            
+            # Calculate commission
+            commission = abs(quantity) * fill_price * self.commission_rate
+            
+            # Create fill event
+            class FillEventImpl:
+                def __init__(self, timestamp, symbol, quantity, price, commission):
+                    self.timestamp = timestamp
+                    self.symbol = symbol
+                    self.quantity = quantity
+                    self.price = price
+                    self.commission = commission
+            
+            return FillEventImpl(
+                timestamp=datetime.now(),
+                symbol=symbol,
+                quantity=quantity,
+                price=fill_price,
+                commission=commission
+            )
+            
+        except Exception as e:
+            print(f"Error executing order: {e}")
+            return None 

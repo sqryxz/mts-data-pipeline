@@ -1,0 +1,55 @@
+{
+  "timestamp": 1754758816633,
+  "date": "2025-08-10",
+  "pairs": [
+    "BTC_ETH"
+  ],
+  "correlation_windows": [
+    7,
+    14,
+    30,
+    60
+  ],
+  "matrix": {
+    "BTC_ETH": {
+      "7d": {
+        "correlation": 8.08288675254789e-05,
+        "significance": "False",
+        "p_value": 0.9963050601418637,
+        "sample_size": 8276
+      },
+      "14d": {
+        "correlation": 0.18871118751710858,
+        "significance": "True",
+        "p_value": 3.7040349950059014e-51,
+        "sample_size": 8276
+      },
+      "30d": {
+        "correlation": 0.18064799880169718,
+        "significance": "True",
+        "p_value": 4.3372828280804836e-47,
+        "sample_size": 8276
+      },
+      "60d": {
+        "correlation": 0.44219735026619506,
+        "significance": "True",
+        "p_value": 0.0,
+        "sample_size": 8276
+      }
+    }
+  },
+  "summary": {
+    "total_pairs": 1,
+    "total_correlations": 4,
+    "significant_correlations": 3,
+    "average_correlation_strength": 0.20290934136313157,
+    "strong_correlations": 0,
+    "weak_correlations": 3,
+    "negative_correlations": 0
+  },
+  "metadata": {
+    "generation_time": "2025-08-10T01:00:16.633168",
+    "config_used": "config/correlation_analysis/mosaic_settings.json",
+    "generation_time_seconds": 0.060027122497558594
+  }
+}

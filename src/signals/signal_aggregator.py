@@ -190,7 +190,7 @@ class SignalAggregator:
             for signal in signals:
                 # Filter by minimum confidence threshold
                 if signal.confidence >= self.config['min_confidence_threshold']:
-                    signals_by_asset[signal.asset].append(signal)
+                    signals_by_asset[signal.symbol].append(signal)
         
         return dict(signals_by_asset)
     
@@ -364,9 +364,12 @@ class SignalAggregator:
         }
         
         # Create aggregated signal
+        from src.data.signal_models import SignalDirection
+        
         aggregated_signal = TradingSignal(
-            asset=asset,
+            symbol=asset,
             signal_type=final_signal_type,
+            direction=SignalDirection.BUY if final_signal_type == SignalType.LONG else SignalDirection.SELL,
             timestamp=latest_timestamp,
             price=final_price,
             strategy_name="Aggregated_Signal",
@@ -411,8 +414,9 @@ class SignalAggregator:
             updated_analysis = {**(best_signal.analysis_data or {}), **aggregated_analysis}
             
             return TradingSignal(
-                asset=best_signal.asset,
+                symbol=best_signal.symbol,
                 signal_type=best_signal.signal_type,
+                direction=best_signal.direction,
                 timestamp=best_signal.timestamp,
                 price=best_signal.price,
                 strategy_name="Aggregated_Signal",
@@ -489,7 +493,7 @@ class SignalAggregator:
         # Group signals by asset for conflict resolution
         signals_by_asset = defaultdict(list)
         for signal in signals:
-            signals_by_asset[signal.asset].append(signal)
+            signals_by_asset[signal.symbol].append(signal)
         
         resolved_signals = []
         
@@ -637,8 +641,9 @@ class SignalAggregator:
         updated_analysis = {**(best_signal.analysis_data or {}), **aggregated_analysis}
         
         resolved_signal = TradingSignal(
-            asset=best_signal.asset,
+            symbol=best_signal.symbol,
             signal_type=best_signal.signal_type,
+            direction=best_signal.direction,
             timestamp=best_signal.timestamp,
             price=best_signal.price,
             strategy_name="Risk_Weighted_Signal",
@@ -672,7 +677,7 @@ class SignalAggregator:
         # Group signals by asset
         signals_by_asset = defaultdict(list)
         for signal in signals:
-            signals_by_asset[signal.asset].append(signal)
+            signals_by_asset[signal.symbol].append(signal)
         
         conflict_report = {
             'total_signals': len(signals),

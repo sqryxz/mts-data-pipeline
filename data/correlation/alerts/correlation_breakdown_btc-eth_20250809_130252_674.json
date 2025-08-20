@@ -1,0 +1,54 @@
+{
+  "timestamp": 1754715772674,
+  "alert_type": "correlation_breakdown",
+  "alert_id": "corr_breakdown_btc-eth_20250809_130252_673_66aa116f",
+  "pair": "BTC_ETH",
+  "pair_type": "crypto_crypto",
+  "breakdown_details": {
+    "current_correlation": 0.85,
+    "historical_average_correlation": 0.45,
+    "z_score": 2.5,
+    "significance_level": 0.01,
+    "threshold_exceeded": true,
+    "breakdown_direction": "positive",
+    "severity": "high",
+    "duration_minutes": 30
+  },
+  "market_context": {
+    "asset1_price": 45000.0,
+    "asset1_24h_change": 0.05,
+    "asset2_price": 3000.0,
+    "asset2_24h_change": 0.03,
+    "market_volatility": "high"
+  },
+  "statistical_analysis": {
+    "correlation_windows": {
+      "7d": 0.82,
+      "14d": 0.78,
+      "30d": 0.45
+    },
+    "confidence_interval": {
+      "lower": 0.75,
+      "upper": 0.95
+    },
+    "p_value": 0.01,
+    "sample_size": 100
+  },
+  "recommended_actions": [
+    "Monitor for potential trend convergence",
+    "Consider correlation-based trading strategies",
+    "High severity correlation change - monitor closely",
+    "Watch for correlation normalization",
+    "Consider position adjustments",
+    "Monitor related asset pairs"
+  ],
+  "alert_metadata": {
+    "severity": "high",
+    "category": "correlation_analysis",
+    "expires_at": 1754719372674,
+    "related_pairs": [
+      "ETH_SOL",
+      "BTC_SOL"
+    ]
+  }
+}

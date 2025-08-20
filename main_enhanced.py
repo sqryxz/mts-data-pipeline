@@ -45,9 +45,9 @@ def setup_enhanced_application(enable_signals: bool = True, enable_alerts: bool 
         
         # Initialize enhanced multi-tier scheduler
         scheduler = EnhancedMultiTierScheduler(
-            high_frequency_assets=['bitcoin', 'ethereum'],  # 15-minute intervals
+            high_frequency_assets=['bitcoin', 'ethereum', 'ripple', 'sui', 'ethena'],  # 15-minute intervals
             hourly_assets=[
-                'tether', 'solana', 'ripple', 'bittensor', 'fetch-ai',
+                'tether', 'solana', 'bittensor', 'fetch-ai',
                 'singularitynet', 'render-token', 'ocean-protocol'
             ],  # Hourly intervals
             macro_indicators=[
@@ -215,6 +215,12 @@ def run_enhanced_status_check(scheduler: EnhancedMultiTierScheduler, logger: log
     logger.info("=" * 60)
 
 
+
+
+
+
+
+
 def main():
     """Main entry point with enhanced multi-tier scheduling and signal generation."""
     
@@ -293,6 +299,12 @@ Examples:
         help='Enable verbose logging output'
     )
     
+
+    
+
+    
+
+    
     args = parser.parse_args()
     
     # Show help if no action specified
@@ -368,6 +380,10 @@ Examples:
             logger.info(f"   ✅ Multi-tier Data Collection")
             
             return 0 if health_status['healthy'] else 1
+        
+
+        
+
         
     except KeyboardInterrupt:
         print("\n🛑 Operation cancelled by user")

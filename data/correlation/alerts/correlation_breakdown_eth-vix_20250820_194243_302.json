@@ -1,0 +1,46 @@
+{
+  "timestamp": 1755690163302,
+  "alert_type": "correlation_breakdown",
+  "alert_id": "corr_breakdown_eth-vix_20250820_194243_302_170ed240",
+  "pair": "ETH_VIX",
+  "pair_type": "crypto_macro",
+  "breakdown_details": {
+    "current_correlation": -0.6622962014411475,
+    "historical_average_correlation": -0.09237993282788926,
+    "z_score": -2.3800178411152113,
+    "significance_level": 0.0,
+    "threshold_exceeded": true,
+    "breakdown_direction": "negative",
+    "severity": "moderate",
+    "duration_minutes": 0
+  },
+  "market_context": {
+    "asset1_price": 0.0,
+    "asset1_24h_change": 0.0,
+    "asset2_price": 0.0,
+    "asset2_24h_change": 0.0,
+    "market_volatility": "normal"
+  },
+  "statistical_analysis": {
+    "correlation_windows": {
+      "30d": -0.6622962014411475
+    },
+    "confidence_interval": {
+      "lower": -0.6743816166106786,
+      "upper": -0.6498560335654896
+    },
+    "p_value": 0.0,
+    "sample_size": 100
+  },
+  "recommended_actions": [
+    "Monitor for potential trend divergence",
+    "Consider hedging strategies",
+    "Monitor related asset pairs"
+  ],
+  "alert_metadata": {
+    "severity": "moderate",
+    "category": "correlation_analysis",
+    "expires_at": 1755693763302,
+    "related_pairs": []
+  }
+}

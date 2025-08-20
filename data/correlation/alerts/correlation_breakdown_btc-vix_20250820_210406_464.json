@@ -1,0 +1,46 @@
+{
+  "timestamp": 1755695046464,
+  "alert_type": "correlation_breakdown",
+  "alert_id": "corr_breakdown_btc-vix_20250820_210406_464_57872a74",
+  "pair": "BTC_VIX",
+  "pair_type": "crypto_macro",
+  "breakdown_details": {
+    "current_correlation": -0.004867388212652615,
+    "historical_average_correlation": -0.004675701499366669,
+    "z_score": -2.002639076903178,
+    "significance_level": 0.7540120631084577,
+    "threshold_exceeded": true,
+    "breakdown_direction": "negative",
+    "severity": "moderate",
+    "duration_minutes": 0
+  },
+  "market_context": {
+    "asset1_price": 0.0,
+    "asset1_24h_change": 0.0,
+    "asset2_price": 0.0,
+    "asset2_24h_change": 0.0,
+    "market_volatility": "normal"
+  },
+  "statistical_analysis": {
+    "correlation_windows": {
+      "60d": -0.004867388212652615
+    },
+    "confidence_interval": {
+      "lower": -0.03529931327183019,
+      "upper": 0.025573555128357572
+    },
+    "p_value": 0.7540120631084577,
+    "sample_size": 100
+  },
+  "recommended_actions": [
+    "Monitor for potential trend divergence",
+    "Consider hedging strategies",
+    "Monitor related asset pairs"
+  ],
+  "alert_metadata": {
+    "severity": "moderate",
+    "category": "correlation_analysis",
+    "expires_at": 1755698646464,
+    "related_pairs": []
+  }
+}

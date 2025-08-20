@@ -5,7 +5,7 @@ from datetime import datetime
 import logging
 
 from src.signals.strategies.base_strategy import SignalStrategy
-from src.data.signal_models import TradingSignal, SignalType, SignalStrength
+from src.data.signal_models import TradingSignal, SignalType, SignalStrength, SignalDirection
 from src.data.sqlite_helper import CryptoDatabase
 
 
@@ -47,7 +47,7 @@ class VIXCorrelationStrategy(SignalStrategy):
             Dict containing correlation analysis results for each asset
         """
         analysis_results = {
-            'timestamp': int(datetime.now().timestamp() * 1000),
+            'timestamp': datetime.now(),
             'strategy_name': self.config.get('name', 'VIX_Correlation_Strategy'),
             'correlation_analysis': {},
             'signal_opportunities': []
@@ -229,8 +229,9 @@ class VIXCorrelationStrategy(SignalStrategy):
                 
                 # Create trading signal
                 signal = TradingSignal(
-                    asset=opportunity['asset'],
+                    symbol=opportunity['asset'],
                     signal_type=opportunity['signal_type'],
+                    direction=SignalDirection.BUY if opportunity['signal_type'] == SignalType.LONG else SignalDirection.SELL,
                     timestamp=analysis_results['timestamp'],
                     price=current_price,
                     strategy_name=analysis_results['strategy_name'],
@@ -250,7 +251,7 @@ class VIXCorrelationStrategy(SignalStrategy):
                 
                 signals.append(signal)
                 
-                self.logger.info(f"Generated {signal.signal_type.value} signal for {signal.asset} "
+                self.logger.info(f"Generated {signal.signal_type.value} signal for {signal.symbol} "
                                f"(correlation: {opportunity['correlation']:.3f}, "
                                f"confidence: {signal.confidence:.3f})")
                 

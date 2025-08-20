@@ -1,0 +1,122 @@
+{
+  "crypto_pairs": {
+    "BTC_ETH": {
+      "primary": "bitcoin",
+      "secondary": "ethereum",
+      "correlation_windows": [7, 14, 30, 60]
+    },
+    "BTC_SOL": {
+      "primary": "bitcoin",
+      "secondary": "solana",
+      "correlation_windows": [7, 14, 30, 60]
+    },
+    "BTC_XRP": {
+      "primary": "bitcoin",
+      "secondary": "ripple",
+      "correlation_windows": [7, 14, 30, 60]
+    },
+    "BTC_SUI": {
+      "primary": "bitcoin",
+      "secondary": "sui",
+      "correlation_windows": [7, 14, 30, 60]
+    },
+    "BTC_ENA": {
+      "primary": "bitcoin",
+      "secondary": "ethena",
+      "correlation_windows": [7, 14, 30, 60]
+    },
+    "ETH_SOL": {
+      "primary": "ethereum",
+      "secondary": "solana",
+      "correlation_windows": [7, 14, 30, 60]
+    },
+    "ETH_XRP": {
+      "primary": "ethereum",
+      "secondary": "ripple",
+      "correlation_windows": [7, 14, 30, 60]
+    },
+    "ETH_SUI": {
+      "primary": "ethereum",
+      "secondary": "sui",
+      "correlation_windows": [7, 14, 30, 60]
+    },
+    "ETH_ENA": {
+      "primary": "ethereum",
+      "secondary": "ethena",
+      "correlation_windows": [7, 14, 30, 60]
+    },
+    "SOL_XRP": {
+      "primary": "solana",
+      "secondary": "ripple",
+      "correlation_windows": [7, 14, 30, 60]
+    },
+    "SOL_ENA": {
+      "primary": "solana",
+      "secondary": "ethena",
+      "correlation_windows": [7, 14, 30, 60]
+    },
+    "XRP_ENA": {
+      "primary": "ripple",
+      "secondary": "ethena",
+      "correlation_windows": [7, 14, 30, 60]
+    },
+    "BTC_USDT": {
+      "primary": "bitcoin",
+      "secondary": "tether",
+      "correlation_windows": [7, 14, 30, 60]
+    },
+    "ETH_USDT": {
+      "primary": "ethereum",
+      "secondary": "tether",
+      "correlation_windows": [7, 14, 30, 60]
+    },
+    "BTC_BTT": {
+      "primary": "bitcoin",
+      "secondary": "bittensor",
+      "correlation_windows": [7, 14, 30, 60]
+    },
+    "ETH_BTT": {
+      "primary": "ethereum",
+      "secondary": "bittensor",
+      "correlation_windows": [7, 14, 30, 60]
+    }
+  },
+  "macro_pairs": {
+    "BTC_VIX": {
+      "primary": "bitcoin",
+      "secondary": "VIXCLS",
+      "correlation_windows": [7, 14, 30, 60]
+    },
+    "ETH_VIX": {
+      "primary": "ethereum",
+      "secondary": "VIXCLS",
+      "correlation_windows": [7, 14, 30, 60]
+    },
+    "BTC_DXY": {
+      "primary": "bitcoin",
+      "secondary": "DEXCHUS",
+      "correlation_windows": [7, 14, 30, 60]
+    },
+    "ETH_DXY": {
+      "primary": "ethereum",
+      "secondary": "DEXCHUS",
+      "correlation_windows": [7, 14, 30, 60]
+    },
+    "BTC_TREASURY": {
+      "primary": "bitcoin",
+      "secondary": "DGS10",
+      "correlation_windows": [7, 14, 30, 60]
+    },
+    "ETH_TREASURY": {
+      "primary": "ethereum",
+      "secondary": "DGS10",
+      "correlation_windows": [7, 14, 30, 60]
+    }
+  },
+  "monitoring_settings": {
+    "update_frequency_seconds": 300,
+    "data_retention_days": 365,
+    "cache_ttl_seconds": 3600,
+    "max_alerts_per_hour": 10
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "timestamp": 1755684369030,
+  "alert_type": "correlation_breakdown",
+  "alert_id": "corr_breakdown_eth-treasury_20250820_180609_030_ae9b6890",
+  "pair": "ETH_TREASURY",
+  "pair_type": "crypto_crypto",
+  "breakdown_details": {
+    "current_correlation": 3.951599023054641e-15,
+    "historical_average_correlation": -5.475051909357825e-16,
+    "z_score": 2.8646213613216274,
+    "significance_level": 0.999999999999718,
+    "threshold_exceeded": true,
+    "breakdown_direction": "positive",
+    "severity": "high",
+    "duration_minutes": 0
+  },
+  "market_context": {
+    "asset1_price": 0.0,
+    "asset1_24h_change": 0.0,
+    "asset2_price": 0.0,
+    "asset2_24h_change": 0.0,
+    "market_volatility": "normal"
+  },
+  "statistical_analysis": {
+    "correlation_windows": {
+      "14d": 3.951599023054641e-15
+    },
+    "confidence_interval": {
+      "lower": -0.02189861369751369,
+      "upper": 0.021898613697521666
+    },
+    "p_value": 0.999999999999718,
+    "sample_size": 100
+  },
+  "recommended_actions": [
+    "Strong positive correlation breakout detected",
+    "Consider momentum-based trading strategies",
+    "High severity correlation change - monitor closely",
+    "Watch for correlation normalization",
+    "Consider position adjustments",
+    "Monitor related asset pairs"
+  ],
+  "alert_metadata": {
+    "severity": "high",
+    "category": "correlation_analysis",
+    "expires_at": 1755687969030,
+    "related_pairs": []
+  }
+}

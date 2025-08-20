@@ -32,7 +32,9 @@ class SignalProcessor:
             'bitcoin': 'BTCUSDT',
             'ethereum': 'ETHUSDT',
             'btcusdt': 'BTCUSDT',
-            'ethusdt': 'ETHUSDT'
+            'ethusdt': 'ETHUSDT',
+            'ethena': 'ENAUSDT',
+            'enausdt': 'ENAUSDT'
         }
     
     def process_volatility_alert(self, alert_data: Dict[str, Any]) -> Optional[TradingSignal]:

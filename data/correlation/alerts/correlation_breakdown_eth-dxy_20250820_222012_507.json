@@ -1,0 +1,46 @@
+{
+  "timestamp": 1755699612507,
+  "alert_type": "correlation_breakdown",
+  "alert_id": "corr_breakdown_eth-dxy_20250820_222012_507_48aa68fe",
+  "pair": "ETH_DXY",
+  "pair_type": "crypto_macro",
+  "breakdown_details": {
+    "current_correlation": 1.921931203137927e-15,
+    "historical_average_correlation": 3.5305570282826446e-17,
+    "z_score": 2.0177162411585035,
+    "significance_level": 0.9999999999998619,
+    "threshold_exceeded": true,
+    "breakdown_direction": "positive",
+    "severity": "moderate",
+    "duration_minutes": 0
+  },
+  "market_context": {
+    "asset1_price": 0.0,
+    "asset1_24h_change": 0.0,
+    "asset2_price": 0.0,
+    "asset2_24h_change": 0.0,
+    "market_volatility": "normal"
+  },
+  "statistical_analysis": {
+    "correlation_windows": {
+      "30d": 1.921931203137927e-15
+    },
+    "confidence_interval": {
+      "lower": -0.021741759564538665,
+      "upper": 0.021741759564542634
+    },
+    "p_value": 0.9999999999998619,
+    "sample_size": 100
+  },
+  "recommended_actions": [
+    "Monitor for potential trend convergence",
+    "Consider correlation-based trading strategies",
+    "Monitor related asset pairs"
+  ],
+  "alert_metadata": {
+    "severity": "moderate",
+    "category": "correlation_analysis",
+    "expires_at": 1755703212507,
+    "related_pairs": []
+  }
+}

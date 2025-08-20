@@ -1,0 +1,46 @@
+{
+  "timestamp": 1755684672381,
+  "alert_type": "correlation_breakdown",
+  "alert_id": "corr_breakdown_btc-usdt_20250820_181112_381_e1527d0b",
+  "pair": "BTC_USDT",
+  "pair_type": "crypto_crypto",
+  "breakdown_details": {
+    "current_correlation": 0.594345375584313,
+    "historical_average_correlation": 0.08612197657480039,
+    "z_score": 2.471758539292567,
+    "significance_level": 0.0,
+    "threshold_exceeded": true,
+    "breakdown_direction": "positive",
+    "severity": "moderate",
+    "duration_minutes": 0
+  },
+  "market_context": {
+    "asset1_price": 0.0,
+    "asset1_24h_change": 0.0,
+    "asset2_price": 0.0,
+    "asset2_24h_change": 0.0,
+    "market_volatility": "normal"
+  },
+  "statistical_analysis": {
+    "correlation_windows": {
+      "7d": 0.594345375584313
+    },
+    "confidence_interval": {
+      "lower": 0.5818538612497159,
+      "upper": 0.6065565388763815
+    },
+    "p_value": 0.0,
+    "sample_size": 100
+  },
+  "recommended_actions": [
+    "Monitor for potential trend convergence",
+    "Consider correlation-based trading strategies",
+    "Monitor related asset pairs"
+  ],
+  "alert_metadata": {
+    "severity": "moderate",
+    "category": "correlation_analysis",
+    "expires_at": 1755688272381,
+    "related_pairs": []
+  }
+}

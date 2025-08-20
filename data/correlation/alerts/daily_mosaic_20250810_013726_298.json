@@ -1,0 +1,27 @@
+{
+  "timestamp": 1754761046298,
+  "alert_type": "daily_correlation_mosaic",
+  "alert_id": "corr_mosaic_daily_20250810_013726_298_c219c03c",
+  "date": "2025-08-10",
+  "mosaic_summary": {
+    "total_pairs_analyzed": 1,
+    "significant_correlations": 0,
+    "breakdown_events": 0,
+    "divergence_signals": 0,
+    "average_correlation_strength": 0.0
+  },
+  "key_findings": [
+    "Analyzed 1 asset pairs with correlation data"
+  ],
+  "file_locations": {
+    "json_report": "data/correlation/mosaics/daily_mosaic_20250810.json",
+    "html_report": "",
+    "heatmap_image": ""
+  },
+  "alert_metadata": {
+    "severity": "info",
+    "category": "correlation_analysis",
+    "report_type": "daily_summary",
+    "expires_at": 1754847446298
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "timestamp": 1755698392659,
+  "alert_type": "correlation_breakdown",
+  "alert_id": "corr_breakdown_eth-xrp_20250820_215952_659_eae6521e",
+  "pair": "ETH_XRP",
+  "pair_type": "crypto_crypto",
+  "breakdown_details": {
+    "current_correlation": 0.41597804264223454,
+    "historical_average_correlation": 0.47013991327227556,
+    "z_score": -3.196599088301438,
+    "significance_level": 0.0,
+    "threshold_exceeded": true,
+    "breakdown_direction": "negative",
+    "severity": "extreme",
+    "duration_minutes": 0
+  },
+  "market_context": {
+    "asset1_price": 0.0,
+    "asset1_24h_change": 0.0,
+    "asset2_price": 0.0,
+    "asset2_24h_change": 0.0,
+    "market_volatility": "normal"
+  },
+  "statistical_analysis": {
+    "correlation_windows": {
+      "7d": 0.41597804264223454
+    },
+    "confidence_interval": {
+      "lower": 0.4023471480867043,
+      "upper": 0.429424542546349
+    },
+    "p_value": 0.0,
+    "sample_size": 100
+  },
+  "recommended_actions": [
+    "Strong negative correlation breakdown detected",
+    "Consider hedging strategies immediately",
+    "High severity correlation change - monitor closely",
+    "Watch for correlation normalization",
+    "Consider position adjustments",
+    "Monitor related asset pairs"
+  ],
+  "alert_metadata": {
+    "severity": "extreme",
+    "category": "correlation_analysis",
+    "expires_at": 1755701992659,
+    "related_pairs": []
+  }
+}

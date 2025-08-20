@@ -1,0 +1,39 @@
+{
+  "enhanced_scheduler": {
+    "command": ["python3", "main_enhanced.py", "--background"],
+    "restart_on_failure": true,
+    "max_restarts": 3,
+    "health_check_interval": 30,
+    "startup_timeout": 60,
+    "log_file": "logs/enhanced_scheduler.log"
+  },
+  "correlation_analysis": {
+    "command": ["python3", "-m", "src.correlation_analysis", "--monitor"],
+    "restart_on_failure": true,
+    "max_restarts": 3,
+    "health_check_interval": 30,
+    "startup_timeout": 60,
+    "log_file": "logs/correlation_analysis.log"
+  },
+  "monitoring": {
+    "health_check_interval": 60,
+    "log_rotation": true,
+    "max_log_size": "10MB",
+    "max_log_files": 5,
+    "metrics_enabled": true,
+    "alert_on_failure": true
+  },
+  "logging": {
+    "level": "INFO",
+    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    "file": "logs/system_manager.log",
+    "max_size": "5MB",
+    "backup_count": 3
+  },
+  "notifications": {
+    "discord_enabled": true,
+    "email_enabled": false,
+    "slack_enabled": false,
+    "alert_threshold": 3
+  }
+}

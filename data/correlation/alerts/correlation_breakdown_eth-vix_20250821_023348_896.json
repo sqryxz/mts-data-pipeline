@@ -1,0 +1,49 @@
+{
+  "timestamp": 1755714828895,
+  "alert_type": "correlation_breakdown",
+  "alert_id": "corr_breakdown_eth-vix_20250821_023348_895_4710a649",
+  "pair": "ETH_VIX",
+  "pair_type": "crypto_macro",
+  "breakdown_details": {
+    "current_correlation": 0.00033286634682131274,
+    "historical_average_correlation": -0.34751794326648844,
+    "z_score": 3.379517417813067,
+    "significance_level": 0.9759352255880425,
+    "threshold_exceeded": true,
+    "breakdown_direction": "positive",
+    "severity": "extreme",
+    "duration_minutes": 0
+  },
+  "market_context": {
+    "asset1_price": 0.0,
+    "asset1_24h_change": 0.0,
+    "asset2_price": 0.0,
+    "asset2_24h_change": 0.0,
+    "market_volatility": "normal"
+  },
+  "statistical_analysis": {
+    "correlation_windows": {
+      "14d": 0.00033286634682131274
+    },
+    "confidence_interval": {
+      "lower": -0.021292276610773778,
+      "upper": 0.021957697981094815
+    },
+    "p_value": 0.9759352255880425,
+    "sample_size": 100
+  },
+  "recommended_actions": [
+    "Strong positive correlation breakout detected",
+    "Consider momentum-based trading strategies",
+    "High severity correlation change - monitor closely",
+    "Watch for correlation normalization",
+    "Consider position adjustments",
+    "Monitor related asset pairs"
+  ],
+  "alert_metadata": {
+    "severity": "extreme",
+    "category": "correlation_analysis",
+    "expires_at": 1755718428895,
+    "related_pairs": []
+  }
+}

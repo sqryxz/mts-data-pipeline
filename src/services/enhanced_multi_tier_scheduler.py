@@ -74,9 +74,9 @@ class EnhancedMultiTierScheduler:
                  state_file: str = "data/enhanced_multi_tier_scheduler_state.json"):
         
         # Asset configuration
-        self.high_frequency_assets = high_frequency_assets or ['bitcoin', 'ethereum']
+        self.high_frequency_assets = high_frequency_assets or ['bitcoin', 'ethereum', 'ripple', 'sui', 'ethena']
         self.hourly_assets = hourly_assets or [
-            'tether', 'solana', 'ripple', 'bittensor', 'fetch-ai', 
+            'tether', 'solana', 'bittensor', 'fetch-ai', 
             'singularitynet', 'render-token', 'ocean-protocol'
         ]
         self.macro_indicators = macro_indicators or [

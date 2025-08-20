@@ -8,6 +8,14 @@ class PortfolioManager:
         self.cash_balance = initial_capital
         self.positions = {}  # symbol -> Position
         self._epsilon = 1e-10
+    
+    def get_cash(self) -> float:
+        """Get current cash balance."""
+        return self.cash_balance
+    
+    def get_positions(self) -> dict:
+        """Get current positions."""
+        return {symbol: pos.quantity for symbol, pos in self.positions.items()}
 
     def get_portfolio_value(self, current_prices: dict) -> float:
         if not isinstance(current_prices, dict):

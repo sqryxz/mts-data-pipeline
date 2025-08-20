@@ -1,0 +1,49 @@
+{
+  "timestamp": 1755707741716,
+  "alert_type": "correlation_breakdown",
+  "alert_id": "corr_breakdown_eth-dxy_20250821_003541_716_23b48647",
+  "pair": "ETH_DXY",
+  "pair_type": "crypto_macro",
+  "breakdown_details": {
+    "current_correlation": 4.516317090071028e-15,
+    "historical_average_correlation": -2.2700927662962023e-16,
+    "z_score": 3.2179150749279577,
+    "significance_level": 0.999999999999674,
+    "threshold_exceeded": true,
+    "breakdown_direction": "positive",
+    "severity": "extreme",
+    "duration_minutes": 0
+  },
+  "market_context": {
+    "asset1_price": 0.0,
+    "asset1_24h_change": 0.0,
+    "asset2_price": 0.0,
+    "asset2_24h_change": 0.0,
+    "market_volatility": "normal"
+  },
+  "statistical_analysis": {
+    "correlation_windows": {
+      "7d": 4.516317090071028e-15
+    },
+    "confidence_interval": {
+      "lower": -0.02167120651645725,
+      "upper": 0.021671206516466392
+    },
+    "p_value": 0.999999999999674,
+    "sample_size": 100
+  },
+  "recommended_actions": [
+    "Strong positive correlation breakout detected",
+    "Consider momentum-based trading strategies",
+    "High severity correlation change - monitor closely",
+    "Watch for correlation normalization",
+    "Consider position adjustments",
+    "Monitor related asset pairs"
+  ],
+  "alert_metadata": {
+    "severity": "extreme",
+    "category": "correlation_analysis",
+    "expires_at": 1755711341716,
+    "related_pairs": []
+  }
+}

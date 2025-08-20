@@ -1,0 +1,3722 @@
+{
+  "metadata": {
+    "last_updated": "2025-08-21T02:46:30.876146",
+    "version": "1.0",
+    "state_manager": "CorrelationStateManager"
+  },
+  "state": {
+    "pairs": {
+      "BTC_ETH": {
+        "last_update": "2025-08-10T01:37:26.537459"
+      },
+      "ETH_TREASURY": {
+        "last_correlation": 1.246940314218948e-15,
+        "last_updated": "2025-08-20T11:46:33.144287"
+      },
+      "ETH_USDT": {
+        "last_correlation": -1.5984931360825204e-15,
+        "last_updated": "2025-08-20T02:18:25.639694"
+      },
+      "BTC_SUI": {
+        "last_correlation": 0.7055736727107966,
+        "last_updated": "2025-08-20T11:45:16.638998"
+      },
+      "SOL_XRP": {
+        "last_correlation": 0.21261363357354607,
+        "last_updated": "2025-08-21T01:29:06.402421"
+      },
+      "BTC_USDT": {
+        "last_correlation": 0.15218161452885953,
+        "last_updated": "2025-08-21T01:53:00.588067"
+      },
+      "BTC_TREASURY": {
+        "last_correlation": 0.20089714126673483,
+        "last_updated": "2025-08-21T02:41:46.905265"
+      },
+      "ETH_VIX": {
+        "last_correlation": -0.007102083156118737,
+        "last_updated": "2025-08-21T02:46:30.875663"
+      }
+    },
+    "correlation_history": {
+      "ETH_TREASURY": [
+        {
+          "correlation": -2.6790952968642777e-15,
+          "timestamp": 1755624673173,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.6350368924523498,
+          "timestamp": 1755624673173,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.47712040750772583,
+          "timestamp": 1755624673173,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.34336598055442946,
+          "timestamp": 1755624673173,
+          "window_days": 60
+        },
+        {
+          "correlation": -2.6790952968642777e-15,
+          "timestamp": 1755624977915,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.6350368924523498,
+          "timestamp": 1755624977915,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.47712040750772583,
+          "timestamp": 1755624977915,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.34336598055442946,
+          "timestamp": 1755624977915,
+          "window_days": 60
+        },
+        {
+          "correlation": -2.6790952968642777e-15,
+          "timestamp": 1755625282036,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.6350368924523498,
+          "timestamp": 1755625282036,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.47712040750772583,
+          "timestamp": 1755625282036,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.34336598055442946,
+          "timestamp": 1755625282036,
+          "window_days": 60
+        },
+        {
+          "correlation": 1.2825413862253728e-15,
+          "timestamp": 1755625586511,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.6333808326407309,
+          "timestamp": 1755625586511,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.4771407886177661,
+          "timestamp": 1755625586511,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.3433501592705908,
+          "timestamp": 1755625586511,
+          "window_days": 60
+        },
+        {
+          "correlation": 1.2825413862253728e-15,
+          "timestamp": 1755625890988,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.6333808326407309,
+          "timestamp": 1755625890988,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.4771407886177661,
+          "timestamp": 1755625890988,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.3433501592705908,
+          "timestamp": 1755625890988,
+          "window_days": 60
+        },
+        {
+          "correlation": 1.2825413862253728e-15,
+          "timestamp": 1755626195103,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.6333808326407309,
+          "timestamp": 1755626195103,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.4771407886177661,
+          "timestamp": 1755626195103,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.3433501592705908,
+          "timestamp": 1755626195103,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.6316794342297366,
+          "timestamp": 1755626500096,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.47716934120548904,
+          "timestamp": 1755626500096,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.343328582799748,
+          "timestamp": 1755626500096,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.6316794342297366,
+          "timestamp": 1755626804019,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.47716934120548904,
+          "timestamp": 1755626804019,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.343328582799748,
+          "timestamp": 1755626804019,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.6316794342297366,
+          "timestamp": 1755627108611,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.47716934120548904,
+          "timestamp": 1755627108611,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.343328582799748,
+          "timestamp": 1755627108611,
+          "window_days": 60
+        },
+        {
+          "correlation": 3.865824348866256e-15,
+          "timestamp": 1755627412806,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.6294865402470301,
+          "timestamp": 1755627412806,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.4771916973159624,
+          "timestamp": 1755627412806,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.34331208236386207,
+          "timestamp": 1755627412806,
+          "window_days": 60
+        },
+        {
+          "correlation": 3.865824348866256e-15,
+          "timestamp": 1755627509288,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.6294865402470301,
+          "timestamp": 1755627509288,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.4771916973159624,
+          "timestamp": 1755627509288,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.34331208236386207,
+          "timestamp": 1755627509288,
+          "window_days": 60
+        },
+        {
+          "correlation": -3.0840913354341357e-16,
+          "timestamp": 1755661592910,
+          "window_days": 14
+        },
+        {
+          "correlation": 1.246940314218948e-15,
+          "timestamp": 1755661592910,
+          "window_days": 30
+        },
+        {
+          "correlation": 1.246940314218948e-15,
+          "timestamp": 1755661592910,
+          "window_days": 60
+        }
+      ],
+      "ETH_USDT": [
+        {
+          "correlation": -3.78155569820977e-15,
+          "timestamp": 1755627504669,
+          "window_days": 7
+        },
+        {
+          "correlation": -3.465154026493632e-15,
+          "timestamp": 1755627504669,
+          "window_days": 14
+        },
+        {
+          "correlation": -1.5984931360825204e-15,
+          "timestamp": 1755627504669,
+          "window_days": 30
+        },
+        {
+          "correlation": -4.4108488476481085e-16,
+          "timestamp": 1755627504669,
+          "window_days": 60
+        }
+      ],
+      "BTC_SUI": [
+        {
+          "correlation": -5.012114669643554e-16,
+          "timestamp": 1755627555400,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.4493093689191566,
+          "timestamp": 1755627555400,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7338998937018544,
+          "timestamp": 1755627555400,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9429944580949159,
+          "timestamp": 1755627555400,
+          "window_days": 60
+        },
+        {
+          "correlation": -5.012114669643554e-16,
+          "timestamp": 1755627859192,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.4493093689191566,
+          "timestamp": 1755627859192,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7338998937018544,
+          "timestamp": 1755627859192,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9429944580949159,
+          "timestamp": 1755627859192,
+          "window_days": 60
+        },
+        {
+          "correlation": -5.012114669643554e-16,
+          "timestamp": 1755628162912,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.4493093689191566,
+          "timestamp": 1755628162912,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7338998937018544,
+          "timestamp": 1755628162912,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9429944580949159,
+          "timestamp": 1755628162912,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.4403478961234279,
+          "timestamp": 1755632319165,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7298322673544144,
+          "timestamp": 1755632319165,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9419808251428978,
+          "timestamp": 1755632319165,
+          "window_days": 60
+        },
+        {
+          "correlation": 1.9025424239454416e-15,
+          "timestamp": 1755637212143,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.43237721662543444,
+          "timestamp": 1755637212143,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7259569267708498,
+          "timestamp": 1755637212143,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.940975599213303,
+          "timestamp": 1755637212143,
+          "window_days": 60
+        },
+        {
+          "correlation": 1.9025424239454416e-15,
+          "timestamp": 1755637516223,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.43237721662543444,
+          "timestamp": 1755637516223,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7259569267708498,
+          "timestamp": 1755637516223,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.940975599213303,
+          "timestamp": 1755637516223,
+          "window_days": 60
+        },
+        {
+          "correlation": 1.7110906589104056e-15,
+          "timestamp": 1755639121558,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.43087437712829646,
+          "timestamp": 1755639121558,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7251460547730767,
+          "timestamp": 1755639121558,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9407724897582429,
+          "timestamp": 1755639121558,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.42955649839255694,
+          "timestamp": 1755639425380,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7244766640866963,
+          "timestamp": 1755639425380,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9406041371141659,
+          "timestamp": 1755639425380,
+          "window_days": 60
+        },
+        {
+          "correlation": 3.600120951496967e-15,
+          "timestamp": 1755642721157,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.4258326401285329,
+          "timestamp": 1755642721157,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7216979959613697,
+          "timestamp": 1755642721157,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9399006123880966,
+          "timestamp": 1755642721157,
+          "window_days": 60
+        },
+        {
+          "correlation": 3.600120951496967e-15,
+          "timestamp": 1755643025107,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.4258326401285329,
+          "timestamp": 1755643025107,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7216979959613697,
+          "timestamp": 1755643025107,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9399006123880966,
+          "timestamp": 1755643025107,
+          "window_days": 60
+        },
+        {
+          "correlation": 3.600120951496967e-15,
+          "timestamp": 1755643328974,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.4258326401285329,
+          "timestamp": 1755643328974,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7216979959613697,
+          "timestamp": 1755643328974,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9399006123880966,
+          "timestamp": 1755643328974,
+          "window_days": 60
+        },
+        {
+          "correlation": 2.2601898806326173e-15,
+          "timestamp": 1755643632840,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.4245152293030414,
+          "timestamp": 1755643632840,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7208446306347509,
+          "timestamp": 1755643632840,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9396514929611068,
+          "timestamp": 1755643632840,
+          "window_days": 60
+        },
+        {
+          "correlation": 2.2601898806326173e-15,
+          "timestamp": 1755643936685,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.4245152293030414,
+          "timestamp": 1755643936685,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7208446306347509,
+          "timestamp": 1755643936685,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9396514929611068,
+          "timestamp": 1755643936685,
+          "window_days": 60
+        },
+        {
+          "correlation": 2.2601898806326173e-15,
+          "timestamp": 1755644240606,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.4245152293030414,
+          "timestamp": 1755644240606,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7208446306347509,
+          "timestamp": 1755644240606,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9396514929611068,
+          "timestamp": 1755644240606,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.4231306527872511,
+          "timestamp": 1755644544365,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7199890714308274,
+          "timestamp": 1755644544365,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9394336394933235,
+          "timestamp": 1755644544365,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.4231306527872511,
+          "timestamp": 1755644848233,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7199890714308274,
+          "timestamp": 1755644848233,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9394336394933235,
+          "timestamp": 1755644848233,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.4231306527872511,
+          "timestamp": 1755645152185,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7199890714308274,
+          "timestamp": 1755645152185,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9394336394933235,
+          "timestamp": 1755645152185,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.4215096736949136,
+          "timestamp": 1755645456080,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7190733150606229,
+          "timestamp": 1755645456080,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9391657353829793,
+          "timestamp": 1755645456080,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.4215096736949136,
+          "timestamp": 1755645760042,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7190733150606229,
+          "timestamp": 1755645760042,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9391657353829793,
+          "timestamp": 1755645760042,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.4215096736949136,
+          "timestamp": 1755646064003,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7190733150606229,
+          "timestamp": 1755646064003,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9391657353829793,
+          "timestamp": 1755646064003,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.4101570690588667,
+          "timestamp": 1755648919144,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7159667463056644,
+          "timestamp": 1755648919144,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9383360540406147,
+          "timestamp": 1755648919144,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.4101570690588667,
+          "timestamp": 1755649223034,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7159667463056644,
+          "timestamp": 1755649223034,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9383360540406147,
+          "timestamp": 1755649223034,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.4101570690588667,
+          "timestamp": 1755649526974,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7159667463056644,
+          "timestamp": 1755649526974,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9383360540406147,
+          "timestamp": 1755649526974,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.4035746485415461,
+          "timestamp": 1755649831166,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7148522962292021,
+          "timestamp": 1755649831166,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9380468855860691,
+          "timestamp": 1755649831166,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.4035746485415461,
+          "timestamp": 1755650135180,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7148522962292021,
+          "timestamp": 1755650135180,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9380468855860691,
+          "timestamp": 1755650135180,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.4035746485415461,
+          "timestamp": 1755650439221,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7148522962292021,
+          "timestamp": 1755650439221,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9380468855860691,
+          "timestamp": 1755650439221,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.3973298451110581,
+          "timestamp": 1755650743203,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7139524607115519,
+          "timestamp": 1755650743203,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9378133885754495,
+          "timestamp": 1755650743203,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.3973298451110581,
+          "timestamp": 1755651047339,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7139524607115519,
+          "timestamp": 1755651047339,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9378133885754495,
+          "timestamp": 1755651047339,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.3973298451110581,
+          "timestamp": 1755651351248,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7139524607115519,
+          "timestamp": 1755651351248,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9378133885754495,
+          "timestamp": 1755651351248,
+          "window_days": 60
+        },
+        {
+          "correlation": -1.2163082056628149e-15,
+          "timestamp": 1755651655428,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.39111448284054773,
+          "timestamp": 1755651655428,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7131181363730879,
+          "timestamp": 1755651655428,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.937597692047197,
+          "timestamp": 1755651655428,
+          "window_days": 60
+        },
+        {
+          "correlation": -1.2163082056628149e-15,
+          "timestamp": 1755651959631,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.39111448284054773,
+          "timestamp": 1755651959631,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7131181363730879,
+          "timestamp": 1755651959631,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.937597692047197,
+          "timestamp": 1755651959631,
+          "window_days": 60
+        },
+        {
+          "correlation": -1.2163082056628149e-15,
+          "timestamp": 1755652263605,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.39111448284054773,
+          "timestamp": 1755652263605,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7131181363730879,
+          "timestamp": 1755652263605,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.937597692047197,
+          "timestamp": 1755652263605,
+          "window_days": 60
+        },
+        {
+          "correlation": -2.2718234804409966e-15,
+          "timestamp": 1755655429898,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.3647871893794876,
+          "timestamp": 1755655429898,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7103204622226568,
+          "timestamp": 1755655429898,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.936772626995995,
+          "timestamp": 1755655429898,
+          "window_days": 60
+        },
+        {
+          "correlation": 2.9238957737060374e-15,
+          "timestamp": 1755655734138,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.3645063881209242,
+          "timestamp": 1755655734138,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7101628470466428,
+          "timestamp": 1755655734138,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9367316841735264,
+          "timestamp": 1755655734138,
+          "window_days": 60
+        },
+        {
+          "correlation": 2.9238957737060374e-15,
+          "timestamp": 1755656038006,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.3645063881209242,
+          "timestamp": 1755656038006,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7101628470466428,
+          "timestamp": 1755656038006,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9367316841735264,
+          "timestamp": 1755656038006,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.35821489113875393,
+          "timestamp": 1755656342315,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7095407058684567,
+          "timestamp": 1755656342315,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.936570104081181,
+          "timestamp": 1755656342315,
+          "window_days": 60
+        },
+        {
+          "correlation": 5.080188886374502e-16,
+          "timestamp": 1755656646326,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.3561916109981491,
+          "timestamp": 1755656646326,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.709387556703542,
+          "timestamp": 1755656646326,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9365303441369685,
+          "timestamp": 1755656646326,
+          "window_days": 60
+        },
+        {
+          "correlation": 5.080188886374502e-16,
+          "timestamp": 1755656950226,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.3561916109981491,
+          "timestamp": 1755656950226,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.709387556703542,
+          "timestamp": 1755656950226,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9365303441369685,
+          "timestamp": 1755656950226,
+          "window_days": 60
+        },
+        {
+          "correlation": 3.4610567436391054e-15,
+          "timestamp": 1755657254232,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.34977326006763115,
+          "timestamp": 1755657254232,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7087742544388764,
+          "timestamp": 1755657254232,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9363709669716592,
+          "timestamp": 1755657254232,
+          "window_days": 60
+        },
+        {
+          "correlation": 2.4359758237650558e-15,
+          "timestamp": 1755657558298,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.34950491749334656,
+          "timestamp": 1755657558298,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7086180239482079,
+          "timestamp": 1755657558298,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9363302698834408,
+          "timestamp": 1755657558298,
+          "window_days": 60
+        },
+        {
+          "correlation": 2.4359758237650558e-15,
+          "timestamp": 1755657862243,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.34950491749334656,
+          "timestamp": 1755657862243,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7086180239482079,
+          "timestamp": 1755657862243,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9363302698834408,
+          "timestamp": 1755657862243,
+          "window_days": 60
+        },
+        {
+          "correlation": 3.144475780293327e-15,
+          "timestamp": 1755658166134,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.34480013422554967,
+          "timestamp": 1755658166134,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7079819239243508,
+          "timestamp": 1755658166134,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9361641809800189,
+          "timestamp": 1755658166134,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.34452780712660536,
+          "timestamp": 1755658470023,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7078202288262844,
+          "timestamp": 1755658470023,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9361218670503515,
+          "timestamp": 1755658470023,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.34452780712660536,
+          "timestamp": 1755658773892,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7078202288262844,
+          "timestamp": 1755658773892,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9361218670503515,
+          "timestamp": 1755658773892,
+          "window_days": 60
+        },
+        {
+          "correlation": 5.793585173709418e-16,
+          "timestamp": 1755659078046,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.3360217423118926,
+          "timestamp": 1755659078046,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7071686781167218,
+          "timestamp": 1755659078046,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9359138507467771,
+          "timestamp": 1755659078046,
+          "window_days": 60
+        },
+        {
+          "correlation": 1.2815776389336287e-15,
+          "timestamp": 1755659382824,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.33386479227737526,
+          "timestamp": 1755659382824,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7070061107534803,
+          "timestamp": 1755659382824,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9358711778711198,
+          "timestamp": 1755659382824,
+          "window_days": 60
+        },
+        {
+          "correlation": 1.2815776389336287e-15,
+          "timestamp": 1755659687570,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.33386479227737526,
+          "timestamp": 1755659687570,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7070061107534803,
+          "timestamp": 1755659687570,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9358711778711198,
+          "timestamp": 1755659687570,
+          "window_days": 60
+        },
+        {
+          "correlation": 1.1360439718411417e-16,
+          "timestamp": 1755659992660,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.3289694463192161,
+          "timestamp": 1755659992660,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7063458441865061,
+          "timestamp": 1755659992660,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9356974891493766,
+          "timestamp": 1755659992660,
+          "window_days": 60
+        },
+        {
+          "correlation": -1.7971695211962118e-15,
+          "timestamp": 1755660296950,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.32676992414030304,
+          "timestamp": 1755660296950,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7061798354134284,
+          "timestamp": 1755660296950,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9356537581657467,
+          "timestamp": 1755660296950,
+          "window_days": 60
+        },
+        {
+          "correlation": -1.7971695211962118e-15,
+          "timestamp": 1755660601321,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.32676992414030304,
+          "timestamp": 1755660601321,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7061798354134284,
+          "timestamp": 1755660601321,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9356537581657467,
+          "timestamp": 1755660601321,
+          "window_days": 60
+        },
+        {
+          "correlation": 2.201204272474596e-15,
+          "timestamp": 1755660906858,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.32217112411683013,
+          "timestamp": 1755660906858,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7057162610820393,
+          "timestamp": 1755660906858,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9354945938777967,
+          "timestamp": 1755660906858,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.32000071092619425,
+          "timestamp": 1755661211217,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7055736727107966,
+          "timestamp": 1755661211217,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9354574188685322,
+          "timestamp": 1755661211217,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.32000071092619425,
+          "timestamp": 1755661515539,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.7055736727107966,
+          "timestamp": 1755661515539,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.9354574188685322,
+          "timestamp": 1755661515539,
+          "window_days": 60
+        }
+      ],
+      "SOL_XRP": [
+        {
+          "correlation": 0.21468476337352882,
+          "timestamp": 1755661587304,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.05632511259919064,
+          "timestamp": 1755661587304,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.25526193322665863,
+          "timestamp": 1755661587304,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.29367362337479774,
+          "timestamp": 1755661587304,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.050816412694731944,
+          "timestamp": 1755662697880,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.1758806029653395,
+          "timestamp": 1755662697880,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.13278952755000012,
+          "timestamp": 1755662697880,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.13401146950689916,
+          "timestamp": 1755662697880,
+          "window_days": 60
+        },
+        {
+          "correlation": -0.02962675456898272,
+          "timestamp": 1755673094220,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.1901063063469644,
+          "timestamp": 1755673094220,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.1447791396860888,
+          "timestamp": 1755673094220,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.14648298141883806,
+          "timestamp": 1755673094220,
+          "window_days": 60
+        },
+        {
+          "correlation": -0.027657375889437813,
+          "timestamp": 1755673455323,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.18489088951090246,
+          "timestamp": 1755673455323,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.14001306052735732,
+          "timestamp": 1755673455323,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.1417593027259807,
+          "timestamp": 1755673455323,
+          "window_days": 60
+        },
+        {
+          "correlation": -0.027657375889437813,
+          "timestamp": 1755673763808,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.18489088951090246,
+          "timestamp": 1755673763808,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.14001306052735732,
+          "timestamp": 1755673763808,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.1417593027259807,
+          "timestamp": 1755673763808,
+          "window_days": 60
+        },
+        {
+          "correlation": -0.02067558696036184,
+          "timestamp": 1755674075588,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.17284547457048582,
+          "timestamp": 1755674075588,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.12921529440382407,
+          "timestamp": 1755674075588,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.1310746715435912,
+          "timestamp": 1755674075588,
+          "window_days": 60
+        },
+        {
+          "correlation": -0.02067558696036184,
+          "timestamp": 1755674382309,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.17284547457048582,
+          "timestamp": 1755674382309,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.12921529440382407,
+          "timestamp": 1755674382309,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.1310746715435912,
+          "timestamp": 1755674382309,
+          "window_days": 60
+        },
+        {
+          "correlation": -0.02067558696036184,
+          "timestamp": 1755674770035,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.17284547457048582,
+          "timestamp": 1755674770035,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.12921529440382407,
+          "timestamp": 1755674770035,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.1310746715435912,
+          "timestamp": 1755674770035,
+          "window_days": 60
+        },
+        {
+          "correlation": -0.020066308185480827,
+          "timestamp": 1755675076785,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.17190447131852443,
+          "timestamp": 1755675076785,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.12853639582829832,
+          "timestamp": 1755675076785,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.1304011877366706,
+          "timestamp": 1755675076785,
+          "window_days": 60
+        },
+        {
+          "correlation": -0.020066308185480827,
+          "timestamp": 1755675383978,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.17190447131852443,
+          "timestamp": 1755675383978,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.12853639582829832,
+          "timestamp": 1755675383978,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.1304011877366706,
+          "timestamp": 1755675383978,
+          "window_days": 60
+        },
+        {
+          "correlation": -0.020066308185480827,
+          "timestamp": 1755675692289,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.17190447131852443,
+          "timestamp": 1755675692289,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.12853639582829832,
+          "timestamp": 1755675692289,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.1304011877366706,
+          "timestamp": 1755675692289,
+          "window_days": 60
+        },
+        {
+          "correlation": -0.01962349741097169,
+          "timestamp": 1755675999665,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.17146752753216488,
+          "timestamp": 1755675999665,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.12810873072110876,
+          "timestamp": 1755675999665,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.1299807927397644,
+          "timestamp": 1755675999665,
+          "window_days": 60
+        },
+        {
+          "correlation": -0.01962349741097169,
+          "timestamp": 1755676306481,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.17146752753216488,
+          "timestamp": 1755676306481,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.12810873072110876,
+          "timestamp": 1755676306481,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.1299807927397644,
+          "timestamp": 1755676306481,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.1535383487533678,
+          "timestamp": 1755684222673,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.15839506586570415,
+          "timestamp": 1755684222673,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.12106401536643746,
+          "timestamp": 1755684222673,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.12234051222800933,
+          "timestamp": 1755684222673,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.13359713806343188,
+          "timestamp": 1755684528613,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.16220598697794392,
+          "timestamp": 1755684528613,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.12741888729901646,
+          "timestamp": 1755684528613,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.12869079969669245,
+          "timestamp": 1755684528613,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.13317089788475137,
+          "timestamp": 1755684834076,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.16207088638314143,
+          "timestamp": 1755684834076,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.12769092606052024,
+          "timestamp": 1755684834076,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.12896430431706166,
+          "timestamp": 1755684834076,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.13373938548198758,
+          "timestamp": 1755685140130,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.16191713594873686,
+          "timestamp": 1755685140130,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.12830189369922085,
+          "timestamp": 1755685140130,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.1295756786414599,
+          "timestamp": 1755685140130,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.13380314257227402,
+          "timestamp": 1755685446621,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.16189330010884814,
+          "timestamp": 1755685446621,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.12830151182062746,
+          "timestamp": 1755685446621,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.1295752868586925,
+          "timestamp": 1755685446621,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.13400524243140263,
+          "timestamp": 1755685751383,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.1618705171491603,
+          "timestamp": 1755685751383,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.12839196723675145,
+          "timestamp": 1755685751383,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.12966592227306797,
+          "timestamp": 1755685751383,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.1343391759333564,
+          "timestamp": 1755686057441,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.16189901301094298,
+          "timestamp": 1755686057441,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.12852085932018778,
+          "timestamp": 1755686057441,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.1297948843778733,
+          "timestamp": 1755686057441,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.0942615453652981,
+          "timestamp": 1755686363165,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.17932293009167405,
+          "timestamp": 1755686363165,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.1449114613697667,
+          "timestamp": 1755686363165,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.14617907052780688,
+          "timestamp": 1755686363165,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.09669478237527432,
+          "timestamp": 1755686668793,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.1788914025766499,
+          "timestamp": 1755686668793,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.1447124613148315,
+          "timestamp": 1755686668793,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.1459813737040921,
+          "timestamp": 1755686668793,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.09735382170141631,
+          "timestamp": 1755686974162,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.17882841758018422,
+          "timestamp": 1755686974162,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.14470598970299176,
+          "timestamp": 1755686974162,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.14597495156784482,
+          "timestamp": 1755686974162,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.09735382170141631,
+          "timestamp": 1755687276823,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.17882841758018422,
+          "timestamp": 1755687276823,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.14470598970299176,
+          "timestamp": 1755687276823,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.14597495156784482,
+          "timestamp": 1755687276823,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.12537133420273475,
+          "timestamp": 1755687581665,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.1746898274792766,
+          "timestamp": 1755687581665,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.14138836472713875,
+          "timestamp": 1755687581665,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.142667911854532,
+          "timestamp": 1755687581665,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.12885114054097052,
+          "timestamp": 1755687885856,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.17378321523590048,
+          "timestamp": 1755687885856,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.1414833324758692,
+          "timestamp": 1755687885856,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.14276704429009962,
+          "timestamp": 1755687885856,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.1292585959808537,
+          "timestamp": 1755688194065,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.17367587570894233,
+          "timestamp": 1755688194065,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.14148139101343743,
+          "timestamp": 1755688194065,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.14276559963412694,
+          "timestamp": 1755688194065,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.1297737944639934,
+          "timestamp": 1755688498685,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.1735395952659632,
+          "timestamp": 1755688498685,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.14147929270522897,
+          "timestamp": 1755688498685,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.14276400760212965,
+          "timestamp": 1755688498685,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.13019574964045677,
+          "timestamp": 1755688803155,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.17442529015232935,
+          "timestamp": 1755688803155,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.14204407514271147,
+          "timestamp": 1755688803155,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.1433288887536172,
+          "timestamp": 1755688803155,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.1305014725502519,
+          "timestamp": 1755689107673,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.17440312621849352,
+          "timestamp": 1755689107673,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.14204303631830462,
+          "timestamp": 1755689107673,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.14332785075343857,
+          "timestamp": 1755689107673,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.13033524891978998,
+          "timestamp": 1755689411793,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.17529104161468195,
+          "timestamp": 1755689411793,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.14275015031538918,
+          "timestamp": 1755689411793,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.14403559695027995,
+          "timestamp": 1755689411793,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.13103945712754128,
+          "timestamp": 1755689716028,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.17613155339613895,
+          "timestamp": 1755689716028,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.14330848631454354,
+          "timestamp": 1755689716028,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.1445940004939014,
+          "timestamp": 1755689716028,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.10730430028519782,
+          "timestamp": 1755690020364,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.023122822532388284,
+          "timestamp": 1755690020364,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.00585261548941295,
+          "timestamp": 1755690020364,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.00585261548941295,
+          "timestamp": 1755690020364,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.10296334776035393,
+          "timestamp": 1755690324724,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.020020374215867224,
+          "timestamp": 1755690324724,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.0034613615760145646,
+          "timestamp": 1755690324724,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.0034613615760145646,
+          "timestamp": 1755690324724,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.10832312552639377,
+          "timestamp": 1755690629172,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.021761015321348744,
+          "timestamp": 1755690629172,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.0038798682228626613,
+          "timestamp": 1755690629172,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.0038798682228626613,
+          "timestamp": 1755690629172,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.10370718444331053,
+          "timestamp": 1755690933617,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.0653065728451302,
+          "timestamp": 1755690933617,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.036682589549334184,
+          "timestamp": 1755690933617,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.036682589549334184,
+          "timestamp": 1755690933617,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.10320599954932275,
+          "timestamp": 1755691237901,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.06335013957265595,
+          "timestamp": 1755691237901,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.03526284136091723,
+          "timestamp": 1755691237901,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.03526284136091723,
+          "timestamp": 1755691237901,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.008340935017400769,
+          "timestamp": 1755691542185,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.19967544031394363,
+          "timestamp": 1755691542185,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.15839770050899657,
+          "timestamp": 1755691542185,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.16014639256380206,
+          "timestamp": 1755691542185,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.007610850769202302,
+          "timestamp": 1755691846457,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.198356330779612,
+          "timestamp": 1755691846457,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.15721877829710496,
+          "timestamp": 1755691846457,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.1589768898506587,
+          "timestamp": 1755691846457,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.00795002557637727,
+          "timestamp": 1755692150687,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.1968600723797276,
+          "timestamp": 1755692150687,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.15587444404601944,
+          "timestamp": 1755692150687,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.15764157898438752,
+          "timestamp": 1755692150687,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.008293395315539048,
+          "timestamp": 1755692455241,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.19680440098183452,
+          "timestamp": 1755692455241,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.15566034980872287,
+          "timestamp": 1755692455241,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.15743260290957448,
+          "timestamp": 1755692455241,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.008366024485727897,
+          "timestamp": 1755692759566,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.19713884162749423,
+          "timestamp": 1755692759566,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.15627571297959966,
+          "timestamp": 1755692759566,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.1580476605792634,
+          "timestamp": 1755692759566,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.008588031930879331,
+          "timestamp": 1755693064101,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.1963926530663778,
+          "timestamp": 1755693064101,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.15548246704549434,
+          "timestamp": 1755693064101,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.15726152413005987,
+          "timestamp": 1755693064101,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.010939823354855905,
+          "timestamp": 1755693368340,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.1935165549940249,
+          "timestamp": 1755693368340,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.15287554466744913,
+          "timestamp": 1755693368340,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.15467712499176237,
+          "timestamp": 1755693368340,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.1538890105929438,
+          "timestamp": 1755693672700,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.17060165046484121,
+          "timestamp": 1755693672700,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.14143126137287892,
+          "timestamp": 1755693672700,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.14273222764288443,
+          "timestamp": 1755693672700,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.15402815394732314,
+          "timestamp": 1755693976971,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.17139088954425186,
+          "timestamp": 1755693976971,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.1419819372946043,
+          "timestamp": 1755693976971,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.1432835198910906,
+          "timestamp": 1755693976971,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.15390339901440797,
+          "timestamp": 1755694281184,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.17335249612902856,
+          "timestamp": 1755694281184,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.1435230266785048,
+          "timestamp": 1755694281184,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.14482552422195943,
+          "timestamp": 1755694281184,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.2589340676495996,
+          "timestamp": 1755694585549,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.11805373713565158,
+          "timestamp": 1755694585549,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.08467388154619379,
+          "timestamp": 1755694585549,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.08601050045355081,
+          "timestamp": 1755694585549,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.2589340676495996,
+          "timestamp": 1755694889785,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.11805373713565158,
+          "timestamp": 1755694889785,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.08467388154619379,
+          "timestamp": 1755694889785,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.08601050045355081,
+          "timestamp": 1755694889785,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.23994465390727202,
+          "timestamp": 1755695194332,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.1368631264725232,
+          "timestamp": 1755695194332,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.0990818320052984,
+          "timestamp": 1755695194332,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.1004120872950016,
+          "timestamp": 1755695194332,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.2397876677328914,
+          "timestamp": 1755695498789,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.137237368027458,
+          "timestamp": 1755695498789,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.09984278217976307,
+          "timestamp": 1755695498789,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.1011738414212027,
+          "timestamp": 1755695498789,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.2397876677328914,
+          "timestamp": 1755695803045,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.137237368027458,
+          "timestamp": 1755695803045,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.09984278217976307,
+          "timestamp": 1755695803045,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.1011738414212027,
+          "timestamp": 1755695803045,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.23981683938114545,
+          "timestamp": 1755696107583,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.13878671956654173,
+          "timestamp": 1755696107583,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.10109296542386766,
+          "timestamp": 1755696107583,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.10242347830547725,
+          "timestamp": 1755696107583,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.24056407884119588,
+          "timestamp": 1755696411854,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.13874867252976178,
+          "timestamp": 1755696411854,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.10142689557418327,
+          "timestamp": 1755696411854,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.10275826258393383,
+          "timestamp": 1755696411854,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.24056407884119588,
+          "timestamp": 1755696716292,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.13874867252976178,
+          "timestamp": 1755696716292,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.10142689557418327,
+          "timestamp": 1755696716292,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.10275826258393383,
+          "timestamp": 1755696716292,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.24151962205932834,
+          "timestamp": 1755697020789,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.13863909559286675,
+          "timestamp": 1755697020789,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.10145043216280657,
+          "timestamp": 1755697020789,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.10278153644433044,
+          "timestamp": 1755697020789,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.06814367518318958,
+          "timestamp": 1755697325154,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.19483073497356618,
+          "timestamp": 1755697325154,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.16139771149542148,
+          "timestamp": 1755697325154,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.16306374481788158,
+          "timestamp": 1755697325154,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.06814367518318958,
+          "timestamp": 1755697629510,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.19483073497356618,
+          "timestamp": 1755697629510,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.16139771149542148,
+          "timestamp": 1755697629510,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.16306374481788158,
+          "timestamp": 1755697629510,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.06870449048146413,
+          "timestamp": 1755697933952,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.1947206086195323,
+          "timestamp": 1755697933952,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.1613584959124959,
+          "timestamp": 1755697933952,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.16302399630518108,
+          "timestamp": 1755697933952,
+          "window_days": 60
+        },
+        {
+          "correlation": -0.01691346858643195,
+          "timestamp": 1755698238347,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.04783180835198878,
+          "timestamp": 1755698238347,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.03494351726621616,
+          "timestamp": 1755698238347,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.03494351726621616,
+          "timestamp": 1755698238347,
+          "window_days": 60
+        },
+        {
+          "correlation": -0.01691346858643195,
+          "timestamp": 1755698542890,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.04783180835198878,
+          "timestamp": 1755698542890,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.03494351726621616,
+          "timestamp": 1755698542890,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.03494351726621616,
+          "timestamp": 1755698542890,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.02129976767197461,
+          "timestamp": 1755698847240,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.031108656874704488,
+          "timestamp": 1755698847240,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.02630288640301869,
+          "timestamp": 1755698847240,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.02630288640301869,
+          "timestamp": 1755698847240,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.021287410070649663,
+          "timestamp": 1755699151792,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.03110004819314861,
+          "timestamp": 1755699151792,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.026302836318939368,
+          "timestamp": 1755699151792,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.026302836318939368,
+          "timestamp": 1755699151792,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.021287410070649663,
+          "timestamp": 1755699456212,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.03110004819314861,
+          "timestamp": 1755699456212,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.026302836318939368,
+          "timestamp": 1755699456212,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.026302836318939368,
+          "timestamp": 1755699456212,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.021180936530372337,
+          "timestamp": 1755699761350,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.031054967600032693,
+          "timestamp": 1755699761350,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.026302008766795736,
+          "timestamp": 1755699761350,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.026302008766795736,
+          "timestamp": 1755699761350,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.021167635898798665,
+          "timestamp": 1755700066759,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.03104743609624051,
+          "timestamp": 1755700066759,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.026302233728368717,
+          "timestamp": 1755700066759,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.026302233728368717,
+          "timestamp": 1755700066759,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.021167635898798665,
+          "timestamp": 1755700371690,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.03104743609624051,
+          "timestamp": 1755700371690,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.026302233728368717,
+          "timestamp": 1755700371690,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.026302233728368717,
+          "timestamp": 1755700371690,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.006094245198731787,
+          "timestamp": 1755700676437,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.00802254629862719,
+          "timestamp": 1755700676437,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.012636365309796418,
+          "timestamp": 1755700676437,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.012636365309796418,
+          "timestamp": 1755700676437,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.21265625788091536,
+          "timestamp": 1755700980976,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.14702132697044445,
+          "timestamp": 1755700980976,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.12108574091639943,
+          "timestamp": 1755700980976,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.12240898718443143,
+          "timestamp": 1755700980976,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.21265625788091536,
+          "timestamp": 1755701286559,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.14702132697044445,
+          "timestamp": 1755701286559,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.12108574091639943,
+          "timestamp": 1755701286559,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.12240898718443143,
+          "timestamp": 1755701286559,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.2131132826985714,
+          "timestamp": 1755701593883,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.14707679878789967,
+          "timestamp": 1755701593883,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.12132504695345483,
+          "timestamp": 1755701593883,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.12264849969991516,
+          "timestamp": 1755701593883,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.28966225685161034,
+          "timestamp": 1755701900653,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.10510145794920178,
+          "timestamp": 1755701900653,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.08048859221345168,
+          "timestamp": 1755701900653,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.08184180872180792,
+          "timestamp": 1755701900653,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.28966225685161034,
+          "timestamp": 1755702205872,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.10510145794920178,
+          "timestamp": 1755702205872,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.08048859221345168,
+          "timestamp": 1755702205872,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.08184180872180792,
+          "timestamp": 1755702205872,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.2704312464963462,
+          "timestamp": 1755702512242,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.12637710288014187,
+          "timestamp": 1755702512242,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.09418771447184457,
+          "timestamp": 1755702512242,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.0955359369942969,
+          "timestamp": 1755702512242,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.2707424091081844,
+          "timestamp": 1755702818519,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.1263577553843113,
+          "timestamp": 1755702818519,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.09420561940560283,
+          "timestamp": 1755702818519,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.09555377689508722,
+          "timestamp": 1755702818519,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.2707424091081844,
+          "timestamp": 1755703124409,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.1263577553843113,
+          "timestamp": 1755703124409,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.09420561940560283,
+          "timestamp": 1755703124409,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.09555377689508722,
+          "timestamp": 1755703124409,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.27138317186706895,
+          "timestamp": 1755703431129,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.12632862281732254,
+          "timestamp": 1755703431129,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.09424189803685679,
+          "timestamp": 1755703431129,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.09558997777406109,
+          "timestamp": 1755703431129,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.270628353048151,
+          "timestamp": 1755703737679,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.12835935216520292,
+          "timestamp": 1755703737679,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.09591614613914132,
+          "timestamp": 1755703737679,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.09726588005990698,
+          "timestamp": 1755703737679,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.270628353048151,
+          "timestamp": 1755704043372,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.12835935216520292,
+          "timestamp": 1755704043372,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.09591614613914132,
+          "timestamp": 1755704043372,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.09726588005990698,
+          "timestamp": 1755704043372,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.27156398608774485,
+          "timestamp": 1755704350677,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.12910694250732885,
+          "timestamp": 1755704350677,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.09766766760319814,
+          "timestamp": 1755704350677,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.09902004386572152,
+          "timestamp": 1755704350677,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.5115984266516725,
+          "timestamp": 1755704657574,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.1144465702475317,
+          "timestamp": 1755704657574,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.19286982266245592,
+          "timestamp": 1755704657574,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.19206361798241564,
+          "timestamp": 1755704657574,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.5115984266516725,
+          "timestamp": 1755704964313,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.1144465702475317,
+          "timestamp": 1755704964313,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.19286982266245592,
+          "timestamp": 1755704964313,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.19206361798241564,
+          "timestamp": 1755704964313,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.5109811543476688,
+          "timestamp": 1755705269808,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.1138736158350986,
+          "timestamp": 1755705269808,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.19246486396283383,
+          "timestamp": 1755705269808,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.19165885753467113,
+          "timestamp": 1755705269808,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.47992381142461354,
+          "timestamp": 1755705575143,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.09313748289372382,
+          "timestamp": 1755705575143,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.1266417380771507,
+          "timestamp": 1755705575143,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.12548247017411387,
+          "timestamp": 1755705575143,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.4806350175718673,
+          "timestamp": 1755705880201,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.09257395575698706,
+          "timestamp": 1755705880201,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.12651714828516417,
+          "timestamp": 1755705880201,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.1253581964802112,
+          "timestamp": 1755705880201,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.49078292630147463,
+          "timestamp": 1755706184811,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.0970006514771247,
+          "timestamp": 1755706184811,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.1368720869931571,
+          "timestamp": 1755706184811,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.13570944437452012,
+          "timestamp": 1755706184811,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.49111061618444785,
+          "timestamp": 1755706493827,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.09647756136888543,
+          "timestamp": 1755706493827,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.13678422227149828,
+          "timestamp": 1755706493827,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.13562179161081228,
+          "timestamp": 1755706493827,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.4917982798767995,
+          "timestamp": 1755706800046,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.09542539677592966,
+          "timestamp": 1755706800046,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.13665555064388524,
+          "timestamp": 1755706800046,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.1354934227416501,
+          "timestamp": 1755706800046,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.49216046948313436,
+          "timestamp": 1755707105664,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.09533440034941418,
+          "timestamp": 1755707105664,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.1365350316979966,
+          "timestamp": 1755707105664,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.1353731674592603,
+          "timestamp": 1755707105664,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.4921582118778843,
+          "timestamp": 1755707411126,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.09480417732030486,
+          "timestamp": 1755707411126,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.1364956065063445,
+          "timestamp": 1755707411126,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.13533382665030608,
+          "timestamp": 1755707411126,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.4929670996440247,
+          "timestamp": 1755707716003,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.09424345522020847,
+          "timestamp": 1755707716003,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.13641718809050765,
+          "timestamp": 1755707716003,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.1352555750276856,
+          "timestamp": 1755707716003,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.5167831579107616,
+          "timestamp": 1755708020478,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.11147220792885867,
+          "timestamp": 1755708020478,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.2048100538469471,
+          "timestamp": 1755708020478,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.20492936990584307,
+          "timestamp": 1755708020478,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.5045085712149693,
+          "timestamp": 1755708324828,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.10572687121391731,
+          "timestamp": 1755708324828,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.16177346256057676,
+          "timestamp": 1755708324828,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.16062228542454576,
+          "timestamp": 1755708324828,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.5039440327279922,
+          "timestamp": 1755708629226,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.10567907049910755,
+          "timestamp": 1755708629226,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.1613336502613917,
+          "timestamp": 1755708629226,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.16018169264615598,
+          "timestamp": 1755708629226,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.5039072169827773,
+          "timestamp": 1755708934263,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.10511355537003143,
+          "timestamp": 1755708934263,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.16078087293211174,
+          "timestamp": 1755708934263,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.15962830915549506,
+          "timestamp": 1755708934263,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.513000274757147,
+          "timestamp": 1755709239036,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.10918212652924908,
+          "timestamp": 1755709239036,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.19242220457289794,
+          "timestamp": 1755709239036,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.19161571101425515,
+          "timestamp": 1755709239036,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.5132327570428714,
+          "timestamp": 1755709543583,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.1082033071056164,
+          "timestamp": 1755709543583,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.19200818600142042,
+          "timestamp": 1755709543583,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.19120152363504506,
+          "timestamp": 1755709543583,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.5028754010005768,
+          "timestamp": 1755709849655,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.10237674115189596,
+          "timestamp": 1755709849655,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.15771432644096542,
+          "timestamp": 1755709849655,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.15655952481122898,
+          "timestamp": 1755709849655,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.00893810197245554,
+          "timestamp": 1755710424902,
+          "window_days": 7
+        },
+        {
+          "correlation": -0.00627986725199069,
+          "timestamp": 1755710424902,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.21261363357354607,
+          "timestamp": 1755710424902,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.2201395363692059,
+          "timestamp": 1755710424902,
+          "window_days": 60
+        }
+      ],
+      "BTC_USDT": [
+        {
+          "correlation": 0.5682405763867682,
+          "timestamp": 1755711378957,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.19551140833443942,
+          "timestamp": 1755711378957,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.1522193187426493,
+          "timestamp": 1755711378957,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.11886164554977469,
+          "timestamp": 1755711378957,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.5695908116272445,
+          "timestamp": 1755711852634,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.19616499216176203,
+          "timestamp": 1755711852634,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.15218161452885953,
+          "timestamp": 1755711852634,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.11905906748755693,
+          "timestamp": 1755711852634,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.5695908116272445,
+          "timestamp": 1755712317947,
+          "window_days": 7
+        },
+        {
+          "correlation": 0.19616499216176203,
+          "timestamp": 1755712317947,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.15218161452885953,
+          "timestamp": 1755712317947,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.11905906748755693,
+          "timestamp": 1755712317947,
+          "window_days": 60
+        }
+      ],
+      "BTC_TREASURY": [
+        {
+          "correlation": 0.29680106787643085,
+          "timestamp": 1755712558276,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.20135421936022324,
+          "timestamp": 1755712558276,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.21355830520874722,
+          "timestamp": 1755712558276,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.2962704678967405,
+          "timestamp": 1755713025535,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.2012328665329668,
+          "timestamp": 1755713025535,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.21350352388936855,
+          "timestamp": 1755713025535,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.2962704678967405,
+          "timestamp": 1755713507108,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.2012328665329668,
+          "timestamp": 1755713507108,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.21350352388936855,
+          "timestamp": 1755713507108,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.29562939050970016,
+          "timestamp": 1755713993541,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.20101626160344438,
+          "timestamp": 1755713993541,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.21340811254421627,
+          "timestamp": 1755713993541,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.29562939050970016,
+          "timestamp": 1755714392255,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.20101626160344438,
+          "timestamp": 1755714392255,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.21340811254421627,
+          "timestamp": 1755714392255,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.2954879064499231,
+          "timestamp": 1755714822645,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.20093168947393422,
+          "timestamp": 1755714822645,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.21337157959354042,
+          "timestamp": 1755714822645,
+          "window_days": 60
+        },
+        {
+          "correlation": 0.29530984643258384,
+          "timestamp": 1755715301674,
+          "window_days": 14
+        },
+        {
+          "correlation": 0.20089714126673483,
+          "timestamp": 1755715301674,
+          "window_days": 30
+        },
+        {
+          "correlation": 0.2133556760357523,
+          "timestamp": 1755715301674,
+          "window_days": 60
+        }
+      ],
+      "ETH_VIX": [
+        {
+          "correlation": 0.00034044082810918963,
+          "timestamp": 1755715579222,
+          "window_days": 14
+        },
+        {
+          "correlation": -0.007102083156118737,
+          "timestamp": 1755715579222,
+          "window_days": 30
+        },
+        {
+          "correlation": -0.17025016003305402,
+          "timestamp": 1755715579222,
+          "window_days": 60
+        }
+      ]
+    },
+    "breakout_history": {
+      "ETH_TREASURY": [
+        {
+          "z_score": -2.1456681169976783,
+          "severity": "moderate",
+          "timestamp": 1755627412806
+        }
+      ],
+      "ETH_USDT": [],
+      "BTC_SUI": [
+        {
+          "z_score": -2.089496946052792,
+          "severity": "moderate",
+          "timestamp": 1755637212143
+        },
+        {
+          "z_score": 2.0867507010897324,
+          "severity": "moderate",
+          "timestamp": 1755642721157
+        }
+      ],
+      "SOL_XRP": [
+        {
+          "z_score": -2.046123681201492,
+          "severity": "moderate",
+          "timestamp": 1755673094220
+        },
+        {
+          "z_score": -2.5446039010107957,
+          "severity": "high",
+          "timestamp": 1755691542185
+        },
+        {
+          "z_score": -2.3916736859061767,
+          "severity": "moderate",
+          "timestamp": 1755691846457
+        },
+        {
+          "z_score": -2.2474764435400383,
+          "severity": "moderate",
+          "timestamp": 1755692150687
+        },
+        {
+          "z_score": -2.135534339385965,
+          "severity": "moderate",
+          "timestamp": 1755692455241
+        },
+        {
+          "z_score": -2.0506514989523144,
+          "severity": "moderate",
+          "timestamp": 1755692759566
+        },
+        {
+          "z_score": -2.5370293809492925,
+          "severity": "high",
+          "timestamp": 1755698238347
+        },
+        {
+          "z_score": -2.5049515907444353,
+          "severity": "high",
+          "timestamp": 1755698542890
+        },
+        {
+          "z_score": -2.1103704937284187,
+          "severity": "moderate",
+          "timestamp": 1755698847240
+        },
+        {
+          "z_score": -2.125512163698789,
+          "severity": "moderate",
+          "timestamp": 1755699151792
+        },
+        {
+          "z_score": -2.1401730712396403,
+          "severity": "moderate",
+          "timestamp": 1755699456212
+        },
+        {
+          "z_score": -2.153916681156772,
+          "severity": "moderate",
+          "timestamp": 1755699761350
+        },
+        {
+          "z_score": -2.046805808942568,
+          "severity": "moderate",
+          "timestamp": 1755700066759
+        },
+        {
+          "z_score": -2.009686279226883,
+          "severity": "moderate",
+          "timestamp": 1755700676437
+        },
+        {
+          "z_score": -2.169329441262585,
+          "severity": "moderate",
+          "timestamp": 1755704043372
+        },
+        {
+          "z_score": -2.446732746769064,
+          "severity": "moderate",
+          "timestamp": 1755704350677
+        },
+        {
+          "z_score": 2.4061831432470266,
+          "severity": "moderate",
+          "timestamp": 1755704657574
+        },
+        {
+          "z_score": 2.335370370639678,
+          "severity": "moderate",
+          "timestamp": 1755704964313
+        },
+        {
+          "z_score": 2.2683056310064944,
+          "severity": "moderate",
+          "timestamp": 1755705269808
+        },
+        {
+          "z_score": 2.1010060555260015,
+          "severity": "moderate",
+          "timestamp": 1755706184811
+        },
+        {
+          "z_score": 2.2184248707671466,
+          "severity": "moderate",
+          "timestamp": 1755706493827
+        },
+        {
+          "z_score": 2.4758197185213286,
+          "severity": "moderate",
+          "timestamp": 1755706800046
+        },
+        {
+          "z_score": 2.6981113196324658,
+          "severity": "high",
+          "timestamp": 1755707105664
+        },
+        {
+          "z_score": 2.648204488474055,
+          "severity": "high",
+          "timestamp": 1755707411126
+        },
+        {
+          "z_score": 2.5871746764109522,
+          "severity": "high",
+          "timestamp": 1755707716003
+        },
+        {
+          "z_score": 2.9563106027460275,
+          "severity": "high",
+          "timestamp": 1755708020478
+        },
+        {
+          "z_score": 2.60421069630044,
+          "severity": "high",
+          "timestamp": 1755708324828
+        },
+        {
+          "z_score": 2.5013974022072216,
+          "severity": "high",
+          "timestamp": 1755708629226
+        },
+        {
+          "z_score": 2.423653456225662,
+          "severity": "moderate",
+          "timestamp": 1755708934263
+        },
+        {
+          "z_score": 2.505187099030797,
+          "severity": "high",
+          "timestamp": 1755709239036
+        },
+        {
+          "z_score": 2.4290930044688093,
+          "severity": "moderate",
+          "timestamp": 1755709543583
+        },
+        {
+          "z_score": 2.1799314515413957,
+          "severity": "moderate",
+          "timestamp": 1755709849655
+        },
+        {
+          "z_score": -5.203292145918328,
+          "severity": "extreme",
+          "timestamp": 1755710424902
+        }
+      ],
+      "BTC_USDT": [],
+      "BTC_TREASURY": [
+        {
+          "z_score": 5.678349258578465,
+          "severity": "extreme",
+          "timestamp": 1755712558276
+        },
+        {
+          "z_score": -5.686913979674181,
+          "severity": "extreme",
+          "timestamp": 1755712558276
+        },
+        {
+          "z_score": -5.684132802148835,
+          "severity": "extreme",
+          "timestamp": 1755712558276
+        },
+        {
+          "z_score": 4.884710861490235,
+          "severity": "extreme",
+          "timestamp": 1755713025535
+        },
+        {
+          "z_score": -4.9003055490508,
+          "severity": "extreme",
+          "timestamp": 1755713025535
+        },
+        {
+          "z_score": -4.903388113526002,
+          "severity": "extreme",
+          "timestamp": 1755713025535
+        },
+        {
+          "z_score": 4.3486269433681075,
+          "severity": "extreme",
+          "timestamp": 1755713507108
+        },
+        {
+          "z_score": -4.35985272779827,
+          "severity": "extreme",
+          "timestamp": 1755713507108
+        },
+        {
+          "z_score": -4.362153495765155,
+          "severity": "extreme",
+          "timestamp": 1755713507108
+        },
+        {
+          "z_score": 3.9411596653505128,
+          "severity": "extreme",
+          "timestamp": 1755713993541
+        },
+        {
+          "z_score": -3.9601489004426,
+          "severity": "extreme",
+          "timestamp": 1755713993541
+        },
+        {
+          "z_score": -3.9688093988965947,
+          "severity": "extreme",
+          "timestamp": 1755713993541
+        },
+        {
+          "z_score": 3.6314192647084305,
+          "severity": "extreme",
+          "timestamp": 1755714392255
+        },
+        {
+          "z_score": -3.646580671547334,
+          "severity": "extreme",
+          "timestamp": 1755714392255
+        },
+        {
+          "z_score": -3.6535326063498528,
+          "severity": "extreme",
+          "timestamp": 1755714392255
+        },
+        {
+          "z_score": 3.3782581885530027,
+          "severity": "extreme",
+          "timestamp": 1755714822645
+        },
+        {
+          "z_score": -3.392946886576713,
+          "severity": "extreme",
+          "timestamp": 1755714822645
+        },
+        {
+          "z_score": -3.4009893047336144,
+          "severity": "extreme",
+          "timestamp": 1755714822645
+        },
+        {
+          "z_score": 3.1668160624742767,
+          "severity": "extreme",
+          "timestamp": 1755715301674
+        },
+        {
+          "z_score": -3.1814714885494864,
+          "severity": "extreme",
+          "timestamp": 1755715301674
+        },
+        {
+          "z_score": -3.1892332360537266,
+          "severity": "extreme",
+          "timestamp": 1755715301674
+        }
+      ],
+      "ETH_VIX": [
+        {
+          "z_score": 3.0000375603526743,
+          "severity": "extreme",
+          "timestamp": 1755715579222
+        },
+        {
+          "z_score": 3.0028675919918357,
+          "severity": "extreme",
+          "timestamp": 1755715579222
+        }
+      ]
+    },
+    "settings": {
+      "last_analysis_time": "2025-08-21T02:46:30.875670",
+      "total_pairs_analyzed": 8,
+      "total_breakouts_detected": 59
+    }
+  }
+}

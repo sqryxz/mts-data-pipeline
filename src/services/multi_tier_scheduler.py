@@ -63,9 +63,9 @@ class MultiTierScheduler:
                  state_file: str = "data/multi_tier_scheduler_state.json"):
         
         # Default asset configuration optimized for minimal API calls
-        self.high_frequency_assets = high_frequency_assets or ['bitcoin', 'ethereum']
+        self.high_frequency_assets = high_frequency_assets or ['bitcoin', 'ethereum', 'ripple', 'sui', 'ethena']
         self.hourly_assets = daily_assets or [
-            'tether', 'solana', 'ripple', 'bittensor', 'fetch-ai', 
+            'tether', 'solana', 'bittensor', 'fetch-ai', 
             'singularitynet', 'render-token', 'ocean-protocol'
         ]
         self.macro_indicators = macro_indicators or [

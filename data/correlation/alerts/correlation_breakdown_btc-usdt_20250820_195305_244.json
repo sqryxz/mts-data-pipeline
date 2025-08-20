@@ -1,0 +1,49 @@
+{
+  "timestamp": 1755690785244,
+  "alert_type": "correlation_breakdown",
+  "alert_id": "corr_breakdown_btc-usdt_20250820_195305_244_4ea0fac4",
+  "pair": "BTC_USDT",
+  "pair_type": "crypto_crypto",
+  "breakdown_details": {
+    "current_correlation": -0.19222109603257248,
+    "historical_average_correlation": 0.003014544151662317,
+    "z_score": -2.588938332446183,
+    "significance_level": 0.0,
+    "threshold_exceeded": true,
+    "breakdown_direction": "negative",
+    "severity": "high",
+    "duration_minutes": 0
+  },
+  "market_context": {
+    "asset1_price": 0.0,
+    "asset1_24h_change": 0.0,
+    "asset2_price": 0.0,
+    "asset2_24h_change": 0.0,
+    "market_volatility": "normal"
+  },
+  "statistical_analysis": {
+    "correlation_windows": {
+      "60d": -0.19222109603257248
+    },
+    "confidence_interval": {
+      "lower": -0.2104838002585078,
+      "upper": -0.17382427300888179
+    },
+    "p_value": 0.0,
+    "sample_size": 100
+  },
+  "recommended_actions": [
+    "Strong negative correlation breakdown detected",
+    "Consider hedging strategies immediately",
+    "High severity correlation change - monitor closely",
+    "Watch for correlation normalization",
+    "Consider position adjustments",
+    "Monitor related asset pairs"
+  ],
+  "alert_metadata": {
+    "severity": "high",
+    "category": "correlation_analysis",
+    "expires_at": 1755694385244,
+    "related_pairs": []
+  }
+}

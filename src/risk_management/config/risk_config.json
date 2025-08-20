@@ -23,7 +23,7 @@
   "risk_assessment": {
     "default_risk_reward_ratio": 2.0,
     "confidence_threshold": 0.5,
-    "processing_timeout_ms": 5000
+    "processing_timeout_ms": 5000.0
   },
   "market_conditions": {
     "volatility_warning_threshold": 0.04,

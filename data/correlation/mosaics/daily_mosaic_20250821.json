@@ -1,0 +1,637 @@
+{
+  "mosaic_type": "daily",
+  "generation_date": "2025-08-21",
+  "correlation_matrix": {
+    "timestamp": 1755715307033,
+    "date": "2025-08-21",
+    "pairs": [
+      "BTC_ETH",
+      "BTC_SOL",
+      "BTC_XRP",
+      "BTC_SUI",
+      "BTC_ENA",
+      "ETH_SOL",
+      "ETH_XRP",
+      "ETH_SUI",
+      "ETH_ENA",
+      "SOL_XRP",
+      "SOL_ENA",
+      "XRP_ENA",
+      "BTC_USDT",
+      "ETH_USDT",
+      "BTC_BTT",
+      "ETH_BTT",
+      "BTC_VIX",
+      "ETH_VIX",
+      "BTC_DXY",
+      "ETH_DXY",
+      "BTC_TREASURY",
+      "ETH_TREASURY"
+    ],
+    "correlation_windows": [
+      7,
+      14,
+      30,
+      60
+    ],
+    "matrix": {
+      "BTC_ETH": {
+        "7d": {
+          "correlation": -0.006548612692945205,
+          "significance": "False",
+          "p_value": 0.7170507550127798,
+          "sample_size": 12433
+        },
+        "14d": {
+          "correlation": -0.0049282277406361525,
+          "significance": "False",
+          "p_value": 0.7275971789568982,
+          "sample_size": 12433
+        },
+        "30d": {
+          "correlation": 0.06835904187113635,
+          "significance": "True",
+          "p_value": 2.677431169454823e-12,
+          "sample_size": 12433
+        },
+        "60d": {
+          "correlation": 0.048526830985577724,
+          "significance": "True",
+          "p_value": 6.431865326285822e-08,
+          "sample_size": 12433
+        }
+      },
+      "BTC_SOL": {
+        "7d": {
+          "correlation": 0.2899915452316887,
+          "significance": "True",
+          "p_value": 1.1559747574609282e-52,
+          "sample_size": 12024
+        },
+        "14d": {
+          "correlation": 0.19838567530979406,
+          "significance": "True",
+          "p_value": 7.160478924837211e-39,
+          "sample_size": 12024
+        },
+        "30d": {
+          "correlation": 0.3826272644551109,
+          "significance": "True",
+          "p_value": 3.1742938337e-314,
+          "sample_size": 12024
+        },
+        "60d": {
+          "correlation": 0.4141986804332771,
+          "significance": "True",
+          "p_value": 0.0,
+          "sample_size": 12024
+        }
+      },
+      "BTC_XRP": {
+        "7d": {
+          "correlation": 0.03892130333421847,
+          "significance": "True",
+          "p_value": 0.031074095743708556,
+          "sample_size": 10672
+        },
+        "14d": {
+          "correlation": 0.020299474756668684,
+          "significance": "False",
+          "p_value": 0.15937018308867515,
+          "sample_size": 10672
+        },
+        "30d": {
+          "correlation": 0.14262871218505435,
+          "significance": "True",
+          "p_value": 5.321879293083799e-45,
+          "sample_size": 10672
+        },
+        "60d": {
+          "correlation": 0.2614370759151024,
+          "significance": "True",
+          "p_value": 8.773598851232035e-166,
+          "sample_size": 10672
+        }
+      },
+      "BTC_SUI": {
+        "7d": {
+          "correlation": 0.025963101164725656,
+          "significance": "False",
+          "p_value": 0.14859139040784006,
+          "sample_size": 7596
+        },
+        "14d": {
+          "correlation": 0.3269420213241786,
+          "significance": "True",
+          "p_value": 5.499673758327657e-97,
+          "sample_size": 7596
+        },
+        "30d": {
+          "correlation": 0.367889794673758,
+          "significance": "True",
+          "p_value": 1.3101055705255604e-209,
+          "sample_size": 7596
+        },
+        "60d": {
+          "correlation": 0.32110081002049784,
+          "significance": "True",
+          "p_value": 6.219990874236349e-181,
+          "sample_size": 7596
+        }
+      },
+      "BTC_ENA": {
+        "7d": {
+          "correlation": NaN,
+          "significance": false,
+          "p_value": NaN,
+          "sample_size": 4226
+        },
+        "14d": {
+          "correlation": NaN,
+          "significance": false,
+          "p_value": NaN,
+          "sample_size": 4226
+        },
+        "30d": {
+          "correlation": NaN,
+          "significance": false,
+          "p_value": NaN,
+          "sample_size": 4226
+        },
+        "60d": {
+          "correlation": NaN,
+          "significance": false,
+          "p_value": NaN,
+          "sample_size": 4226
+        }
+      },
+      "ETH_SOL": {
+        "7d": {
+          "correlation": -0.35384517005070376,
+          "significance": "True",
+          "p_value": 4.5749877341020756e-135,
+          "sample_size": 15954
+        },
+        "14d": {
+          "correlation": 0.16131004729295842,
+          "significance": "True",
+          "p_value": 3.1354965279114396e-48,
+          "sample_size": 15954
+        },
+        "30d": {
+          "correlation": 0.444344519534862,
+          "significance": "True",
+          "p_value": 0.0,
+          "sample_size": 15954
+        },
+        "60d": {
+          "correlation": 0.382360324212446,
+          "significance": "True",
+          "p_value": 0.0,
+          "sample_size": 15954
+        }
+      },
+      "ETH_XRP": {
+        "7d": {
+          "correlation": 0.5078226985807262,
+          "significance": "True",
+          "p_value": 1e-323,
+          "sample_size": 14599
+        },
+        "14d": {
+          "correlation": 0.15388339281384517,
+          "significance": "True",
+          "p_value": 8.287726747751526e-47,
+          "sample_size": 14599
+        },
+        "30d": {
+          "correlation": 0.36834106901347624,
+          "significance": "True",
+          "p_value": 0.0,
+          "sample_size": 14599
+        },
+        "60d": {
+          "correlation": 0.36831370429139415,
+          "significance": "True",
+          "p_value": 0.0,
+          "sample_size": 14599
+        }
+      },
+      "ETH_SUI": {
+        "7d": {
+          "correlation": 0.025172028716530903,
+          "significance": "False",
+          "p_value": 0.07505562577219019,
+          "sample_size": 11520
+        },
+        "14d": {
+          "correlation": 0.015333189890012444,
+          "significance": "False",
+          "p_value": 0.17885348816071203,
+          "sample_size": 11520
+        },
+        "30d": {
+          "correlation": 0.16331926691593235,
+          "significance": "True",
+          "p_value": 1.310378389074636e-63,
+          "sample_size": 11520
+        },
+        "60d": {
+          "correlation": 0.3112932257371888,
+          "significance": "True",
+          "p_value": 2.5313193369509624e-256,
+          "sample_size": 11520
+        }
+      },
+      "ETH_ENA": {
+        "7d": {
+          "correlation": NaN,
+          "significance": false,
+          "p_value": NaN,
+          "sample_size": 8164
+        },
+        "14d": {
+          "correlation": NaN,
+          "significance": false,
+          "p_value": NaN,
+          "sample_size": 8164
+        },
+        "30d": {
+          "correlation": NaN,
+          "significance": false,
+          "p_value": NaN,
+          "sample_size": 8164
+        },
+        "60d": {
+          "correlation": NaN,
+          "significance": false,
+          "p_value": NaN,
+          "sample_size": 8164
+        }
+      },
+      "SOL_XRP": {
+        "7d": {
+          "correlation": 0.5367413600749612,
+          "significance": "True",
+          "p_value": 0.0,
+          "sample_size": 14072
+        },
+        "14d": {
+          "correlation": 0.15428592038660516,
+          "significance": "True",
+          "p_value": 5.218265004412833e-43,
+          "sample_size": 14072
+        },
+        "30d": {
+          "correlation": 0.3802265872578465,
+          "significance": "True",
+          "p_value": 0.0,
+          "sample_size": 14072
+        },
+        "60d": {
+          "correlation": 0.41609018258588365,
+          "significance": "True",
+          "p_value": 0.0,
+          "sample_size": 14072
+        }
+      },
+      "SOL_ENA": {
+        "7d": {
+          "correlation": NaN,
+          "significance": false,
+          "p_value": NaN,
+          "sample_size": 7684
+        },
+        "14d": {
+          "correlation": NaN,
+          "significance": false,
+          "p_value": NaN,
+          "sample_size": 7684
+        },
+        "30d": {
+          "correlation": NaN,
+          "significance": false,
+          "p_value": NaN,
+          "sample_size": 7684
+        },
+        "60d": {
+          "correlation": NaN,
+          "significance": false,
+          "p_value": NaN,
+          "sample_size": 7684
+        }
+      },
+      "XRP_ENA": {
+        "7d": {
+          "correlation": NaN,
+          "significance": false,
+          "p_value": NaN,
+          "sample_size": 6362
+        },
+        "14d": {
+          "correlation": NaN,
+          "significance": false,
+          "p_value": NaN,
+          "sample_size": 6362
+        },
+        "30d": {
+          "correlation": NaN,
+          "significance": false,
+          "p_value": NaN,
+          "sample_size": 6362
+        },
+        "60d": {
+          "correlation": NaN,
+          "significance": false,
+          "p_value": NaN,
+          "sample_size": 6362
+        }
+      },
+      "BTC_USDT": {
+        "7d": {
+          "correlation": 9.911653113507627e-07,
+          "significance": "False",
+          "p_value": 0.9999592700519885,
+          "sample_size": 8657
+        },
+        "14d": {
+          "correlation": -1.1317363022260522e-06,
+          "significance": "False",
+          "p_value": 0.9999410246831968,
+          "sample_size": 8657
+        },
+        "30d": {
+          "correlation": 7.27250638692516e-07,
+          "significance": "False",
+          "p_value": 0.9999484007043721,
+          "sample_size": 8657
+        },
+        "60d": {
+          "correlation": 7.5211322646751e-07,
+          "significance": "False",
+          "p_value": 0.9999441730015257,
+          "sample_size": 8657
+        }
+      },
+      "ETH_USDT": {
+        "7d": {
+          "correlation": -0.007602781008308287,
+          "significance": "False",
+          "p_value": 0.6072540624746208,
+          "sample_size": 14852
+        },
+        "14d": {
+          "correlation": -0.004691434628984532,
+          "significance": "False",
+          "p_value": 0.6727134667116639,
+          "sample_size": 14852
+        },
+        "30d": {
+          "correlation": 0.02147739542777334,
+          "significance": "True",
+          "p_value": 0.014053147871098756,
+          "sample_size": 14852
+        },
+        "60d": {
+          "correlation": 0.034316975713321166,
+          "significance": "True",
+          "p_value": 2.950297267315563e-05,
+          "sample_size": 14852
+        }
+      },
+      "BTC_BTT": {
+        "7d": {
+          "correlation": 0.0038515623500681023,
+          "significance": "False",
+          "p_value": 0.8420004109049497,
+          "sample_size": 10267
+        },
+        "14d": {
+          "correlation": 0.0022657954340724916,
+          "significance": "False",
+          "p_value": 0.8814713032704315,
+          "sample_size": 10267
+        },
+        "30d": {
+          "correlation": 0.030810124700242972,
+          "significance": "True",
+          "p_value": 0.003060425984141021,
+          "sample_size": 10267
+        },
+        "60d": {
+          "correlation": 0.22320480298315928,
+          "significance": "True",
+          "p_value": 1.0033418461353498e-115,
+          "sample_size": 10267
+        }
+      },
+      "ETH_BTT": {
+        "7d": {
+          "correlation": 0.4919626043027274,
+          "significance": "True",
+          "p_value": 5.784886076486357e-279,
+          "sample_size": 14239
+        },
+        "14d": {
+          "correlation": 0.4633332497890553,
+          "significance": "True",
+          "p_value": 0.0,
+          "sample_size": 14239
+        },
+        "30d": {
+          "correlation": 0.43311026004252706,
+          "significance": "True",
+          "p_value": 0.0,
+          "sample_size": 14239
+        },
+        "60d": {
+          "correlation": 0.6034574778583326,
+          "significance": "True",
+          "p_value": 0.0,
+          "sample_size": 14239
+        }
+      },
+      "BTC_VIX": {
+        "7d": {
+          "correlation": -0.0019801133284603548,
+          "significance": "False",
+          "p_value": 0.9620472945801722,
+          "sample_size": 4322
+        },
+        "14d": {
+          "correlation": -0.05742426513709669,
+          "significance": "False",
+          "p_value": 0.16578030403803387,
+          "sample_size": 4322
+        },
+        "30d": {
+          "correlation": -0.13049758716692747,
+          "significance": "True",
+          "p_value": 5.969872189006922e-14,
+          "sample_size": 4322
+        },
+        "60d": {
+          "correlation": -0.06345145511744547,
+          "significance": "True",
+          "p_value": 3.259114887016777e-05,
+          "sample_size": 4322
+        }
+      },
+      "ETH_VIX": {
+        "7d": {
+          "correlation": NaN,
+          "significance": false,
+          "p_value": NaN,
+          "sample_size": 8258
+        },
+        "14d": {
+          "correlation": 0.00034044082810918963,
+          "significance": "False",
+          "p_value": 0.9819211451717379,
+          "sample_size": 8258
+        },
+        "30d": {
+          "correlation": 0.07901331167753098,
+          "significance": "True",
+          "p_value": 1.7058738244502965e-11,
+          "sample_size": 8258
+        },
+        "60d": {
+          "correlation": -0.10155511003971247,
+          "significance": "True",
+          "p_value": 2.6809823137580547e-20,
+          "sample_size": 8258
+        }
+      },
+      "BTC_DXY": {
+        "7d": {
+          "correlation": NaN,
+          "significance": false,
+          "p_value": NaN,
+          "sample_size": 4321
+        },
+        "14d": {
+          "correlation": NaN,
+          "significance": false,
+          "p_value": NaN,
+          "sample_size": 4321
+        },
+        "30d": {
+          "correlation": -0.0863873506087716,
+          "significance": "True",
+          "p_value": 7.125331728887296e-07,
+          "sample_size": 4321
+        },
+        "60d": {
+          "correlation": -0.18713611670386418,
+          "significance": "True",
+          "p_value": 4.967357184780882e-35,
+          "sample_size": 4321
+        }
+      },
+      "ETH_DXY": {
+        "7d": {
+          "correlation": NaN,
+          "significance": false,
+          "p_value": NaN,
+          "sample_size": 6244
+        },
+        "14d": {
+          "correlation": NaN,
+          "significance": false,
+          "p_value": NaN,
+          "sample_size": 6244
+        },
+        "30d": {
+          "correlation": NaN,
+          "significance": false,
+          "p_value": NaN,
+          "sample_size": 6244
+        },
+        "60d": {
+          "correlation": NaN,
+          "significance": false,
+          "p_value": NaN,
+          "sample_size": 6244
+        }
+      },
+      "BTC_TREASURY": {
+        "7d": {
+          "correlation": NaN,
+          "significance": false,
+          "p_value": NaN,
+          "sample_size": 4321
+        },
+        "14d": {
+          "correlation": 0.29530984643258384,
+          "significance": "True",
+          "p_value": 3.3879706637226055e-13,
+          "sample_size": 4321
+        },
+        "30d": {
+          "correlation": 0.20089714126673483,
+          "significance": "True",
+          "p_value": 3.0047978568452054e-31,
+          "sample_size": 4321
+        },
+        "60d": {
+          "correlation": 0.19394745750640738,
+          "significance": "True",
+          "p_value": 1.508818916480153e-37,
+          "sample_size": 4321
+        }
+      },
+      "ETH_TREASURY": {
+        "7d": {
+          "correlation": NaN,
+          "significance": false,
+          "p_value": NaN,
+          "sample_size": 8275
+        },
+        "14d": {
+          "correlation": NaN,
+          "significance": false,
+          "p_value": NaN,
+          "sample_size": 8275
+        },
+        "30d": {
+          "correlation": NaN,
+          "significance": false,
+          "p_value": NaN,
+          "sample_size": 8275
+        },
+        "60d": {
+          "correlation": NaN,
+          "significance": false,
+          "p_value": NaN,
+          "sample_size": 8275
+        }
+      }
+    },
+    "summary": {
+      "total_pairs": 22,
+      "total_correlations": 88,
+      "significant_correlations": 43,
+      "average_correlation_strength": 0.156122673497452,
+      "strong_correlations": 0,
+      "weak_correlations": 41,
+      "negative_correlations": 13
+    },
+    "metadata": {
+      "generation_time": "2025-08-21T02:41:47.033589",
+      "config_used": "config/correlation_analysis/mosaic_settings.json",
+      "generation_time_seconds": 44.68726086616516
+    }
+  },
+  "key_findings": [
+    "Analyzed 22 asset pairs with correlation data",
+    "Found 43 statistically significant correlations",
+    "Found 13 negative correlations"
+  ],
+  "recommendations": [
+    "Low average correlation suggests good diversification opportunities",
+    "Monitor correlation breakdowns for trading opportunities",
+    "Review correlation trends for portfolio rebalancing decisions"
+  ],
+  "file_locations": {}
+}

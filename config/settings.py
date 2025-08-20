@@ -101,7 +101,7 @@ class Config:
         """Setup comprehensive real-time configuration"""
         # Real-Time Collection Settings
         self.REALTIME_ENABLED = os.getenv('REALTIME_ENABLED', 'true').lower() == 'true'
-        self.REALTIME_SYMBOLS = self._parse_list(os.getenv('REALTIME_SYMBOLS', 'BTCUSDT,ETHUSDT,XRPUSDT,TAOUSDT,FETUSDT,AGIXUSDT,RNDRUSDT,OCEANUSDT'))
+        self.REALTIME_SYMBOLS = self._parse_list(os.getenv('REALTIME_SYMBOLS', 'BTCUSDT,ETHUSDT,XRPUSDT,SUIUSDT,ENAUSDT,TAOUSDT,FETUSDT,AGIXUSDT,RNDRUSDT,OCEANUSDT'))
         self.REALTIME_EXCHANGES = self._parse_list(os.getenv('REALTIME_EXCHANGES', 'binance'))
         
         # Order Book Configuration
