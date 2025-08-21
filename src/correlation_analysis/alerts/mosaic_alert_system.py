@@ -11,8 +11,10 @@ from pathlib import Path
 from typing import Dict, List, Optional, Any, Tuple
 
 from .alert_templates import AlertTemplates
+from .enhanced_alert_templates import EnhancedAlertTemplates
 from .discord_integration import CorrelationDiscordIntegration
 from ..visualization.mosaic_generator import MosaicGenerator
+from ..analytics.enhanced_mosaic_analyzer import EnhancedMosaicAnalyzer
 
 
 class MosaicAlertSystem:
@@ -31,7 +33,9 @@ class MosaicAlertSystem:
         self.logger = logging.getLogger(__name__)
         self.alert_directory = Path(alert_directory)
         self.templates = AlertTemplates()
+        self.enhanced_templates = EnhancedAlertTemplates()
         self.mosaic_generator = MosaicGenerator()
+        self.enhanced_analyzer = EnhancedMosaicAnalyzer()
         
         # Initialize Discord integration
         self.discord_integration = CorrelationDiscordIntegration(config=discord_config)
@@ -44,6 +48,72 @@ class MosaicAlertSystem:
             self.logger.info("Discord integration enabled for mosaic alerts")
         else:
             self.logger.info("Discord integration disabled - no webhook URL provided")
+    
+    def generate_enhanced_daily_mosaic_alert(self, force_regeneration: bool = False) -> str:
+        """
+        Generate enhanced daily mosaic alert with actionable insights and trading opportunities.
+        
+        Args:
+            force_regeneration: If True, regenerate even if alert exists for today
+            
+        Returns:
+            str: Filepath of saved enhanced alert file
+        """
+        try:
+            self.logger.info("Starting enhanced daily mosaic alert generation")
+            
+            # Check if enhanced alert already exists for today
+            today = datetime.now().strftime('%Y-%m-%d')
+            existing_alert = self._find_existing_enhanced_daily_alert(today)
+            
+            if existing_alert and not force_regeneration:
+                self.logger.info(f"Enhanced daily mosaic alert already exists for {today}: {existing_alert}")
+                return str(existing_alert)
+            
+            # Generate daily mosaic data
+            mosaic_data = self.mosaic_generator.generate_daily_mosaic()
+            
+            if not mosaic_data:
+                self.logger.error("Failed to generate daily mosaic data")
+                return ""
+            
+            # Perform enhanced analysis
+            enhanced_analysis = self.enhanced_analyzer.analyze_mosaic(mosaic_data)
+            
+            if not enhanced_analysis:
+                self.logger.error("Failed to perform enhanced mosaic analysis")
+                return ""
+            
+            # Generate enhanced alert using new templates
+            enhanced_alert = self.enhanced_templates.create_enhanced_mosaic_alert(enhanced_analysis)
+            
+            if not enhanced_alert:
+                self.logger.error("Failed to generate enhanced mosaic alert template")
+                return ""
+            
+            # Generate filename
+            filename = self._generate_filename("enhanced_daily_mosaic")
+            filepath = self.alert_directory / filename
+            
+            # Save enhanced alert atomically
+            if not self._save_alert_atomic(enhanced_alert, filepath):
+                return ""
+            
+            # Send to Discord if integration is enabled
+            if self.discord_integration.discord:
+                self.logger.info("Sending enhanced mosaic alert to Discord...")
+                discord_success = self.discord_integration.send_enhanced_mosaic_alert(enhanced_analysis, str(filepath))
+                if discord_success:
+                    self.logger.info("✅ Enhanced mosaic alert sent to Discord successfully")
+                else:
+                    self.logger.warning("⚠️ Failed to send enhanced mosaic alert to Discord")
+            
+            self.logger.info(f"Generated enhanced daily mosaic alert: {filepath}")
+            return str(filepath)
+            
+        except Exception as e:
+            self.logger.error(f"Failed to generate enhanced daily mosaic alert: {e}")
+            return ""
     
     def generate_daily_mosaic_alert(self, force_regeneration: bool = False) -> str:
         """
@@ -349,6 +419,28 @@ class MosaicAlertSystem:
             
         except Exception as e:
             self.logger.error(f"Failed to find existing daily alert: {e}")
+            return None
+    
+    def _find_existing_enhanced_daily_alert(self, date: str) -> Optional[Path]:
+        """Find existing enhanced daily alert for a specific date."""
+        try:
+            for alert_file in self.alert_directory.glob("*.json"):
+                try:
+                    with open(alert_file, 'r') as f:
+                        alert_data = json.load(f)
+                    
+                    if (alert_data.get('alert_type') == 'enhanced_daily_correlation_mosaic' and 
+                        alert_data.get('date') == date):
+                        return alert_file
+                        
+                except Exception as e:
+                    self.logger.debug(f"Failed to read alert file {alert_file}: {e}")
+                    continue
+            
+            return None
+            
+        except Exception as e:
+            self.logger.error(f"Failed to find existing enhanced daily alert: {e}")
             return None
     
     def _generate_filename(self, alert_type: str) -> str:
