@@ -149,7 +149,10 @@ class CorrelationDiscordIntegration:
             key_findings = mosaic_data.get('key_findings', [])
             recommendations = mosaic_data.get('recommendations', [])
             market_insights = mosaic_data.get('market_insights', [])
-            
+
+            # Extract notable pairs from key findings
+            notable_pairs = self._extract_notable_pairs_from_findings(key_findings)
+
             # Create embed
             embed = {
                 "title": "🎨 Daily Correlation Mosaic Alert",
@@ -158,7 +161,7 @@ class CorrelationDiscordIntegration:
                 "timestamp": datetime.now().isoformat(),
                 "fields": []
             }
-            
+
             # Add summary fields
             embed["fields"].extend([
                 {
@@ -168,22 +171,44 @@ class CorrelationDiscordIntegration:
                             f"**Average Strength:** {summary.get('average_correlation_strength', 0.0):.3f}\n"
                             f"**Strong Correlations:** {summary.get('strong_correlations', 0)}",
                     "inline": True
-                },
-                {
-                    "name": "📈 Market Insights",
-                    "value": "\n".join(market_insights[:3]) if market_insights else "No significant insights",
-                    "inline": False
                 }
             ])
-            
-            # Add key findings
-            if key_findings:
+
+            # Add pairs worth watching section
+            if notable_pairs:
+                pairs_text = []
+                if notable_pairs.get('strong_positive'):
+                    pairs_text.append(f"🔥 **Strong Positive:** {', '.join(notable_pairs['strong_positive'][:2])}")
+                if notable_pairs.get('strong_negative'):
+                    pairs_text.append(f"🛡️ **Strong Negative:** {', '.join(notable_pairs['strong_negative'][:2])}")
+                if notable_pairs.get('high_significance'):
+                    pairs_text.append(f"📊 **Highly Significant:** {', '.join(notable_pairs['high_significance'][:2])}")
+                if notable_pairs.get('correlation_changes'):
+                    pairs_text.append(f"⚡ **Major Changes:** {', '.join(notable_pairs['correlation_changes'][:2])}")
+
+                if pairs_text:
+                    embed["fields"].append({
+                        "name": "👀 Pairs Worth Watching",
+                        "value": "\n".join(pairs_text),
+                        "inline": False
+                    })
+
+            # Add market insights
+            embed["fields"].append({
+                "name": "📈 Market Insights",
+                "value": "\n".join(market_insights[:3]) if market_insights else "Low correlation environment suggests good diversification opportunities",
+                "inline": False
+            })
+
+            # Add key findings (filter out the specific pair findings since we show them separately)
+            general_findings = [f for f in key_findings if not any(keyword in f.lower() for keyword in ['strong positive', 'strong negative', 'highly significant', 'correlation changes'])]
+            if general_findings:
                 embed["fields"].append({
-                    "name": "🔍 Key Findings",
-                    "value": "\n".join(f"• {finding}" for finding in key_findings[:3]),
+                    "name": "🔍 Analysis",
+                    "value": "\n".join(f"• {finding}" for finding in general_findings[:3]),
                     "inline": False
                 })
-            
+
             # Add recommendations
             if recommendations:
                 embed["fields"].append({
@@ -191,15 +216,15 @@ class CorrelationDiscordIntegration:
                     "value": "\n".join(f"• {rec}" for rec in recommendations[:3]),
                     "inline": False
                 })
-            
+
             # Add footer with file path
             if alert_filepath:
                 embed["footer"] = {
                     "text": f"Detailed report: {Path(alert_filepath).name}"
                 }
-            
+
             return embed
-            
+
         except Exception as e:
             self.logger.error(f"Error creating mosaic embed: {e}")
             return {
@@ -208,6 +233,45 @@ class CorrelationDiscordIntegration:
                 "color": 0xff0000,  # Red for error
                 "timestamp": datetime.now().isoformat()
             }
+
+    def _extract_notable_pairs_from_findings(self, key_findings: List[str]) -> Dict[str, List[str]]:
+        """Extract notable pairs from key findings."""
+        notable_pairs = {
+            'strong_positive': [],
+            'strong_negative': [],
+            'high_significance': [],
+            'correlation_changes': []
+        }
+
+        try:
+            for finding in key_findings:
+                finding_lower = finding.lower()
+
+                if 'strong positive correlations:' in finding_lower:
+                    # Extract pairs like "BTC_XRP (60d: 0.448), ETH_XRP (30d: 0.239)"
+                    pairs_text = finding.split(': ', 1)[1]
+                    pairs = [pair.strip() for pair in pairs_text.split(', ')]
+                    notable_pairs['strong_positive'] = pairs
+
+                elif 'strong negative correlations:' in finding_lower:
+                    pairs_text = finding.split(': ', 1)[1]
+                    pairs = [pair.strip() for pair in pairs_text.split(', ')]
+                    notable_pairs['strong_negative'] = pairs
+
+                elif 'highly significant pairs:' in finding_lower:
+                    pairs_text = finding.split(': ', 1)[1]
+                    pairs = [pair.strip() for pair in pairs_text.split(', ')]
+                    notable_pairs['high_significance'] = pairs
+
+                elif 'notable correlation changes:' in finding_lower:
+                    pairs_text = finding.split(': ', 1)[1]
+                    pairs = [pair.strip() for pair in pairs_text.split(', ')]
+                    notable_pairs['correlation_changes'] = pairs
+
+        except Exception as e:
+            self.logger.error(f"Error extracting notable pairs from findings: {e}")
+
+        return notable_pairs
     
     def _create_breakdown_embed(self, pair: str, correlation_data: Dict[str, Any]) -> Dict[str, Any]:
         """Create Discord embed for correlation breakdown alert."""

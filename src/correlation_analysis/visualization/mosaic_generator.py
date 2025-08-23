@@ -447,49 +447,176 @@ class MosaicGenerator:
     def _extract_key_findings(self, matrix_data: Dict[str, Any]) -> List[str]:
         """Extract key findings from correlation matrix."""
         findings = []
-        
+
         try:
             summary = matrix_data.get('summary', {})
             matrix = matrix_data.get('matrix', {})
-            
+
             # Add summary findings
             total_pairs = summary.get('total_pairs', 0)
             significant_correlations = summary.get('significant_correlations', 0)
             average_correlation = summary.get('average_correlation_strength', 0.0)
             strong_correlations = summary.get('strong_correlations', 0)
             negative_correlations = summary.get('negative_correlations', 0)
-            
+
             findings.append(f"Analyzed {total_pairs} asset pairs with correlation data")
-            
+
             if significant_correlations > 0:
                 findings.append(f"Found {significant_correlations} statistically significant correlations")
-            
+
             if abs(average_correlation) > 0.5:
                 findings.append(f"Average correlation strength: {average_correlation:.3f}")
-            
+
             if strong_correlations > 0:
                 findings.append(f"Identified {strong_correlations} strong correlations (|r| >= 0.7)")
-            
+
             if negative_correlations > 0:
                 findings.append(f"Found {negative_correlations} negative correlations")
-            
-            # Extract specific pair findings
-            strong_pairs = []
-            for pair, correlations in matrix.items():
-                for window, data in correlations.items():
-                    correlation = data.get('correlation', 0.0)
-                    if abs(correlation) >= 0.7 and not np.isnan(correlation):
-                        strong_pairs.append(f"{pair} ({window}: {correlation:.3f})")
-            
-            if strong_pairs:
-                findings.append(f"Strongest correlations: {', '.join(strong_pairs[:5])}")
-            
+
+            # Extract and rank specific pairs worth paying attention to
+            notable_pairs = self._identify_notable_pairs(matrix)
+
+            # Add top pairs to findings
+            if notable_pairs['strong_positive']:
+                strong_pos = notable_pairs['strong_positive'][:3]
+                findings.append(f"🔥 Strong positive correlations: {', '.join(strong_pos)}")
+
+            if notable_pairs['strong_negative']:
+                strong_neg = notable_pairs['strong_negative'][:3]
+                findings.append(f"🛡️ Strong negative correlations: {', '.join(strong_neg)}")
+
+            if notable_pairs['high_significance']:
+                high_sig = notable_pairs['high_significance'][:3]
+                findings.append(f"📊 Highly significant pairs: {', '.join(high_sig)}")
+
+            if notable_pairs['correlation_changes']:
+                changes = notable_pairs['correlation_changes'][:2]
+                findings.append(f"⚡ Notable correlation changes: {', '.join(changes)}")
+
         except Exception as e:
             self.logger.error(f"Failed to extract key findings: {e}")
             findings.append("Error extracting key findings")
-        
+
         return findings
-    
+
+    def _identify_notable_pairs(self, matrix: Dict[str, Any]) -> Dict[str, List[str]]:
+        """
+        Identify notable pairs worth paying attention to based on correlation strength,
+        significance, and changes over time.
+
+        Returns:
+            Dict with keys: strong_positive, strong_negative, high_significance, correlation_changes
+        """
+        notable_pairs = {
+            'strong_positive': [],
+            'strong_negative': [],
+            'high_significance': [],
+            'correlation_changes': []
+        }
+
+        try:
+            # First pass: collect all correlation data
+            pair_analysis = {}
+
+            for pair, correlations in matrix.items():
+                pair_analysis[pair] = {
+                    'correlations': {},
+                    'max_abs_corr': 0.0,
+                    'min_p_value': 1.0,
+                    'has_significant': False
+                }
+
+                for window, data in correlations.items():
+                    correlation = data.get('correlation', np.nan)
+                    p_value = data.get('p_value', np.nan)
+                    significance = data.get('significance', False)
+
+                    if not np.isnan(correlation):
+                        pair_analysis[pair]['correlations'][window] = correlation
+                        pair_analysis[pair]['max_abs_corr'] = max(pair_analysis[pair]['max_abs_corr'], abs(correlation))
+
+                    if not np.isnan(p_value) and p_value < pair_analysis[pair]['min_p_value']:
+                        pair_analysis[pair]['min_p_value'] = p_value
+
+                    if significance:
+                        pair_analysis[pair]['has_significant'] = True
+
+            # Identify strong positive correlations (focus on most recent/important windows)
+            for pair, analysis in pair_analysis.items():
+                # Check 30d and 60d windows for strong correlations (longer-term more reliable)
+                for window in ['60d', '30d']:
+                    if window in analysis['correlations']:
+                        corr = analysis['correlations'][window]
+                        if not np.isnan(corr) and corr >= 0.7:
+                            notable_pairs['strong_positive'].append(f"{pair} ({window}: {corr:.3f})")
+                            break  # Only add once per pair
+
+            # Identify strong negative correlations
+            for pair, analysis in pair_analysis.items():
+                for window in ['60d', '30d']:
+                    if window in analysis['correlations']:
+                        corr = analysis['correlations'][window]
+                        if not np.isnan(corr) and corr <= -0.7:
+                            notable_pairs['strong_negative'].append(f"{pair} ({window}: {corr:.3f})")
+                            break
+
+            # Identify highly significant correlations (very low p-values)
+            for pair, analysis in pair_analysis.items():
+                if analysis['has_significant'] and analysis['min_p_value'] < 1e-10:
+                    # Find the strongest correlation for this pair
+                    strongest_corr = None
+                    strongest_window = None
+                    for window, corr in analysis['correlations'].items():
+                        if not np.isnan(corr) and (strongest_corr is None or abs(corr) > abs(strongest_corr)):
+                            strongest_corr = corr
+                            strongest_window = window
+
+                    if strongest_corr is not None:
+                        notable_pairs['high_significance'].append(f"{pair} ({strongest_window}: {strongest_corr:.3f})")
+
+            # Identify pairs with notable correlation changes
+            for pair, analysis in pair_analysis.items():
+                correlations = analysis['correlations']
+
+                # Need at least 2 time windows to detect changes
+                if len(correlations) >= 2:
+                    # Compare short-term vs long-term changes
+                    short_term = correlations.get('7d', np.nan)
+                    long_term = correlations.get('60d', np.nan)
+
+                    if not np.isnan(short_term) and not np.isnan(long_term):
+                        change = long_term - short_term
+                        if abs(change) >= 0.3:  # Significant change threshold
+                            notable_pairs['correlation_changes'].append(
+                                f"{pair} ({short_term:+.3f}→{long_term:+.3f})"
+                            )
+
+            # Sort by correlation strength (strongest first)
+            notable_pairs['strong_positive'].sort(key=lambda x: float(x.split(': ')[1]), reverse=True)
+            notable_pairs['strong_negative'].sort(key=lambda x: float(x.split(': ')[1]))  # Most negative first
+            notable_pairs['high_significance'].sort(key=lambda x: abs(float(x.split(': ')[1])), reverse=True)
+
+            # For correlation changes, sort by magnitude of change
+            try:
+                def extract_change_magnitude(change_str):
+                    # Extract values like "+0.376→+0.005)" from "BTC_ETH (+0.376→+0.005)"
+                    values_part = change_str.split('(')[1].rstrip(')')
+                    start_val, end_val = values_part.split('→')
+                    return abs(float(end_val) - float(start_val))
+
+                notable_pairs['correlation_changes'].sort(
+                    key=extract_change_magnitude,
+                    reverse=True
+                )
+            except (ValueError, IndexError) as e:
+                self.logger.warning(f"Could not sort correlation changes: {e}")
+                # Keep original order if sorting fails
+
+        except Exception as e:
+            self.logger.error(f"Failed to identify notable pairs: {e}")
+
+        return notable_pairs
+
     def _generate_recommendations(self, matrix_data: Dict[str, Any]) -> List[str]:
         """Generate recommendations based on correlation matrix."""
         recommendations = []
