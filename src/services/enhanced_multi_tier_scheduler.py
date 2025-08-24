@@ -69,7 +69,7 @@ class EnhancedMultiTierScheduler:
                  enable_signal_generation: bool = True,
                  enable_alert_generation: bool = True,
                  enable_discord_alerts: bool = True,
-                 signal_generation_interval: int = 3600,  # Generate signals every hour
+                 signal_generation_interval: int = 3600,   # Generate signals every hour (reduced from 5 minutes)
                  macro_collection_time: str = "23:00",  # 11 PM - time for macro data collection
                  state_file: str = "data/enhanced_multi_tier_scheduler_state.json"):
         
@@ -90,6 +90,9 @@ class EnhancedMultiTierScheduler:
         self.enable_discord_alerts = enable_discord_alerts
         self.signal_generation_interval = signal_generation_interval
         self.macro_collection_time = macro_collection_time  # Time for macro collection (HH:MM format)
+        
+        # Signal generation tracking (instance variable, not local)
+        self.last_signal_generation = None
         
         # Collection intervals
         self.intervals = {
@@ -246,6 +249,10 @@ class EnhancedMultiTierScheduler:
                 if 'discord_alerts_sent' in state_data:
                     self.discord_alerts_sent = state_data['discord_alerts_sent']
                 
+                # Load last signal generation time
+                if 'last_signal_generation' in state_data:
+                    self.last_signal_generation = datetime.fromisoformat(state_data['last_signal_generation'])
+                
                 self.logger.info(f"Loaded scheduler state from {self.state_file}")
                 
             except Exception as e:
@@ -262,6 +269,7 @@ class EnhancedMultiTierScheduler:
                 'signals_generated': self.signals_generated,
                 'alerts_generated': self.alerts_generated,
                 'discord_alerts_sent': self.discord_alerts_sent,
+                'last_signal_generation': self.last_signal_generation.isoformat() if self.last_signal_generation else None,
                 'last_save': datetime.now().isoformat()
             }
             
@@ -380,8 +388,6 @@ class EnhancedMultiTierScheduler:
         """Main scheduler loop with signal generation"""
         self.logger.info("Enhanced scheduler loop started")
         
-        last_signal_generation = None
-        
         while self._running and not self._shutdown_event.is_set():
             try:
                 current_time = datetime.now()
@@ -401,7 +407,7 @@ class EnhancedMultiTierScheduler:
                             self._process_tier_tasks(tier, tier_tasks, current_time)
                 
                 # Check if signal generation is due
-                if self.enable_signal_generation and self._is_signal_generation_due(current_time, last_signal_generation):
+                if self.enable_signal_generation and self._is_signal_generation_due(current_time, self.last_signal_generation):
                     self.logger.info("⚡ Running signal generation...")
                     try:
                         signals = self._generate_signals()
@@ -420,7 +426,7 @@ class EnhancedMultiTierScheduler:
                             self.logger.info(f"🚨 Generated {len(alerts)} alerts from {len(signals)} signals" + 
                                            (f", sent {discord_count} Discord alerts" if discord_count > 0 else ""))
                         
-                        last_signal_generation = current_time
+                        self.last_signal_generation = current_time
                         
                     except Exception as e:
                         self.logger.error(f"Signal generation failed: {e}")

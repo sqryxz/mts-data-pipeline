@@ -358,7 +358,7 @@ class CorrelationEngine:
         return {
             'correlation_windows': [7, 14, 30],
             'min_data_points': 20,
-            'z_score_threshold': 2.0,
+            'z_score_threshold': 4.5,
             'monitoring_interval_minutes': 15,
             'data_lookback_days': 60,
             'alert_on_breakout': True,

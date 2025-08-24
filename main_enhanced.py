@@ -57,7 +57,7 @@ def setup_enhanced_application(enable_signals: bool = True, enable_alerts: bool 
             enable_signal_generation=enable_signals,
             enable_alert_generation=enable_alerts,
             enable_discord_alerts=enable_discord,
-            signal_generation_interval=3600,  # Generate signals every hour
+            signal_generation_interval=3600,   # Generate signals every hour (reduced from 5 minutes)
             macro_collection_time="23:00"  # Collect macro data at 11 PM daily
         )
         

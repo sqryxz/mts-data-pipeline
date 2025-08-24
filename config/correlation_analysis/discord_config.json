@@ -6,11 +6,11 @@
     "daily_summaries": true
   },
   "alert_settings": {
-    "min_correlation_change": 0.1,
-    "min_significance": 0.05,
+    "min_correlation_change": 0.3,
+    "min_significance": 0.001,
     "send_breakdown_alerts": true,
-    "send_mosaic_alerts": true,
-    "send_daily_summaries": true
+    "send_mosaic_alerts": false,
+    "send_daily_summaries": false
   },
   "embed_settings": {
     "include_correlation_matrix": true,
@@ -20,8 +20,8 @@
     "max_recommendations_displayed": 3
   },
   "rate_limiting": {
-    "max_alerts_per_hour": 10,
-    "max_alerts_per_day": 50,
-    "cooldown_minutes": 5
+    "max_alerts_per_hour": 2,
+    "max_alerts_per_day": 10,
+    "cooldown_minutes": 30
   }
 }

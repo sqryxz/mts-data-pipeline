@@ -280,15 +280,16 @@ class CorrelationDiscordIntegration:
             current_correlation = correlation_data.get('current_correlation', 0.0)
             previous_correlation = correlation_data.get('previous_correlation', 0.0)
             change = current_correlation - previous_correlation
-            significance = correlation_data.get('significance', 0.0)
+            # Display p-value if available (more interpretable for significance)
+            significance = correlation_data.get('p_value', correlation_data.get('significance', 0.0))
             
-            # Determine color based on change
-            if abs(change) > 0.3:
-                color = 0xff0000  # Red for significant change
-            elif abs(change) > 0.1:
-                color = 0xffa500  # Orange for moderate change
+            # Determine color based on change (more restrictive thresholds)
+            if abs(change) > 0.5:
+                color = 0xff0000  # Red for major change
+            elif abs(change) > 0.3:
+                color = 0xffa500  # Orange for significant change
             else:
-                color = 0x00ff00  # Green for minor change
+                color = 0x00ff00  # Green for minor change (won't be sent due to other filters)
             
             # Create embed
             embed = {
@@ -302,7 +303,7 @@ class CorrelationDiscordIntegration:
                         "value": f"**Previous:** {previous_correlation:.3f}\n"
                                 f"**Current:** {current_correlation:.3f}\n"
                                 f"**Change:** {change:+.3f}\n"
-                                f"**Significance:** {significance:.3f}",
+                                f"**p-value:** {significance:.3f}",
                         "inline": True
                     },
                     {
@@ -364,11 +365,11 @@ class CorrelationDiscordIntegration:
     
     def _get_breakdown_impact(self, change: float, pair: str) -> str:
         """Get impact description for correlation breakdown."""
-        if abs(change) > 0.5:
+        if abs(change) > 0.7:
+            return "🚨 **Critical Impact** - Extreme correlation shift"
+        elif abs(change) > 0.5:
             return "🚨 **High Impact** - Major correlation shift"
         elif abs(change) > 0.3:
             return "⚠️ **Medium Impact** - Significant change"
-        elif abs(change) > 0.1:
-            return "📊 **Low Impact** - Moderate change"
         else:
-            return "📈 **Minimal Impact** - Minor fluctuation"
+            return "📊 **Low Impact** - Moderate change"

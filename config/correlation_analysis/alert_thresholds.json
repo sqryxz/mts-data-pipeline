@@ -1,9 +1,9 @@
 {
   "breakdown_thresholds": {
-    "z_score_threshold": 3.0,
-    "significance_level": 0.003,
-    "min_duration_minutes": 15,
-    "confirmation_windows": 2
+    "z_score_threshold": 4.5,
+    "significance_level": 0.0001,
+    "min_duration_minutes": 60,
+    "confirmation_windows": 5
   },
   "divergence_thresholds": {
     "price_divergence_threshold": 0.05,

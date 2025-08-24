@@ -56,21 +56,49 @@ class CorrelationMonitor:
             'enable_persistence_validation': True,
             'max_retries': 3,
             'retry_delay': 1.0,
-            'enable_performance_monitoring': True
+            'enable_performance_monitoring': True,
+            # Additional tightening controls (can be overridden by alert_thresholds.json)
+            'significance_level': 0.01,
+            'confirmation_windows': 2,
+            'min_breakout_duration_minutes': 15
         }
         if config:
             self.config.update(config)
+        
+        # Load global alert thresholds if available
+        try:
+            thresholds_path = Path("config/correlation_analysis/alert_thresholds.json")
+            if thresholds_path.exists():
+                import json as _json
+                with open(thresholds_path, 'r') as _f:
+                    thresholds_cfg = _json.load(_f)
+                breakdown_cfg = thresholds_cfg.get('breakdown_thresholds', {})
+                if isinstance(breakdown_cfg, dict):
+                    self.config['z_score_threshold'] = breakdown_cfg.get('z_score_threshold', self.config['z_score_threshold'])
+                    self.config['significance_level'] = breakdown_cfg.get('significance_level', self.config['significance_level'])
+                    self.config['min_breakout_duration_minutes'] = breakdown_cfg.get('min_duration_minutes', self.config['min_breakout_duration_minutes'])
+                    self.config['confirmation_windows'] = breakdown_cfg.get('confirmation_windows', self.config['confirmation_windows'])
+                    self.logger.info(
+                        f"Applied alert thresholds: z>={self.config['z_score_threshold']}, p<{self.config['significance_level']}, "
+                        f"min_dur={self.config['min_breakout_duration_minutes']}m, conf={self.config['confirmation_windows']}"
+                    )
+        except Exception as e:
+            self.logger.warning(f"Failed to load alert thresholds config: {e}")
         
         # Initialize components
         self.data_fetcher = DataFetcher()
         self.data_normalizer = DataNormalizer()
         self.correlation_calculator = CorrelationCalculator()
-        self.statistical_analyzer = StatisticalAnalyzer()
+        self.statistical_analyzer = StatisticalAnalyzer({
+            'z_score_threshold': self.config['z_score_threshold'],
+            'significance_level': self.config.get('significance_level', 0.01)
+        })
         self.breakout_detector = BreakoutDetector({
             'z_score_threshold': self.config['z_score_threshold'],
             'min_data_points': self.config['min_data_points'],
             'persistence_validation_enabled': self.config['enable_persistence_validation'],
-            'statistical_validation_enabled': self.config['enable_statistical_validation']
+            'statistical_validation_enabled': self.config['enable_statistical_validation'],
+            'min_breakout_duration_minutes': self.config.get('min_breakout_duration_minutes', 15)
         })
         self.alert_system = CorrelationAlertSystem()
         
@@ -88,6 +116,9 @@ class CorrelationMonitor:
         
         # Load existing state
         self.state = self.state_manager.load_correlation_state()
+        
+        # Track confirmation counts per window across runs
+        self._confirmation_counters: Dict[str, int] = {}
         
         self.logger.info(f"Correlation monitor initialized for {pair} with windows: {self.config['correlation_windows']}")
     
@@ -436,13 +467,31 @@ class CorrelationMonitor:
                         )
                         
                         if breakout_result['breakout_detected']:
+                            # Enforce significance filter
+                            p_val = correlation_data.get('p_value', np.nan)
+                            if not isinstance(p_val, (int, float)) or np.isnan(p_val) or p_val >= self.config.get('significance_level', 0.01):
+                                self.logger.debug(
+                                    f"Skipping breakout due to insufficient significance: p={p_val} >= {self.config.get('significance_level', 0.01)}"
+                                )
+                                continue
+                            # Require consecutive confirmations
+                            confirm_needed = int(self.config.get('confirmation_windows', 2))
+                            count = self._confirmation_counters.get(window_key, 0) + 1
+                            self._confirmation_counters[window_key] = count
+                            if count < confirm_needed:
+                                self.logger.debug(f"Awaiting confirmations for {window_key}: {count}/{confirm_needed}")
+                                continue
+                            # Reset counter after confirmed
+                            self._confirmation_counters[window_key] = 0
+                            
                             breakout_result['pair'] = self.pair
                             breakout_result['window_days'] = window_days
                             breakout_result['window_key'] = window_key
                             # Include p_value from correlation data
-                            breakout_result['p_value'] = correlation_data.get('p_value', 0.0)
+                            breakout_result['p_value'] = p_val
                             breakout_result['confidence_interval_lower'] = correlation_data.get('confidence_interval_lower', np.nan)
                             breakout_result['confidence_interval_upper'] = correlation_data.get('confidence_interval_upper', np.nan)
+                            breakout_result['confirmation_count'] = count
                             breakouts.append(breakout_result)
                             
                             self.logger.info(f"Breakout detected for {self.pair} ({window_days}d): "
