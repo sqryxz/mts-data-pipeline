@@ -12,6 +12,7 @@ from datetime import datetime
 import os
 
 from src.data.signal_models import TradingSignal
+from src.utils.alert_deduper import AlertDeduper
 
 
 class DiscordWebhook:
@@ -364,6 +365,10 @@ class DiscordAlertManager:
         }
         
         self.last_alert_time = {}  # Track last alert time per asset
+        # Cross-process deduper (shared file)
+        dedupe_ttl = int(os.getenv('DISCORD_ALERT_DEDUPE_TTL', '3600'))
+        dedupe_file = os.getenv('DISCORD_ALERT_DEDUPE_FILE', 'data/alert_dedupe_state.json')
+        self._deduper = AlertDeduper(state_file=dedupe_file, ttl_seconds=dedupe_ttl)
         
     async def process_signals(self, signals: List[TradingSignal]) -> Dict[str, int]:
         """
@@ -383,10 +388,21 @@ class DiscordAlertManager:
         
         # Send alerts
         if self.alert_config.get('batch_alerts', True):
-            results = await self.webhook.send_bulk_signals(filtered_signals)
+            # Apply cross-process dedupe per signal
+            deduped: List[TradingSignal] = []
+            for s in filtered_signals:
+                key = self._make_dedupe_key(s)
+                if self._deduper.should_send(key):
+                    deduped.append(s)
+                    self._deduper.mark_sent(key)
+            results = await self.webhook.send_bulk_signals(deduped)
         else:
             results = {'total': len(filtered_signals), 'success': 0, 'failed': 0}
             for signal in filtered_signals:
+                key = self._make_dedupe_key(signal)
+                if not self._deduper.should_send(key):
+                    continue
+                self._deduper.mark_sent(key)
                 success = await self.webhook.send_signal_alert(signal)
                 if success:
                     results['success'] += 1
@@ -400,6 +416,19 @@ class DiscordAlertManager:
             'sent': results['success'],
             'failed': results['failed']
         }
+
+    def _make_dedupe_key(self, signal: TradingSignal) -> str:
+        try:
+            return self._deduper.make_key(
+                source='signals',
+                strategy=signal.strategy_name,
+                symbol=signal.symbol,
+                signal_type=signal.signal_type.value,
+                price=signal.price,
+            )
+        except Exception:
+            # Fallback key
+            return f"signals|{signal.strategy_name}|{signal.symbol}|{signal.signal_type.value}|{getattr(signal, 'price', 0):.2f}"
     
     def _filter_signals(self, signals: List[TradingSignal]) -> List[TradingSignal]:
         """

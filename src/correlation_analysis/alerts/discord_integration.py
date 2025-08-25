@@ -10,7 +10,9 @@ from datetime import datetime
 from typing import Dict, List, Optional, Any
 from pathlib import Path
 
+import os
 from src.utils.discord_webhook import DiscordWebhook
+from src.utils.alert_deduper import AlertDeduper
 
 
 class CorrelationDiscordIntegration:
@@ -41,6 +43,11 @@ class CorrelationDiscordIntegration:
         else:
             self.discord = None
             self.logger.warning("No Discord webhook URL provided - Discord alerts disabled")
+
+        # Cross-process deduper shared with signals
+        dedupe_ttl = int(os.getenv('DISCORD_ALERT_DEDUPE_TTL', '3600'))
+        dedupe_file = os.getenv('DISCORD_ALERT_DEDUPE_FILE', 'data/alert_dedupe_state.json')
+        self._deduper = AlertDeduper(state_file=dedupe_file, ttl_seconds=dedupe_ttl)
     
     def send_mosaic_alert(self, mosaic_data: Dict[str, Any], alert_filepath: str = "") -> bool:
         """
@@ -61,8 +68,19 @@ class CorrelationDiscordIntegration:
             # Create Discord embed
             embed = self._create_mosaic_embed(mosaic_data, alert_filepath)
             
+            # Deduplicate by mosaic date+summary hash
+            key = self._deduper.make_key(
+                source='correlation', strategy='mosaic', symbol='mosaic', signal_type=None,
+                price=float(hash(json.dumps(mosaic_data, sort_keys=True)) & 0xFFFFFFFF)
+            )
+            if not self._deduper.should_send(key):
+                self.logger.info("Skipping duplicate mosaic alert (deduped)")
+                return False
+
             # Send to Discord
             success = self.discord.send_embed(embed)
+            if success:
+                self._deduper.mark_sent(key)
             
             if success:
                 self.logger.info("✅ Mosaic alert sent to Discord successfully")
@@ -94,8 +112,18 @@ class CorrelationDiscordIntegration:
             # Create Discord embed
             embed = self._create_breakdown_embed(pair, correlation_data)
             
+            key = self._deduper.make_key(
+                source='correlation', strategy='breakdown', symbol=pair.lower(), signal_type=None,
+                price=float(hash(json.dumps(correlation_data, sort_keys=True)) & 0xFFFFFFFF)
+            )
+            if not self._deduper.should_send(key):
+                self.logger.info("Skipping duplicate correlation breakdown alert (deduped)")
+                return False
+
             # Send to Discord
             success = self.discord.send_embed(embed)
+            if success:
+                self._deduper.mark_sent(key)
             
             if success:
                 self.logger.info(f"✅ Correlation breakdown alert sent to Discord for {pair}")
@@ -126,8 +154,18 @@ class CorrelationDiscordIntegration:
             # Create Discord embed
             embed = self._create_daily_summary_embed(summary_data)
             
+            key = self._deduper.make_key(
+                source='correlation', strategy='daily_summary', symbol='summary', signal_type=None,
+                price=float(hash(json.dumps(summary_data, sort_keys=True)) & 0xFFFFFFFF)
+            )
+            if not self._deduper.should_send(key):
+                self.logger.info("Skipping duplicate daily summary alert (deduped)")
+                return False
+
             # Send to Discord
             success = self.discord.send_embed(embed)
+            if success:
+                self._deduper.mark_sent(key)
             
             if success:
                 self.logger.info("✅ Daily correlation summary sent to Discord")
