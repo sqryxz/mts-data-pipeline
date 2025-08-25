@@ -158,7 +158,9 @@ class SignalAggregator:
         def sort_key(signal):
             # Ensure timestamp is numeric for sorting
             timestamp = signal.timestamp
-            if isinstance(timestamp, str):
+            if isinstance(timestamp, datetime):
+                timestamp = timestamp.timestamp()  # Convert datetime to Unix timestamp
+            elif isinstance(timestamp, str):
                 try:
                     timestamp = int(timestamp)
                 except (ValueError, TypeError):
@@ -279,7 +281,7 @@ class SignalAggregator:
         
         # Collect analysis data
         combined_analysis_data = {}
-        latest_timestamp = 0
+        latest_timestamp = datetime.now()  # Initialize as datetime
         
         # Only include signals that match the dominant type (or are neutral)
         relevant_signals = [s for s in signals if s.signal_type == final_signal_type or s.signal_type == SignalType.HOLD]
@@ -314,17 +316,18 @@ class SignalAggregator:
                         'weight': strategy_weight
                     })
             
-            # Handle timestamp comparison safely
+            # Handle timestamp comparison safely - keep as datetime
             current_timestamp = signal.timestamp
-            if isinstance(current_timestamp, str):
+            if isinstance(current_timestamp, datetime):
+                latest_timestamp = max(latest_timestamp, current_timestamp)
+            elif isinstance(current_timestamp, (int, float)):
+                # Convert timestamp to datetime if it's numeric
                 try:
-                    current_timestamp = int(current_timestamp)
-                except (ValueError, TypeError):
-                    current_timestamp = 0
-            elif not isinstance(current_timestamp, (int, float)):
-                current_timestamp = 0
-            
-            latest_timestamp = max(latest_timestamp, current_timestamp)
+                    current_dt = datetime.fromtimestamp(current_timestamp)
+                    latest_timestamp = max(latest_timestamp, current_dt)
+                except (ValueError, OSError):
+                    # If conversion fails, use current time
+                    pass
         
         if total_weight == 0:
             return None
@@ -526,7 +529,7 @@ class SignalAggregator:
                 continue
         
         # Sort by confidence and timestamp for consistent output
-        resolved_signals.sort(key=lambda s: (-s.confidence, -s.timestamp))
+        resolved_signals.sort(key=lambda s: (-s.confidence, -(s.timestamp.timestamp() if isinstance(s.timestamp, datetime) else s.timestamp)))
         
         self.logger.info(f"Resolved conflicts for {len(signals)} signals → {len(resolved_signals)} conflict-free signals")
         

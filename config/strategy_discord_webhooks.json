@@ -1,0 +1,44 @@
+{
+  "strategy_webhooks": {
+    "vixcorrelation": {
+      "webhook_url": "https://discord.com/api/webhooks/1408273388753129504/_w8oTulee_396ULSikz3My0yImCp-c2kyciTNCWJQIbM8uV35ZNuIRC4y0p6m6HionPT",
+      "min_confidence": 0.5,
+      "enabled_assets": ["bitcoin", "ethereum", "binancecoin"],
+      "enabled_signal_types": ["LONG", "SHORT"],
+      "rate_limit": 60,
+      "batch_alerts": true,
+      "description": "VIX Correlation Strategy signals"
+    },
+    "meanreversion": {
+      "webhook_url": "https://discord.com/api/webhooks/1408273388753129504/_w8oTulee_396ULSikz3My0yImCp-c2kyciTNCWJQIbM8uV35ZNuIRC4y0p6m6HionPT",
+      "min_confidence": 0.4,
+      "enabled_assets": ["bitcoin", "ethereum", "binancecoin"],
+      "enabled_signal_types": ["LONG", "SHORT"],
+      "rate_limit": 60,
+      "batch_alerts": true,
+      "description": "Mean Reversion Strategy signals"
+    },
+    "volatility": {
+      "webhook_url": "https://discord.com/api/webhooks/1408273388753129504/_w8oTulee_396ULSikz3My0yImCp-c2kyciTNCWJQIbM8uV35ZNuIRC4y0p6m6HionPT",
+      "min_confidence": 0.6,
+      "enabled_assets": ["bitcoin", "ethereum"],
+      "enabled_signal_types": ["LONG", "SHORT"],
+      "rate_limit": 60,
+      "batch_alerts": true,
+      "description": "Volatility Strategy signals"
+    },
+    "ripple": {
+      "webhook_url": "https://discord.com/api/webhooks/1408273388753129504/_w8oTulee_396ULSikz3My0yImCp-c2kyciTNCWJQIbM8uV35ZNuIRC4y0p6m6HionPT",
+      "min_confidence": 0.3,
+      "enabled_assets": ["ripple"],
+      "enabled_signal_types": ["LONG", "SHORT"],
+      "rate_limit": 60,
+      "batch_alerts": true,
+      "description": "Ripple Strategy signals"
+    }
+  },
+  "fallback_webhook": {
+    "webhook_url": "https://discord.com/api/webhooks/1399672969462284429/9WzK1RPHcRlR5ERks42o7b5ii0CplUvUsXC1K3sjlq07xDhnM6tyuq4OqH94jzFTKwXc",
+    "description": "Fallback webhook for strategies without specific webhooks"
+  }
+}

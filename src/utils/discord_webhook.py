@@ -66,9 +66,9 @@ class DiscordWebhook:
             success = await self._send_webhook(payload)
             
             if success:
-                self.logger.info(f"Signal alert sent to Discord: {signal.signal_type.value} {signal.asset}")
+                self.logger.info(f"Signal alert sent to Discord: {signal.signal_type.value} {signal.symbol}")
             else:
-                self.logger.error(f"Failed to send signal alert to Discord: {signal.signal_type.value} {signal.asset}")
+                self.logger.error(f"Failed to send signal alert to Discord: {signal.signal_type.value} {signal.symbol}")
             
             return success
             
@@ -125,7 +125,7 @@ class DiscordWebhook:
         
         # Create embed
         embed = {
-            "title": f"{emoji} {signal.signal_type.value} Signal: {signal.asset.capitalize()}",
+            "title": f"{emoji} {signal.signal_type.value} Signal: {signal.symbol.capitalize()}",
             "color": color,
             "timestamp": datetime.now().isoformat(),
             "fields": [
@@ -425,7 +425,7 @@ class DiscordAlertManager:
                 continue
             
             # Check asset filter
-            if signal.asset not in self.alert_config.get('enabled_assets', ['bitcoin', 'ethereum']):
+            if signal.symbol not in self.alert_config.get('enabled_assets', ['bitcoin', 'ethereum']):
                 continue
             
             # Check signal type filter
@@ -433,7 +433,7 @@ class DiscordAlertManager:
                 continue
             
             # Check rate limiting
-            if not self._check_rate_limit(signal.asset):
+            if not self._check_rate_limit(signal.symbol):
                 continue
             
             filtered.append(signal)

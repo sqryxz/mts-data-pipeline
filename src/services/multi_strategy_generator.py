@@ -14,6 +14,7 @@ from src.signals.signal_aggregator import SignalAggregator
 from src.data.signal_models import TradingSignal
 from src.data.sqlite_helper import CryptoDatabase
 from src.utils.exceptions import ConfigurationError, DataProcessingError
+from src.utils.multi_webhook_discord_manager import MultiWebhookDiscordManager
 
 
 class MultiStrategyGenerator:
@@ -62,6 +63,9 @@ class MultiStrategyGenerator:
         
         # Load and validate strategies
         self.strategies = self._load_strategies()
+        
+        # Initialize multi-webhook Discord manager if configured (after strategies are loaded)
+        self.multi_webhook_manager = self._initialize_multi_webhook_manager()
         
         self.logger.info(f"MultiStrategyGenerator initialized with {len(self.strategies)} strategies")
     
@@ -188,6 +192,90 @@ class MultiStrategyGenerator:
                 strategy_signals[strategy_name] = []
         
         return strategy_signals
+    
+    def _initialize_multi_webhook_manager(self) -> Optional[MultiWebhookDiscordManager]:
+        """Initialize multi-webhook Discord manager from configuration."""
+        try:
+            config_path = "config/strategy_discord_webhooks.json"
+            if not Path(config_path).exists():
+                self.logger.info("No strategy Discord webhook configuration found")
+                return None
+            
+            with open(config_path, 'r') as f:
+                webhook_config = json.load(f)
+            
+            strategy_webhooks = webhook_config.get('strategy_webhooks', {})
+            if not strategy_webhooks:
+                self.logger.info("No strategy webhooks configured")
+                return None
+            
+            # Filter to only include strategies we actually have
+            filtered_webhooks = {}
+            for strategy_name, config in strategy_webhooks.items():
+                if strategy_name in self.strategies:
+                    filtered_webhooks[strategy_name] = config
+                    self.logger.info(f"Configured Discord webhook for strategy: {strategy_name}")
+            
+            if filtered_webhooks:
+                return MultiWebhookDiscordManager(filtered_webhooks)
+            
+            return None
+            
+        except Exception as e:
+            self.logger.error(f"Failed to initialize multi-webhook Discord manager: {e}")
+            return None
+    
+    def generate_signals_with_discord_routing(self, days: int = 30) -> Dict[str, Any]:
+        """
+        Generate signals and send individual strategy signals to their specific Discord webhooks.
+        
+        Args:
+            days: Number of days of historical data to use for analysis
+            
+        Returns:
+            Dict with aggregated signals and Discord sending results
+        """
+        self.logger.info(f"Generating signals with Discord routing using {days} days of data")
+        
+        try:
+            # Get all unique assets from all strategies
+            all_assets = self._get_all_assets()
+            
+            # Fetch market data for all assets
+            market_data = self._get_market_data(all_assets, days)
+            
+            # Generate signals from all strategies
+            strategy_signals = self._generate_individual_signals(market_data)
+            
+            # Send individual strategy signals to their Discord webhooks
+            discord_results = {}
+            if self.multi_webhook_manager:
+                discord_results = self.multi_webhook_manager.send_strategy_signals_sync(strategy_signals)
+                
+                total_sent = sum(result.get('sent', 0) for result in discord_results.values())
+                self.logger.info(f"Sent {total_sent} individual strategy signals to Discord")
+            else:
+                self.logger.info("Multi-webhook Discord manager not configured")
+            
+            # Also generate aggregated signals
+            aggregated_signals = self.aggregator.aggregate_signals(strategy_signals)
+            
+            results = {
+                'individual_signals': strategy_signals,
+                'aggregated_signals': aggregated_signals,
+                'discord_results': discord_results,
+                'total_individual_signals': sum(len(signals) for signals in strategy_signals.values()),
+                'total_aggregated_signals': len(aggregated_signals)
+            }
+            
+            self.logger.info(f"Generated {results['total_aggregated_signals']} aggregated signals from "
+                           f"{results['total_individual_signals']} individual signals")
+            
+            return results
+            
+        except Exception as e:
+            self.logger.error(f"Failed to generate signals with Discord routing: {e}")
+            raise DataProcessingError(f"Signal generation with Discord routing failed: {e}")
     
     def get_strategy_performance_summary(self, signals: List[TradingSignal]) -> Dict[str, Any]:
         """
