@@ -331,6 +331,122 @@ class SystemManager:
             for mosaic in recent_mosaics[-5:]:  # Show last 5
                 self.logger.info(f"   📄 {mosaic}")
     
+    def check_strategy_configuration(self):
+        """Check and display strategy configuration information."""
+        self.logger.info("🎯 Strategy Configuration Check")
+        
+        try:
+            # Change to project root for strategy checks
+            project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            
+            # Check strategy registry
+            self.logger.info("📊 Checking Strategy Registry...")
+            try:
+                result = subprocess.run([
+                    'python3', '-c', 
+                    'import sys; sys.path.append("."); from src.signals.strategies.strategy_registry import StrategyRegistry; registry = StrategyRegistry(); registry.load_strategies_from_directory("src/signals/strategies"); strategies = registry.list_strategies(); print("Available strategies:", list(strategies.keys()))'
+                ], capture_output=True, text=True, timeout=30, cwd=project_root)
+                
+                if result.returncode == 0:
+                    output = result.stdout.strip()
+                    if "Available strategies:" in output:
+                        strategies = output.split("Available strategies:")[1].strip()
+                        self.logger.info(f"✅ Strategy Registry: {strategies}")
+                    else:
+                        self.logger.warning("⚠️ Strategy Registry: Could not parse output")
+                else:
+                    self.logger.warning("⚠️ Strategy Registry: Check failed")
+                    
+            except Exception as e:
+                self.logger.warning(f"⚠️ Strategy Registry check failed: {e}")
+            
+            # Check multi-strategy generator configuration
+            self.logger.info("🔧 Checking Multi-Strategy Generator...")
+            try:
+                result = subprocess.run([
+                    'python3', '-c', 
+                    'import sys; sys.path.append("."); from src.services.multi_strategy_generator import create_default_multi_strategy_generator; generator = create_default_multi_strategy_generator(); print("Loaded strategies:", list(generator.strategies.keys())); print("Strategy weights:", generator.aggregator_config.get("strategy_weights", {}))'
+                ], capture_output=True, text=True, timeout=30, cwd=project_root)
+                
+                if result.returncode == 0:
+                    output = result.stdout.strip()
+                    lines = output.split('\n')
+                    
+                    for line in lines:
+                        if "Loaded strategies:" in line:
+                            strategies = line.split("Loaded strategies:")[1].strip()
+                            self.logger.info(f"✅ Loaded Strategies: {strategies}")
+                        elif "Strategy weights:" in line:
+                            weights = line.split("Strategy weights:")[1].strip()
+                            self.logger.info(f"📊 Strategy Weights: {weights}")
+                else:
+                    self.logger.warning("⚠️ Multi-Strategy Generator: Check failed")
+                    
+            except Exception as e:
+                self.logger.warning(f"⚠️ Multi-Strategy Generator check failed: {e}")
+            
+            # Check Discord webhook configuration
+            self.logger.info("📢 Checking Discord Integration...")
+            try:
+                webhook_config_path = os.path.join(project_root, 'config/strategy_discord_webhooks.json')
+                if os.path.exists(webhook_config_path):
+                    import json
+                    with open(webhook_config_path, 'r') as f:
+                        webhook_config = json.load(f)
+                    
+                    strategy_webhooks = webhook_config.get('strategy_webhooks', {})
+                    configured_strategies = list(strategy_webhooks.keys())
+                    
+                    self.logger.info(f"✅ Discord Webhooks: {len(configured_strategies)} strategies configured")
+                    for strategy in configured_strategies:
+                        config = strategy_webhooks[strategy]
+                        webhook_configured = "✅" if config.get('webhook_url') else "❌"
+                        min_confidence = config.get('min_confidence', 'Not set')
+                        enabled_assets = len(config.get('enabled_assets', []))
+                        self.logger.info(f"   {webhook_configured} {strategy}: confidence≥{min_confidence}, {enabled_assets} assets")
+                else:
+                    self.logger.warning("⚠️ Discord webhook configuration file not found")
+                    
+            except Exception as e:
+                self.logger.warning(f"⚠️ Discord integration check failed: {e}")
+            
+            # Check environment configuration
+            self.logger.info("⚙️ Checking Environment Configuration...")
+            try:
+                result = subprocess.run([
+                    'python3', '-c', 
+                    'import sys; sys.path.append("."); from config.settings import Config; config = Config(); print("Enabled strategies:", config.ENABLED_STRATEGIES); print("Strategy weights:", config.STRATEGY_WEIGHTS)'
+                ], capture_output=True, text=True, timeout=30, cwd=project_root)
+                
+                if result.returncode == 0:
+                    output = result.stdout.strip()
+                    lines = output.split('\n')
+                    
+                    for line in lines:
+                        if "Enabled strategies:" in line:
+                            strategies = line.split("Enabled strategies:")[1].strip()
+                            self.logger.info(f"✅ Environment Strategies: {strategies}")
+                        elif "Strategy weights:" in line:
+                            weights = line.split("Strategy weights:")[1].strip()
+                            self.logger.info(f"📊 Environment Weights: {weights}")
+                else:
+                    self.logger.warning("⚠️ Environment configuration check failed")
+                    
+            except Exception as e:
+                self.logger.warning(f"⚠️ Environment configuration check failed: {e}")
+            
+            # Display strategy summary
+            self.logger.info("📋 Strategy Summary:")
+            self.logger.info("   🎯 Multi-Bucket Portfolio: Cross-sectional momentum, residual analysis, mean-reversion")
+            self.logger.info("   📈 VIX Correlation: Market regime detection and volatility analysis")
+            self.logger.info("   🔄 Mean Reversion: Overextended moves and drawdown analysis")
+            self.logger.info("   📊 Volatility: Breakout detection and volatility regime analysis")
+            self.logger.info("   🌊 Ripple: Specialized XRP analysis and momentum detection")
+            self.logger.info("   📢 Discord Alerts: Real-time notifications for all strategies")
+            
+        except Exception as e:
+            self.logger.error(f"❌ Error checking strategy configuration: {e}")
+    
     def start_complete_system(self):
         """Start the complete system."""
         self.logger.info("🚀 Starting Complete MTS Data Pipeline System")
@@ -358,6 +474,9 @@ class SystemManager:
             # Check initial status
             self.check_system_status()
             
+            # Check strategy configuration
+            self.check_strategy_configuration()
+            
             # Generate a test signal
             self.generate_test_signals()
             
@@ -371,6 +490,7 @@ class SystemManager:
             self.logger.info("   📊 Daily Correlation Matrices: Generated automatically")
             self.logger.info("   🚨 Signal Alerts: Generated for high-confidence signals")
             self.logger.info("   📈 ENA Integration: High-frequency tracking (15-minute intervals)")
+            self.logger.info("   🎯 Multi-Bucket Portfolio Strategy: Integrated with Discord alerts")
             
             self.logger.info("📋 How to monitor:")
             self.logger.info("   • Check status: python3 main_enhanced.py --status")

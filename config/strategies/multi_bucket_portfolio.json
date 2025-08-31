@@ -1,0 +1,147 @@
+{
+  "name": "multi_bucket_portfolio",
+  "description": "Systematic multi-bucket crypto portfolio exploiting cross-sectional momentum, residual momentum, mean-reversion, pair convergence, and dynamic risk modulation",
+  "version": "1.0.0",
+  "enabled": true,
+  
+  "assets": {
+    "universe": ["bitcoin", "ethereum", "binancecoin", "cardano", "solana", "ripple", "polkadot", "chainlink", "litecoin", "uniswap"],
+    "factor_assets": ["bitcoin", "ethereum"],
+    "stablecoins": ["tether", "usdcoin", "dai"],
+    "pairs": [
+      {"long": "ethereum", "short": "binancecoin", "name": "ETH-BNB"},
+      {"long": "ethereum", "short": "cardano", "name": "ETH-ADA"},
+      {"long": "bitcoin", "short": "litecoin", "name": "BTC-LTC"}
+    ]
+  },
+  
+  "momentum_parameters": {
+    "horizons": [7, 14, 30],
+    "weights": [0.5, 0.3, 0.2],
+    "zscore_window": 180,
+    "min_zscore_window": 120,
+    "composite_threshold": 0.75,
+    "base_momentum_threshold": 0.04,
+    "acceleration_threshold": 0.0,
+    "established_trend_threshold": 1.5
+  },
+  
+  "residual_parameters": {
+    "regression_window": 60,
+    "residual_window": 20,
+    "residual_threshold": 1.0,
+    "beta_tolerance": 0.05
+  },
+  
+  "mean_reversion_parameters": {
+    "overextension_threshold": 2.0,
+    "oversold_threshold": -2.0,
+    "reversion_target": 0.5,
+    "momentum_strength_threshold": 0.5
+  },
+  
+  "pair_trade_parameters": {
+    "spread_window": 30,
+    "zscore_window": 60,
+    "entry_threshold": 2.0,
+    "exit_threshold": 0.0,
+    "partial_exit_threshold": 0.75,
+    "hard_stop_threshold": 3.0,
+    "correlation_threshold": 0.65,
+    "correlation_decline_threshold": 0.05,
+    "correlation_breakdown_threshold": 0.45
+  },
+  
+  "correlation_regime_parameters": {
+    "correlation_windows": [7, 14, 30, 60],
+    "low_correlation_threshold": 0.15,
+    "high_correlation_threshold": 0.50,
+    "leverage_reduction_factor": 0.4,
+    "regime_shift_threshold": 0.10,
+    "breadth_collapse_threshold": 0.60
+  },
+  
+  "position_sizing": {
+    "target_portfolio_vol": 0.15,
+    "max_single_asset_exposure": 0.20,
+    "cluster_risk_multiplier": 1.2,
+    "mean_reversion_short_limit": 0.30,
+    "confidence_multiplier": {
+      "high": 1.0,
+      "medium": 0.85,
+      "low": 0.7
+    },
+    "residual_boost_multiplier": 1.25,
+    "mean_reversion_size_multiplier": 0.5
+  },
+  
+  "risk_management": {
+    "atr_window": 14,
+    "stop_loss_atr_multiplier": 2.0,
+    "trailing_stop_atr_multiplier": 1.5,
+    "time_stop_days": 10,
+    "time_stop_profit_threshold": 0.5,
+    "drawdown_circuit_threshold": 0.08,
+    "recovery_threshold": 0.04,
+    "position_size_reduction": 0.5
+  },
+  
+  "portfolio_structure": {
+    "momentum_long_target": 0.45,
+    "residual_spread_target": 0.20,
+    "pair_convergence_target": 0.125,
+    "mean_reversion_target": 0.075,
+    "cash_target": 0.20
+  },
+  
+  "entry_exit_rules": {
+    "momentum_long": {
+      "entry": {
+        "trend_alignment": true,
+        "composite_threshold": 0.75,
+        "acceleration_condition": "positive_or_established_trend",
+        "momentum_strength": "positive"
+      },
+      "exit": {
+        "composite_threshold": 0.25,
+        "acceleration_negative_days": 3,
+        "momentum_strength_threshold": -0.5,
+        "trailing_stop": true
+      }
+    },
+    "mean_reversion": {
+      "entry": {
+        "correlation_regime": "low",
+        "overextension_condition": true,
+        "momentum_strength_confirmation": true
+      },
+      "exit": {
+        "reversion_target": 0.5,
+        "time_stop": 10,
+        "correlation_breakdown": true
+      }
+    }
+  },
+  
+  "monitoring": {
+    "daily_recompute": true,
+    "regression_update_frequency": "daily",
+    "correlation_update_frequency": "daily",
+    "risk_summary_frequency": "daily",
+    "performance_attribution_frequency": "monthly"
+  },
+  
+  "optimization": {
+    "walk_forward_enabled": true,
+    "parameter_grid": {
+      "composite_threshold": [0.5, 0.75, 1.0, 1.25],
+      "momentum_weights": [
+        [0.6, 0.25, 0.15],
+        [0.5, 0.3, 0.2],
+        [0.4, 0.35, 0.25]
+      ]
+    },
+    "sharpe_threshold": 0.2,
+    "residual_ir_threshold": 0.3
+  }
+}

@@ -319,6 +319,7 @@ class EnhancedMultiTierScheduler:
             # Log signal generation features
             if self.enable_signal_generation:
                 self.logger.info(f"  🎯 Signal Generation: Every {self.signal_generation_interval//60} minutes")
+                self._log_strategy_information()
             if self.enable_alert_generation:
                 self.logger.info(f"  🚨 Alert Generation: Enabled for high-confidence signals")
             if self.enable_discord_alerts:
@@ -383,6 +384,64 @@ class EnhancedMultiTierScheduler:
         calls_per_day += macro_indicators * 1
         
         return calls_per_day
+    
+    def _log_strategy_information(self):
+        """Log detailed strategy information during startup"""
+        try:
+            if not self.signal_generator:
+                self.logger.info("  📊 Strategies: Signal generator not initialized")
+                return
+            
+            # Get strategy information from the signal generator
+            strategies = list(self.signal_generator.strategies.keys())
+            strategy_weights = self.signal_generator.aggregator_config.get('strategy_weights', {})
+            
+            self.logger.info(f"  📊 Active Strategies ({len(strategies)} total):")
+            
+            # Log each strategy with its weight and description
+            strategy_descriptions = {
+                'multibucketportfolio': '🎯 Multi-Bucket Portfolio (Cross-sectional momentum, residual analysis, mean-reversion)',
+                'vixcorrelation': '📈 VIX Correlation (Market regime detection, volatility analysis)',
+                'meanreversion': '🔄 Mean Reversion (Overextended moves, drawdown analysis)',
+                'volatility': '📊 Volatility (Breakout detection, volatility regime analysis)',
+                'ripple': '🌊 Ripple (Specialized XRP analysis, momentum detection)'
+            }
+            
+            for strategy in strategies:
+                weight = strategy_weights.get(strategy, 0.0)
+                weight_pct = weight * 100
+                description = strategy_descriptions.get(strategy, f'📋 {strategy.title()} Strategy')
+                
+                # Check if strategy has Discord webhook configured
+                discord_status = "📢" if self._has_discord_webhook(strategy) else "🔇"
+                
+                self.logger.info(f"    {discord_status} {strategy.title()}: {weight_pct:.1f}% weight - {description}")
+            
+            # Log aggregation configuration
+            agg_config = self.signal_generator.aggregator_config.get('aggregation_config', {})
+            conflict_resolution = agg_config.get('conflict_resolution', 'weighted_average')
+            max_position_size = agg_config.get('max_position_size', 0.10) * 100
+            
+            self.logger.info(f"  🔧 Aggregation: {conflict_resolution} conflict resolution, {max_position_size:.1f}% max position size")
+            
+        except Exception as e:
+            self.logger.warning(f"Could not log strategy information: {e}")
+    
+    def _has_discord_webhook(self, strategy_name: str) -> bool:
+        """Check if a strategy has Discord webhook configured"""
+        try:
+            webhook_config_path = 'config/strategy_discord_webhooks.json'
+            if os.path.exists(webhook_config_path):
+                import json
+                with open(webhook_config_path, 'r') as f:
+                    webhook_config = json.load(f)
+                
+                strategy_webhooks = webhook_config.get('strategy_webhooks', {})
+                return strategy_name in strategy_webhooks and strategy_webhooks[strategy_name].get('webhook_url')
+            
+            return False
+        except Exception:
+            return False
     
     def _scheduler_loop(self):
         """Main scheduler loop with signal generation"""

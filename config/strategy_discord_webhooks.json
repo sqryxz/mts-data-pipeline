@@ -35,6 +35,15 @@
       "rate_limit": 60,
       "batch_alerts": true,
       "description": "Ripple Strategy signals"
+    },
+    "multibucketportfolio": {
+      "webhook_url": "https://discord.com/api/webhooks/1408273388753129504/_w8oTulee_396ULSikz3My0yImCp-c2kyciTNCWJQIbM8uV35ZNuIRC4y0p6m6HionPT",
+      "min_confidence": 0.5,
+      "enabled_assets": ["bitcoin", "ethereum", "binancecoin", "cardano", "solana", "ripple", "polkadot", "chainlink", "litecoin", "uniswap"],
+      "enabled_signal_types": ["LONG", "SHORT"],
+      "rate_limit": 60,
+      "batch_alerts": true,
+      "description": "Multi-Bucket Portfolio Strategy signals"
     }
   },
   "fallback_webhook": {

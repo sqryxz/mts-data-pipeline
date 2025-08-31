@@ -101,7 +101,12 @@ def run_enhanced_background_service(scheduler: EnhancedMultiTierScheduler, logge
     # Display features summary
     logger.info("🎯 Complete End-to-End Pipeline Features:")
     logger.info("   • Multi-tier data collection with optimized intervals")
-    logger.info("   • Multi-strategy signal generation (VIX correlation, mean reversion, volatility)")
+    logger.info("   • Multi-strategy signal generation:")
+    logger.info("     🎯 Multi-Bucket Portfolio (Cross-sectional momentum, residual analysis, mean-reversion)")
+    logger.info("     📈 VIX Correlation (Market regime detection, volatility analysis)")
+    logger.info("     🔄 Mean Reversion (Overextended moves, drawdown analysis)")
+    logger.info("     📊 Volatility (Breakout detection, volatility regime analysis)")
+    logger.info("     🌊 Ripple (Specialized XRP analysis, momentum detection)")
     logger.info("   • Signal aggregation with conflict resolution")
     logger.info("   • JSON alert generation for high-confidence signals")
     logger.info("   • Discord webhook notifications for trading signals")

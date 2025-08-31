@@ -13,6 +13,7 @@ import os
 
 from src.data.signal_models import TradingSignal
 from src.utils.alert_deduper import AlertDeduper
+from src.utils.discord_alert_logger import DiscordAlertLogger
 
 
 class DiscordWebhook:
@@ -48,6 +49,9 @@ class DiscordWebhook:
             'retry_delay': 1.0
         }
         
+        # Initialize database logger
+        self.alert_logger = DiscordAlertLogger()
+        
         self.logger.info("Discord webhook initialized")
     
     async def send_signal_alert(self, signal: TradingSignal) -> bool:
@@ -60,21 +64,34 @@ class DiscordWebhook:
         Returns:
             bool: True if sent successfully, False otherwise
         """
+        # Log alert attempt to database
+        alert_id = self.alert_logger.log_alert_attempt(
+            signal=signal,
+            webhook_url=self.webhook_url,
+            alert_type="signal_alert",
+            strategy_name=getattr(signal, 'strategy_name', None)
+        )
+        
         try:
             embed = self._create_signal_embed(signal)
             payload = self._create_webhook_payload(embed)
             
             success = await self._send_webhook(payload)
             
+            # Update database with result
             if success:
                 self.logger.info(f"Signal alert sent to Discord: {signal.signal_type.value} {signal.symbol}")
+                self.alert_logger.update_alert_result(alert_id, success=True)
             else:
                 self.logger.error(f"Failed to send signal alert to Discord: {signal.signal_type.value} {signal.symbol}")
+                self.alert_logger.update_alert_result(alert_id, success=False, error_message="Webhook send failed")
             
             return success
             
         except Exception as e:
-            self.logger.error(f"Error sending signal alert to Discord: {e}")
+            error_msg = f"Error sending signal alert to Discord: {e}"
+            self.logger.error(error_msg)
+            self.alert_logger.update_alert_result(alert_id, success=False, error_message=error_msg)
             return False
     
     async def send_bulk_signals(self, signals: List[TradingSignal]) -> Dict[str, int]:
@@ -150,11 +167,27 @@ class DiscordWebhook:
                     "value": f"{signal.position_size:.1%}",
                     "inline": True
                 }
-            ],
-            "footer": {
+            ]
+        }
+        
+        # Add strategy information based on signal type
+        if signal.strategy_name == "Aggregated_Signal" and signal.analysis_data:
+            # For aggregated signals, show contributing strategies
+            contributing_strategies = signal.analysis_data.get('strategies_combined', [])
+            if contributing_strategies:
+                strategy_text = ", ".join(contributing_strategies)
+                embed["footer"] = {
+                    "text": f"🎯 Aggregated Signal | Strategies: {strategy_text} | MTS Pipeline"
+                }
+            else:
+                embed["footer"] = {
+                    "text": f"🎯 Aggregated Signal | MTS Pipeline"
+                }
+        else:
+            # For individual strategy signals, show the strategy name
+            embed["footer"] = {
                 "text": f"Strategy: {signal.strategy_name} | MTS Pipeline"
             }
-        }
         
         # Add risk management fields
         if self.config.get('include_risk_metrics', True):

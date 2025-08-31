@@ -41,7 +41,7 @@ class Config:
         
         # Strategy Configuration
         self.STRATEGY_CONFIG_DIR = os.getenv('STRATEGY_CONFIG_DIR', 'config/strategies')
-        self.ENABLED_STRATEGIES = self._parse_list(os.getenv('ENABLED_STRATEGIES', 'vix_correlation,mean_reversion'))
+        self.ENABLED_STRATEGIES = self._parse_list(os.getenv('ENABLED_STRATEGIES', 'vix_correlation,mean_reversion,multi_bucket_portfolio'))
         self.STRATEGY_WEIGHTS = self._parse_strategy_weights()
         
         # API Server Configuration
@@ -224,7 +224,7 @@ class Config:
     
     def _parse_strategy_weights(self) -> dict:
         """Parse strategy weights from environment"""
-        weights_str = os.getenv('STRATEGY_WEIGHTS', 'vix_correlation:0.6,mean_reversion:0.4')
+        weights_str = os.getenv('STRATEGY_WEIGHTS', 'vix_correlation:0.25,mean_reversion:0.20,volatility:0.20,ripple:0.15,multi_bucket_portfolio:0.20')
         weights = {}
         
         for pair in weights_str.split(','):

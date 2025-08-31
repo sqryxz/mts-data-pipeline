@@ -1,0 +1,61 @@
+{
+  "total_return": 7.269123918083492,
+  "annualized_return": 3.2824610962854575,
+  "volatility": 0.08760013676371453,
+  "sharpe_ratio": 37.47095858011387,
+  "max_drawdown": -0.00764975128382054,
+  "calmar_ratio": 429.0938325312568,
+  "win_rate": 0.05862361937128292,
+  "profit_factor": 1.4309127596266626,
+  "bucket_performance": {
+    "momentum_long": {
+      "signals": 137,
+      "trades": 154,
+      "pnl": -755.8533975496011
+    },
+    "residual_long": {
+      "signals": 408,
+      "trades": 614,
+      "pnl": 8490.956149003407
+    },
+    "residual_short": {
+      "signals": 403,
+      "trades": 403,
+      "pnl": 0.0
+    },
+    "mean_reversion_long": {
+      "signals": 0,
+      "trades": 0,
+      "pnl": 0.0
+    },
+    "mean_reversion_short": {
+      "signals": 4,
+      "trades": 4,
+      "pnl": 0.0
+    },
+    "pair_long_spread": {
+      "signals": 0,
+      "trades": 0,
+      "pnl": 0.0
+    },
+    "pair_short_spread": {
+      "signals": 2,
+      "trades": 2,
+      "pnl": 0.0
+    }
+  },
+  "regime_analysis": {
+    "low_correlation": {
+      "days": 359,
+      "avg_return": 0.0
+    },
+    "medium_correlation": {
+      "days": 7,
+      "avg_return": 0.0
+    },
+    "high_correlation": {
+      "days": 0,
+      "avg_return": 0.0
+    }
+  }
+}

@@ -472,16 +472,20 @@ def create_default_multi_strategy_generator() -> MultiStrategyGenerator:
         },
         "ripple": {
             "config_path": "config/strategies/ripple_signals.json"
+        },
+        "multibucketportfolio": {
+            "config_path": "config/strategies/multi_bucket_portfolio.json"
         }
     }
     
     # Default aggregator configuration
     aggregator_config = {
         "strategy_weights": {
-            "vixcorrelation": 0.30,
-            "meanreversion": 0.25,
-            "volatility": 0.25,
-            "ripple": 0.20
+            "vixcorrelation": 0.25,
+            "meanreversion": 0.20,
+            "volatility": 0.20,
+            "ripple": 0.15,
+            "multibucketportfolio": 0.20
         },
         "aggregation_config": {
             "conflict_resolution": "weighted_average",
