@@ -134,6 +134,21 @@ logs/*.log.*
 data/scheduler_state.json
 data/raw/*.csv
 
+# Data files and databases
+data/crypto_data.db
+data/crypto_data.db-*
+data/correlation/alerts/
+data/correlation/mosaics/
+data/correlation/state/
+data/enhanced_multi_tier_scheduler_state.json
+data/enhanced_multi_tier_scheduler_state.json.backup
+data/alert_dedupe_state.json
+
+# Temporary and backup files
+*.backup
+*.tmp
+*.temp
+
 # IDE
 .vscode/
 .idea/
