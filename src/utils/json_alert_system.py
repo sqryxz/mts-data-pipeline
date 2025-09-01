@@ -93,6 +93,63 @@ class JSONAlertSystem:
         
         return alert
     
+    def generate_signal_alert(self, signal: TradingSignal) -> Dict[str, Any]:
+        """
+        Generate a general signal alert for non-volatility signals.
+        
+        Args:
+            signal: TradingSignal object
+            
+        Returns:
+            Dict containing the signal alert
+        """
+        timestamp = int(signal.timestamp.timestamp() * 1000) if hasattr(signal.timestamp, 'timestamp') else int(datetime.now().timestamp() * 1000)
+        
+        # Clean analysis_data to ensure JSON serialization
+        clean_analysis_data = self._clean_for_json_serialization(signal.analysis_data) if signal.analysis_data else None
+        
+        alert = {
+            "timestamp": timestamp,
+            "asset": signal.symbol,
+            "signal_type": signal.signal_type.value if hasattr(signal.signal_type, 'value') else str(signal.signal_type),
+            "direction": signal.direction.value if hasattr(signal.direction, 'value') else str(signal.direction),
+            "price": signal.price,
+            "confidence": signal.confidence,
+            "strategy_name": signal.strategy_name,
+            "position_size": signal.position_size,
+            "stop_loss": signal.stop_loss,
+            "take_profit": signal.take_profit,
+            "alert_type": "trading_signal",
+            "analysis_data": clean_analysis_data,
+            "correlation_value": signal.correlation_value
+        }
+        
+        return alert
+    
+    def _clean_for_json_serialization(self, data: Any) -> Any:
+        """
+        Clean data to ensure it's JSON serializable.
+        
+        Args:
+            data: Data to clean
+            
+        Returns:
+            Cleaned data that can be serialized to JSON
+        """
+        if data is None:
+            return None
+        elif isinstance(data, (str, int, float, bool)):
+            return data
+        elif isinstance(data, (list, tuple)):
+            return [self._clean_for_json_serialization(item) for item in data]
+        elif isinstance(data, dict):
+            return {str(k): self._clean_for_json_serialization(v) for k, v in data.items()}
+        elif isinstance(data, set):
+            return list(data)  # Convert sets to lists
+        else:
+            # For any other types, convert to string
+            return str(data)
+    
     def _determine_position_direction(self, signal_type: SignalType, volatility_percentile: float) -> str:
         """
         Determine position direction based on momentum and volatility.
@@ -134,7 +191,11 @@ class JSONAlertSystem:
         """
         if filename is None:
             timestamp = datetime.fromtimestamp(alert['timestamp'] / 1000)
-            filename = f"volatility_alert_{alert['asset']}_{timestamp.strftime('%Y%m%d_%H%M%S')}.json"
+            alert_type = alert.get('alert_type', 'signal')
+            if alert_type == 'volatility_spike':
+                filename = f"volatility_alert_{alert['asset']}_{timestamp.strftime('%Y%m%d_%H%M%S')}.json"
+            else:
+                filename = f"signal_alert_{alert['asset']}_{timestamp.strftime('%Y%m%d_%H%M%S')}.json"
         
         filepath = self.alert_dir / filename
         
@@ -184,30 +245,31 @@ class JSONAlertSystem:
         alerts = []
         
         for signal in signals:
-            if signal.asset not in self.config['enabled_assets']:
+            if signal.symbol not in self.config['enabled_assets']:
                 continue
             
-            # Extract volatility data from signal analysis
-            volatility_value = 0.0
-            volatility_threshold = 0.0
-            volatility_percentile = 0.0
-            
-            if signal.analysis_data:
+            # Check if this is a volatility signal
+            if signal.analysis_data and 'volatility' in signal.analysis_data:
+                # Generate volatility alert
                 volatility_value = signal.analysis_data.get('volatility', 0.0)
                 volatility_threshold = signal.analysis_data.get('volatility_threshold', 0.0)
                 volatility_percentile = signal.analysis_data.get('volatility_percentile', 0.0)
-            
-            # Only generate alerts if volatility exceeds threshold
-            if volatility_percentile >= self.config['volatility_threshold_percentile']:
-                alert = self.generate_volatility_alert(
-                    asset=signal.asset,
-                    current_price=signal.price,
-                    volatility_value=volatility_value,
-                    volatility_threshold=volatility_threshold,
-                    volatility_percentile=volatility_percentile,
-                    signal_type=signal.signal_type,
-                    timestamp=signal.timestamp
-                )
+                
+                # Only generate alerts if volatility exceeds threshold
+                if volatility_percentile >= self.config['volatility_threshold_percentile']:
+                    alert = self.generate_volatility_alert(
+                        asset=signal.symbol,
+                        current_price=signal.price,
+                        volatility_value=volatility_value,
+                        volatility_threshold=volatility_threshold,
+                        volatility_percentile=volatility_percentile,
+                        signal_type=signal.signal_type,
+                        timestamp=signal.timestamp
+                    )
+                    alerts.append(alert)
+            else:
+                # Generate general signal alert for non-volatility signals
+                alert = self.generate_signal_alert(signal)
                 alerts.append(alert)
         
         return alerts
@@ -226,7 +288,7 @@ class JSONAlertSystem:
         cutoff_time = datetime.now().timestamp() * 1000 - (hours * 3600 * 1000)
         
         try:
-            for filepath in self.alert_dir.glob("volatility_alert_*.json"):
+            for filepath in self.alert_dir.glob("*.json"):
                 try:
                     with open(filepath, 'r') as f:
                         alert = json.load(f)
@@ -260,7 +322,7 @@ class JSONAlertSystem:
         deleted_count = 0
         
         try:
-            for filepath in self.alert_dir.glob("volatility_alert_*.json"):
+            for filepath in self.alert_dir.glob("*.json"):
                 try:
                     with open(filepath, 'r') as f:
                         alert = json.load(f)
