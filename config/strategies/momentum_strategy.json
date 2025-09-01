@@ -1,0 +1,12 @@
+{
+  "assets": ["bitcoin", "ethereum"],
+  "short_window": 10,
+  "long_window": 30,
+  "rsi_window": 14,
+  "rsi_overbought": 70,
+  "rsi_oversold": 30,
+  "base_position_size": 0.02,
+  "max_position_size": 0.05,
+  "min_confidence": 0.6,
+  "description": "Momentum strategy using moving average crossovers and RSI"
+}

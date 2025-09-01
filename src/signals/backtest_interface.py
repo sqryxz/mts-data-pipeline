@@ -14,7 +14,7 @@ from enum import Enum
 from src.data.sqlite_helper import CryptoDatabase
 from src.signals.strategies.base_strategy import SignalStrategy
 # MultiStrategyGenerator import removed to avoid circular dependency - import when needed
-from src.data.signal_models import TradingSignal, SignalType
+from src.data.signal_models import TradingSignal, SignalType, SignalDirection, SignalStrength
 from src.utils.exceptions import DataProcessingError, ConfigurationError
 
 
@@ -328,6 +328,121 @@ class BacktestInterface:
             # Return failed result
             return self._create_failed_result("Multi-Strategy_Aggregated", start_date, end_date, execution_time)
     
+    def backtest_signals(self, signals: List[Dict[str, Any]], start_date: datetime, end_date: datetime, 
+                        initial_capital: float = 10000.0, commission: float = 0.001) -> BacktestResult:
+        """
+        Backtest a list of trading signals directly.
+        
+        Args:
+            signals: List of signal dictionaries
+            start_date: Start datetime
+            end_date: End datetime
+            initial_capital: Starting capital
+            commission: Commission rate
+            
+        Returns:
+            BacktestResult containing performance metrics
+        """
+        self.logger.info(f"Starting signal backtest with {len(signals)} signals")
+        
+        start_time = datetime.now()
+        
+        try:
+            # Convert signal dictionaries to TradingSignal objects
+            trading_signals = []
+            for signal_dict in signals:
+                try:
+                    signal = TradingSignal(
+                        symbol=signal_dict['asset'],
+                        signal_type=SignalType(signal_dict['signal_type']),
+                        direction=SignalDirection(signal_dict['direction']),
+                        timestamp=datetime.fromtimestamp(signal_dict['timestamp'] / 1000),
+                        price=signal_dict['price'],
+                        strategy_name=signal_dict['strategy'],
+                        signal_strength=SignalStrength.STRONG,  # Default to STRONG
+                        confidence=signal_dict['confidence'],
+                        position_size=signal_dict['position_size'],
+                        stop_loss=signal_dict['stop_loss'],
+                        take_profit=signal_dict['take_profit']
+                    )
+                    trading_signals.append(signal)
+                except Exception as e:
+                    self.logger.warning(f"Failed to convert signal: {e}")
+                    continue
+            
+            if not trading_signals:
+                raise ValueError("No valid signals to backtest")
+            
+            # Get assets from signals
+            assets = list(set(signal.symbol for signal in trading_signals))
+            
+            # Get historical data
+            historical_data = self._get_historical_data(assets, start_date.strftime('%Y-%m-%d'), end_date.strftime('%Y-%m-%d'))
+            
+            # Execute backtest simulation
+            backtest_results = self._execute_backtest_simulation(
+                trading_signals, historical_data, start_date.strftime('%Y-%m-%d'), end_date.strftime('%Y-%m-%d')
+            )
+            
+            # Calculate performance metrics
+            performance_metrics = self._calculate_performance_metrics(
+                backtest_results['daily_returns'],
+                backtest_results['equity_curve'],
+                backtest_results['trade_log']
+            )
+            
+            # Calculate signal statistics
+            signal_stats = self._calculate_signal_statistics(trading_signals)
+            
+            execution_time = (datetime.now() - start_time).total_seconds()
+            
+            # Create result object
+            result = BacktestResult(
+                strategy_name="Signal_Backtest",
+                start_date=start_date.strftime('%Y-%m-%d'),
+                end_date=end_date.strftime('%Y-%m-%d'),
+                status=BacktestStatus.SUCCESS,
+                total_return=performance_metrics['total_return'],
+                annualized_return=performance_metrics['annualized_return'],
+                sharpe_ratio=performance_metrics['sharpe_ratio'],
+                max_drawdown=performance_metrics['max_drawdown'],
+                win_rate=performance_metrics['win_rate'],
+                total_trades=performance_metrics['total_trades'],
+                profitable_trades=performance_metrics['profitable_trades'],
+                losing_trades=performance_metrics['losing_trades'],
+                average_trade_return=performance_metrics['average_trade_return'],
+                average_winning_trade=performance_metrics['average_winning_trade'],
+                average_losing_trade=performance_metrics['average_losing_trade'],
+                volatility=performance_metrics['volatility'],
+                var_95=performance_metrics['var_95'],
+                calmar_ratio=performance_metrics['calmar_ratio'],
+                total_signals=signal_stats['total_signals'],
+                long_signals=signal_stats['long_signals'],
+                short_signals=signal_stats['short_signals'],
+                hold_signals=signal_stats['hold_signals'],
+                daily_returns=backtest_results['daily_returns'],
+                equity_curve=backtest_results['equity_curve'],
+                drawdown_series=backtest_results['drawdown_series'],
+                trade_log=backtest_results['trade_log'],
+                signals_generated=trading_signals,
+                execution_time=execution_time,
+                data_quality=backtest_results['data_quality']
+            )
+            
+            self.logger.info(f"Signal backtest completed successfully")
+            self.logger.info(f"Total return: {performance_metrics['total_return']:.2%}")
+            self.logger.info(f"Sharpe ratio: {performance_metrics['sharpe_ratio']:.3f}")
+            self.logger.info(f"Max drawdown: {performance_metrics['max_drawdown']:.2%}")
+            
+            return result
+            
+        except Exception as e:
+            execution_time = (datetime.now() - start_time).total_seconds()
+            self.logger.error(f"Signal backtest failed: {e}")
+            
+            # Return failed result
+            return self._create_failed_result("Signal_Backtest", start_date.strftime('%Y-%m-%d'), end_date.strftime('%Y-%m-%d'), execution_time)
+    
     def _validate_date_range(self, start_date: str, end_date: str) -> None:
         """Validate the date range for backtesting."""
         try:
@@ -575,7 +690,7 @@ class BacktestInterface:
                       price_data: Dict[str, Dict[str, float]], date_str: str) -> None:
         """Execute a trade based on a signal."""
         
-        asset = signal.asset
+        asset = signal.symbol
         signal_type = signal.signal_type
         position_size = signal.position_size
         

@@ -3,10 +3,8 @@
     "bitcoin",
     "ethereum"
   ],
-  "volatility_window": 15,
-  "historical_hours": 24,
-  "volatility_threshold_percentile": 90,
-  "extreme_volatility_percentile": 95,
+  "correlation_threshold": 0.7,
+  "vix_threshold": 25.0,
   "base_position_size": 0.02,
   "max_position_size": 0.05,
   "min_confidence": 0.6

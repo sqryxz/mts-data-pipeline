@@ -1,73 +1,73 @@
 {
   "tasks": {
     "crypto_bitcoin": {
-      "last_collection": "2025-09-02T03:09:55.954278",
+      "last_collection": "2025-09-02T03:25:44.649073",
       "last_signal_generation": null,
       "consecutive_failures": 0,
       "enabled": true
     },
     "crypto_ethereum": {
-      "last_collection": "2025-09-02T03:09:55.954278",
+      "last_collection": "2025-09-02T03:25:44.649073",
       "last_signal_generation": null,
       "consecutive_failures": 0,
       "enabled": true
     },
     "crypto_ripple": {
-      "last_collection": "2025-09-02T03:09:55.954278",
+      "last_collection": "2025-09-02T03:25:44.649073",
       "last_signal_generation": null,
       "consecutive_failures": 0,
       "enabled": true
     },
     "crypto_sui": {
-      "last_collection": "2025-09-02T03:09:55.954278",
+      "last_collection": "2025-09-02T03:25:44.649073",
       "last_signal_generation": null,
       "consecutive_failures": 0,
       "enabled": true
     },
     "crypto_ethena": {
-      "last_collection": "2025-09-02T03:09:55.954278",
+      "last_collection": "2025-09-02T03:25:44.649073",
       "last_signal_generation": null,
       "consecutive_failures": 0,
       "enabled": true
     },
     "crypto_tether": {
-      "last_collection": "2025-09-02T02:33:48.440311",
+      "last_collection": "2025-09-02T03:34:46.832950",
       "last_signal_generation": null,
       "consecutive_failures": 0,
       "enabled": true
     },
     "crypto_solana": {
-      "last_collection": "2025-09-02T02:33:48.440311",
+      "last_collection": "2025-09-02T03:34:46.832950",
       "last_signal_generation": null,
       "consecutive_failures": 0,
       "enabled": true
     },
     "crypto_bittensor": {
-      "last_collection": "2025-09-02T02:33:48.440311",
+      "last_collection": "2025-09-02T03:34:46.832950",
       "last_signal_generation": null,
       "consecutive_failures": 0,
       "enabled": true
     },
     "crypto_fetch-ai": {
-      "last_collection": "2025-09-02T02:33:48.440311",
+      "last_collection": "2025-09-02T03:34:46.832950",
       "last_signal_generation": null,
       "consecutive_failures": 0,
       "enabled": true
     },
     "crypto_singularitynet": {
-      "last_collection": "2025-09-02T02:33:48.440311",
+      "last_collection": "2025-09-02T03:34:46.832950",
       "last_signal_generation": null,
       "consecutive_failures": 0,
       "enabled": true
     },
     "crypto_render-token": {
-      "last_collection": "2025-09-02T02:33:48.440311",
+      "last_collection": "2025-09-02T03:34:46.832950",
       "last_signal_generation": null,
       "consecutive_failures": 0,
       "enabled": true
     },
     "crypto_ocean-protocol": {
-      "last_collection": "2025-09-02T02:33:48.440311",
+      "last_collection": "2025-09-02T03:34:46.832950",
       "last_signal_generation": null,
       "consecutive_failures": 0,
       "enabled": true
@@ -129,11 +129,11 @@
   },
   "collection_stats": {
     "high_frequency": {
-      "success": 685,
+      "success": 690,
       "failure": 0
     },
     "hourly": {
-      "success": 245,
+      "success": 252,
       "failure": 0
     },
     "macro": {
@@ -141,10 +141,10 @@
       "failure": 18
     }
   },
-  "total_api_calls": 0,
-  "signals_generated": 64,
-  "alerts_generated": 22,
+  "total_api_calls": 12,
+  "signals_generated": 66,
+  "alerts_generated": 24,
   "discord_alerts_sent": 0,
-  "last_signal_generation": "2025-09-02T02:33:48.440311",
-  "last_save": "2025-09-02T03:19:43.832657"
+  "last_signal_generation": "2025-09-02T03:34:46.832950",
+  "last_save": "2025-09-02T03:35:50.010875"
 }
