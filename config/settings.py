@@ -41,7 +41,7 @@ class Config:
         
         # Strategy Configuration
         self.STRATEGY_CONFIG_DIR = os.getenv('STRATEGY_CONFIG_DIR', 'config/strategies')
-        self.ENABLED_STRATEGIES = self._parse_list(os.getenv('ENABLED_STRATEGIES', 'vix_correlation,mean_reversion,multi_bucket_portfolio'))
+        self.ENABLED_STRATEGIES = self._parse_list(os.getenv('ENABLED_STRATEGIES', 'vix_correlation,mean_reversion,multi_bucket_portfolio,volatility,ripple'))
         self.STRATEGY_WEIGHTS = self._parse_strategy_weights()
         
         # API Server Configuration

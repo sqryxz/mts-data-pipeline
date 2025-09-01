@@ -23,13 +23,13 @@
     },
     "signal_thresholds": {
         "rsi_overbought": 70,
-        "rsi_oversold": 30,
+        "rsi_oversold": 35,
         "rsi_extreme_overbought": 80,
         "rsi_extreme_oversold": 20,
         "volume_spike_threshold": 2.0,
         "price_momentum_threshold": 0.04,
         "volatility_spike_threshold": 2.5,
-        "confidence_min": 0.40,
+        "confidence_min": 0.30,
         "confidence_high": 0.75,
         "dynamic_thresholds": true
     },

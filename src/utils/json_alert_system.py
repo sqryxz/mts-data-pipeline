@@ -115,6 +115,7 @@ class JSONAlertSystem:
             "direction": signal.direction.value if hasattr(signal.direction, 'value') else str(signal.direction),
             "price": signal.price,
             "confidence": signal.confidence,
+            "signal_strength": signal.signal_strength.value if hasattr(signal.signal_strength, 'value') else str(signal.signal_strength),
             "strategy_name": signal.strategy_name,
             "position_size": signal.position_size,
             "stop_loss": signal.stop_loss,

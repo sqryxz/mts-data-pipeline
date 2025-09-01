@@ -347,12 +347,23 @@ class SignalAggregator:
         final_max_risk = weighted_max_risk / total_weight if weighted_max_risk > 0 else None
         
         # Determine final signal strength based on confidence and agreement
-        if final_confidence > 0.7 and analysis['dominant_weight'] > 0.7:
-            final_strength = SignalStrength.STRONG
-        elif final_confidence > 0.5 and analysis['dominant_weight'] > 0.5:
-            final_strength = SignalStrength.MODERATE
+        # For single strategy signals, use confidence-based strength
+        if analysis['signal_count'] == 1:
+            # Single strategy signal - use confidence-based strength
+            if final_confidence > 0.8:
+                final_strength = SignalStrength.STRONG
+            elif final_confidence > 0.6:
+                final_strength = SignalStrength.MODERATE
+            else:
+                final_strength = SignalStrength.WEAK
         else:
-            final_strength = SignalStrength.WEAK
+            # Multiple strategy signals - use both confidence and agreement
+            if final_confidence > 0.7 and analysis['dominant_weight'] > 0.7:
+                final_strength = SignalStrength.STRONG
+            elif final_confidence > 0.5 and analysis['dominant_weight'] > 0.5:
+                final_strength = SignalStrength.MODERATE
+            else:
+                final_strength = SignalStrength.WEAK
         
         # Create aggregated analysis data
         aggregated_analysis = {

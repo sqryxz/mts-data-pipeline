@@ -1,9 +1,9 @@
 {
-  "name": "VIX_Correlation_Strategy",
+  "name": "vixcorrelation",
   "assets": ["bitcoin", "ethereum", "binancecoin"],
   "correlation_thresholds": {
-    "strong_negative": -0.6,
-    "strong_positive": 0.6
+    "strong_negative": -0.5,
+    "strong_positive": 0.5
   },
   "lookback_days": 30,
   "position_size": 0.02

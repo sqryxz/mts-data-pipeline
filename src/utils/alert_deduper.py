@@ -86,7 +86,11 @@ class AlertDeduper:
         if ts is None:
             return True
         # If within TTL, do not resend
-        return False
+        age_seconds = time.time() - ts
+        if age_seconds < self.ttl_seconds:
+            return False
+        # If expired, allow resending
+        return True
 
     def mark_sent(self, unique_key: str) -> None:
         self._state[unique_key] = time.time()

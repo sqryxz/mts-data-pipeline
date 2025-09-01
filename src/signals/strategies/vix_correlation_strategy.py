@@ -132,8 +132,33 @@ class VIXCorrelationStrategy(SignalStrategy):
             'data_points': len(clean_df),
             'vix_availability': len(clean_df) / len(df),
             'latest_vix': clean_df['vix_value'].iloc[-1] if not clean_df.empty else None,
-            'latest_price': clean_df['close'].iloc[-1] if not clean_df.empty else None
+            'latest_price': self._get_current_price(asset, clean_df)
         }
+    
+    def _get_current_price(self, asset: str, clean_df: pd.DataFrame) -> float:
+        """Get current price, using fresh data if VIX data is stale"""
+        if clean_df.empty:
+            return None
+            
+        # Check if VIX data is stale (older than 2 days)
+        latest_vix_date = clean_df.iloc[-1]['date_str']
+        from datetime import datetime as dt
+        vix_date = dt.strptime(latest_vix_date, '%Y-%m-%d')
+        days_old = (dt.now() - vix_date).days
+        
+        if days_old > 2:
+            # Get fresh crypto price from crypto_ohlcv table
+            try:
+                fresh_crypto = self.database.get_crypto_data(asset, days=3)
+                if not fresh_crypto.empty:
+                    current_price = fresh_crypto['close'].iloc[-1]
+                    self.logger.info(f"Using fresh {asset} price ${current_price:,.2f} (VIX data {days_old} days old)")
+                    return current_price
+            except Exception as e:
+                self.logger.warning(f"Could not get fresh price for {asset}: {e}")
+        
+        # Fall back to price from combined dataset
+        return clean_df['close'].iloc[-1]
     
     def _classify_correlation_strength(self, correlation: float) -> str:
         """Classify correlation strength based on absolute value"""
