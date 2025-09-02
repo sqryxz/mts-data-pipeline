@@ -44,10 +44,10 @@ def setup_application() -> tuple[MultiTierScheduler, logging.Logger]:
         
         # Initialize multi-tier scheduler with optimized settings
         scheduler = MultiTierScheduler(
-            high_frequency_assets=['bitcoin', 'ethereum', 'ripple', 'sui', 'ethena'],  # 15-minute intervals
+            high_frequency_assets=['bitcoin', 'ethereum', 'binancecoin', 'hyperliquid', 'solana', 'ripple', 'dogecoin', 'chainlink', 'sui', 'uniswap'],  # 15-minute intervals
             daily_assets=[
-                'tether', 'solana', 'bittensor', 'fetch-ai',
-                'singularitynet', 'render-token', 'ocean-protocol'
+                'tether', 'bittensor', 'fetch-ai', 'singularitynet', 
+                'render-token', 'ocean-protocol', 'ethena'
             ],  # Hourly intervals (parameter name kept for compatibility)
             macro_indicators=[
                 'VIXCLS', 'DFF', 'DGS10', 'DTWEXBGS', 'DEXUSEU',

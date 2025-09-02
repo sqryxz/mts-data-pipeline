@@ -45,10 +45,10 @@ def setup_enhanced_application(enable_signals: bool = True, enable_alerts: bool 
         
         # Initialize enhanced multi-tier scheduler
         scheduler = EnhancedMultiTierScheduler(
-            high_frequency_assets=['bitcoin', 'ethereum', 'ripple', 'sui', 'ethena'],  # 15-minute intervals
+            high_frequency_assets=['bitcoin', 'ethereum', 'binancecoin', 'hyperliquid', 'solana', 'ripple', 'dogecoin', 'chainlink', 'sui', 'uniswap'],  # 15-minute intervals
             hourly_assets=[
-                'tether', 'solana', 'bittensor', 'fetch-ai',
-                'singularitynet', 'render-token', 'ocean-protocol'
+                'tether', 'bittensor', 'fetch-ai', 'singularitynet', 
+                'render-token', 'ocean-protocol', 'ethena'
             ],  # Hourly intervals
             macro_indicators=[
                 'VIXCLS', 'DFF', 'DGS10', 'DTWEXBGS', 'DEXUSEU',

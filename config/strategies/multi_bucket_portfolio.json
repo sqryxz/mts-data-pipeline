@@ -5,13 +5,13 @@
   "enabled": true,
   
   "assets": {
-    "universe": ["bitcoin", "ethereum", "binancecoin", "cardano", "solana", "ripple", "polkadot", "chainlink", "litecoin", "uniswap"],
+    "universe": ["bitcoin", "ethereum", "binancecoin", "hyperliquid", "solana", "ripple", "dogecoin", "chainlink", "sui", "uniswap"],
     "factor_assets": ["bitcoin", "ethereum"],
     "stablecoins": ["tether", "usdcoin", "dai"],
     "pairs": [
       {"long": "ethereum", "short": "binancecoin", "name": "ETH-BNB"},
-      {"long": "ethereum", "short": "cardano", "name": "ETH-ADA"},
-      {"long": "bitcoin", "short": "litecoin", "name": "BTC-LTC"}
+      {"long": "ethereum", "short": "hyperliquid", "name": "ETH-HYPE"},
+      {"long": "bitcoin", "short": "sui", "name": "BTC-SUI"}
     ]
   },
   

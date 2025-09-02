@@ -3,7 +3,18 @@
     "vixcorrelation": {
       "webhook_url": "https://discord.com/api/webhooks/1408273388753129504/_w8oTulee_396ULSikz3My0yImCp-c2kyciTNCWJQIbM8uV35ZNuIRC4y0p6m6HionPT",
       "min_confidence": 0.5,
-      "enabled_assets": ["bitcoin", "ethereum", "binancecoin"],
+      "enabled_assets": [
+        "bitcoin",
+        "ethereum",
+        "binancecoin",
+        "hyperliquid",
+        "solana",
+        "ripple",
+        "dogecoin",
+        "chainlink",
+        "sui",
+        "uniswap"
+      ],
       "enabled_signal_types": ["LONG", "SHORT"],
       "rate_limit": 60,
       "batch_alerts": true,
@@ -12,7 +23,18 @@
     "meanreversion": {
       "webhook_url": "https://discord.com/api/webhooks/1408273388753129504/_w8oTulee_396ULSikz3My0yImCp-c2kyciTNCWJQIbM8uV35ZNuIRC4y0p6m6HionPT",
       "min_confidence": 0.4,
-      "enabled_assets": ["bitcoin", "ethereum", "binancecoin"],
+      "enabled_assets": [
+        "bitcoin",
+        "ethereum",
+        "binancecoin",
+        "hyperliquid",
+        "solana",
+        "ripple",
+        "dogecoin",
+        "chainlink",
+        "sui",
+        "uniswap"
+      ],
       "enabled_signal_types": ["LONG", "SHORT"],
       "rate_limit": 60,
       "batch_alerts": true,
@@ -21,7 +43,18 @@
     "volatility": {
       "webhook_url": "https://discord.com/api/webhooks/1408273388753129504/_w8oTulee_396ULSikz3My0yImCp-c2kyciTNCWJQIbM8uV35ZNuIRC4y0p6m6HionPT",
       "min_confidence": 0.6,
-      "enabled_assets": ["bitcoin", "ethereum"],
+      "enabled_assets": [
+        "bitcoin",
+        "ethereum",
+        "binancecoin",
+        "hyperliquid",
+        "solana",
+        "ripple",
+        "dogecoin",
+        "chainlink",
+        "sui",
+        "uniswap"
+      ],
       "enabled_signal_types": ["LONG", "SHORT"],
       "rate_limit": 60,
       "batch_alerts": true,
@@ -39,7 +72,18 @@
     "multibucketportfolio": {
       "webhook_url": "https://discord.com/api/webhooks/1408273388753129504/_w8oTulee_396ULSikz3My0yImCp-c2kyciTNCWJQIbM8uV35ZNuIRC4y0p6m6HionPT",
       "min_confidence": 0.5,
-      "enabled_assets": ["bitcoin", "ethereum", "binancecoin", "cardano", "solana", "ripple", "polkadot", "chainlink", "litecoin", "uniswap"],
+      "enabled_assets": [
+        "bitcoin",
+        "ethereum",
+        "binancecoin",
+        "hyperliquid",
+        "solana",
+        "ripple",
+        "dogecoin",
+        "chainlink",
+        "sui",
+        "uniswap"
+      ],
       "enabled_signal_types": ["LONG", "SHORT"],
       "rate_limit": 60,
       "batch_alerts": true,

@@ -1,6 +1,17 @@
 {
   "name": "vixcorrelation",
-  "assets": ["bitcoin", "ethereum", "binancecoin"],
+  "assets": [
+    "bitcoin",
+    "ethereum",
+    "binancecoin",
+    "hyperliquid",
+    "solana",
+    "ripple",
+    "dogecoin",
+    "chainlink",
+    "sui",
+    "uniswap"
+  ],
   "correlation_thresholds": {
     "strong_negative": -0.5,
     "strong_positive": 0.5

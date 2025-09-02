@@ -15,10 +15,17 @@
       }
     },
     {
-      "coingecko_id": "tether",
+      "coingecko_id": "binancecoin",
       "symbols": {
-        "binance": "USDTUSDT",
-        "bybit": "USDTUSDT"
+        "binance": "BNBUSDT",
+        "bybit": "BNBUSDT"
+      }
+    },
+    {
+      "coingecko_id": "hyperliquid",
+      "symbols": {
+        "binance": "HYPEUSDT",
+        "bybit": "HYPEUSDT"
       }
     },
     {
@@ -33,6 +40,41 @@
       "symbols": {
         "binance": "XRPUSDT",
         "bybit": "XRPUSDT"
+      }
+    },
+    {
+      "coingecko_id": "dogecoin",
+      "symbols": {
+        "binance": "DOGEUSDT",
+        "bybit": "DOGEUSDT"
+      }
+    },
+    {
+      "coingecko_id": "chainlink",
+      "symbols": {
+        "binance": "LINKUSDT",
+        "bybit": "LINKUSDT"
+      }
+    },
+    {
+      "coingecko_id": "sui",
+      "symbols": {
+        "binance": "SUIUSDT",
+        "bybit": "SUIUSDT"
+      }
+    },
+    {
+      "coingecko_id": "uniswap",
+      "symbols": {
+        "binance": "UNIUSDT",
+        "bybit": "UNIUSDT"
+      }
+    },
+    {
+      "coingecko_id": "tether",
+      "symbols": {
+        "binance": "USDTUSDT",
+        "bybit": "USDTUSDT"
       }
     },
     {
@@ -68,13 +110,6 @@
       "symbols": {
         "binance": "OCEANUSDT",
         "bybit": "OCEANUSDT"
-      }
-    },
-    {
-      "coingecko_id": "sui",
-      "symbols": {
-        "binance": "SUIUSDT",
-        "bybit": "SUIUSDT"
       }
     },
     {
