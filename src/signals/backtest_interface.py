@@ -473,6 +473,8 @@ class BacktestInterface:
             
             # Get market data using our enhanced provider
             market_data = self.db.get_strategy_market_data(assets, days)
+            # Normalize provider output into the structure expected by the backtester
+            market_data = self._format_market_data(market_data, assets)
             
             # Filter data to exact date range
             filtered_data = self._filter_data_by_date_range(market_data, start_date, end_date)
@@ -481,6 +483,54 @@ class BacktestInterface:
             
         except Exception as e:
             raise DataProcessingError(f"Failed to get historical data: {e}")
+
+    def _format_market_data(self, market_data: Dict[str, Any], assets: List[str]) -> Dict[str, Any]:
+        """Convert provider DataFrame-based output to dict-of-lists expected by backtester."""
+        try:
+            formatted: Dict[str, Any] = {
+                'vix_data': [],
+                'crypto_data': {}
+            }
+
+            # VIX
+            vix = market_data.get('vix_data')
+            if vix is not None:
+                if isinstance(vix, pd.DataFrame):
+                    for _, row in vix.iterrows():
+                        formatted['vix_data'].append({
+                            'date': str(row.get('date')),
+                            'vix_value': float(row.get('vix_value')) if row.get('vix_value') is not None else None
+                        })
+                elif isinstance(vix, list):
+                    formatted['vix_data'] = vix
+
+            # Crypto per-asset price data
+            for asset in assets:
+                asset_df = market_data.get(asset)
+                price_list: List[Dict[str, Any]] = []
+                if isinstance(asset_df, pd.DataFrame) and not asset_df.empty:
+                    for _, row in asset_df.iterrows():
+                        price_list.append({
+                            'date': str(row.get('date_str')),
+                            'close': float(row.get('close')) if row.get('close') is not None else None
+                        })
+                else:
+                    # Try to derive from combined crypto_data DataFrame
+                    combined_df = market_data.get('crypto_data')
+                    if isinstance(combined_df, pd.DataFrame) and not combined_df.empty:
+                        subset = combined_df[combined_df.get('cryptocurrency') == asset] if 'cryptocurrency' in combined_df.columns else pd.DataFrame()
+                        for _, row in subset.iterrows():
+                            price_list.append({
+                                'date': str(row.get('date_str')),
+                                'close': float(row.get('close')) if row.get('close') is not None else None
+                            })
+
+                formatted['crypto_data'][asset] = {'price_data': price_list}
+
+            return formatted
+        except Exception as e:
+            self.logger.warning(f"Failed to format market data: {e}")
+            return market_data
     
     def _filter_data_by_date_range(self, market_data: Dict[str, Any], 
                                   start_date: str, end_date: str) -> Dict[str, Any]:
@@ -522,7 +572,7 @@ class BacktestInterface:
         start_dt = datetime.strptime(start_date, '%Y-%m-%d')
         end_dt = datetime.strptime(end_date, '%Y-%m-%d')
         
-        # Generate signals weekly to reduce computation
+        # Generate signals daily for better coverage
         current_date = start_dt
         while current_date <= end_dt:
             try:
@@ -544,7 +594,7 @@ class BacktestInterface:
             except Exception as e:
                 self.logger.warning(f"Failed to generate signals for {current_date}: {e}")
             
-            current_date += timedelta(days=7)  # Weekly generation for performance
+            current_date += timedelta(days=1)
         
         return signals
     
@@ -558,7 +608,7 @@ class BacktestInterface:
         start_dt = datetime.strptime(start_date, '%Y-%m-%d')
         end_dt = datetime.strptime(end_date, '%Y-%m-%d')
         
-        # Generate signals weekly to reduce computation
+        # Generate signals daily for better coverage
         current_date = start_dt
         while current_date <= end_dt:
             try:
@@ -580,7 +630,7 @@ class BacktestInterface:
             except Exception as e:
                 self.logger.warning(f"Failed to generate aggregated signals for {current_date}: {e}")
             
-            current_date += timedelta(days=7)  # Weekly generation for performance
+            current_date += timedelta(days=1)
         
         return signals
     

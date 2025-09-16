@@ -1,0 +1,25 @@
+{
+  "timestamp": 1757415203917,
+  "asset": "bitcoin",
+  "signal_type": "SHORT",
+  "direction": "SELL",
+  "price": 112696.07268555176,
+  "confidence": 1.0,
+  "signal_strength": "STRONG",
+  "strategy_name": "Aggregated_Signal",
+  "position_size": 0.02,
+  "stop_loss": 118330.87631982933,
+  "take_profit": 101426.46541699657,
+  "alert_type": "trading_signal",
+  "analysis_data": {
+    "aggregation_method": "weighted_average",
+    "strategies_combined": [
+      "vixcorrelation"
+    ],
+    "strategy_weights": {
+      "vixcorrelation": 0.3
+    },
+    "signal_conflict_analysis": {
+      "signal_count": 1,
+      "unique_types": [
+        

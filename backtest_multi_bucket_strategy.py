@@ -32,7 +32,7 @@ def generate_sample_historical_data(start_date: datetime, end_date: datetime) ->
     date_range = pd.date_range(start=start_date, end=end_date, freq='D')
     
     # Assets to simulate
-    assets = ['bitcoin', 'ethereum', 'binancecoin', 'cardano', 'solana', 'ripple', 'polkadot', 'chainlink', 'litecoin', 'uniswap']
+    assets = ['bitcoin', 'ethereum', 'binancecoin', 'cardano', 'solana', 'polkadot', 'chainlink', 'litecoin', 'uniswap']
     
     market_data = {}
     

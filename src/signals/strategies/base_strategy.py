@@ -10,6 +10,8 @@ class SignalStrategy(ABC):
     def __init__(self, config_path: str):
         """Initialize strategy with configuration file"""
         self.config = self.load_config(config_path)
+        # Default name if not provided in config
+        self._name = self.config.get('name', self.__class__.__name__)
     
     def load_config(self, config_path: str) -> Dict[str, Any]:
         """Load strategy configuration from JSON file"""
@@ -20,6 +22,10 @@ class SignalStrategy(ABC):
             raise FileNotFoundError(f"Configuration file not found: {config_path}")
         except json.JSONDecodeError as e:
             raise ValueError(f"Invalid JSON in configuration file: {e}")
+    
+    def get_name(self) -> str:
+        """Return strategy display name"""
+        return self._name
     
     @abstractmethod
     def analyze(self, market_data: Dict[str, Any]) -> Dict[str, Any]:

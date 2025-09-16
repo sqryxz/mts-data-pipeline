@@ -1,0 +1,23 @@
+{
+  "realtime_price_service": {
+    "max_data_age_minutes": 30,
+    "max_vix_data_age_days": 2,
+    "price_tolerance_percent": 0.05,
+    "enable_freshness_validation": true,
+    "enable_price_updates": true,
+    "log_freshness_reports": true
+  },
+  "data_sources": {
+    "primary": "database",
+    "fallback": "database",
+    "validation_enabled": true
+  },
+  "signal_generation": {
+    "force_fresh_data": true,
+    "validate_timestamps": true,
+    "max_signal_age_minutes": 5,
+    "enable_real_time_prices": true
+  }
+}
+
+

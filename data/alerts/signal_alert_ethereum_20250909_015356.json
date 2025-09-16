@@ -1,0 +1,25 @@
+{
+  "timestamp": 1757354036896,
+  "asset": "ethereum",
+  "signal_type": "LONG",
+  "direction": "BUY",
+  "price": 4334.160597912947,
+  "confidence": 1.0,
+  "signal_strength": "STRONG",
+  "strategy_name": "Aggregated_Signal",
+  "position_size": 0.02,
+  "stop_loss": 4117.452568017299,
+  "take_profit": 4767.576657704242,
+  "alert_type": "trading_signal",
+  "analysis_data": {
+    "aggregation_method": "weighted_average",
+    "strategies_combined": [
+      "vixcorrelation"
+    ],
+    "strategy_weights": {
+      "vixcorrelation": 0.3
+    },
+    "signal_conflict_analysis": {
+      "signal_count": 1,
+      "unique_types": [
+        

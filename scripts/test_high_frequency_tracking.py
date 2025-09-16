@@ -41,7 +41,7 @@ def test_config_settings():
         return False
 
 def test_multi_tier_scheduler():
-    """Test that XRP and SUI are in the high-frequency assets."""
+    """Test that SUI is in the high-frequency assets."""
     print("\n📊 Testing Multi-Tier Scheduler...")
     
     try:
@@ -70,7 +70,7 @@ def test_multi_tier_scheduler():
         return False
 
 def test_enhanced_scheduler():
-    """Test that XRP and SUI are in the enhanced scheduler high-frequency assets."""
+    """Test that SUI is in the enhanced scheduler high-frequency assets."""
     print("\n🚀 Testing Enhanced Multi-Tier Scheduler...")
     
     try:
@@ -133,7 +133,7 @@ def test_optimized_collection_config():
         return False
 
 def test_real_time_signal_aggregator():
-    """Test that XRP and SUI are in the real-time signal aggregator."""
+    """Test that SUI is in the real-time signal aggregator (XRP removed)."""
     print("\n📡 Testing Real-Time Signal Aggregator...")
     
     try:
@@ -143,14 +143,15 @@ def test_real_time_signal_aggregator():
         
         print(f"   📡 Monitored symbols: {sorted(aggregator.monitored_symbols)}")
         
-        # Check if XRP and SUI are included
+        # Check if SUI is included and XRP is NOT included
         xrp_included = 'XRPUSDT' in aggregator.monitored_symbols
         sui_included = 'SUIUSDT' in aggregator.monitored_symbols
         
         print(f"   ✅ XRPUSDT included: {xrp_included}")
         print(f"   ✅ SUIUSDT included: {sui_included}")
         
-        return xrp_included and sui_included
+        # XRP should NOT be included, SUI should be included
+        return not xrp_included and sui_included
         
     except Exception as e:
         print(f"   ❌ Error testing real-time signal aggregator: {e}")
@@ -191,12 +192,13 @@ def main():
     print(f"\nOverall: {passed}/{len(results)} tests passed")
     
     if passed == len(results):
-        print("🎉 All tests passed! XRP and SUI are properly configured for high-frequency tracking.")
+        print("🎉 All tests passed! SUI is properly configured for high-frequency tracking (XRP removed).")
         print("\nHigh-Frequency Tracking Configuration:")
-        print("✅ XRP and SUI added to real-time symbols (XRPUSDT, SUIUSDT)")
-        print("✅ XRP and SUI moved to high-frequency assets (15-minute intervals)")
-        print("✅ XRP and SUI removed from hourly assets")
-        print("✅ Real-time signal aggregator includes XRP and SUI")
+        print("✅ SUI added to real-time symbols (SUIUSDT)")
+        print("✅ XRP removed from real-time symbols (XRPUSDT)")
+        print("✅ SUI moved to high-frequency assets (15-minute intervals)")
+        print("✅ SUI removed from hourly assets")
+        print("✅ Real-time signal aggregator includes SUI (XRP excluded)")
         print("\nNext steps:")
         print("1. Start the high-frequency tracking:")
         print("   python3 main_enhanced.py --background")

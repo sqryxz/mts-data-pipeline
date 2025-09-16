@@ -41,7 +41,7 @@ class Config:
         
         # Strategy Configuration
         self.STRATEGY_CONFIG_DIR = os.getenv('STRATEGY_CONFIG_DIR', 'config/strategies')
-        self.ENABLED_STRATEGIES = self._parse_list(os.getenv('ENABLED_STRATEGIES', 'vix_correlation,mean_reversion,multi_bucket_portfolio,volatility,ripple'))
+        self.ENABLED_STRATEGIES = self._parse_list(os.getenv('ENABLED_STRATEGIES', 'vix_correlation,mean_reversion,multi_bucket_portfolio,volatility'))
         self.STRATEGY_WEIGHTS = self._parse_strategy_weights()
         
         # API Server Configuration
@@ -101,7 +101,7 @@ class Config:
         """Setup comprehensive real-time configuration"""
         # Real-Time Collection Settings
         self.REALTIME_ENABLED = os.getenv('REALTIME_ENABLED', 'true').lower() == 'true'
-        self.REALTIME_SYMBOLS = self._parse_list(os.getenv('REALTIME_SYMBOLS', 'BTCUSDT,ETHUSDT,XRPUSDT,SUIUSDT,ENAUSDT,TAOUSDT,FETUSDT,AGIXUSDT,RNDRUSDT,OCEANUSDT'))
+        self.REALTIME_SYMBOLS = self._parse_list(os.getenv('REALTIME_SYMBOLS', 'BTCUSDT,ETHUSDT,SUIUSDT,ENAUSDT,TAOUSDT,FETUSDT,AGIXUSDT,RNDRUSDT,OCEANUSDT'))
         self.REALTIME_EXCHANGES = self._parse_list(os.getenv('REALTIME_EXCHANGES', 'binance'))
         
         # Order Book Configuration
@@ -224,7 +224,7 @@ class Config:
     
     def _parse_strategy_weights(self) -> dict:
         """Parse strategy weights from environment"""
-        weights_str = os.getenv('STRATEGY_WEIGHTS', 'vix_correlation:0.25,mean_reversion:0.20,volatility:0.20,ripple:0.15,multi_bucket_portfolio:0.20')
+        weights_str = os.getenv('STRATEGY_WEIGHTS', 'vix_correlation:0.30,mean_reversion:0.25,volatility:0.25,multi_bucket_portfolio:0.20')
         weights = {}
         
         for pair in weights_str.split(','):

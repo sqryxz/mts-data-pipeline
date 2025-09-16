@@ -8,8 +8,8 @@
         "description": "Critical assets requiring frequent updates",
         "interval_minutes": 15,
         "daily_collections_per_asset": 96,
-        "assets": ["bitcoin", "ethereum", "ripple", "sui", "ethena"],
-        "rationale": "BTC, ETH, XRP, SUI, and ENA are primary trading pairs and require frequent updates for accurate volatility and trend analysis"
+        "assets": ["bitcoin", "ethereum", "sui", "ethena"],
+        "rationale": "BTC, ETH, SUI, and ENA are primary trading pairs and require frequent updates for accurate volatility and trend analysis"
       },
       "hourly": {
         "description": "Standard crypto assets updated hourly",

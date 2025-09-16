@@ -65,7 +65,7 @@ class MultiTierScheduler:
         # Default asset configuration optimized for minimal API calls
         self.high_frequency_assets = high_frequency_assets or [
             'bitcoin', 'ethereum', 'binancecoin', 'hyperliquid', 'solana', 
-            'ripple', 'dogecoin', 'chainlink', 'sui', 'uniswap'
+            'dogecoin', 'chainlink', 'sui', 'uniswap'
         ]
         self.hourly_assets = daily_assets or [
             'tether', 'bittensor', 'fetch-ai', 'singularitynet', 

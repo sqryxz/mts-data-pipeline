@@ -2,7 +2,8 @@
   "strategy_webhooks": {
     "vixcorrelation": {
       "webhook_url": "https://discord.com/api/webhooks/1408273388753129504/_w8oTulee_396ULSikz3My0yImCp-c2kyciTNCWJQIbM8uV35ZNuIRC4y0p6m6HionPT",
-      "min_confidence": 0.5,
+      "min_confidence": 0.65,
+      "min_strength": "MODERATE",
       "enabled_assets": [
         "bitcoin",
         "ethereum",
@@ -16,7 +17,7 @@
         "uniswap"
       ],
       "enabled_signal_types": ["LONG", "SHORT"],
-      "rate_limit": 60,
+      "rate_limit": 900,
       "batch_alerts": true,
       "description": "VIX Correlation Strategy signals"
     },

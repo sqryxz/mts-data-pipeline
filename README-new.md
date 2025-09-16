@@ -130,7 +130,7 @@ The MTS pipeline now features an **optimized multi-tier scheduling system** that
 - **API Usage**: 192 calls/day for both assets
 
 #### **Hourly Tier** (60 minutes) 
-- **Assets**: Tether, Solana, Ripple, Bittensor, Fetch.ai, SingularityNET, Render Token, Ocean Protocol
+- **Assets**: Tether, Solana, Bittensor, Fetch.ai, SingularityNET, Render Token, Ocean Protocol
 - **Frequency**: Every 60 minutes (24 collections/day per asset)
 - **Rationale**: Portfolio diversification assets with sufficient hourly granularity
 - **API Usage**: 192 calls/day for all 8 assets
@@ -221,7 +221,7 @@ REDIS_CACHE_TTL=3600
 
 # Real-time Data
 REALTIME_ENABLED=true
-REALTIME_SYMBOLS=BTCUSDT,ETHUSDT,XRPUSDT,TAOUSDT,FETUSDT,AGIXUSDT,RNDRUSDT,OCEANUSDT
+REALTIME_SYMBOLS=BTCUSDT,ETHUSDT,TAOUSDT,FETUSDT,AGIXUSDT,RNDRUSDT,OCEANUSDT
 REALTIME_EXCHANGES=binance
 
 # Signal Generation
@@ -261,7 +261,7 @@ The optimized pipeline uses `config/optimized_collection.json` for tier configur
         "description": "Standard crypto assets updated hourly", 
         "interval_minutes": 60,
         "daily_collections_per_asset": 24,
-        "assets": ["tether", "solana", "ripple", "bittensor", "fetch-ai"]
+        "assets": ["tether", "solana", "bittensor", "fetch-ai"]
       },
       "macro": {
         "description": "Macro economic indicators updated daily",

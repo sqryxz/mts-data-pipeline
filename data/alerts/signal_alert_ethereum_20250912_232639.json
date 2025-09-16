@@ -1,0 +1,25 @@
+{
+  "timestamp": 1757690799093,
+  "asset": "ethereum",
+  "signal_type": "SHORT",
+  "direction": "SELL",
+  "price": 4541.895112922644,
+  "confidence": 1.0,
+  "signal_strength": "STRONG",
+  "strategy_name": "Aggregated_Signal",
+  "position_size": 0.02,
+  "stop_loss": 4768.989868568777,
+  "take_profit": 4087.70560163038,
+  "alert_type": "trading_signal",
+  "analysis_data": {
+    "aggregation_method": "weighted_average",
+    "strategies_combined": [
+      "vixcorrelation"
+    ],
+    "strategy_weights": {
+      "vixcorrelation": 0.3
+    },
+    "signal_conflict_analysis": {
+      "signal_count": 1,
+      "unique_types": [
+        

@@ -2,20 +2,53 @@
   "name": "vixcorrelation",
   "assets": [
     "bitcoin",
-    "ethereum",
-    "binancecoin",
-    "hyperliquid",
-    "solana",
-    "ripple",
-    "dogecoin",
-    "chainlink",
-    "sui",
-    "uniswap"
+    "ethereum"
   ],
   "correlation_thresholds": {
-    "strong_negative": -0.5,
-    "strong_positive": 0.5
+    "strong_negative": -0.4,
+    "strong_positive": 0.4
   },
-  "lookback_days": 30,
-  "position_size": 0.02
-} 
+  "lookback_days": 180,
+  "position_size": 0.02,
+  "vix_spike": {
+    "enabled": true,
+    "ma_window": 10,
+    "std_mult": 1.5,
+    "roc_window": 3,
+    "roc_up_threshold": 0.10,
+    "roc_down_threshold": -0.10,
+    "use_bands": true,
+    "use_roc": true,
+    "correlation_secondary": true
+  },
+  "correlation_windows": [14, 21, 30],
+  "lag_range": [-3, -2, -1, 0, 1, 2, 3],
+  "min_agreement_windows": 2,
+  "use_dynamic_thresholds": false,
+  "dynamic_threshold_quantiles": {
+    "negative": 0.2,
+    "positive": 0.8
+  },
+  "vix_filters": {
+    "min_vix_for_long": 18.0,
+    "min_vix_for_short": 20.0
+  },
+  "rsi_filter": {
+    "enabled": true,
+    "long_max_rsi": 55,
+    "short_min_rsi": 45
+  },
+  "drawdown_filter": {
+    "enabled": true,
+    "min_drawdown_for_long": 0.03,
+    "min_drawup_for_short": 0.03
+  },
+  "asset_overrides": {
+    "bitcoin": {
+      "vix_filters": {"min_vix_for_long": 18.0, "min_vix_for_short": 20.0}
+    },
+    "ethereum": {
+      "vix_filters": {"min_vix_for_long": 18.0, "min_vix_for_short": 20.0}
+    }
+  }
+}

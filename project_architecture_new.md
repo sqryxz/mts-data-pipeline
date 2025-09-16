@@ -2193,7 +2193,7 @@ class Config:
         "description": "Standard crypto assets updated hourly",
         "interval_minutes": 60,
         "daily_collections_per_asset": 24,
-        "assets": ["tether", "solana", "ripple", "bittensor", "fetch-ai", 
+        "assets": ["tether", "solana", "bittensor", "fetch-ai", 
                   "singularitynet", "render-token", "ocean-protocol"],
         "rationale": "Hourly updates provide good balance for portfolio signals"
       },

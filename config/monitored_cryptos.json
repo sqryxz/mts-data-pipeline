@@ -36,13 +36,6 @@
       }
     },
     {
-      "coingecko_id": "ripple",
-      "symbols": {
-        "binance": "XRPUSDT",
-        "bybit": "XRPUSDT"
-      }
-    },
-    {
       "coingecko_id": "dogecoin",
       "symbols": {
         "binance": "DOGEUSDT",

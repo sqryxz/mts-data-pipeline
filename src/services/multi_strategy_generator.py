@@ -13,6 +13,7 @@ from src.signals.strategies.strategy_registry import StrategyRegistry
 from src.signals.signal_aggregator import SignalAggregator
 from src.data.signal_models import TradingSignal
 from src.data.sqlite_helper import CryptoDatabase
+from src.data.realtime_price_service import RealtimePriceService
 from src.utils.exceptions import ConfigurationError, DataProcessingError
 from src.utils.multi_webhook_discord_manager import MultiWebhookDiscordManager
 
@@ -58,8 +59,9 @@ class MultiStrategyGenerator:
         aggregation_config = aggregator_config.get('aggregation_config', {})
         self.aggregator = SignalAggregator(strategy_weights, aggregation_config)
         
-        # Initialize database connection
+        # Initialize database connection and real-time price service
         self.db = CryptoDatabase()
+        self.realtime_price_service = RealtimePriceService()
         
         # Load and validate strategies
         self.strategies = self._load_strategies()
@@ -141,26 +143,37 @@ class MultiStrategyGenerator:
     
     def _get_market_data(self, assets: List[str], days: int) -> Dict[str, Any]:
         """
-        Get comprehensive market data for all assets.
+        Get comprehensive market data for all assets with real-time price validation.
         
         Args:
             assets: List of asset names
             days: Number of days of historical data
             
         Returns:
-            Dictionary containing market data for all assets
+            Dictionary containing validated fresh market data for all assets
         """
         try:
-            # Use the enhanced market data provider from Task 6
-            market_data = self.db.get_strategy_market_data(assets, days)
+            # Use real-time price service to ensure fresh data
+            self.logger.info(f"Retrieving fresh market data for {len(assets)} assets over {days} days")
+            market_data = self.realtime_price_service.get_fresh_market_data(assets, days)
             
-            self.logger.debug(f"Retrieved market data for {len(assets)} assets over {days} days")
+            # Log data freshness report
+            self.realtime_price_service.log_data_freshness_report(market_data)
+            
+            self.logger.debug(f"Retrieved and validated fresh market data for {len(assets)} assets over {days} days")
             
             return market_data
             
         except Exception as e:
-            self.logger.error(f"Failed to retrieve market data: {e}")
-            raise DataProcessingError(f"Market data retrieval failed: {e}")
+            self.logger.error(f"Failed to retrieve fresh market data: {e}")
+            # Fallback to regular database query
+            try:
+                self.logger.warning("Falling back to regular database query")
+                market_data = self.db.get_strategy_market_data(assets, days)
+                return market_data
+            except Exception as fallback_error:
+                self.logger.error(f"Fallback market data retrieval also failed: {fallback_error}")
+                raise DataProcessingError(f"Market data retrieval failed: {e}")
     
     def _generate_individual_signals(self, market_data: Dict[str, Any]) -> Dict[str, List[TradingSignal]]:
         """
@@ -470,9 +483,7 @@ def create_default_multi_strategy_generator() -> MultiStrategyGenerator:
         "volatility": {
             "config_path": "config/strategies/volatility_strategy.json"
         },
-        "ripple": {
-            "config_path": "config/strategies/ripple_signals.json"
-        },
+
         "multibucketportfolio": {
             "config_path": "config/strategies/multi_bucket_portfolio.json"
         }
@@ -481,10 +492,9 @@ def create_default_multi_strategy_generator() -> MultiStrategyGenerator:
     # Default aggregator configuration
     aggregator_config = {
         "strategy_weights": {
-            "vixcorrelation": 0.25,
-            "meanreversion": 0.20,
-            "volatility": 0.20,
-            "ripple": 0.15,
+            "vixcorrelation": 0.30,
+            "meanreversion": 0.25,
+            "volatility": 0.25,
             "multibucketportfolio": 0.20
         },
         "aggregation_config": {

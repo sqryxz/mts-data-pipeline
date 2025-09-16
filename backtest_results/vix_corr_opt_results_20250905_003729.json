@@ -1,0 +1,2827 @@
+{
+  "start": "2025-03-08",
+  "end": "2025-09-04",
+  "results": [
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 55,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.0,
+        "min_du_short": 0.0,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 55,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.0,
+        "min_du_short": 0.02,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 55,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.0,
+        "min_du_short": 0.04,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 55,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.02,
+        "min_du_short": 0.0,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 55,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.02,
+        "min_du_short": 0.02,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 55,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.02,
+        "min_du_short": 0.04,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 55,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.04,
+        "min_du_short": 0.0,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 55,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.04,
+        "min_du_short": 0.02,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 55,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.04,
+        "min_du_short": 0.04,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 55,
+        "short_min_rsi": 55,
+        "min_dd_long": 0.0,
+        "min_du_short": 0.0,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 55,
+        "short_min_rsi": 55,
+        "min_dd_long": 0.0,
+        "min_du_short": 0.02,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 55,
+        "short_min_rsi": 55,
+        "min_dd_long": 0.0,
+        "min_du_short": 0.04,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 55,
+        "short_min_rsi": 55,
+        "min_dd_long": 0.02,
+        "min_du_short": 0.0,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 55,
+        "short_min_rsi": 55,
+        "min_dd_long": 0.02,
+        "min_du_short": 0.02,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 55,
+        "short_min_rsi": 55,
+        "min_dd_long": 0.02,
+        "min_du_short": 0.04,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 55,
+        "short_min_rsi": 55,
+        "min_dd_long": 0.04,
+        "min_du_short": 0.0,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 55,
+        "short_min_rsi": 55,
+        "min_dd_long": 0.04,
+        "min_du_short": 0.02,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 55,
+        "short_min_rsi": 55,
+        "min_dd_long": 0.04,
+        "min_du_short": 0.04,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 60,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.0,
+        "min_du_short": 0.0,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 60,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.0,
+        "min_du_short": 0.02,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 60,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.0,
+        "min_du_short": 0.04,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 60,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.02,
+        "min_du_short": 0.0,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 60,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.02,
+        "min_du_short": 0.02,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 60,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.02,
+        "min_du_short": 0.04,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 60,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.04,
+        "min_du_short": 0.0,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 60,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.04,
+        "min_du_short": 0.02,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 60,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.04,
+        "min_du_short": 0.04,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 60,
+        "short_min_rsi": 55,
+        "min_dd_long": 0.0,
+        "min_du_short": 0.0,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 60,
+        "short_min_rsi": 55,
+        "min_dd_long": 0.0,
+        "min_du_short": 0.02,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 60,
+        "short_min_rsi": 55,
+        "min_dd_long": 0.0,
+        "min_du_short": 0.04,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 60,
+        "short_min_rsi": 55,
+        "min_dd_long": 0.02,
+        "min_du_short": 0.0,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 60,
+        "short_min_rsi": 55,
+        "min_dd_long": 0.02,
+        "min_du_short": 0.02,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 60,
+        "short_min_rsi": 55,
+        "min_dd_long": 0.02,
+        "min_du_short": 0.04,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 60,
+        "short_min_rsi": 55,
+        "min_dd_long": 0.04,
+        "min_du_short": 0.0,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 60,
+        "short_min_rsi": 55,
+        "min_dd_long": 0.04,
+        "min_du_short": 0.02,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": false,
+        "long_max_rsi": 60,
+        "short_min_rsi": 55,
+        "min_dd_long": 0.04,
+        "min_du_short": 0.04,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": true,
+        "long_max_rsi": 55,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.0,
+        "min_du_short": 0.0,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": true,
+        "long_max_rsi": 55,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.0,
+        "min_du_short": 0.02,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": true,
+        "long_max_rsi": 55,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.0,
+        "min_du_short": 0.04,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": true,
+        "long_max_rsi": 55,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.02,
+        "min_du_short": 0.0,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": true,
+        "long_max_rsi": 55,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.02,
+        "min_du_short": 0.02,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": true,
+        "long_max_rsi": 55,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.02,
+        "min_du_short": 0.04,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": true,
+        "long_max_rsi": 55,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.04,
+        "min_du_short": 0.0,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": true,
+        "long_max_rsi": 55,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.04,
+        "min_du_short": 0.02,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": true,
+        "long_max_rsi": 55,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.04,
+        "min_du_short": 0.04,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": true,
+        "long_max_rsi": 55,
+        "short_min_rsi": 55,
+        "min_dd_long": 0.0,
+        "min_du_short": 0.0,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": true,
+        "long_max_rsi": 55,
+        "short_min_rsi": 55,
+        "min_dd_long": 0.0,
+        "min_du_short": 0.02,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": true,
+        "long_max_rsi": 55,
+        "short_min_rsi": 55,
+        "min_dd_long": 0.0,
+        "min_du_short": 0.04,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": true,
+        "long_max_rsi": 55,
+        "short_min_rsi": 55,
+        "min_dd_long": 0.02,
+        "min_du_short": 0.0,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": true,
+        "long_max_rsi": 55,
+        "short_min_rsi": 55,
+        "min_dd_long": 0.02,
+        "min_du_short": 0.02,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": true,
+        "long_max_rsi": 55,
+        "short_min_rsi": 55,
+        "min_dd_long": 0.02,
+        "min_du_short": 0.04,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": true,
+        "long_max_rsi": 55,
+        "short_min_rsi": 55,
+        "min_dd_long": 0.04,
+        "min_du_short": 0.0,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": true,
+        "long_max_rsi": 55,
+        "short_min_rsi": 55,
+        "min_dd_long": 0.04,
+        "min_du_short": 0.02,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": true,
+        "long_max_rsi": 55,
+        "short_min_rsi": 55,
+        "min_dd_long": 0.04,
+        "min_du_short": 0.04,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": true,
+        "long_max_rsi": 60,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.0,
+        "min_du_short": 0.0,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": true,
+        "long_max_rsi": 60,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.0,
+        "min_du_short": 0.02,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": true,
+        "long_max_rsi": 60,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.0,
+        "min_du_short": 0.04,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": true,
+        "long_max_rsi": 60,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.02,
+        "min_du_short": 0.0,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": true,
+        "long_max_rsi": 60,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.02,
+        "min_du_short": 0.02,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    },
+    {
+      "params": {
+        "neg": -0.2,
+        "pos": 0.2,
+        "windows": [
+          7,
+          14,
+          21
+        ],
+        "agree": 1,
+        "dynamic": false,
+        "min_vix_long": 10.0,
+        "min_vix_short": 10.0,
+        "rsi_enabled": true,
+        "long_max_rsi": 60,
+        "short_min_rsi": 50,
+        "min_dd_long": 0.02,
+        "min_du_short": 0.04,
+        "lags": [
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      "performance": {
+        "total_return": 0.0,
+        "annualized_return": 0.0,
+        "sharpe_ratio": 0,
+        "max_drawdown": 0.0,
+        "win_rate": 0,
+        "volatility": 0.0,
+        "var_95": 0.0,
+        "calmar_ratio": 0
+      },
+      "stats": {
+        "total_trades": 0,
+        "profitable_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0,
+        "average_trade_return": 0,
+        "average_winning_trade": 0,
+        "average_losing_trade": 0
+      },
+      "score": 0.0
+    }
+  ],
+  "best": null
+}

@@ -5,7 +5,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 from api.websockets.bybit_websocket import BybitWebSocket
 
-SYMBOLS = ['BTCUSDT', 'ETHUSDT', 'XRPUSDT', 'TAOUSDT', 'FETUSDT', 'AGIXUSDT', 'RNDRUSDT', 'OCEANUSDT']
+SYMBOLS = ['BTCUSDT', 'ETHUSDT', 'TAOUSDT', 'FETUSDT', 'AGIXUSDT', 'RNDRUSDT', 'OCEANUSDT']
 
 async def main():
     ws = BybitWebSocket()

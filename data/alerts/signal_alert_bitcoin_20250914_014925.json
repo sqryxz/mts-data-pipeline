@@ -1,0 +1,25 @@
+{
+  "timestamp": 1757785765442,
+  "asset": "bitcoin",
+  "signal_type": "LONG",
+  "direction": "BUY",
+  "price": 115570.91110491939,
+  "confidence": 1.0,
+  "signal_strength": "STRONG",
+  "strategy_name": "Aggregated_Signal",
+  "position_size": 0.02,
+  "stop_loss": 109792.36554967341,
+  "take_profit": 127128.00221541132,
+  "alert_type": "trading_signal",
+  "analysis_data": {
+    "aggregation_method": "weighted_average",
+    "strategies_combined": [
+      "vixcorrelation"
+    ],
+    "strategy_weights": {
+      "vixcorrelation": 0.3
+    },
+    "signal_conflict_analysis": {
+      "signal_count": 1,
+      "unique_types": [
+        
