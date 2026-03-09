@@ -1,0 +1,299 @@
+{
+  "generated_at": "2026-03-09T20:03:27.908953",
+  "data_range": {
+    "start_date": "2020-01-01",
+    "end_date": "2026-03-09"
+  },
+  "database_stats": {
+    "database_path": "data/crypto_data.db",
+    "database_size_mb": 114.38,
+    "crypto_data": [
+      {
+        "symbol": "binancecoin",
+        "total_records": 5594,
+        "latest_date": "2025-09-16"
+      },
+      {
+        "symbol": "bitcoin",
+        "total_records": 15974,
+        "latest_date": "2025-09-16"
+      },
+      {
+        "symbol": "bittensor",
+        "total_records": 15006,
+        "latest_date": "2025-09-16"
+      },
+      {
+        "symbol": "chainlink",
+        "total_records": 5596,
+        "latest_date": "2025-09-16"
+      },
+      {
+        "symbol": "dogecoin",
+        "total_records": 5584,
+        "latest_date": "2025-09-16"
+      },
+      {
+        "symbol": "ethena",
+        "total_records": 10211,
+        "latest_date": "2025-09-16"
+      },
+      {
+        "symbol": "ethereum",
+        "total_records": 19911,
+        "latest_date": "2025-09-16"
+      },
+      {
+        "symbol": "fetch-ai",
+        "total_records": 16149,
+        "latest_date": "2025-09-16"
+      },
+      {
+        "symbol": "hyperliquid",
+        "total_records": 5279,
+        "latest_date": "2025-09-16"
+      },
+      {
+        "symbol": "ocean-protocol",
+        "total_records": 16361,
+        "latest_date": "2025-09-16"
+      },
+      {
+        "symbol": "render-token",
+        "total_records": 16004,
+        "latest_date": "2025-09-16"
+      },
+      {
+        "symbol": "ripple",
+        "total_records": 18120,
+        "latest_date": "2025-09-16"
+      },
+      {
+        "symbol": "singularitynet",
+        "total_records": 16366,
+        "latest_date": "2025-09-16"
+      },
+      {
+        "symbol": "solana",
+        "total_records": 21104,
+        "latest_date": "2025-09-16"
+      },
+      {
+        "symbol": "sui",
+        "total_records": 13833,
+        "latest_date": "2025-09-16"
+      },
+      {
+        "symbol": "tether",
+        "total_records": 16776,
+        "latest_date": "2025-09-16"
+      },
+      {
+        "symbol": "uniswap",
+        "total_records": 5590,
+        "latest_date": "2025-09-16"
+      }
+    ],
+    "macro_data": [
+      {
+        "indicator": "BAMLH0A0HYM2",
+        "total_records": 1608,
+        "latest_date": "2026-03-05"
+      },
+      {
+        "indicator": "DEXCHUS",
+        "total_records": 1523,
+        "latest_date": "2026-02-27"
+      },
+      {
+        "indicator": "DEXUSEU",
+        "total_records": 1523,
+        "latest_date": "2026-02-27"
+      },
+      {
+        "indicator": "DFF",
+        "total_records": 2238,
+        "latest_date": "2026-03-05"
+      },
+      {
+        "indicator": "DGS10",
+        "total_records": 1532,
+        "latest_date": "2026-03-05"
+      },
+      {
+        "indicator": "DTWEXBGS",
+        "total_records": 1523,
+        "latest_date": "2026-02-27"
+      },
+      {
+        "indicator": "RRPONTSYD",
+        "total_records": 1542,
+        "latest_date": "2026-03-06"
+      },
+      {
+        "indicator": "SOFR",
+        "total_records": 1535,
+        "latest_date": "2026-03-06"
+      },
+      {
+        "indicator": "VIXCLS",
+        "total_records": 1577,
+        "latest_date": "2026-03-05"
+      }
+    ]
+  },
+  "crypto_metrics": {
+    "bitcoin": {
+      "total_return": 1.0578099182842298,
+      "volatility": 0.15341186410871044,
+      "sharpe_ratio": 0.15307589720070705,
+      "max_drawdown": -0.7671822068881932,
+      "avg_annual_return": 0.0234836587396738,
+      "var_95": -0.0025769748074553453,
+      "skewness": 0.2589192718321147,
+      "kurtosis": 57.57680876965123,
+      "data_points": 15539
+    },
+    "ethereum": {
+      "total_return": 1.505896376941657,
+      "volatility": 0.18248356229119198,
+      "sharpe_ratio": 0.15643644423091926,
+      "max_drawdown": -0.7933018460301264,
+      "avg_annual_return": 0.028547079615425533,
+      "var_95": -0.003409413695875829,
+      "skewness": 0.7050565426472527,
+      "kurtosis": 89.53452347231539,
+      "data_points": 19476
+    },
+    "solana": {
+      "total_return": 15.486154889879717,
+      "volatility": 0.25525101936918243,
+      "sharpe_ratio": 0.2611009059200981,
+      "max_drawdown": -0.9629771193722053,
+      "avg_annual_return": 0.06664627239432204,
+      "var_95": -0.00966544344789979,
+      "skewness": 1.1977694680987956,
+      "kurtosis": 102.0167444799731,
+      "data_points": 20770
+    },
+    "ripple": {
+      "total_return": 5.433598285705049,
+      "volatility": 0.25181546480026,
+      "sharpe_ratio": 0.2230932951717415,
+      "max_drawdown": -0.8316728035606215,
+      "avg_annual_return": 0.05617834181749369,
+      "var_95": -0.0033648811132081895,
+      "skewness": 9.273637888817015,
+      "kurtosis": 366.891381921798,
+      "data_points": 17685
+    },
+    "tether": {
+      "total_return": 0.003237694861340401,
+      "volatility": 0.00852674767237801,
+      "sharpe_ratio": 0.010110500082326144,
+      "max_drawdown": -0.018597776331514073,
+      "avg_annual_return": 8.620968304355213e-05,
+      "var_95": -8.186144085741142e-05,
+      "skewness": -0.5061781983036676,
+      "kurtosis": 120.89239086971544,
+      "data_points": 16341
+    }
+  },
+  "macro_stats": {
+    "VIXCLS": {
+      "count": 1577,
+      "mean": 20.896943563728595,
+      "std": 7.78371376119582,
+      "min": 11.86,
+      "max": 82.69,
+      "current": 23.75,
+      "first_date": "2020-01-02",
+      "last_date": "2026-03-05"
+    },
+    "DGS10": {
+      "count": 1532,
+      "mean": 2.9800848563968665,
+      "std": 1.4033485867813948,
+      "min": 0.52,
+      "max": 4.98,
+      "current": 4.13,
+      "first_date": "2020-01-02",
+      "last_date": "2026-03-05"
+    },
+    "DTWEXBGS": {
+      "count": 1523,
+      "mean": 119.67441871306632,
+      "std": 4.433587821500447,
+      "min": 110.5179,
+      "max": 130.2142,
+      "current": 117.8223,
+      "first_date": "2020-01-02",
+      "last_date": "2026-02-27"
+    },
+    "DFF": {
+      "count": 2238,
+      "mean": 2.7664834673815903,
+      "std": 2.1970161242457755,
+      "min": 0.04,
+      "max": 5.33,
+      "current": 3.64,
+      "first_date": "2020-01-01",
+      "last_date": "2026-03-05"
+    },
+    "DEXUSEU": {
+      "count": 1523,
+      "mean": 1.1130487196323047,
+      "std": 0.057470205644280146,
+      "min": 0.9616,
+      "max": 1.2295,
+      "current": 1.1822,
+      "first_date": "2020-01-02",
+      "last_date": "2026-02-27"
+    },
+    "DEXCHUS": {
+      "count": 1523,
+      "mean": 6.923385357846357,
+      "std": 0.3141336584589332,
+      "min": 6.3084,
+      "max": 7.3499,
+      "current": 6.8579,
+      "first_date": "2020-01-02",
+      "last_date": "2026-02-27"
+    },
+    "BAMLH0A0HYM2": {
+      "count": 1608,
+      "mean": 3.9188432835820897,
+      "std": 1.1583397578928578,
+      "min": 2.59,
+      "max": 10.87,
+      "current": 3.0,
+      "first_date": "2020-01-02",
+      "last_date": "2026-03-05"
+    },
+    "RRPONTSYD": {
+      "count": 1542,
+      "mean": 803.0001686121919,
+      "std": 846.9592800936249,
+      "min": 0.0,
+      "max": 2553.716,
+      "current": 1.512,
+      "first_date": "2020-01-02",
+      "last_date": "2026-03-06"
+    },
+    "SOFR": {
+      "count": 1535,
+      "mean": 2.7545276872964175,
+      "std": 2.210462267748614,
+      "min": 0.01,
+      "max": 5.4,
+      "current": 3.65,
+      "first_date": "2020-01-02",
+      "last_date": "2026-03-06"
+    }
+  },
+  "summary": {
+    "total_crypto_assets": 5,
+    "total_macro_indicators": 9,
+    "data_completeness": "Historical data updated successfully"
+  }
+}
