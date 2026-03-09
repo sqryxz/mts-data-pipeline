@@ -51,6 +51,9 @@ def setup_enhanced_application(enable_signals: bool = True, enable_alerts: bool 
                 'render-token', 'ocean-protocol', 'ethena'
             ],  # Hourly intervals
             macro_indicators=[
+                'VIXCLS', 'DFF', 'DGS1', 'DGS2', 'DGS5', 'DGS10', 'DGS20', 'DGS30',
+                'DTWEXBGS', 'DEXUSEU', 'DEXCHUS', 'BAMLH0A0HYM2', 'RRPONTSYD', 'SOFR'
+            ],  # Daily intervals
                 'VIXCLS', 'DFF', 'DGS10', 'DTWEXBGS', 'DEXUSEU',
                 'DEXCHUS', 'BAMLH0A0HYM2', 'RRPONTSYD', 'SOFR'
             ],  # Daily intervals

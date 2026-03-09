@@ -1,0 +1,135 @@
+{
+  "generated_at": "2026-03-10T02:05:41.638307+08:00",
+  "generated_utc": "2026-03-09T18:05:41.638307+00:00",
+  "report_date": "2026-03-10",
+  "macro_indicators": [
+    {
+      "indicator": "VIXCLS",
+      "name": "CBOE Volatility Index",
+      "value": 29.49,
+      "date": "2026-03-06",
+      "change_7d_pct": 48.49,
+      "change_14d_pct": 54.48,
+      "change_30d_pct": 58.21
+    },
+    {
+      "indicator": "DFF",
+      "name": "Federal Funds Effective Rate",
+      "value": 3.64,
+      "date": "2026-03-05",
+      "change_7d_pct": 0.0,
+      "change_14d_pct": 0.0,
+      "change_30d_pct": 0.0
+    },
+    {
+      "indicator": "DTWEXBGS",
+      "name": "US Dollar Index",
+      "value": 117.8223,
+      "date": "2026-02-27",
+      "change_7d_pct": -0.14,
+      "change_14d_pct": 0.25,
+      "change_30d_pct": 0.26
+    },
+    {
+      "indicator": "DEXUSEU",
+      "name": "USD/EUR Exchange Rate",
+      "value": 1.1822,
+      "date": "2026-02-27",
+      "change_7d_pct": 0.35,
+      "change_14d_pct": -0.4,
+      "change_30d_pct": -1.0
+    },
+    {
+      "indicator": "DEXCHUS",
+      "name": "USD/CNY Exchange Rate",
+      "value": 6.8579,
+      "date": "2026-02-27",
+      "change_7d_pct": -0.65,
+      "change_14d_pct": -0.73,
+      "change_30d_pct": -1.27
+    },
+    {
+      "indicator": "BAMLH0A0HYM2",
+      "name": "High Yield Credit Spread",
+      "value": 3.13,
+      "date": "2026-03-06",
+      "change_7d_pct": 0.97,
+      "change_14d_pct": 9.44,
+      "change_30d_pct": 9.44
+    },
+    {
+      "indicator": "RRPONTSYD",
+      "name": "Overnight Reverse Repo",
+      "value": 1.512,
+      "date": "2026-03-06",
+      "change_7d_pct": -90.73,
+      "change_14d_pct": 204.84,
+      "change_30d_pct": -37.37
+    },
+    {
+      "indicator": "SOFR",
+      "name": "Secured Overnight Financing Rate",
+      "value": 3.65,
+      "date": "2026-03-06",
+      "change_7d_pct": -0.82,
+      "change_14d_pct": -0.27,
+      "change_30d_pct": 0.0
+    }
+  ],
+  "bond_yields": [
+    {
+      "maturity": "1Y",
+      "indicator": "DGS1",
+      "yield": 3.59,
+      "date": "2026-03-05",
+      "change_7d_pct": 1.99,
+      "change_14d_pct": 2.57,
+      "change_30d_pct": 2.87
+    },
+    {
+      "maturity": "2Y",
+      "indicator": "DGS2",
+      "yield": 3.57,
+      "date": "2026-03-05",
+      "change_7d_pct": 4.39,
+      "change_14d_pct": 2.88,
+      "change_30d_pct": 0.0
+    },
+    {
+      "maturity": "5Y",
+      "indicator": "DGS5",
+      "yield": 3.72,
+      "date": "2026-03-05",
+      "change_7d_pct": 4.2,
+      "change_14d_pct": 1.92,
+      "change_30d_pct": -2.87
+    },
+    {
+      "maturity": "10Y",
+      "indicator": "DGS10",
+      "yield": 4.13,
+      "date": "2026-03-05",
+      "change_7d_pct": 2.74,
+      "change_14d_pct": 1.23,
+      "change_30d_pct": -3.5
+    },
+    {
+      "maturity": "20Y",
+      "indicator": "DGS20",
+      "yield": 4.71,
+      "date": "2026-03-05",
+      "change_7d_pct": 2.39,
+      "change_14d_pct": 1.51,
+      "change_30d_pct": -2.89
+    },
+    {
+      "maturity": "30Y",
+      "indicator": "DGS30",
+      "yield": 4.74,
+      "date": "2026-03-05",
+      "change_7d_pct": 1.5,
+      "change_14d_pct": 0.85,
+      "change_30d_pct": -3.27
+    }
+  ]
+}

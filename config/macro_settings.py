@@ -87,6 +87,7 @@ MACRO_INDICATORS = {
         'units': 'Percent',
         'file_prefix': 'dgs30'
     },
+    'FED_FUNDS_RATE': {
         'fred_series_id': 'DGS10',
         'name': '10-Year Treasury Constant Maturity Rate',
         'frequency': 'daily',
