@@ -52,6 +52,47 @@ MACRO_INDICATORS = {
         'units': 'Percent',
         'file_prefix': 'dgs10'
     },
+    'DGS1': {
+        'fred_series_id': 'DGS1',
+        'name': '1-Year Treasury Constant Maturity Rate',
+        'frequency': 'daily',
+        'units': 'Percent',
+        'file_prefix': 'dgs1'
+    },
+    'DGS2': {
+        'fred_series_id': 'DGS2',
+        'name': '2-Year Treasury Constant Maturity Rate',
+        'frequency': 'daily',
+        'units': 'Percent',
+        'file_prefix': 'dgs2'
+    },
+    'DGS5': {
+        'fred_series_id': 'DGS5',
+        'name': '5-Year Treasury Constant Maturity Rate',
+        'frequency': 'daily',
+        'units': 'Percent',
+        'file_prefix': 'dgs5'
+    },
+    'DGS20': {
+        'fred_series_id': 'DGS20',
+        'name': '20-Year Treasury Constant Maturity Rate',
+        'frequency': 'daily',
+        'units': 'Percent',
+        'file_prefix': 'dgs20'
+    },
+    'DGS30': {
+        'fred_series_id': 'DGS30',
+        'name': '30-Year Treasury Constant Maturity Rate',
+        'frequency': 'daily',
+        'units': 'Percent',
+        'file_prefix': 'dgs30'
+    },
+        'fred_series_id': 'DGS10',
+        'name': '10-Year Treasury Constant Maturity Rate',
+        'frequency': 'daily',
+        'units': 'Percent',
+        'file_prefix': 'dgs10'
+    },
     'FED_FUNDS_RATE': {
         'fred_series_id': 'DFF',
         'name': 'Federal Funds Effective Rate',

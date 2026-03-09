@@ -62,7 +62,7 @@ Get keys:
 Tables:
 - `crypto_ohlcv` — Daily OHLCV for ~25 cryptocurrencies
 - `crypto_volatility` — Rolling volatility calculations
-- `macro_indicators` — VIX, Treasury yields, DXY, SOFR, etc.
+- `macro_indicators` — VIX, Treasury yields (DGS1-DGS30), Dollar Index, SOFR, FX rates, etc.
 - `funding_rates` — Exchange funding rates
 - `correlation_history` — Asset correlation data
 

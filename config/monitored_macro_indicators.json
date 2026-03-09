@@ -11,9 +11,34 @@
       "description": "Federal Funds Effective Rate"
     },
     {
+      "name": "DGS1",
+      "fred_series_id": "DGS1",
+      "description": "1-Year Treasury Constant Maturity Rate"
+    },
+    {
+      "name": "DGS2",
+      "fred_series_id": "DGS2",
+      "description": "2-Year Treasury Constant Maturity Rate"
+    },
+    {
+      "name": "DGS5",
+      "fred_series_id": "DGS5",
+      "description": "5-Year Treasury Constant Maturity Rate"
+    },
+    {
       "name": "DGS10",
       "fred_series_id": "DGS10",
       "description": "10-Year Treasury Constant Maturity Rate"
+    },
+    {
+      "name": "DGS20",
+      "fred_series_id": "DGS20",
+      "description": "20-Year Treasury Constant Maturity Rate"
+    },
+    {
+      "name": "DGS30",
+      "fred_series_id": "DGS30",
+      "description": "30-Year Treasury Constant Maturity Rate"
     },
     {
       "name": "DTWEXBGS",
@@ -46,4 +71,4 @@
       "description": "Secured Overnight Financing Rate: Dollar funding stress indicator. Deviations >10bps from trailing average signal risk-off moves in BTC/ETH."
     }
   ]
-} 
+}
