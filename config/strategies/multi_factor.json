@@ -1,0 +1,48 @@
+{
+  "name": "Multi-Factor Strategy",
+  "description": "Three-layer signal system combining macro regime, momentum, and mean reversion",
+  "enabled": true,
+  "run_interval_hours": 4,
+  "layer_weights": {
+    "macro": 0.30,
+    "trend": 0.40,
+    "reversion": 0.30
+  },
+  "high_corr_weights": {
+    "macro": 0.45,
+    "trend": 0.30,
+    "reversion": 0.25
+  },
+  "alert_thresholds": {
+    "strong_long": 0.6,
+    "lean_long": 0.3,
+    "lean_short": -0.3,
+    "strong_short": -0.6
+  },
+  "asset_betas": {
+    "bitcoin": 1.0,
+    "ethereum": 1.1,
+    "solana": 1.1,
+    "sui": 1.1,
+    "chainlink": 1.2,
+    "uniswap": 1.2,
+    "render-token": 1.2,
+    "bittensor": 1.2,
+    "fetch-ai": 1.3,
+    "ocean-protocol": 1.3,
+    "singularitynet": 1.3,
+    "dogecoin": 1.2,
+    "ripple": 0.9,
+    "binancecoin": 0.9,
+    "hyperliquid": 1.3,
+    "ethena": 1.3
+  },
+  "excluded_assets": ["tether", "usdt", "USDT"],
+  "indicator_windows": {
+    "sma_short": 20,
+    "sma_long": 50,
+    "sma_200": 200,
+    "rsi": 14,
+    "roc_period": 14
+  }
+}

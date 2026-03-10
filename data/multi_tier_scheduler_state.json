@@ -1,0 +1,145 @@
+{
+  "tasks": {
+    "crypto_bitcoin": {
+      "last_collection": "2026-03-10T01:18:40.079247",
+      "consecutive_failures": 1,
+      "enabled": true
+    },
+    "crypto_ethereum": {
+      "last_collection": "2026-03-10T01:18:40.079247",
+      "consecutive_failures": 1,
+      "enabled": true
+    },
+    "crypto_binancecoin": {
+      "last_collection": "2026-03-10T01:18:40.079247",
+      "consecutive_failures": 1,
+      "enabled": true
+    },
+    "crypto_hyperliquid": {
+      "last_collection": "2026-03-10T01:18:40.079247",
+      "consecutive_failures": 1,
+      "enabled": true
+    },
+    "crypto_solana": {
+      "last_collection": "2026-03-10T01:18:40.079247",
+      "consecutive_failures": 1,
+      "enabled": true
+    },
+    "crypto_dogecoin": {
+      "last_collection": "2026-03-10T01:18:40.079247",
+      "consecutive_failures": 1,
+      "enabled": true
+    },
+    "crypto_chainlink": {
+      "last_collection": "2026-03-10T01:18:40.079247",
+      "consecutive_failures": 1,
+      "enabled": true
+    },
+    "crypto_sui": {
+      "last_collection": "2026-03-10T01:18:40.079247",
+      "consecutive_failures": 1,
+      "enabled": true
+    },
+    "crypto_uniswap": {
+      "last_collection": "2026-03-10T01:18:40.079247",
+      "consecutive_failures": 1,
+      "enabled": true
+    },
+    "crypto_tether": {
+      "last_collection": "2026-03-10T01:18:40.079247",
+      "consecutive_failures": 1,
+      "enabled": true
+    },
+    "crypto_bittensor": {
+      "last_collection": "2026-03-10T01:18:40.079247",
+      "consecutive_failures": 1,
+      "enabled": true
+    },
+    "crypto_fetch-ai": {
+      "last_collection": "2026-03-10T01:18:40.079247",
+      "consecutive_failures": 1,
+      "enabled": true
+    },
+    "crypto_singularitynet": {
+      "last_collection": "2026-03-10T01:18:40.079247",
+      "consecutive_failures": 1,
+      "enabled": true
+    },
+    "crypto_render-token": {
+      "last_collection": "2026-03-10T01:18:40.079247",
+      "consecutive_failures": 1,
+      "enabled": true
+    },
+    "crypto_ocean-protocol": {
+      "last_collection": "2026-03-10T01:18:40.079247",
+      "consecutive_failures": 1,
+      "enabled": true
+    },
+    "crypto_ethena": {
+      "last_collection": "2026-03-10T01:18:40.079247",
+      "consecutive_failures": 1,
+      "enabled": true
+    },
+    "macro_VIXCLS": {
+      "last_collection": "2026-03-10T01:18:40.079247",
+      "consecutive_failures": 1,
+      "enabled": true
+    },
+    "macro_DFF": {
+      "last_collection": "2026-03-10T01:18:40.079247",
+      "consecutive_failures": 1,
+      "enabled": true
+    },
+    "macro_DGS10": {
+      "last_collection": "2026-03-10T01:18:40.079247",
+      "consecutive_failures": 1,
+      "enabled": true
+    },
+    "macro_DTWEXBGS": {
+      "last_collection": "2026-03-10T01:18:40.079247",
+      "consecutive_failures": 1,
+      "enabled": true
+    },
+    "macro_DEXUSEU": {
+      "last_collection": "2026-03-10T01:18:40.079247",
+      "consecutive_failures": 1,
+      "enabled": true
+    },
+    "macro_DEXCHUS": {
+      "last_collection": "2026-03-10T01:18:40.079247",
+      "consecutive_failures": 1,
+      "enabled": true
+    },
+    "macro_BAMLH0A0HYM2": {
+      "last_collection": "2026-03-10T01:18:40.079247",
+      "consecutive_failures": 1,
+      "enabled": true
+    },
+    "macro_RRPONTSYD": {
+      "last_collection": "2026-03-10T01:18:40.079247",
+      "consecutive_failures": 1,
+      "enabled": true
+    },
+    "macro_SOFR": {
+      "last_collection": "2026-03-10T01:18:40.079247",
+      "consecutive_failures": 1,
+      "enabled": true
+    }
+  },
+  "collection_stats": {
+    "high_frequency": {
+      "success": 0,
+      "failure": 9
+    },
+    "hourly": {
+      "success": 0,
+      "failure": 7
+    },
+    "macro": {
+      "success": 0,
+      "failure": 9
+    }
+  },
+  "total_api_calls": 9,
+  "last_save": "2026-03-10T01:23:38.362372"
+}
